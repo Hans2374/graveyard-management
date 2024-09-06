@@ -1,7 +1,11 @@
-import { HeaderBefore } from '../components/HeaderBefore'
+import { HeaderBefore } from "../components/HeaderBefore";
+import Footer from "../components/Footer";
 
 export const HomepageBefore = () => {
-    return (
-        <HeaderBefore />
-    )
-}
+  return (
+    <>
+      <HeaderBefore />
+      <Footer />
+    </>
+  );
+};
