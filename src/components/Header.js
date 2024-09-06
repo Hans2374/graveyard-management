@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import {
     AppBar, Toolbar, Button, Box, MenuItem, Select, Dialog, DialogTitle, DialogContent,
-    DialogActions, TextField, Tabs, Tab, IconButton, InputAdornment, Link, Typography
+    DialogActions, TextField, Tabs, Tab, IconButton, InputAdornment, Link, Typography,
+    Menu, Popover, List, ListItem, ListItemText
 } from '@mui/material';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -31,7 +34,7 @@ export const HeaderBefore = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [showPassword, setShowPassword] = useState(false);
     const [loginValues, setLoginValues] = useState({ username: '', password: '' });
-    const [signupValues, setSignupValues] = useState({ username: '', password: '', confirmPassword: '' });
+    const [signupValues, setSignupValues] = useState({ email: '', username: '', password: '', confirmPassword: '' });
     const [loginErrors, setLoginErrors] = useState({});
     const [signupErrors, setSignupErrors] = useState({});
     const [forgotPasswordDialogOpen, setForgotPasswordDialogOpen] = useState(false);
@@ -43,6 +46,60 @@ export const HeaderBefore = () => {
     const [codeSent, setCodeSent] = useState(false);
     const [helpText, setHelpText] = useState('');
     const [showNewPassword, setShowNewPassword] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
+    const [accountAnchorEl, setAccountAnchorEl] = useState(null);
+
+    const handleNotificationClick = (event) => {
+        setNotificationAnchorEl(event.currentTarget);
+    };
+
+    const handleNotificationClose = () => {
+        setNotificationAnchorEl(null);
+    };
+
+    const handleAccountClick = (event) => {
+        setAccountAnchorEl(event.currentTarget);
+    };
+
+    const handleAccountClose = () => {
+        setAccountAnchorEl(null);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        handleAccountClose();
+    };
+
+    // Giả lập đăng nhập thành công
+    const handleSuccessfulLogin = () => {
+        const errors = {};
+        if (!loginValues.username.trim()) {
+            errors.username = 'Vui lòng nhập tên đăng nhập hoặc email';
+        }
+        if (!loginValues.password) {
+            errors.password = 'Vui lòng nhập mật khẩu';
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setLoginErrors(errors);
+            return;
+        }
+
+        // Ở đây bạn sẽ thêm logic kiểm tra đăng nhập với server
+        // Giả sử đăng nhập thành công
+        setIsLoggedIn(true);
+        handleCloseDialog();
+        // Reset form
+        setLoginValues({ username: '', password: '' });
+        setLoginErrors({});
+    };
+
+    const notifications = [
+        "Thông báo 1",
+        "Thông báo 2 với nội dung dài hơn sẽ bị cắt ngắn...",
+        "Thông báo 3",
+    ];
 
     const handleLanguageChange = (event) => setLanguage(event.target.value);
     const handleOpenDialog = () => {
@@ -53,7 +110,7 @@ export const HeaderBefore = () => {
     const handleCloseDialog = () => {
         setOpen(false);
         setLoginValues({ username: '', password: '' });
-        setSignupValues({ username: '', password: '', confirmPassword: '' });
+        setSignupValues({ email: '', username: '', password: '', confirmPassword: '' });
         setLoginErrors({});
         setSignupErrors({});
     };
@@ -123,42 +180,40 @@ export const HeaderBefore = () => {
     };
 
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const validateUsername = (username) => username.length >= 3 && username.length <= 15;
-
-    const handleLogin = () => {
-        const errors = {};
-        if (!loginValues.username) {
-            errors.username = 'Vui lòng nhập email hoặc tên đăng nhập';
-        }
-        if (!loginValues.password) {
-            errors.password = 'Vui lòng nhập mật khẩu';
-        }
-        setLoginErrors(errors);
-
-        if (Object.keys(errors).length === 0) {
-            console.log('Login successful');
-        }
-    };
 
     const handleSignup = () => {
         const errors = {};
-        if (!signupValues.email || !validateEmail(signupValues.email)) {
-            errors.email = 'Email không đúng định dạng (ví dụ: abc123@gmail.com)';
+        if (!signupValues.email?.trim()) {
+            errors.email = 'Vui lòng nhập email';
+        } else if (!validateEmail(signupValues.email)) {
+            errors.email = 'Email không hợp lệ';
         }
-        if (!signupValues.username || !validateUsername(signupValues.username)) {
-            errors.username = 'Tên đăng nhập phải từ 3 đến 15 ký tự';
+        if (!signupValues.username.trim()) {
+            errors.username = 'Vui lòng nhập tên đăng nhập';
+        } else if (signupValues.username.length < 3 || signupValues.username.length > 20) {
+            errors.username = 'Tên đăng nhập phải có từ 3 đến 20 ký tự';
         }
         if (!signupValues.password) {
             errors.password = 'Vui lòng nhập mật khẩu';
+        } else if (signupValues.password.length < 6) {
+            errors.password = 'Mật khẩu phải có ít nhất 6 ký tự';
         }
         if (signupValues.password !== signupValues.confirmPassword) {
             errors.confirmPassword = 'Mật khẩu xác nhận không khớp';
         }
-        setSignupErrors(errors);
 
-        if (Object.keys(errors).length === 0) {
-            console.log('Signup successful');
+        if (Object.keys(errors).length > 0) {
+            setSignupErrors(errors);
+            return;
         }
+
+        // Ở đây bạn sẽ thêm logic đăng ký với server
+        // Giả sử đăng ký thành công
+        setIsLoggedIn(true);
+        handleCloseDialog();
+        // Reset form
+        setSignupValues({ email: '', username: '', password: '', confirmPassword: '' });
+        setSignupErrors({});
     };
 
     return (
@@ -177,7 +232,7 @@ export const HeaderBefore = () => {
                         width: 100,
                         borderRadius: 3,
                         marginRight: 2,
-                        height: 53,
+                        height: 40,
                         backgroundColor: 'white',
                         '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
                         boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.1)',
@@ -212,22 +267,79 @@ export const HeaderBefore = () => {
                         </Box>
                     </MenuItem>
                 </Select>
-                <Button
-                    variant='contained'
-                    color='inherit'
-                    endIcon={<AccountCircleIcon sx={{ color: '#D3B023', scale: 2 }} />}
-                    onClick={handleOpenDialog}
-                    sx={{
-                        borderRadius: 3,
-                        padding: '15px',
-                        fontSize: 13,
-                        paddingRight: '20px',
-                        fontWeight: 'bold',
-                        backgroundColor: 'white',
-                    }}
-                >
-                    Đăng nhập
-                </Button>
+                {isLoggedIn ? (
+                    <>
+                        <IconButton color="inherit" sx={{scale: 1.2, marginRight: 2}}>
+                            <ChatBubbleIcon />
+                        </IconButton>
+                        <IconButton color="inherit" onClick={handleNotificationClick} sx={{scale: 1.2, marginRight: 2}}>
+                            <CircleNotificationsIcon />
+                        </IconButton>
+                        <IconButton color="inherit" onClick={handleAccountClick} sx={{scale: 1.2}}>
+                            <AccountCircleIcon />
+                        </IconButton>
+
+                        <Popover
+                            open={Boolean(notificationAnchorEl)}
+                            anchorEl={notificationAnchorEl}
+                            onClose={handleNotificationClose}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                        >
+                            <Box sx={{ p: 2, maxWidth: 300 }}>
+                                <Typography variant="h6" align="center" gutterBottom>
+                                    Thông báo
+                                </Typography>
+                                <List sx={{ maxHeight: 200, overflowY: 'auto' }}>
+                                    {notifications.map((notification, index) => (
+                                        <ListItem key={index}>
+                                            <ListItemText
+                                                primary={notification.length > 50 ? `${notification.substring(0, 50)}...` : notification}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                <Button fullWidth variant="text" sx={{ mt: 2 }}>
+                                    Xem tất cả
+                                </Button>
+                            </Box>
+                        </Popover>
+
+                        <Menu
+                            anchorEl={accountAnchorEl}
+                            open={Boolean(accountAnchorEl)}
+                            onClose={handleAccountClose}
+                        >
+                            <MenuItem onClick={handleAccountClose}>Tên Người Dùng</MenuItem>
+                            <MenuItem onClick={handleAccountClose}>Dịch vụ của tôi</MenuItem>
+                            <MenuItem onClick={handleAccountClose}>Đóng góp ý kiến</MenuItem>
+                            <MenuItem onClick={handleLogout}>Đăng Xuất</MenuItem>
+                        </Menu>
+                    </>
+                ) : (
+                    <Button
+                        variant='contained'
+                        color='inherit'
+                        endIcon={<AccountCircleIcon sx={{ color: '#D3B023', scale: 2 }} />}
+                        onClick={handleOpenDialog}
+                        sx={{
+                            borderRadius: 3,
+                            padding: '15px',
+                            fontSize: 13,
+                            paddingRight: '20px',
+                            fontWeight: 'bold',
+                            backgroundColor: 'white',
+                        }}
+                    >
+                        Đăng nhập
+                    </Button>
+                )}
             </Toolbar>
 
             {/* Main Login/Signup Dialog */}
@@ -361,7 +473,7 @@ export const HeaderBefore = () => {
                 </DialogContent>
                 <DialogActions sx={{ marginBottom: 2 }}>
                     {activeTab === 0 ? (
-                        <Button onClick={handleLogin} variant="contained" color="inherit"
+                        <Button onClick={handleSuccessfulLogin} variant="contained" color="inherit"
                             fullWidth sx={{ py: 1.5, borderRadius: 3, bgcolor: '#D3B023', mt: 2 }}>
                             Đăng nhập
                         </Button>
