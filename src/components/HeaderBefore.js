@@ -10,6 +10,20 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import logo from "../assets/logo.png";
 import VI from "../assets/vietnam.png";
 import EN from "../assets/united-kingdom.png";
+import { styled } from '@mui/material/styles';
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+    backgroundColor: '#E6D189', // Màu nền cho navbar
+    boxShadow: 'none', // Loại bỏ bóng đổ mặc định
+    transition: theme.transitions.create(['box-shadow', 'background-color'], {
+        duration: theme.transitions.duration.short,
+        easing: theme.transitions.easing.easeInOut,
+    }),
+    '&.sticky': {
+        backgroundColor: '#E6D189', // Màu nền khi sticky
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Bóng đổ khi sticky
+    },
+}));
 
 export const HeaderBefore = () => {
     const [language, setLanguage] = useState('vi');
@@ -148,7 +162,7 @@ export const HeaderBefore = () => {
     };
 
     return (
-        <AppBar position='static' sx={{ backgroundColor: '#E6D189' }}>
+        <StyledAppBar position='sticky' sx={{ backgroundColor: '#E6D189' }}>
             <Toolbar>
                 <img src={logo} alt="logo" style={{ width: 200, height: 70, padding: 5 }} />
                 <Box sx={{ flexGrow: 1 }} />
@@ -455,6 +469,6 @@ export const HeaderBefore = () => {
                     )}
                 </DialogContent>
             </Dialog>
-        </AppBar>
+        </StyledAppBar>
     );
 };
