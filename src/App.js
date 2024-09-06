@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { HomepageBefore } from "./pages/HomepageBefore";
+import { HomepageBefore } from "./pages/Homepage";
 import "./App.css";
 import { Box } from "@mui/material";
 

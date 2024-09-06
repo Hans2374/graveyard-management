@@ -1,5 +1,5 @@
-import { HeaderBefore } from "../components/HeaderBefore";
-import HomePage from "../components/HomePage";
+import { HeaderBefore } from "../components/Header";
+import HomePage from "../components/HomePageContent";
 import Footer from "../components/Footer";
 import StickyNavbar from "../components/StickyNavbar";
 
