@@ -1,4 +1,4 @@
-import { HeaderBefore } from "../components/HeaderBefore";
+import { HeaderBefore } from "../components/Header";
 import HomePage from "../components/HomePage";
 import Footer from "../components/Footer";
 import StickyNavbar from "../components/StickyNavbar";

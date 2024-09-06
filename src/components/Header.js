@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
     AppBar, Toolbar, Button, Box, MenuItem, Select, Dialog, DialogTitle, DialogContent,
     DialogActions, TextField, Tabs, Tab, IconButton, InputAdornment, Link, Typography
@@ -164,7 +164,9 @@ export const HeaderBefore = () => {
     return (
         <StyledAppBar position='sticky' sx={{ backgroundColor: '#E6D189' }}>
             <Toolbar>
-                <img src={logo} alt="logo" style={{ width: 200, height: 70, padding: 5 }} />
+                <Link to="/">
+                    <img src={logo} alt="logo" style={{ width: 170, height: 60, padding: 5, cursor: 'pointer' }} />
+                </Link>
                 <Box sx={{ flexGrow: 1 }} />
                 <Select
                     color='inherit'
