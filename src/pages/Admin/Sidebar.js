@@ -14,10 +14,11 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import { HeaderBefore } from "../../components/HeaderBefore";
+
 import AdminServices from "./AdminServices";
 import ServiceHistory from "./ServiceHistory";
 import { ListItemButton, ListItemIcon } from "@mui/material";
+import { HeaderBefore } from "../../components/Header";
 
 const drawerWidth = 240;
 
@@ -31,7 +32,7 @@ export default function Sidebar() {
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <HeaderBefore />
+        <HeaderBefore/>
       </AppBar>
       <Drawer
         variant="permanent"
