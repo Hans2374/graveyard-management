@@ -18,7 +18,7 @@ import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
 import AdminServices from "./AdminServices";
 import ServiceHistory from "./ServiceHistory";
 import { ListItemButton, ListItemIcon } from "@mui/material";
-import { HeaderBefore } from "../../components/Header";
+import { Header } from "../../components/Header";
 
 const drawerWidth = 240;
 
@@ -32,7 +32,7 @@ export default function Sidebar() {
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <HeaderBefore/>
+        <Header/>
       </AppBar>
       <Drawer
         variant="permanent"
