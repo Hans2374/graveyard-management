@@ -14,8 +14,9 @@ function App() {
       }}
     >
       <Routes>
-        <Route path="/" element={<HomepageBefore />} />
+        <Route path="/home" element={<HomepageBefore />} />
         <Route path="/admin" element={<Sidebar />} />
+        <Route path="/contact" element={<HomepageBefore />} />
       </Routes>
     </Box>
   );

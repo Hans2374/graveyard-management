@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -40,6 +40,7 @@ const StickyNavbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
   const buttonRefs = useRef([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,8 +52,28 @@ const StickyNavbar = () => {
     };
   }, []);
 
-  const handleButtonClick = (index) => {
+  const handleButtonClick = (index, path) => {
     setActiveButton(index);
+    if (path === '/home') {
+      navigate(path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (path === "/service") {
+
+      navigate(path);
+    } else if (path === "/info") {
+
+      navigate(path);
+    } else if (path === "/customer") {
+
+      navigate(path);
+    } else if (path === "/contact") {
+
+      const footerElement = document.getElementById('footer');
+      if (footerElement) {
+        footerElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
   };
 
   const getIndicatorStyle = () => {
@@ -72,11 +93,11 @@ const StickyNavbar = () => {
   };
 
   const navItems = [
-    { label: 'Trang Chủ', path: '/' },
-    { label: 'Dịch Vụ', path: '/' },
-    { label: 'Tin tức', path: '/' },
-    { label: 'Khách hàng', path: '/' },
-    { label: 'Liên Hệ', path: '/' },
+    { label: 'Trang Chủ', path: '/home' },
+    { label: 'Dịch Vụ', path: '/service' },
+    { label: 'Tin tức', path: '/info' },
+    { label: 'Khách hàng', path: '/customer' },
+    { label: 'Liên Hệ', path: '/contact' },
   ];
 
   return (
