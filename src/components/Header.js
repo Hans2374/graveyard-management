@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     AppBar, Toolbar, Button, Box, MenuItem, Select, Dialog, DialogTitle, DialogContent,
     DialogActions, TextField, Tabs, Tab, IconButton, InputAdornment, Link, Typography,
-    Menu, Popover, List, ListItem, ListItemText
+    Popover, List, ListItem, ListItemText, Divider, useTheme, useMediaQuery
 } from '@mui/material';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
@@ -11,6 +12,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import logo from "../assets/logo.png";
+import logo1 from "../assets/logo1.png";
 import VI from "../assets/vietnam.png";
 import EN from "../assets/united-kingdom.png";
 import { styled } from '@mui/material/styles';
@@ -28,7 +30,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
     },
 }));
 
-export const HeaderBefore = () => {
+export const Header = () => {
     const [language, setLanguage] = useState('vi');
     const [open, setOpen] = useState(false);
     const [activeTab, setActiveTab] = useState(0);
@@ -50,6 +52,44 @@ export const HeaderBefore = () => {
     const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
     const [accountAnchorEl, setAccountAnchorEl] = useState(null);
 
+    const navigate = useNavigate();
+    const theme = useTheme();
+    const isXs = useMediaQuery(theme.breakpoints.only('xs'));
+    const isSm = useMediaQuery(theme.breakpoints.only('sm'));
+    const isMd = useMediaQuery(theme.breakpoints.only('md'));
+    const isLg = useMediaQuery(theme.breakpoints.only('lg'));
+    const isXl = useMediaQuery(theme.breakpoints.only('xl'));
+
+    useEffect(() => {
+        const loggedInStatus = localStorage.getItem('isLoggedIn');
+        if (loggedInStatus === 'true') {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const getLogo = () => {
+        if (isXs) {
+            return logo1;
+        }
+        return logo;
+    };
+
+    const getLogoSize = () => {
+        if (isXs) return { width: 45, height: 45 };
+        if (isSm) return { width: 150, height: 50 };
+        if (isMd) return { width: 140, height: 49 };
+        if (isLg) return { width: 155, height: 54 };
+        return { width: 170, height: 60 };  // xl size
+    };
+
+    const getFontSize = () => {
+        if (isXs) return 10;
+        if (isSm) return 11;
+        if (isMd) return 12;
+        if (isLg) return 13;
+        return 14;  // xl size
+    };
+
     const handleNotificationClick = (event) => {
         setNotificationAnchorEl(event.currentTarget);
     };
@@ -66,9 +106,11 @@ export const HeaderBefore = () => {
         setAccountAnchorEl(null);
     };
 
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        handleAccountClose();
+    const handleListItemClick = (event, action) => {
+        if (action === 'logout') {
+            setIsLoggedIn(false);
+        }
+        handleLogout();
     };
 
     // Giả lập đăng nhập thành công
@@ -86,19 +128,31 @@ export const HeaderBefore = () => {
             return;
         }
 
-        // Ở đây bạn sẽ thêm logic kiểm tra đăng nhập với server
-        // Giả sử đăng nhập thành công
+        // Giả lập đăng nhập thành công
         setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', 'true');
         handleCloseDialog();
-        // Reset form
         setLoginValues({ username: '', password: '' });
         setLoginErrors({});
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('isLoggedIn');
+        handleAccountClose();
+    };
+
+    const handleViewAllNotifications = () => {
+        navigate('/notification', { state: { isLoggedIn: isLoggedIn } });
     };
 
     const notifications = [
         "Thông báo 1",
         "Thông báo 2 với nội dung dài hơn sẽ bị cắt ngắn...",
         "Thông báo 3",
+        "Thông báo 4",
+        "Thông báo 5",
+        "Thông báo 6",
     ];
 
     const handleLanguageChange = (event) => setLanguage(event.target.value);
@@ -220,7 +274,15 @@ export const HeaderBefore = () => {
         <StyledAppBar position='sticky' sx={{ backgroundColor: '#E6D189' }}>
             <Toolbar>
                 <Link to="/">
-                    <img src={logo} alt="logo" style={{ width: 170, height: 60, padding: 5, cursor: 'pointer' }} />
+                    <img
+                        src={getLogo()}
+                        alt="logo"
+                        style={{
+                            ...getLogoSize(),
+                            padding: 5,
+                            cursor: 'pointer'
+                        }}
+                    />
                 </Link>
                 <Box sx={{ flexGrow: 1 }} />
                 <Select
@@ -231,7 +293,7 @@ export const HeaderBefore = () => {
                     sx={{
                         width: 100,
                         borderRadius: 3,
-                        marginRight: 2,
+                        marginRight: 3,
                         height: 40,
                         backgroundColor: 'white',
                         '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
@@ -241,6 +303,7 @@ export const HeaderBefore = () => {
                             boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
                             backgroundColor: '#f5f5f5',
                         },
+                        fontSize: getFontSize(),
                     }}
                     IconComponent={KeyboardArrowDownIcon}
                     renderValue={(selected) => (
@@ -269,13 +332,13 @@ export const HeaderBefore = () => {
                 </Select>
                 {isLoggedIn ? (
                     <>
-                        <IconButton color="inherit" sx={{scale: 1.2, marginRight: 2}}>
+                        <IconButton color="inherit" sx={{ scale: 1.2, marginRight: 2 }} aria-label="chat">
                             <ChatBubbleIcon />
                         </IconButton>
-                        <IconButton color="inherit" onClick={handleNotificationClick} sx={{scale: 1.2, marginRight: 2}}>
+                        <IconButton color="inherit" onClick={handleNotificationClick} sx={{ scale: 1.2, marginRight: 2 }} aria-label="notification">
                             <CircleNotificationsIcon />
                         </IconButton>
-                        <IconButton color="inherit" onClick={handleAccountClick} sx={{scale: 1.2}}>
+                        <IconButton color="inherit" onClick={handleAccountClick} sx={{ scale: 1.2 }} aria-label="account">
                             <AccountCircleIcon />
                         </IconButton>
 
@@ -292,48 +355,126 @@ export const HeaderBefore = () => {
                                 horizontal: 'right',
                             }}
                         >
-                            <Box sx={{ p: 2, maxWidth: 300 }}>
-                                <Typography variant="h6" align="center" gutterBottom>
-                                    Thông báo
-                                </Typography>
-                                <List sx={{ maxHeight: 200, overflowY: 'auto' }}>
+                            <Box sx={{
+                                maxWidth: 350,
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    p: 1,
+                                    color: '#D3B023',
+                                }}>
+                                    <Typography variant="h5">
+                                        Thông báo
+                                    </Typography>
+                                </Box>
+                                <Divider sx={{
+                                    borderColor: '#D3B023',
+                                    borderBottomWidth: 5
+                                }} />
+                                <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1, pb: 0, pt: 0 }}>
+                                    <Button
+                                        variant="text"
+                                        size="small"
+                                        onClick={handleViewAllNotifications}
+                                        sx={{
+                                            minWidth: 'auto',
+                                            p: 0,
+                                            pt: '2px',
+                                        }}
+                                    >
+                                        Xem tất cả
+                                    </Button>
+                                </Box>
+                                <List sx={{
+                                    maxHeight: 100,
+                                    maxWidth: 310,
+                                    pt: 0,
+                                    pb: 0,
+                                    overflowY: 'scroll',
+                                    scrollbarWidth: 'none',
+                                    msOverflowStyle: 'none',
+                                    '&::-webkit-scrollbar': {
+                                        display: 'none'
+                                    }
+                                }}>
                                     {notifications.map((notification, index) => (
-                                        <ListItem key={index}>
+                                        <ListItem key={index} sx={{ pb: 0, pt: 0 }}>
                                             <ListItemText
-                                                primary={notification.length > 50 ? `${notification.substring(0, 50)}...` : notification}
+                                                primary={notification.length > 20 ? `${notification.substring(0, 20)}...` : notification}
                                             />
                                         </ListItem>
                                     ))}
                                 </List>
-                                <Button fullWidth variant="text" sx={{ mt: 2 }}>
-                                    Xem tất cả
-                                </Button>
                             </Box>
                         </Popover>
 
-                        <Menu
+                        <Popover
                             anchorEl={accountAnchorEl}
                             open={Boolean(accountAnchorEl)}
                             onClose={handleAccountClose}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
                         >
-                            <MenuItem onClick={handleAccountClose}>Tên Người Dùng</MenuItem>
-                            <MenuItem onClick={handleAccountClose}>Dịch vụ của tôi</MenuItem>
-                            <MenuItem onClick={handleAccountClose}>Đóng góp ý kiến</MenuItem>
-                            <MenuItem onClick={handleLogout}>Đăng Xuất</MenuItem>
-                        </Menu>
+                            <Box sx={{
+                                height: 185,
+                                width: 160,
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}>
+                                <Box sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    p: 1,
+                                    color: '#D3B023',
+                                }}>
+                                    <Typography variant="h5">
+                                        Tài khoản
+                                    </Typography>
+                                </Box>
+                                <Divider sx={{
+                                    borderColor: '#D3B023',
+                                    borderBottomWidth: 5
+                                }} />
+                                <List sx={{ maxHeight: 100, maxWidth: 310, p: 0 }}>
+                                    <ListItem button onClick={(event) => handleListItemClick(event, 'profile')} sx={{ p: '0px 16px' }}>
+                                        <ListItemText primary="Tên Người Dùng" />
+                                    </ListItem>
+                                    <ListItem button onClick={(event) => handleListItemClick(event, 'services')} sx={{ p: '0px 16px' }}>
+                                        <ListItemText primary="Dịch vụ của tôi" />
+                                    </ListItem>
+                                    <ListItem button onClick={(event) => handleListItemClick(event, 'feedback')} sx={{ p: '0px 16px' }}>
+                                        <ListItemText primary="Đóng góp ý kiến" />
+                                    </ListItem>
+                                    <ListItem button onClick={(event) => handleListItemClick(event, 'logout')} sx={{ p: '0px 16px' }}>
+                                        <ListItemText primary="Đăng Xuất" />
+                                    </ListItem>
+                                </List>
+                            </Box>
+                        </Popover>
                     </>
                 ) : (
                     <Button
                         variant='contained'
                         color='inherit'
-                        endIcon={<AccountCircleIcon sx={{ color: '#D3B023', scale: 2 }} />}
+                        endIcon={<AccountCircleIcon sx={{ color: '#D3B023', scale: 1.5 }} />}
                         onClick={handleOpenDialog}
                         sx={{
+                            height: 40,
                             borderRadius: 3,
                             padding: '15px',
-                            fontSize: 13,
+                            fontSize: getFontSize(),
                             paddingRight: '20px',
-                            fontWeight: 'bold',
                             backgroundColor: 'white',
                         }}
                     >
@@ -344,9 +485,7 @@ export const HeaderBefore = () => {
 
             {/* Main Login/Signup Dialog */}
             <Dialog open={open} onClose={handleCloseDialog} maxWidth="xs">
-                <DialogTitle>
-                    <Typography variant="h5" align="center">Đăng nhập tài khoản</Typography>
-                </DialogTitle>
+                <DialogTitle align="center">Đăng nhập tài khoản</DialogTitle>
                 <DialogContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '421px' }}>
                     <Tabs value={activeTab} onChange={handleTabChange} centered >
                         <Tab label="Đăng nhập" />
