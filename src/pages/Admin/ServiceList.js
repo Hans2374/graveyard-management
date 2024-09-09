@@ -8,30 +8,14 @@ import {
   Button,
   TextField,
   InputAdornment,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from "./Service.module.css";
 import AddIcon from '@mui/icons-material/Add';
 import DataTable from "../../components/DataTable";
-import { useState } from "react";
 
-function AdminServices() {
-
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+function ServiceList() {
   return (
     <>
       <Box
@@ -45,22 +29,59 @@ function AdminServices() {
         <ul className={styles.ul}>
           <li className={styles.li}>
             <a href="#home" className={styles.a}>
-              Tất cả gói dịch vụ
+              Tất cả đơn hàng
             </a>
           </li>
           <li className={styles.li}>
             <a href="#news" className={styles.a}>
-              Mai táng
+              Chưa phân công
             </a>
           </li>
           <li className={styles.li}>
             <a href="#contact" className={styles.a}>
-              Cúng định kỳ
+              Đã phân công
             </a>
           </li>
           <li className={styles.li}>
             <a href="#about" className={styles.a}>
-              Thêm dịch vụ
+              Đang thực hiện
+            </a>
+          </li>
+          <li className={styles.li}>
+            <a href="#about" className={styles.a}>
+              Hoàn thành
+            </a>
+          </li>
+        </ul>
+      </Box>
+
+      <Box
+        sx={{
+          marginTop: "3px",
+          backgroundColor: "white",
+          maxWidth: "100%",
+          display: "flex",
+        }}
+      >
+        <ul className={styles.ul}>
+          <li className={styles.li}>
+            <a href="#home" className={styles.a}>
+              Chưa thanh toán
+            </a>
+          </li>
+          <li className={styles.li}>
+            <a href="#news" className={styles.a}>
+              Đã thanh toán
+            </a>
+          </li>
+          <li className={styles.li}>
+            <a href="#contact" className={styles.a}>
+              Yêu cầu hủy
+            </a>
+          </li>
+          <li className={styles.li}>
+            <a href="#about" className={styles.a}>
+              Đã hủy
             </a>
           </li>
         </ul>
@@ -118,42 +139,6 @@ function AdminServices() {
               ),
             }}
           />
-
-          <IconButton
-            sx={{
-              backgroundColor: "var(--primary-color)",
-              position: "absolute",
-              marginLeft: "1040px",
-            }}
-            onClick={handleClickOpen}
-          >
-            <AddIcon />
-          </IconButton>
-
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle
-              sx={{
-                backgroundColor: "var(--primary-color)",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Thông tin chi tiết
-            </DialogTitle>
-            <DialogContent>
-              <Typography>
-                h1. Heading
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} sx={{backgroundColor: "var(--primary-color)", color:"black", borderRadius:"20px", padding:"5px 20px 5px 20px"}}>
-                Đặt lại
-              </Button>
-              <Button onClick={handleClose} sx={{backgroundColor: "var(--primary-color)", color:"black"}}>
-                Hủy
-              </Button>
-            </DialogActions>
-          </Dialog>
         </Box>
         <Box
           sx={{
@@ -162,11 +147,11 @@ function AdminServices() {
             marginTop: "50px",
           }}
         >
-          <DataTable />
+          <DataTable/>
         </Box>
       </Box>
     </>
   );
 }
 
-export default AdminServices;
+export default ServiceList

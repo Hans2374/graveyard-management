@@ -27,7 +27,7 @@ import ServiceList from "../pages/Admin/ServiceList";
 
 const drawerWidth = 240;
 
-export default function Sidebar() {
+export default function StaffSidebar() {
   const [menudata, setMenudata] = React.useState("AdminServices");
 
   return (
@@ -58,7 +58,7 @@ export default function Sidebar() {
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Dịch vụ" />
+                <ListItemText primary="Đơn dịch vụ" />
               </ListItemButton>
             </ListItem>
 
@@ -67,7 +67,7 @@ export default function Sidebar() {
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Đơn dịch vụ" />
+                <ListItemText primary="Lịch trình" />
               </ListItemButton>
             </ListItem>
 
@@ -76,45 +76,10 @@ export default function Sidebar() {
                 <ListItemIcon>
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Khuyến mãi" />
+                <ListItemText primary="Vật dụng" />
               </ListItemButton>
             </ListItem>
 
-            <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminContent")}>
-                <ListItemIcon>
-                  <ArticleOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Nội dung" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem>
-              <ListItemButton onClick={() => setMenudata("EmployeeManagement")}>
-                <ListItemIcon>
-                  <AssignmentIndOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Nhân viên" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem>
-              <ListItemButton onClick={() => setMenudata("CustomerManagement")}>
-                <ListItemIcon>
-                  <ManageAccountsOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Khách hàng" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem>
-              <ListItemButton onClick={() => setMenudata("Dashboard")}>
-                <ListItemIcon>
-                  <ShowChartOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Thống kê" />
-              </ListItemButton>
-            </ListItem>
           </List>
         </Box>
       </Drawer>
@@ -125,10 +90,6 @@ export default function Sidebar() {
         {menudata === "AdminServices" && <AdminServices />}
         {menudata === "ServiceList" && <ServiceList />}
         {menudata === "AdminDiscount" && <AdminDiscount />}
-        {menudata === "AdminContent" && <AdminContent />}
-        {menudata === "EmployeeManagement" && <EmployeeManagement />}
-        {menudata === "CustomerManagement" && <CustomerManagement />}
-        {menudata === "Dashboard" && <Dashboard />}
       </Box>
     </Box>
   );

@@ -8,6 +8,7 @@ import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar";
 import { NotificationPage } from "./pages/Customer/NotificationPage";
 import { News } from "./pages/Customer/News";
+import StaffSidebar from "./components/StaffSidebar";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/admin" element={<Sidebar />} />
+        <Route path="/staff" element={<StaffSidebar />} />
         <Route path="/notification" element={<NotificationPage />} />
         <Route path="/news" element={<News />} />
         <Route path="/service" element={<Servicepage />} />
