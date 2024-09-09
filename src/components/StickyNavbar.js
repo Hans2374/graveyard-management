@@ -110,7 +110,7 @@ const StickyNavbar = () => {
 
   const navItems = [
     { label: 'Trang Chủ', path: '/' },
-    { label: 'Dịch Vụ', path: '/' },
+    { label: 'Dịch Vụ', path: '/services' },
     { label: 'Tin tức', path: '/' },
     { label: 'Khách hàng', path: '/' },
     { label: 'Liên Hệ', path: '/' },
