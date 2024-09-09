@@ -1,50 +1,92 @@
-import React, { useState, useEffect, useRef } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import { Link, useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import React, { useState, useEffect, useRef } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { Link } from 'react-router-dom';
+import { styled, useTheme } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: "#F9F9F9",
-  boxShadow: "none",
-  transition: theme.transitions.create(["box-shadow", "background-color"], {
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
+  transition: theme.transitions.create(['box-shadow', 'background-color'], {
     duration: theme.transitions.duration.short,
     easing: theme.transitions.easing.easeInOut,
   }),
-  "&.sticky": {
-    backgroundColor: "#F9F9F9",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+  '&.sticky': {
+    backgroundColor: '#F9F9F9',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  },
+  top: '74px',
+  [theme.breakpoints.down('lg')]: {
+    top: '63px',
+  },
+  [theme.breakpoints.down('md')]: {
+    top: '63px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    top: '58px',
   },
 }));
 
-const Indicator = styled("div")({
-  height: "5px",
-  backgroundColor: "var(--primary-color)",
-  position: "absolute",
+const Indicator = styled('div')({
+  height: '5px',
+  backgroundColor: '#E6D189',
+  position: 'absolute',
   bottom: 0,
   left: 0,
-  width: "100%",
-  transition: "background-color 0.3s ease",
+  width: '100%',
+  transition: 'left 0.3s ease, width 0.3s ease',
 });
+
+const ActiveIndicator = styled('div')({
+  height: '5px',
+  backgroundColor: '#D3B023',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  width: 0,
+  transition: 'left 0.3s ease, width 0.3s ease',
+});
+
+const GridContainer = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  width: '100%',
+  gap: '10px',
+});
+
+const ResponsiveButton = styled(Button)(({ theme }) => ({
+  color: 'var(--secondary-color)',
+  width: '100%',
+  padding: 0,
+  [theme.breakpoints.down('md')]: {
+    fontSize: '14px',
+  },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '9px',
+    marginBottom: '5px'
+  },
+  [theme.breakpoints.down('xs')]: {
+    fontSize: '10px',
+  },
+}));
 
 const StickyNavbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
   const buttonRefs = useRef([]);
-  const navigate = useNavigate();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
+      setIsSticky(window.scrollY > 100);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -52,104 +94,52 @@ const StickyNavbar = () => {
     setActiveButton(index);
   };
 
-  const handleServicesClick = () => {
-    navigate("/services");
+  const getActiveIndicatorStyle = () => {
+    if (activeButton !== null && buttonRefs.current[activeButton]) {
+      const button = buttonRefs.current[activeButton];
+      return {
+        left: `${button.offsetLeft}px`,
+        width: `${button.offsetWidth}px`,
+      };
+    }
+    return {
+      left: '0',
+      width: '0',
+    };
   };
 
-  const getButtonWidth = (index) => {
-    if (index >= 0 && index < buttonRefs.current.length) {
-      return buttonRefs.current[index].offsetWidth;
-    }
-    return 0;
-  };
-
-  const getIndicatorPosition = (index) => {
-    if (index >= 0 && index < buttonRefs.current.length) {
-      return buttonRefs.current[index].offsetLeft;
-    }
-    return 0;
-  };
+  const navItems = [
+    { label: 'Trang Chủ', path: '/' },
+    { label: 'Dịch Vụ', path: '/' },
+    { label: 'Tin tức', path: '/' },
+    { label: 'Khách hàng', path: '/' },
+    { label: 'Liên Hệ', path: '/' },
+  ];
 
   return (
-    <div>
-      <StyledAppBar
-        position="fixed"
-        elevation={0}
-        className={isSticky ? "sticky" : ""}
-        sx={{ top: "70px" }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
-          <Link
-            to="/"
-            style={{ textDecoration: "none", color: "var(--secondary-color)" }} // Loại bỏ đường link
-          >
-            <Button
-              color="inherit"
-              sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
-              onClick={() => handleButtonClick(0)}
-              ref={(el) => (buttonRefs.current[0] = el)}
+    <StyledAppBar position="fixed" elevation={0} className={isSticky ? 'sticky' : ''} sx={{ bgcolor: 'white', top: '74px', p: 0 }}>
+      <Toolbar sx={{ p: 0 }}>
+        <GridContainer>
+          {navItems.map((item, index) => (
+            <Link
+              key={index}
+              to={item.path}
+              style={{ textDecoration: 'none', color: 'var(--secondary-color)' }}
             >
-              Trang Chủ
-            </Button>
-          </Link>
-          <Link
-            to="/services"
-            style={{ textDecoration: "none", color: "var(--secondary-color)" }} // Loại bỏ đường link
-          >
-            <div style={{ position: "relative" }}>
-              <Button
+              <ResponsiveButton
                 color="inherit"
-                sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
-                ref={(el) => (buttonRefs.current[1] = el)}
-                onClick={handleServicesClick}
+                onClick={() => handleButtonClick(index)}
+                ref={(el) => buttonRefs.current[index] = el}
               >
-                Dịch Vụ
-              </Button>
-            </div>
-          </Link>
-          <Button
-            color="inherit"
-            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
-            onClick={() => handleButtonClick(2)}
-            ref={(el) => (buttonRefs.current[2] = el)}
-          >
-            Tin tức
-          </Button>
-          <Button
-            color="inherit"
-            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
-            onClick={() => handleButtonClick(3)}
-            ref={(el) => (buttonRefs.current[3] = el)}
-          >
-            Khách hàng
-          </Button>
-          <Button
-            color="inherit"
-            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
-            onClick={() => handleButtonClick(4)}
-            ref={(el) => (buttonRefs.current[4] = el)}
-          >
-            Liên Hệ
-          </Button>
-        </Toolbar>
-        <Indicator
-          style={{
-            backgroundColor:
-              activeButton !== null
-                ? "var(--secondary-color)"
-                : "var(--primary-color)",
-            left:
-              activeButton !== null
-                ? `${getIndicatorPosition(activeButton)}px`
-                : "0",
-            width:
-              activeButton !== null
-                ? `${getButtonWidth(activeButton)}px`
-                : "100%",
-          }}
-        />
-      </StyledAppBar>
-    </div>
+                {item.label}
+              </ResponsiveButton>
+            </Link>
+          ))}
+        </GridContainer>
+      </Toolbar>
+      <Indicator />
+      <ActiveIndicator style={getActiveIndicatorStyle()} />
+    </StyledAppBar>
   );
 };
 
