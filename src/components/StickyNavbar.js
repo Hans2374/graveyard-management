@@ -1,37 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import { Link } from 'react-router-dom'; 
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import React, { useState, useEffect, useRef } from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { Link, useNavigate } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  backgroundColor: '#F9F9F9',
-  boxShadow: 'none',
-  transition: theme.transitions.create(['box-shadow', 'background-color'], {
+  backgroundColor: "#F9F9F9",
+  boxShadow: "none",
+  transition: theme.transitions.create(["box-shadow", "background-color"], {
     duration: theme.transitions.duration.short,
     easing: theme.transitions.easing.easeInOut,
   }),
-  '&.sticky': {
-    backgroundColor: '#F9F9F9',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+  "&.sticky": {
+    backgroundColor: "#F9F9F9",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
   },
 }));
 
-const Indicator = styled('div')({
-  height: '5px',
-  backgroundColor: 'var(--primary-color)', 
-  position: 'absolute',
+const Indicator = styled("div")({
+  height: "5px",
+  backgroundColor: "var(--primary-color)",
+  position: "absolute",
   bottom: 0,
   left: 0,
-  width: '100%', 
-  transition: 'background-color 0.3s ease', 
+  width: "100%",
+  transition: "background-color 0.3s ease",
 });
 
 const StickyNavbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
   const buttonRefs = useRef([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,14 +42,18 @@ const StickyNavbar = () => {
         setIsSticky(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
+  };
+
+  const handleServicesClick = () => {
+    navigate("/services");
   };
 
   const getButtonWidth = (index) => {
@@ -67,52 +72,82 @@ const StickyNavbar = () => {
 
   return (
     <div>
-      <StyledAppBar position="fixed" elevation={0} className={isSticky ? 'sticky' : ''} sx={{ top: '70px' }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'center' }}> 
-          <Link to="/"  // Thêm Link component
-              style={{ textDecoration: 'none', color: 'var(--secondary-color)' }} // Loại bỏ đường link
+      <StyledAppBar
+        position="fixed"
+        elevation={0}
+        className={isSticky ? "sticky" : ""}
+        sx={{ top: "70px" }}
+      >
+        <Toolbar sx={{ display: "flex", justifyContent: "center" }}>
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "var(--secondary-color)" }} // Loại bỏ đường link
           >
-            <Button color="inherit" sx={{ color: 'var(--secondary-color)', margin: '0 10px' }}
+            <Button
+              color="inherit"
+              sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
               onClick={() => handleButtonClick(0)}
-              ref={(el) => buttonRefs.current[0] = el} 
+              ref={(el) => (buttonRefs.current[0] = el)}
             >
               Trang Chủ
             </Button>
           </Link>
-          <Link to="/services"  // Thêm Link component
-              style={{ textDecoration: 'none', color: 'var(--secondary-color)' }} // Loại bỏ đường link
+          <Link
+            to="/services"
+            style={{ textDecoration: "none", color: "var(--secondary-color)" }} // Loại bỏ đường link
           >
-            <Button color="inherit" sx={{ color: 'var(--secondary-color)', margin: '0 10px' }}
-              onClick={() => handleButtonClick(1)}
-              ref={(el) => buttonRefs.current[1] = el} 
-            >
-              Dịch Vụ
-            </Button>
+            <div style={{ position: "relative" }}>
+              <Button
+                color="inherit"
+                sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
+                ref={(el) => (buttonRefs.current[1] = el)}
+                onClick={handleServicesClick}
+              >
+                Dịch Vụ
+              </Button>
+            </div>
           </Link>
-          <Button color="inherit" sx={{ color: 'var(--secondary-color)', margin: '0 10px' }}
+          <Button
+            color="inherit"
+            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
             onClick={() => handleButtonClick(2)}
-            ref={(el) => buttonRefs.current[2] = el} 
+            ref={(el) => (buttonRefs.current[2] = el)}
           >
             Tin tức
           </Button>
-          <Button color="inherit" sx={{ color: 'var(--secondary-color)', margin: '0 10px' }}
+          <Button
+            color="inherit"
+            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
             onClick={() => handleButtonClick(3)}
-            ref={(el) => buttonRefs.current[3] = el} 
+            ref={(el) => (buttonRefs.current[3] = el)}
           >
             Khách hàng
           </Button>
-          <Button color="inherit" sx={{ color: 'var(--secondary-color)', margin: '0 10px' }}
+          <Button
+            color="inherit"
+            sx={{ color: "var(--secondary-color)", margin: "0 10px" }}
             onClick={() => handleButtonClick(4)}
-            ref={(el) => buttonRefs.current[4] = el} 
+            ref={(el) => (buttonRefs.current[4] = el)}
           >
             Liên Hệ
           </Button>
         </Toolbar>
-        <Indicator style={{ 
-            backgroundColor: activeButton !== null ? 'var(--secondary-color)' : 'var(--primary-color)', 
-            left: activeButton !== null ? `${getIndicatorPosition(activeButton)}px` : '0',
-            width: activeButton !== null ? `${getButtonWidth(activeButton)}px` : '100%', 
-         }} /> 
+        <Indicator
+          style={{
+            backgroundColor:
+              activeButton !== null
+                ? "var(--secondary-color)"
+                : "var(--primary-color)",
+            left:
+              activeButton !== null
+                ? `${getIndicatorPosition(activeButton)}px`
+                : "0",
+            width:
+              activeButton !== null
+                ? `${getButtonWidth(activeButton)}px`
+                : "100%",
+          }}
+        />
       </StyledAppBar>
     </div>
   );
