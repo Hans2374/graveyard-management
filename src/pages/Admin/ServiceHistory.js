@@ -10,4 +10,4 @@ function ServiceHistory() {
   );
 }
 
-export default ServiceHistory;
+export default ServiceHistory

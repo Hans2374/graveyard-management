@@ -14,9 +14,7 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-
-import AdminServices from "./AdminServices";
-import ServiceHistory from "./ServiceHistory";
+import AdminServices from "../pages/Admin/AdminServices";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import  "./Sidebar.module.css";
 import AdminContent from "../pages/Admin/AdminContent";
@@ -24,7 +22,8 @@ import AdminDiscount from "../pages/Admin/AdminDiscount";
 import EmployeeManagement from "../pages/Admin/EmployeeManagement";
 import CustomerManagement from "../pages/Admin/CustomerManagement";
 import Dashboard from "../pages/Admin/Dashboard";
-import { Header } from "../../components/Header";
+import { Header } from "./Header";
+import ServiceHistory from "../pages/Admin/ServiceHistory"
 
 const drawerWidth = 240;
 
