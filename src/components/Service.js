@@ -32,22 +32,24 @@ export const Service = () => {
   return (
     <Box
       sx={{
-        padding: "40px 20px",
         display: "flex",
         justifyContent: "center",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "100vh",
         boxSizing: "border-box",
+        backgroundColor: "#f0f0f0",
+        padding: 0,
+        margin: 0,
       }}
     >
       <Box
         sx={{
-          borderRadius: "10px",
           padding: "40px 20px",
           maxWidth: "1200px",
           width: "100%",
-          backgroundColor: "rgba(255, 255, 255, 0.8)",
+          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
+          margin: "auto",
         }}
       >
         <Box

@@ -87,7 +87,6 @@ const FuneralServicePage = () => {
   const [compareList, setCompareList] = useState([]);
   const [isCompareDialogOpen, setIsCompareDialogOpen] = useState(false);
 
-  // Thêm dịch vụ vào danh sách so sánh
   const handleAddToCompare = (service) => {
     if (compareList.some((item) => item.id === service.id)) {
       alert("Dịch vụ này đã được thêm vào so sánh.");
@@ -100,7 +99,6 @@ const FuneralServicePage = () => {
     }
   };
 
-  // Mở hộp thoại so sánh
   const handleOpenCompareDialog = () => {
     if (compareList.length === 2) {
       setIsCompareDialogOpen(true);
@@ -109,12 +107,10 @@ const FuneralServicePage = () => {
     }
   };
 
-  // Đóng hộp thoại so sánh
   const handleCloseCompareDialog = () => {
     setIsCompareDialogOpen(false);
   };
 
-  // Xóa dịch vụ khỏi danh sách so sánh
   const handleRemoveFromCompare = (service) => {
     setCompareList(compareList.filter((item) => item.id !== service.id));
   };
@@ -152,7 +148,6 @@ const FuneralServicePage = () => {
           DỊCH VỤ MAI TÁNG
         </Typography>
 
-        {/* Search and Compare Box */}
         <Box
           sx={{
             display: "flex",
@@ -161,7 +156,6 @@ const FuneralServicePage = () => {
             alignItems: "flex-start",
           }}
         >
-          {/* Search Bar */}
           <Box display="flex" alignItems="center">
             <TextField
               placeholder="Tìm kiếm dịch vụ"
@@ -184,7 +178,6 @@ const FuneralServicePage = () => {
             </Button>
           </Box>
 
-          {/* Sticky Compare Box */}
           <Box
             sx={{
               position: "sticky",
@@ -266,7 +259,6 @@ const FuneralServicePage = () => {
                     alignItems="center"
                     mt={2}
                   >
-                    {/* Button Thêm vào so sánh */}
                     <Button
                       variant="contained"
                       sx={{ backgroundColor: "#f0c431" }}
@@ -280,7 +272,6 @@ const FuneralServicePage = () => {
                         : "Thêm vào so sánh"}
                     </Button>
 
-                    {/* Nút Chi tiết */}
                     <Button
                       variant="text"
                       sx={{ marginTop: "10px", color: "#f0c431" }}
@@ -303,7 +294,6 @@ const FuneralServicePage = () => {
           />
         </Box>
 
-        {/* Hộp thoại so sánh dịch vụ */}
         <Dialog
           open={isCompareDialogOpen}
           onClose={handleCloseCompareDialog}

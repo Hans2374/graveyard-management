@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderBefore } from "../components/HeaderBefore";
+import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 import StickyNavbar from "../components/StickyNavbar";
 import PeriodicOffering from "../components/PeriodicOffering";
@@ -7,7 +7,7 @@ import PeriodicOffering from "../components/PeriodicOffering";
 const PeriodicOfferingPage = () => {
   return (
     <>
-      <HeaderBefore />
+      <Header />
       <StickyNavbar />
       <div style={{ marginTop: "50px" }}>
         <PeriodicOffering />
