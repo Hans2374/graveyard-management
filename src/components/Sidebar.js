@@ -14,9 +14,9 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import { HeaderBefore } from "./HeaderBefore";
-import AdminServices from "../pages/Admin/AdminServices";
-import ServiceHistory from "../pages/Admin/ServiceHistory";
+
+import AdminServices from "./AdminServices";
+import ServiceHistory from "./ServiceHistory";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import  "./Sidebar.module.css";
 import AdminContent from "../pages/Admin/AdminContent";
@@ -24,6 +24,7 @@ import AdminDiscount from "../pages/Admin/AdminDiscount";
 import EmployeeManagement from "../pages/Admin/EmployeeManagement";
 import CustomerManagement from "../pages/Admin/CustomerManagement";
 import Dashboard from "../pages/Admin/Dashboard";
+import { Header } from "../../components/Header";
 
 const drawerWidth = 240;
 
@@ -37,7 +38,7 @@ export default function Sidebar() {
         position="fixed"
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
-        <HeaderBefore />
+        <Header/>
       </AppBar>
       <Drawer
         variant="permanent"
