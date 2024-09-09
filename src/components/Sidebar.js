@@ -14,11 +14,16 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-
-import AdminServices from "./AdminServices";
-import ServiceHistory from "./ServiceHistory";
+import AdminServices from "../pages/Admin/AdminServices";
 import { ListItemButton, ListItemIcon } from "@mui/material";
-import { Header } from "../../components/Header";
+import  "./Sidebar.module.css";
+import AdminContent from "../pages/Admin/AdminContent";
+import AdminDiscount from "../pages/Admin/AdminDiscount";
+import EmployeeManagement from "../pages/Admin/EmployeeManagement";
+import CustomerManagement from "../pages/Admin/CustomerManagement";
+import Dashboard from "../pages/Admin/Dashboard";
+import { Header } from "./Header";
+import ServiceHistory from "../pages/Admin/ServiceHistory"
 
 const drawerWidth = 240;
 
@@ -67,7 +72,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("SalesManagement")} >
+              <ListItemButton onClick={() => setMenudata("AdminDiscount")} >
                 <ListItemIcon >
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
@@ -76,7 +81,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ContentManagement")} >
+              <ListItemButton onClick={() => setMenudata("AdminContent")} >
                 <ListItemIcon >
                   <ArticleOutlinedIcon />
                 </ListItemIcon>
@@ -113,9 +118,14 @@ export default function Sidebar() {
           </List>
         </Box>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {menudata == "AdminServices" && <AdminServices />}
-        {menudata == "ServiceHistory" && <ServiceHistory />}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 , backgroundColor:"#F2F2F2"}}>
+        {menudata === "AdminServices" && <AdminServices />}
+        {menudata === "ServiceHistory" && <ServiceHistory />}
+        {menudata === "AdminDiscount" && <AdminDiscount />}
+        {menudata === "AdminContent" && <AdminContent />}
+        {menudata === "EmployeeManagement" && <EmployeeManagement />}
+        {menudata === "CustomerManagement" && <CustomerManagement />}
+        {menudata === "Dashboard" && <Dashboard />}
       </Box>
     </Box>
   );
