@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Homepage } from "./pages/Customer/Homepage";
 import "./App.css";
 import { Box } from "@mui/material";
-import Sidebar from "./pages/Admin/Sidebar";
+import Sidebar from "./components/Sidebar";
 import { NotificationPage } from "./pages/Customer/NotificationPage";
 import { News } from "./pages/Customer/News";
 
