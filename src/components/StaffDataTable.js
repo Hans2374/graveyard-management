@@ -12,6 +12,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { KeyboardArrowRight as KeyboardArrowRightIcon } from '@mui/icons-material';
 
 function createData(stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu) {
     return { stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu };
@@ -45,6 +49,8 @@ export default function StaffDataTable() {
     const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page
     const [open, setOpen] = React.useState(false); // Dialog open state
     const [selectedRow, setSelectedRow] = React.useState(null); // Selected order details
+    const [selectedYear, setSelectedYear] = React.useState('2024'); // Default selected year
+    const [anchorEl, setAnchorEl] = React.useState(null); // Menu anchor
 
     // Handle page change
     const handleChangePage = (event, newPage) => {
@@ -67,6 +73,22 @@ export default function StaffDataTable() {
     const handleCloseDialog = () => {
         setOpen(false); // Close the dialog
         setSelectedRow(null); // Reset selected row
+    };
+
+    // Handle dropdown menu opening
+    const handleOpenMenu = (event) => {
+        setAnchorEl(event.currentTarget); // Set anchor for menu
+    };
+
+    // Handle menu close
+    const handleCloseMenu = () => {
+        setAnchorEl(null); // Close menu
+    };
+
+    // Handle year change
+    const handleYearChange = (year) => {
+        setSelectedYear(year); // Update selected year
+        handleCloseMenu(); // Close the menu after selecting
     };
 
     return (
@@ -167,13 +189,30 @@ export default function StaffDataTable() {
                 <DialogContent>
                     {selectedRow && (
                         <div>
-                            <p><strong>Mã đơn:</strong> {selectedRow.madon}</p>
-                            <p><strong>Tên dịch vụ:</strong> {selectedRow.tendichvu || 'N/A'}</p>
-                            <p><strong>Gói dịch vụ:</strong> {selectedRow.goidichvu || 'N/A'}</p>
-                            <p><strong>Khách hàng:</strong> {selectedRow.khachhang || 'N/A'}</p>
-                            <p><strong>SĐT:</strong> {selectedRow.sdt || 'N/A'}</p>
-                            <p><strong>Thời gian:</strong> {selectedRow.thoigian || 'N/A'}</p>
-                            <p><strong>Ghi chú:</strong> {selectedRow.ghichu || 'N/A'}</p>
+                            <p><strong>Nội dung công việc chung của dịch vụ:</strong> <br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                            <p><strong>Ghi chú đặc biệt:</strong> <br />
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                            {/* Year selection */}
+                            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                                <span>Năm {selectedYear}</span>
+                                <IconButton onClick={handleOpenMenu}>
+                                    <KeyboardArrowRightIcon />
+                                </IconButton>
+                            </Box>
+
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleCloseMenu}
+                            >
+                                <MenuItem onClick={() => handleYearChange('2022')}>2022</MenuItem>
+                                <MenuItem onClick={() => handleYearChange('2023')}>2023</MenuItem>
+                                <MenuItem onClick={() => handleYearChange('2024')}>2024</MenuItem>
+                                <MenuItem onClick={() => handleYearChange('2025')}>2025</MenuItem>
+                            </Menu>
                         </div>
                     )}
                     <Button onClick={handleCloseDialog}>Close</Button>
