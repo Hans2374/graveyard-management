@@ -5,13 +5,18 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import ListItem from "@mui/material/ListItem";
+import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
 import ListItemText from "@mui/material/ListItemText";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
+import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import { Header } from "./Header";
 import ServiceList from "../pages/Admin/ServiceList";
@@ -56,7 +61,7 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ScheduleList")}>
+              <ListItemButton onClick={() => setMenudata("ServiceList")}>
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
@@ -81,7 +86,7 @@ export default function StaffSidebar() {
       >
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
-        {menudata === "AdminDiscount" && <AdminDiscount />}
+        {menudata === "StaffTable" && <StaffTable />}
       </Box>
     </Box>
   );
