@@ -21,6 +21,7 @@ import AdminDiscount from "../pages/Admin/AdminDiscount";
 import { Header } from "./Header";
 import ServiceList from "../pages/Admin/ServiceList";
 import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
+import StaffTable from "../components/StaffTable";
 
 const drawerWidth = 240;
 
@@ -69,14 +70,13 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminDiscount")}>
+              <ListItemButton onClick={() => setMenudata("StaffTable")}>
                 <ListItemIcon>
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Vật dụng" />
               </ListItemButton>
             </ListItem>
-
           </List>
         </Box>
       </Drawer>
@@ -86,7 +86,7 @@ export default function StaffSidebar() {
       >
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
-        {menudata === "AdminDiscount" && <AdminDiscount />}
+        {menudata === "StaffTable" && <StaffTable />}
       </Box>
     </Box>
   );
