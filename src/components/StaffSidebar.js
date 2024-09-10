@@ -19,7 +19,7 @@ import "./Sidebar.module.css";
 import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import { Header } from "./Header";
-import ServiceList from "../pages/Admin/ServiceList";
+import ScheduleList from "../pages/Staff/ScheduleList";
 import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import StaffTable from "../components/StaffTable";
 
@@ -61,7 +61,7 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ServiceList")}>
+              <ListItemButton onClick={() => setMenudata("ScheduleList")}>
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
@@ -85,7 +85,7 @@ export default function StaffSidebar() {
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
-        {menudata === "ServiceList" && <ServiceList />}
+        {menudata === "ScheduleList" && <ScheduleList />}
         {menudata === "StaffTable" && <StaffTable />}
       </Box>
     </Box>
