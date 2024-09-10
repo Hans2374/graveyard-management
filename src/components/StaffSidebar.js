@@ -21,9 +21,9 @@ import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import EmployeeManagement from "../pages/Admin/EmployeeManagement";
 import CustomerManagement from "../pages/Admin/CustomerManagement";
-import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
 import ServiceList from "../pages/Admin/ServiceList";
+import StaffTable from "../components/StaffTable";
 
 const drawerWidth = 240;
 
@@ -72,14 +72,13 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminDiscount")}>
+              <ListItemButton onClick={() => setMenudata("StaffTable")}>
                 <ListItemIcon>
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Vật dụng" />
               </ListItemButton>
             </ListItem>
-
           </List>
         </Box>
       </Drawer>
@@ -89,7 +88,7 @@ export default function StaffSidebar() {
       >
         {menudata === "AdminServices" && <AdminServices />}
         {menudata === "ServiceList" && <ServiceList />}
-        {menudata === "AdminDiscount" && <AdminDiscount />}
+        {menudata === "StaffTable" && <StaffTable />}
       </Box>
     </Box>
   );
