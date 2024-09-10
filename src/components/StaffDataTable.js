@@ -16,6 +16,38 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { KeyboardArrowRight as KeyboardArrowRightIcon } from '@mui/icons-material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import FilterListIcon from '@mui/icons-material/FilterList';
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
 
 function createData(stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu) {
     return { stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu };
@@ -51,6 +83,24 @@ export default function StaffDataTable() {
     const [selectedRow, setSelectedRow] = React.useState(null); // Selected order details
     const [selectedYear, setSelectedYear] = React.useState('2024'); // Default selected year
     const [anchorEl, setAnchorEl] = React.useState(null); // Menu anchor
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    // Random date generation in format "thứ, ngày/tháng"
+    const generateRandomDate = () => {
+        const daysOfWeek = ['th2', 'th3', 'th4', 'th5', 'th6', 'th7', 'CN'];
+        const randomDayOfWeek = daysOfWeek[Math.floor(Math.random() * daysOfWeek.length)];
+
+        const randomDay = Math.floor(Math.random() * 30) + 1;
+        const randomMonth = Math.floor(Math.random() * 12) + 1;
+
+        return `${randomDayOfWeek}, ${randomDay}/${randomMonth}`;
+    };
+
+    const tabs = Array.from({ length: 6 }, () => generateRandomDate());
 
     // Handle page change
     const handleChangePage = (event, newPage) => {
@@ -184,8 +234,20 @@ export default function StaffDataTable() {
             />
 
             {/* Dialog for showing order details */}
-            <Dialog open={open} onClose={handleCloseDialog}>
-                <DialogTitle>Chi tiết mã đơn</DialogTitle>
+            <Dialog open={open}
+                onClose={handleCloseDialog}
+                maxWidth="lg" // Optional: Adjust the maximum width
+                fullWidth // Makes the dialog take up full width
+                PaperProps={{
+                    sx: {
+                        height: '100vh', // Full viewport height
+                        maxHeight: '100vh', // Prevents the dialog from exceeding viewport height
+                        display: 'flex', // Ensures flex behavior for the content
+                        flexDirection: 'column' // Arrange content vertically
+                    }
+                }}
+            >
+                <DialogTitle align='center'>Chi tiết mã đơn</DialogTitle>
                 <DialogContent>
                     {selectedRow && (
                         <div>
@@ -213,6 +275,44 @@ export default function StaffDataTable() {
                                 <MenuItem onClick={() => handleYearChange('2024')}>2024</MenuItem>
                                 <MenuItem onClick={() => handleYearChange('2025')}>2025</MenuItem>
                             </Menu>
+                            <Box sx={{ width: '100%' }}>
+                                <Tabs value={value} onChange={handleChange} aria-label="random tabs example">
+                                    {tabs.map((tab, index) => (
+                                        <Tab label={tab} key={index} {...a11yProps(index)} />
+                                    ))}
+                                </Tabs>
+                                {tabs.map((tab, index) => (
+                                    <TabPanel value={value} index={index} key={index}>
+                                        {/* Text and Filter Section */}
+                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                                            <Typography variant="h6">Vật dụng</Typography>
+                                            <IconButton aria-label="filter">
+                                                <FilterListIcon />
+                                                <Typography sx={{ ml: 1 }}>Lọc vật dụng</Typography>
+                                            </IconButton>
+                                        </Box>
+
+                                        {/* Grid Section */}
+                                        <Grid container spacing={2}>
+                                            {[...Array(9)].map((_, i) => (
+                                                <Grid item xs={4} key={i}>
+                                                    <Box
+                                                        sx={{
+                                                            height: 80,
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center',
+                                                            bgcolor: 'lightgray',
+                                                        }}
+                                                    >
+                                                        Text {i + 1}
+                                                    </Box>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </TabPanel>
+                                ))}
+                            </Box>
                         </div>
                     )}
                     <Button onClick={handleCloseDialog}>Close</Button>
