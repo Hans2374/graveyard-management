@@ -8,50 +8,12 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import styles from "./Service.module.css";
-import CustomerTable from "../../components/CustomerTable";
+import CustomerTable from "../../../components/CustomerTable";
 
 function CustomerManagement() {
 
   return (
     <>
-      <Box
-        sx={{
-          marginTop: "65px",
-          backgroundColor: "white",
-          maxWidth: "100%",
-          display: "flex",
-        }}
-      >
-        <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a href="#home" className={styles.a}>
-              Tất cả khách hàng
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#news" className={styles.a}>
-              Nhiều đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
-              Ít đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#about" className={styles.a}>
-              Chưa có đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#about" className={styles.a}>
-              Bị chặn
-            </a>
-          </li>
-        </ul>
-      </Box>
-
       <Box
         component="main"
         sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}

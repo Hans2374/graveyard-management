@@ -71,7 +71,7 @@ const rows = [
   createData(5, 'EMPLOYEE05', false),
 ];
 
-export default function BasicTable() {
+export default function EmployeeTable() {
   const [blockStatus, setBlockStatus] = useState(
     rows.map(row => row.chan)
   );
