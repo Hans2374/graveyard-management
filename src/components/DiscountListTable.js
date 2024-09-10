@@ -75,14 +75,14 @@ function createData(stt, tengoi, khadung, chinhsua) {
 }
 
 const rows = [
-  createData(1, 'Hỏa táng'),
-  createData(2, 'Hỏa táng'),
-  createData(3, 'Hỏa táng'),
-  createData(4, 'Hỏa táng'),
-  createData(5, 'Hỏa táng'),
+  createData(1, 'BYFUISDN'),
+  createData(2, 'BYFUISDN'),
+  createData(3, 'BYFUISDN'),
+  createData(4, 'BYFUISDN '),
+  createData(5, 'BYFUISDN'),
 ];
 
-export default function BasicTable() {
+export default function DiscountListTable() {
   return (
     <TableContainer component={Paper} sx={{ width: "1080px" }}>
       <Table aria-label="simple table">

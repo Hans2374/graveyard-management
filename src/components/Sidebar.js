@@ -14,21 +14,21 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import AdminServices from "../pages/Admin/AdminServices";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
 import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
-import EmployeeManagement from "../pages/Admin/EmployeeManagement";
-import CustomerManagement from "../pages/Admin/CustomerManagement";
 import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
 import ServiceList from "../pages/Admin/ServiceList";
+import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
+import EmployeeNavbar from "../pages/Admin/EmployeeManagement/EmployeeNavbar";
+import CustomerNavbar from "../pages/Admin/CustomerManagement/CustomerNavbar";
 
 const drawerWidth = 240;
 
 export default function Sidebar() {
-  const [menudata, setMenudata] = React.useState("AdminServices");
+  const [menudata, setMenudata] = React.useState("ServicesNavbar");
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -54,7 +54,7 @@ export default function Sidebar() {
         <Box sx={{ overflow: "auto" }}>
           <List>
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminServices")}>
+              <ListItemButton onClick={() => setMenudata("ServicesNavbar")}>
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
@@ -90,7 +90,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("EmployeeManagement")}>
+              <ListItemButton onClick={() => setMenudata("EmployeeNavbar")}>
                 <ListItemIcon>
                   <AssignmentIndOutlinedIcon />
                 </ListItemIcon>
@@ -99,7 +99,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("CustomerManagement")}>
+              <ListItemButton onClick={() => setMenudata("CustomerNavbar")}>
                 <ListItemIcon>
                   <ManageAccountsOutlinedIcon />
                 </ListItemIcon>
@@ -122,12 +122,12 @@ export default function Sidebar() {
         component="main"
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
-        {menudata === "AdminServices" && <AdminServices />}
+        {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
         {menudata === "AdminDiscount" && <AdminDiscount />}
         {menudata === "AdminContent" && <AdminContent />}
-        {menudata === "EmployeeManagement" && <EmployeeManagement />}
-        {menudata === "CustomerManagement" && <CustomerManagement />}
+        {menudata === "EmployeeNavbar" && <EmployeeNavbar />}
+        {menudata === "CustomerNavbar" && <CustomerNavbar />}
         {menudata === "Dashboard" && <Dashboard />}
       </Box>
     </Box>
