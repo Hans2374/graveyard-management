@@ -11,6 +11,7 @@ import { NotificationPage } from "./pages/Customer/NotificationPage";
 import { News } from "./pages/Customer/News";
 import {NewsDetail} from "./pages/Customer/NewsDetail";
 import StaffSidebar from "./components/StaffSidebar";
+import { CustomerProfile } from "./pages/Customer/CustomerProfile";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           path="/services/periodic-offering"
           element={<PeriodicOfferingPage />}
         />
+        <Route path="/profile" element={<CustomerProfile />} />
       </Routes>
     </Box>
   );
