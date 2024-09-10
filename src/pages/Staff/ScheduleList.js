@@ -13,12 +13,11 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import styles from "./Service.module.css";
 import AddIcon from '@mui/icons-material/Add';
-import DataTable from "../../components/DataTable";
+import StaffDataTable from "../../components/StaffDataTable";
 import { useState } from "react";
 
-function AdminServices() {
+function ScheduleList() {
 
   const [open, setOpen] = useState(false);
 
@@ -33,40 +32,8 @@ function AdminServices() {
   return (
     <>
       <Box
-        sx={{
-          marginTop: "65px",
-          backgroundColor: "white",
-          maxWidth: "100%",
-          display: "flex",
-        }}
-      >
-        <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a href="#home" className={styles.a}>
-              Tất cả gói dịch vụ
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#news" className={styles.a}>
-              Mai táng
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
-              Cúng định kỳ
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#about" className={styles.a}>
-              Thêm dịch vụ
-            </a>
-          </li>
-        </ul>
-      </Box>
-
-      <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
+        sx={{ flexGrow: 1, p: 3, marginTop: "70px", backgroundColor: "white" }}
       >
         <Box
           sx={{
@@ -160,11 +127,11 @@ function AdminServices() {
             marginTop: "50px",
           }}
         >
-          <DataTable />
+          <StaffDataTable />
         </Box>
       </Box>
     </>
   );
 }
 
-export default AdminServices;
+export default ScheduleList;

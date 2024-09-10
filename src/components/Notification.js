@@ -28,7 +28,7 @@ const Notification = ({ notifications = [] }) => {
             <Box sx={{ backgroundColor: 'white', padding: 2, marginTop: '65px', maxWidth: '1000px' }}>
                 <Typography
                     align="center"
-                    sx={{ color: '#D3B023', marginBottom: 2, fontWeight: 'bold', scale: 2 }}
+                    sx={{ color: 'var(--secondary-color)', marginBottom: 2, fontWeight: 'bold', scale: 2 }}
                 >
                     THÔNG BÁO
                 </Typography>

@@ -5,25 +5,17 @@ import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import ListItem from "@mui/material/ListItem";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
 import ListItemText from "@mui/material/ListItemText";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
-import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
 import AdminServices from "../pages/Admin/AdminServices";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
-import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
-import EmployeeManagement from "../pages/Admin/EmployeeManagement";
-import CustomerManagement from "../pages/Admin/CustomerManagement";
-import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
-import ServiceList from "../pages/Admin/ServiceList";
+import ScheduleList from "../pages/Staff/ScheduleList";
 
 const drawerWidth = 240;
 
@@ -63,7 +55,7 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ServiceList")}>
+              <ListItemButton onClick={() => setMenudata("ScheduleList")}>
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
@@ -88,7 +80,7 @@ export default function StaffSidebar() {
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
         {menudata === "AdminServices" && <AdminServices />}
-        {menudata === "ServiceList" && <ServiceList />}
+        {menudata === "ScheduleList" && <ScheduleList />}
         {menudata === "AdminDiscount" && <AdminDiscount />}
       </Box>
     </Box>

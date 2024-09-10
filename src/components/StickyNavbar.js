@@ -32,7 +32,7 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 
 const Indicator = styled("div")({
   height: "5px",
-  backgroundColor: "#E6D189",
+  backgroundColor: "var(--primary-color)",
   position: "absolute",
   bottom: 0,
   left: 0,
@@ -42,7 +42,7 @@ const Indicator = styled("div")({
 
 const ActiveIndicator = styled("div")({
   height: "5px",
-  backgroundColor: "#D3B023",
+  backgroundColor: "var(--secondary-color)",
   position: "absolute",
   bottom: 0,
   left: 0,
@@ -85,6 +85,13 @@ const StickyNavbar = () => {
       setIsSticky(window.scrollY > 100);
     };
     window.addEventListener("scroll", handleScroll);
+
+    // Lấy giá trị từ localStorage khi trang load lại
+    const storedActiveButton = localStorage.getItem("activeButton");
+    if (storedActiveButton) {
+      setActiveButton(Number(storedActiveButton));
+    }
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -92,6 +99,8 @@ const StickyNavbar = () => {
 
   const handleButtonClick = (index) => {
     setActiveButton(index);
+    // Lưu giá trị activeButton vào localStorage
+    localStorage.setItem("activeButton", index);
   };
 
   const getActiveIndicatorStyle = () => {
@@ -111,7 +120,7 @@ const StickyNavbar = () => {
   const navItems = [
     { label: "Trang Chủ", path: "/" },
     { label: "Dịch Vụ", path: "/service" },
-    { label: "Tin tức", path: "/" },
+    { label: "Tin tức", path: "/news" },
     { label: "Khách hàng", path: "/" },
     { label: "Liên Hệ", path: "/" },
   ];
