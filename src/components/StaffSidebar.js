@@ -14,21 +14,19 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import AdminServices from "../pages/Admin/AdminServices";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
 import AdminContent from "../pages/Admin/AdminContent";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
-import EmployeeManagement from "../pages/Admin/EmployeeManagement";
-import CustomerManagement from "../pages/Admin/CustomerManagement";
 import { Header } from "./Header";
 import ServiceList from "../pages/Admin/ServiceList";
+import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import StaffTable from "../components/StaffTable";
 
 const drawerWidth = 240;
 
 export default function StaffSidebar() {
-  const [menudata, setMenudata] = React.useState("AdminServices");
+  const [menudata, setMenudata] = React.useState("ServicesNavbar");
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -54,7 +52,7 @@ export default function StaffSidebar() {
         <Box sx={{ overflow: "auto" }}>
           <List>
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminServices")}>
+              <ListItemButton onClick={() => setMenudata("ServicesNavbar")}>
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
@@ -86,7 +84,7 @@ export default function StaffSidebar() {
         component="main"
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
-        {menudata === "AdminServices" && <AdminServices />}
+        {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
         {menudata === "StaffTable" && <StaffTable />}
       </Box>

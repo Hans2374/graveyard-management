@@ -11,17 +11,16 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from '@mui/icons-material/FilterList';
-import styles from "./Service.module.css";
-import AddIcon from '@mui/icons-material/Add';
+import FilterListIcon from "@mui/icons-material/FilterList";
+import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import DiscountListTable from "../../components/DiscountListTable";
+import ServiceTable from "../../../components/ServiceTable";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-function AdminDiscount() {
-
+function AllServiceTab() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -34,42 +33,6 @@ function AdminDiscount() {
 
   return (
     <>
-      <Box
-        sx={{
-          marginTop: "65px",
-          backgroundColor: "white",
-          maxWidth: "100%",
-          display: "flex",
-        }}
-      >
-        <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a href="#home" className={styles.a}>
-              Tất cả mã khuyến mãi
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#news" className={styles.a}>
-              Còn hạn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
-              Gần hết hạn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a href="#about" className={styles.a}>
-              Hết hạn
-            </a>
-          </li>
-        </ul>
-      </Box>
-
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
-      >
         <Box
           sx={{
             display: "flex",
@@ -145,8 +108,8 @@ function AdminDiscount() {
               Thông tin chi tiết
             </DialogTitle>
             <DialogContent sx={{width:"400px"}}>
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold'}}>
-              Tên mã khuyến mãi:
+              <Typography sx={{ padding: "10px 10px 0 0" }}>
+                Loại dịch vụ
               </Typography>
               <TextField
                 variant="outlined"
@@ -157,23 +120,18 @@ function AdminDiscount() {
                     borderRadius: "10px",
                   },
                 }}
-              />
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold' }}>
-                Mô tả:
-              </Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "10px",
-                    height:"200px"
-                  },
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton>
+                        <ArrowDropDownIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                 }}
               />
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold' }}>
-                Đơn tối thiểu:
+              <Typography sx={{ padding: "10px 10px 0 0" }}>
+                Tên gói dịch vụ
               </Typography>
               <TextField
                 variant="outlined"
@@ -238,11 +196,10 @@ function AdminDiscount() {
             marginTop: "50px",
           }}
         >
-          <DiscountListTable />
+          <ServiceTable />
         </Box>
-      </Box>
-    </>
+        </>
   );
 }
 
-export default AdminDiscount;
+export default AllServiceTab;
