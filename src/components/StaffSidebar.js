@@ -14,7 +14,8 @@ import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import { Header } from "./Header";
-import ServiceList from "../pages/Admin/ServiceList";
+import ScheduleList from "../pages/Staff/ScheduleList";
+import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar"
 
 const drawerWidth = 240;
 
@@ -78,8 +79,8 @@ export default function StaffSidebar() {
         component="main"
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
-        {menudata === "AdminServices" && <AdminServices />}
-        {menudata === "ServiceList" && <ServiceList />}
+        {menudata === "ServicesNavbar" && <ServicesNavbar />}
+        {menudata === "ScheduleList" && <ScheduleList />}
         {menudata === "AdminDiscount" && <AdminDiscount />}
       </Box>
     </Box>
