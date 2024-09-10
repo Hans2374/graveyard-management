@@ -6,8 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import TablePagination from '@mui/material/TablePagination'; // Import TablePagination
-import Box from '@mui/material/Box'; // Import Box for positioning
+import TablePagination from '@mui/material/TablePagination';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Button from '@mui/material/Button';
 
 function createData(stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu) {
     return { stt, madon, tendichvu, goidichvu, khachhang, sdt, thoigian, ghichu };
@@ -34,13 +38,13 @@ const rows = [
     createData(18, 'UVW6543EF', '', '', '', '', '08/12/2024\n10:15', 'Bắt đầu sau z giờ'),
     createData(19, 'XYZ7654GH', '', '', '', '', '09/12/2024\n11:00', 'Bắt đầu sau x giờ'),
     createData(20, 'ABC8765IJ', '', '', '', '', '10/12/2024\n12:45', 'Bắt đầu sau y giờ'),
-
-
 ];
 
 export default function StaffDataTable() {
     const [page, setPage] = React.useState(0); // Current page
-    const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page, changed to 8
+    const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page
+    const [open, setOpen] = React.useState(false); // Dialog open state
+    const [selectedRow, setSelectedRow] = React.useState(null); // Selected order details
 
     // Handle page change
     const handleChangePage = (event, newPage) => {
@@ -53,65 +57,79 @@ export default function StaffDataTable() {
         setPage(0); // Reset to first page when rows per page changes
     };
 
+    // Handle open dialog
+    const handleOpenDialog = (row) => {
+        setSelectedRow(row); // Set the selected row data
+        setOpen(true); // Open the dialog
+    };
+
+    // Handle close dialog
+    const handleCloseDialog = () => {
+        setOpen(false); // Close the dialog
+        setSelectedRow(null); // Reset selected row
+    };
+
     return (
-        <Box sx={{ position: 'relative', width: '1080px' }}> {/* Wrapper with relative position */}
+        <Box sx={{ position: 'relative', width: '1080px' }}>
             <TableContainer
                 component={Paper}
-                sx={{ width: "1080px", height: "410px" }} // Fixed height to accommodate 8 rows
+                sx={{ width: "1100px", height: "420px" }}
             >
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center" sx={{ fontWeight: "bold", width: "10px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "10px", p: 1, borderRight: "1px solid #ddd" }}>
                                 STT
                             </TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "50px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "50px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Mã đơn
                             </TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Tên dịch vụ
                             </TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Gói dịch vụ
                             </TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Khách hàng
                             </TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", p: 0, pl: '5px', borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 1, borderRight: "1px solid #ddd" }}>
                                 SĐT
                             </TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 0, borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Thời gian
                             </TableCell>
-                            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", p: 0, borderRight: "1px solid #ddd" }}>
+                            <TableCell align="center" sx={{ fontWeight: "bold", width: "150px", p: 1, borderRight: "1px solid #ddd" }}>
                                 Ghi chú
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) // Pagination logic
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row) => (
                                 <TableRow
-                                    key={`${row.stt}-${row.madon}`} // Combined unique key
+                                    key={`${row.stt}-${row.madon}`}
                                     sx={{ borderBottom: "1px solid #ddd" }}
                                 >
                                     <TableCell align="center" scope="row" sx={{ borderRight: "1px solid #ddd", p: 0 }}>
                                         {row.stt}
                                     </TableCell>
-                                    <TableCell align="left" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
+                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0, cursor: 'pointer' }}
+                                        onClick={() => handleOpenDialog(row)} // Open dialog on click
+                                    >
                                         {row.madon}
                                     </TableCell>
-                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
+                                    <TableCell align="left" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
                                         {row.tendichvu}
                                     </TableCell>
-                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
+                                    <TableCell align="left" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
                                         {row.goidichvu}
                                     </TableCell>
-                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
+                                    <TableCell align="left" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
                                         {row.khachhang}
                                     </TableCell>
-                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px' }}>
+                                    <TableCell align="center" sx={{ borderRight: "1px solid #ddd", p: 0 }}>
                                         {row.sdt}
                                     </TableCell>
                                     <TableCell align="left" sx={{ borderRight: "1px solid #ddd", p: 0, pl: '5px', whiteSpace: 'pre-wrap' }}>
@@ -134,14 +152,33 @@ export default function StaffDataTable() {
                 onPageChange={handleChangePage}
                 rowsPerPage={rowsPerPage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-                rowsPerPageOptions={[8]} // Set to 8 rows per page
+                rowsPerPageOptions={[8]}
                 sx={{
-                    position: 'absolute', // Absolute positioning
-                    bottom: 0,            // Align to the bottom
-                    right: 0,             // Align to the right
-                    paddingRight: '16px'  // Add padding to match table spacing
+                    position: 'absolute',
+                    bottom: 0,
+                    right: 0,
+                    paddingRight: '16px'
                 }}
             />
+
+            {/* Dialog for showing order details */}
+            <Dialog open={open} onClose={handleCloseDialog}>
+                <DialogTitle>Chi tiết mã đơn</DialogTitle>
+                <DialogContent>
+                    {selectedRow && (
+                        <div>
+                            <p><strong>Mã đơn:</strong> {selectedRow.madon}</p>
+                            <p><strong>Tên dịch vụ:</strong> {selectedRow.tendichvu || 'N/A'}</p>
+                            <p><strong>Gói dịch vụ:</strong> {selectedRow.goidichvu || 'N/A'}</p>
+                            <p><strong>Khách hàng:</strong> {selectedRow.khachhang || 'N/A'}</p>
+                            <p><strong>SĐT:</strong> {selectedRow.sdt || 'N/A'}</p>
+                            <p><strong>Thời gian:</strong> {selectedRow.thoigian || 'N/A'}</p>
+                            <p><strong>Ghi chú:</strong> {selectedRow.ghichu || 'N/A'}</p>
+                        </div>
+                    )}
+                    <Button onClick={handleCloseDialog}>Close</Button>
+                </DialogContent>
+            </Dialog>
         </Box>
     );
 }

@@ -22,7 +22,7 @@ import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  backgroundColor: '#E6D189',
+  backgroundColor: 'var(--primary-color)',
   padding: '20px',
   borderRadius: '10px',
   marginBottom: '20px',
@@ -34,7 +34,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 const ImageItem = styled('div')({
   width: 'calc(33.33% - 10px)',
   height: 150,
-  backgroundColor: '#E6D189',
+  backgroundColor: 'var(--primary-color)',
   border: '1px solid #ddd',
   borderRadius: '5px',
   display: 'flex',
@@ -52,7 +52,7 @@ const Dot = styled('span')({
 });
 
 const ActiveDot = styled(Dot)({
-  backgroundColor: '#D3B023',
+  backgroundColor: 'var(--secondary-color)',
 });
 
 const NewsCard = styled(Card)(({ theme }) => ({
@@ -88,7 +88,7 @@ const HomePage = () => {
 
         {/* VỀ CHÚNG TÔI */}
         <Container maxWidth="md" sx={{ mb: 4 }}>
-          <Typography align="center" gutterBottom sx={{ color: '#D3B023', mb: 2, fontSize: '2rem' }}>
+          <Typography align="center" gutterBottom sx={{ color: 'var(--secondary-color)', mb: 2, fontSize: '2rem' }}>
             VỀ CHÚNG TÔI
           </Typography>
           <Typography variant="body1" align="center" gutterBottom>
@@ -98,7 +98,7 @@ const HomePage = () => {
 
         {/* HÌNH ẢNH */}
         <StyledContainer>
-          <Typography align="center" gutterBottom sx={{ color: '#D3B023', mb: 2, fontSize: '1.5rem' }}>
+          <Typography align="center" gutterBottom sx={{ color: 'var(--secondary-color)', mb: 2, fontSize: '1.5rem' }}>
             HÌNH ẢNH
           </Typography>
 
@@ -140,7 +140,7 @@ const HomePage = () => {
 
         {/* TIN TỨC */}
         <StyledContainer>
-          <Typography align="center" gutterBottom sx={{ color: '#D3B023', mb: 2, fontSize: '1.5rem' }}>
+          <Typography align="center" gutterBottom sx={{ color: 'var(--secondary-color)', mb: 2, fontSize: '1.5rem' }}>
             TIN TỨC
           </Typography>
 
@@ -155,7 +155,7 @@ const HomePage = () => {
                     <CircularProgress size={50} /> {/* Placeholder for image loading */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" sx={{ color: '#D3B023' }}>Tiêu đề</Button>
+                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
                   </CardActions>
                 </NewsCard>
             </Grid>
@@ -165,7 +165,7 @@ const HomePage = () => {
                     <CircularProgress size={50} /> {/* Placeholder for image loading */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" sx={{ color: '#D3B023' }}>Tiêu đề</Button>
+                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
                   </CardActions>
                 </NewsCard>
             </Grid>
@@ -175,7 +175,7 @@ const HomePage = () => {
                     <CircularProgress size={50} /> {/* Placeholder for image loading */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" sx={{ color: '#D3B023' }}>Tiêu đề</Button>
+                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
                   </CardActions>
                 </NewsCard>
               <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
@@ -194,7 +194,7 @@ const HomePage = () => {
 
         {/* DỊCH VỤ */}
         <StyledContainer>
-          <Typography align="center" gutterBottom sx={{ color: '#D3B023', mb: 2, fontSize: '1.5rem' }}>
+          <Typography align="center" gutterBottom sx={{ color: 'var(--secondary-color)', mb: 2, fontSize: '1.5rem' }}>
             DỊCH VỤ
           </Typography>
 
@@ -206,7 +206,7 @@ const HomePage = () => {
               </IconButton>
               <ServiceCard sx={{ flex: 1, ml: 1 }}>
                   <CardContent>
-                    <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: '#D3B023', mb: 1 }}>
+                    <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)', mb: 1 }}>
                       Mai táng
                     </Typography>
                     <List>
@@ -228,14 +228,14 @@ const HomePage = () => {
                     </List>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" sx={{ color: '#D3B023' }}>Mai táng</Button>
+                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Mai táng</Button>
                   </CardActions>
                 </ServiceCard>
             </Grid>
             <Grid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
               <ServiceCard sx={{ flex: 1, mr: 1 }}>
                   <CardContent>
-                    <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: '#D3B023', mb: 1 }}>
+                    <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)', mb: 1 }}>
                       Cúng đình kỳ
                     </Typography>
                     <Typography variant="body2" gutterBottom align="center" sx={{ color: '#777', fontStyle: 'italic', mb: 1 }}>
@@ -260,7 +260,7 @@ const HomePage = () => {
                     </List>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" sx={{ color: '#D3B023' }}>Cúng đình kỳ</Button>
+                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Cúng đình kỳ</Button>
                   </CardActions>
                 </ServiceCard>
               <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
@@ -278,7 +278,7 @@ const HomePage = () => {
 
         {/* KHÁCH HÀNG */}
         <StyledContainer>
-          <Typography align="center" gutterBottom sx={{ color: '#D3B023', mb: 2, fontSize: '1.5rem' }}>
+          <Typography align="center" gutterBottom sx={{ color: 'var(--secondary-color)', mb: 2, fontSize: '1.5rem' }}>
             KHÁCH HÀNG
           </Typography>
 
@@ -290,8 +290,8 @@ const HomePage = () => {
               </IconButton>
               <CustomerCard sx={{ flex: 1, ml: 1 }}>
                 <CardContent>
-                  <Avatar sx={{ bgcolor: '#D3B023', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: '#D3B023' }}>
+                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
                     Tên người dùng
                   </Typography>
                   <Typography variant="body2" gutterBottom align="center">
@@ -303,8 +303,8 @@ const HomePage = () => {
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <CustomerCard sx={{ flex: 1 }}>
                 <CardContent>
-                  <Avatar sx={{ bgcolor: '#D3B023', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: '#D3B023' }}>
+                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
                     Tên người dùng
                   </Typography>
                   <Typography variant="body2" gutterBottom align="center">
@@ -316,8 +316,8 @@ const HomePage = () => {
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <CustomerCard sx={{ flex: 1, mr: 1 }}>
                 <CardContent>
-                  <Avatar sx={{ bgcolor: '#D3B023', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: '#D3B023' }}>
+                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
                     Tên người dùng
                   </Typography>
                   <Typography variant="body2" gutterBottom align="center">
