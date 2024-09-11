@@ -18,14 +18,14 @@ import EN from "../assets/united-kingdom.png";
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-    backgroundColor: '#E6D189', // Màu nền cho navbar
+    backgroundColor: 'var(--primary-color)', // Màu nền cho navbar
     boxShadow: 'none', // Loại bỏ bóng đổ mặc định
     transition: theme.transitions.create(['box-shadow', 'background-color'], {
         duration: theme.transitions.duration.short,
         easing: theme.transitions.easing.easeInOut,
     }),
     '&.sticky': {
-        backgroundColor: '#E6D189', // Màu nền khi sticky
+        backgroundColor: 'var(--primary-color)', // Màu nền khi sticky
         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', // Bóng đổ khi sticky
     },
 }));
@@ -271,7 +271,7 @@ export const Header = () => {
     };
 
     return (
-        <StyledAppBar position='sticky' sx={{ backgroundColor: '#E6D189' }}>
+        <StyledAppBar position='sticky' sx={{ backgroundColor: 'var(--primary-color)' }}>
             <Toolbar>
                 <Link to="/">
                     <img
@@ -365,14 +365,14 @@ export const Header = () => {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     p: 1,
-                                    color: '#D3B023',
+                                    color: 'var(--secondary-color)',
                                 }}>
                                     <Typography variant="h5">
                                         Thông báo
                                     </Typography>
                                 </Box>
                                 <Divider sx={{
-                                    borderColor: '#D3B023',
+                                    borderColor: 'var(--secondary-color)',
                                     borderBottomWidth: 5
                                 }} />
                                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1, pb: 0, pt: 0 }}>
@@ -436,14 +436,14 @@ export const Header = () => {
                                     justifyContent: 'center',
                                     alignItems: 'center',
                                     p: 1,
-                                    color: '#D3B023',
+                                    color: 'var(--secondary-color)',
                                 }}>
                                     <Typography variant="h5">
                                         Tài khoản
                                     </Typography>
                                 </Box>
                                 <Divider sx={{
-                                    borderColor: '#D3B023',
+                                    borderColor: 'var(--secondary-color)',
                                     borderBottomWidth: 5
                                 }} />
                                 <List sx={{ maxHeight: 100, maxWidth: 310, p: 0 }}>
@@ -467,7 +467,7 @@ export const Header = () => {
                     <Button
                         variant='contained'
                         color='inherit'
-                        endIcon={<AccountCircleIcon sx={{ color: '#D3B023', scale: 1.5 }} />}
+                        endIcon={<AccountCircleIcon sx={{ color: 'var(--secondary-color)', scale: 1.5 }} />}
                         onClick={handleOpenDialog}
                         sx={{
                             height: 40,
@@ -613,12 +613,12 @@ export const Header = () => {
                 <DialogActions sx={{ marginBottom: 2 }}>
                     {activeTab === 0 ? (
                         <Button onClick={handleSuccessfulLogin} variant="contained" color="inherit"
-                            fullWidth sx={{ py: 1.5, borderRadius: 3, bgcolor: '#D3B023', mt: 2 }}>
+                            fullWidth sx={{ py: 1.5, borderRadius: 3, bgcolor: 'var(--secondary-color)', mt: 2 }}>
                             Đăng nhập
                         </Button>
                     ) : (
                         <Button onClick={handleSignup} variant="contained" color="inherit"
-                            fullWidth sx={{ py: 1.5, borderRadius: 3, bgcolor: '#D3B023', mt: 2 }}>
+                            fullWidth sx={{ py: 1.5, borderRadius: 3, bgcolor: 'var(--secondary-color)', mt: 2 }}>
                             Đăng ký
                         </Button>
                     )}
@@ -651,7 +651,7 @@ export const Header = () => {
                                             <Button
                                                 onClick={handleSendVerificationCode}
                                                 variant="text"
-                                                sx={{ color: '#D3B023' }}
+                                                sx={{ color: 'var(--secondary-color)' }}
                                                 disabled={codeSent}
                                             >
                                                 Gửi mã
@@ -665,7 +665,7 @@ export const Header = () => {
                             <Button
                                 onClick={handleVerifyCode}
                                 variant="contained"
-                                sx={{ backgroundColor: '#D3B023', color: 'black' }}
+                                sx={{ backgroundColor: 'var(--secondary-color)', color: 'black' }}
                                 fullWidth
                             >
                                 Xác minh mã
@@ -712,7 +712,7 @@ export const Header = () => {
                             <Button
                                 onClick={handleResetPassword}
                                 variant="contained"
-                                sx={{ backgroundColor: '#D3B023', color: 'black' }}
+                                sx={{ backgroundColor: 'var(--secondary-color)', color: 'black' }}
                                 fullWidth
                             >
                                 Đặt lại mật khẩu

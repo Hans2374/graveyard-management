@@ -98,7 +98,7 @@ const NewsContent = () => {
                     gutterBottom
                     sx={{
                         marginTop: '20px',
-                        color: '#D3B023',
+                        color: 'var(--secondary-color)',
                         fontWeight: 'bold',
                         mb: 2,
                         fontSize: {
@@ -119,7 +119,7 @@ const NewsContent = () => {
                             <Typography
                                 variant="body2"
                                 sx={{
-                                    color: '#D3B023',
+                                    color: 'var(--secondary-color)',
                                     textAlign: 'left',
                                     fontSize: {
                                         xs: '12px',
@@ -142,7 +142,7 @@ const NewsContent = () => {
                         onClick={handleLoadMore}
                         sx={{
                             marginTop: '20px',
-                            backgroundColor: '#D3B023',
+                            backgroundColor: 'var(--secondary-color)',
                             textTransform: 'none'
                         }}
                     >

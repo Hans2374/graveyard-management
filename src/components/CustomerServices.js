@@ -45,7 +45,7 @@ const CustomerServices = () => {
     <Container maxWidth="md">
       {/* Phần tiêu đề */}
       <Box textAlign="center" my={4} sx={{ paddingTop: 7 }}>
-        <Typography variant="h4" color="#D3B023">
+        <Typography variant="h4" color="var(--secondary-color)">
           TÊN GÓI DỊCH VỤ
         </Typography>
       </Box>
