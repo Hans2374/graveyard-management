@@ -7,20 +7,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
-import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { KeyboardArrowRight as KeyboardArrowRightIcon } from '@mui/icons-material';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { Box, IconButton, TextField, Typography, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import LinkIcon from '@mui/icons-material/Link';
 
 function a11yProps(index) {
     return {
@@ -84,23 +87,70 @@ export default function StaffDataTable() {
     const [selectedYear, setSelectedYear] = React.useState('2024'); // Default selected year
     const [anchorEl, setAnchorEl] = React.useState(null); // Menu anchor
     const [value, setValue] = React.useState(0);
+    const [reportText, setReportText] = React.useState('');
+
+    const handleTextChange = (e) => {
+        if (e.target.value.length <= 1000) { // Limit to 1000 characters
+            setReportText(e.target.value);
+        }
+    };
+
+    const [items, setItems] = React.useState([
+        { id: 1, name: 'Vật dụng a', quantity: 1 },
+        { id: 2, name: 'Vật dụng b', quantity: 14 },
+        { id: 3, name: 'Vật dụng c', quantity: 3 },
+    ]);
+
+    // Thêm vật dụng mới
+    const handleAddItem = () => {
+        const newItem = { id: items.length + 1, name: `Vật dụng ${String.fromCharCode(97 + items.length)}`, quantity: 1 };
+        setItems([...items, newItem]);
+    };
+
+    // Xóa vật dụng
+    const handleRemoveItem = (id) => {
+        setItems(items.filter(item => item.id !== id));
+    };
+
+    // Thay đổi số lượng
+    const handleQuantityChange = (id, newQuantity) => {
+        setItems(items.map(item => item.id === id ? { ...item, quantity: newQuantity } : item));
+    };
+
+    // Thay đổi tên vật dụng
+    const handleNameChange = (id, newName) => {
+        setItems(items.map(item => item.id === id ? { ...item, name: newName } : item));
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    // Random date generation in format "thứ, ngày/tháng"
-    const generateRandomDate = () => {
-        const daysOfWeek = ['th2', 'th3', 'th4', 'th5', 'th6', 'th7', 'CN'];
-        const randomDayOfWeek = daysOfWeek[Math.floor(Math.random() * daysOfWeek.length)];
-
-        const randomDay = Math.floor(Math.random() * 30) + 1;
-        const randomMonth = Math.floor(Math.random() * 12) + 1;
-
-        return `${randomDayOfWeek}, ${randomDay}/${randomMonth}`;
-    };
-
-    const tabs = Array.from({ length: 6 }, () => generateRandomDate());
+    // Real date values to display in tabs
+    const realDates = [
+        "th6, 01/07",
+        "th3, 01/08",
+        "th5, 01/09",
+        "th5, 01/10",
+        "th4, 01/11",
+        "th2, 01/12",
+        "th2, 05/01",
+        "th6, 14/02",
+        "th3, 07/03",
+        "th5, 21/04",
+        "th7, 12/05",
+        "CN, 25/06",
+        "th4, 16/07",
+        "th5, 03/08",
+        "th3, 29/09",
+        "th2, 18/10",
+        "th6, 10/11",
+        "th5, 23/12",
+        "th3, 11/02",
+        "th4, 28/03",
+        "CN, 06/04",
+        "th7, 19/05",
+    ];
 
     // Handle page change
     const handleChangePage = (event, newPage) => {
@@ -234,8 +284,13 @@ export default function StaffDataTable() {
             />
 
             {/* Dialog for showing order details */}
-            <Dialog open={open}
-                onClose={handleCloseDialog}
+            <Dialog
+                open={open}
+                onClose={(event, reason) => {
+                    if (reason !== 'backdropClick') {
+                        handleCloseDialog(); // Only close dialog when the reason is not backdrop click
+                    }
+                }}
                 maxWidth="lg" // Optional: Adjust the maximum width
                 fullWidth // Makes the dialog take up full width
                 PaperProps={{
@@ -243,79 +298,190 @@ export default function StaffDataTable() {
                         height: '100vh', // Full viewport height
                         maxHeight: '100vh', // Prevents the dialog from exceeding viewport height
                         display: 'flex', // Ensures flex behavior for the content
-                        flexDirection: 'column' // Arrange content vertically
+                        flexDirection: 'column', // Arrange content vertically
+                        width: '970px',
                     }
                 }}
             >
-                <DialogTitle align='center'>Chi tiết mã đơn</DialogTitle>
                 <DialogContent>
                     {selectedRow && (
                         <div>
-                            <p><strong>Nội dung công việc chung của dịch vụ:</strong> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            <p><strong>Ghi chú đặc biệt:</strong> <br />
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            {/* Year selection */}
-                            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-                                <span>Năm {selectedYear}</span>
-                                <IconButton onClick={handleOpenMenu}>
-                                    <KeyboardArrowRightIcon />
-                                </IconButton>
-                            </Box>
+                            <Box sx={{ width: '100%', p: '0px 24px' }}>
+                                <Typography variant='h4' align='center' sx={{ mb: 2 }}>Chi tiết mã đơn</Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Nội dung công việc chung của dịch vụ:</Typography>
+                                <Typography>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Ghi chú đặc biệt:</Typography>
+                                <Typography>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </Typography>
+                                {/* Year selection */}
+                                <Box sx={{ display: 'flex', alignItems: 'center', mt: 3, mb: -1 }}>
+                                    <span>Năm {selectedYear}</span>
+                                    <IconButton onClick={handleOpenMenu}>
+                                        <KeyboardArrowRightIcon />
+                                    </IconButton>
+                                </Box>
 
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleCloseMenu}
-                            >
-                                <MenuItem onClick={() => handleYearChange('2022')}>2022</MenuItem>
-                                <MenuItem onClick={() => handleYearChange('2023')}>2023</MenuItem>
-                                <MenuItem onClick={() => handleYearChange('2024')}>2024</MenuItem>
-                                <MenuItem onClick={() => handleYearChange('2025')}>2025</MenuItem>
-                            </Menu>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleCloseMenu}
+                                >
+                                    <MenuItem onClick={() => handleYearChange('2022')}>2022</MenuItem>
+                                    <MenuItem onClick={() => handleYearChange('2023')}>2023</MenuItem>
+                                    <MenuItem onClick={() => handleYearChange('2024')}>2024</MenuItem>
+                                    <MenuItem onClick={() => handleYearChange('2025')}>2025</MenuItem>
+                                </Menu>
+                            </Box>
                             <Box sx={{ width: '100%' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="random tabs example">
-                                    {tabs.map((tab, index) => (
-                                        <Tab label={tab} key={index} {...a11yProps(index)} />
+                                <Tabs
+                                    value={value}
+                                    onChange={handleChange}
+                                    variant="scrollable" // Allows scrolling for tabs
+                                    scrollButtons="auto" // Shows scroll buttons automatically
+                                    aria-label="scrollable tabs"
+                                    sx={{
+                                        width: '100%', // Ensures full-width for tabs container
+                                        '& .MuiTabs-flexContainer': { // Target the flex container inside the Tabs
+                                            justifyContent: 'space-around', // Space around each tab
+                                        },
+
+                                    }}
+                                >
+                                    {realDates.map((tab, index) => (
+                                        <Tab
+                                            label={tab}
+                                            key={index}
+                                            {...a11yProps(index)}
+                                            sx={{
+                                                minWidth: 0, // Ensure tabs can shrink
+                                                flexGrow: 1, // Make each tab grow equally
+                                                textAlign: 'center' // Center-align the label text
+                                            }}
+                                        />
                                     ))}
                                 </Tabs>
-                                {tabs.map((tab, index) => (
+
+                                {realDates.map((tab, index) => (
                                     <TabPanel value={value} index={index} key={index}>
                                         {/* Text and Filter Section */}
-                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-                                            <Typography variant="h6">Vật dụng</Typography>
-                                            <IconButton aria-label="filter">
+                                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, justifyContent: 'space-between' }}>
+                                            <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Vật dụng</Typography>
+                                            <IconButton
+                                                aria-label="filter"
+                                                sx={{
+                                                    marginRight: '450px',
+                                                    border: '1px solid',         // Adds a solid border
+                                                    borderRadius: '8px',         // Adds border radius
+                                                    padding: '4px',              // Optional: Adds padding for a more spacious look
+                                                    borderColor: 'gray',         // Optional: Sets border color (customize as needed)
+                                                }}
+                                            >
                                                 <FilterListIcon />
                                                 <Typography sx={{ ml: 1 }}>Lọc vật dụng</Typography>
                                             </IconButton>
+                                            <Typography variant="h6" sx={{ marginRight: '74px' }}>Số lượng</Typography>
                                         </Box>
 
-                                        {/* Grid Section */}
-                                        <Grid container spacing={2}>
-                                            {[...Array(9)].map((_, i) => (
-                                                <Grid item xs={4} key={i}>
-                                                    <Box
-                                                        sx={{
-                                                            height: 80,
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center',
-                                                            bgcolor: 'lightgray',
+                                        <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                            {items.map((item) => (
+                                                <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                    {/* TextField for item name (editable) */}
+                                                    <TextField
+                                                        value={item.name}
+                                                        onChange={(e) => handleNameChange(item.id, e.target.value)}
+                                                        placeholder="Nhập tên vật dụng"
+                                                        size="small"
+                                                        sx={{ flexGrow: 1 }}
+                                                    />
+                                                    <IconButton onClick={() => handleQuantityChange(item.id, Math.max(1, item.quantity - 1))}>
+                                                        -
+                                                    </IconButton>
+                                                    <TextField
+                                                        value={item.quantity}
+                                                        onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value) || 1)}
+                                                        size="small"
+                                                        sx={{ width: '55px' }}
+                                                        inputProps={{
+                                                            min: 1,
+                                                            style: { textAlign: 'center' },
+                                                            inputMode: 'numeric', // Only allows numeric input
+                                                            pattern: '[0-9]*', // Restricts input to digits
                                                         }}
-                                                    >
-                                                        Text {i + 1}
-                                                    </Box>
-                                                </Grid>
+                                                        // CSS to hide arrows in number input (spinner)
+                                                        InputProps={{
+                                                            inputProps: {
+                                                                style: {
+                                                                    MozAppearance: 'textfield', // Removes spinner in Firefox
+                                                                    WebkitAppearance: 'none', // Removes spinner in Chrome
+                                                                    appearance: 'textfield' // General removal of spinner
+                                                                }
+                                                            }
+                                                        }}
+                                                    />
+                                                    <IconButton onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>
+                                                        +
+                                                    </IconButton>
+                                                    <IconButton onClick={() => handleRemoveItem(item.id)} aria-label="delete" color="error">
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </Box>
                                             ))}
-                                        </Grid>
+                                            <Button variant="outlined" onClick={handleAddItem} startIcon={<AddIcon />}>
+                                                Thêm vật dụng
+                                            </Button>
+                                        </Box>
                                     </TabPanel>
                                 ))}
                             </Box>
+                            <Box sx={{ width: '100%', p: 2 }}>
+                                <Typography variant="h6" sx={{ mb: 1, fontWeight: 'bold' }}>Báo cáo công việc</Typography>
+
+                                {/* Grouped box for icons and text field */}
+                                <Box sx={{ bgcolor: '#f5f5f5', p: 2, borderRadius: 2 }}>
+                                    {/* Icons for formatting */}
+                                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                                        <IconButton aria-label="bold">
+                                            <FormatBoldIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="italic">
+                                            <FormatItalicIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="underline">
+                                            <FormatUnderlinedIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="add image">
+                                            <InsertPhotoIcon />
+                                        </IconButton>
+                                        <IconButton aria-label="add link">
+                                            <LinkIcon />
+                                        </IconButton>
+                                    </Box>
+
+                                    {/* Report Text Field */}
+                                    <TextField
+                                        value={reportText}
+                                        onChange={handleTextChange}
+                                        multiline
+                                        rows={10} // Adjust this value based on how large you want the text area
+                                        placeholder="Nhập báo cáo công việc..."
+                                        fullWidth
+                                        variant="outlined"
+                                        inputProps={{
+                                            maxLength: 1000, // Limit the input to 1000 characters
+                                        }}
+                                        helperText={`${reportText.length}/1000 ký tự`}
+                                    />
+                                </Box>
+                            </Box>
                         </div>
                     )}
-                    <Button onClick={handleCloseDialog}>Close</Button>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Button onClick={handleCloseDialog} sx={{ p: '5px 100px', border: 'none', bgcolor: 'lightblue', color: 'black' }}>Close</Button>
+                        <Button onClick={handleCloseDialog} sx={{ p: '5px 100px', border: 'none', bgcolor: 'var(--primary-color)', color: 'black' }}>Lưu</Button>
+                    </Box>
                 </DialogContent>
             </Dialog>
         </Box>

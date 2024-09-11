@@ -130,7 +130,7 @@ const StickyNavbar = () => {
       position="fixed"
       elevation={0}
       className={isSticky ? "sticky" : ""}
-      sx={{ bgcolor: "white", top: "74px", p: 0 }}
+      sx={{ bgcolor: "white", top: "68px", p: 0 }}
     >
       <Toolbar sx={{ p: 0 }}>
         <GridContainer>
