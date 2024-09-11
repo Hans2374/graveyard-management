@@ -10,12 +10,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
-  TextField,
   IconButton,
-  Chip,
+  TextField,
   InputAdornment,
-  Modal,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -46,7 +48,6 @@ const mockData = [
     available: 180,
     status: "Hết",
   },
-  // Thêm các dịch vụ khác ở đây...
 ];
 
 const hardcodedItemDetails = [
@@ -59,17 +60,18 @@ const StaffTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const [open, setOpen] = useState(false);
+  const [searchModal, setSearchModal] = useState(""); // Tìm kiếm trong dialog
 
   const handleTabChange = (event, newIndex) => {
     setTabIndex(newIndex);
   };
 
-  const handleOpenModal = (item) => {
+  const handleOpenDialog = (item) => {
     setSelectedItem(item);
     setOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseDialog = () => {
     setOpen(false);
     setSelectedItem(null);
   };
@@ -100,12 +102,9 @@ const StaffTable = () => {
 
   return (
     <Box sx={{ padding: 2, marginTop: 6 }}>
+      {/* Tabs Section */}
       <Box
-        sx={{
-          marginBottom: "3px",
-          backgroundColor: "#fff",
-          padding: "10px",
-        }}
+        sx={{ marginBottom: "3px", backgroundColor: "#fff", padding: "10px" }}
       >
         <Tabs
           value={tabIndex}
@@ -147,19 +146,9 @@ const StaffTable = () => {
         </Tabs>
       </Box>
 
-      <Box
-        sx={{
-          backgroundColor: "#fff",
-          padding: "20px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            maxWidth: "100%",
-            marginBottom: 2,
-          }}
-        >
+      {/* Search and Filter Section */}
+      <Box sx={{ backgroundColor: "#fff", padding: "20px" }}>
+        <Box sx={{ display: "flex", maxWidth: "100%", marginBottom: 2 }}>
           <TextField
             variant="outlined"
             placeholder="Tìm kiếm gói dịch vụ"
@@ -203,6 +192,7 @@ const StaffTable = () => {
           />
         </Box>
 
+        {/* Table Section */}
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -247,12 +237,8 @@ const StaffTable = () => {
                         color: "#D3B023",
                         transition: "0.3s ease",
                       },
-                      "&:hover::after": {
-                        content: '""',
-                        backgroundColor: "#D3B023",
-                      },
                     }}
-                    onClick={() => handleOpenModal(item)}
+                    onClick={() => handleOpenDialog(item)}
                   >
                     {item.inUse}
                   </TableCell>
@@ -277,40 +263,20 @@ const StaffTable = () => {
         </TableContainer>
       </Box>
 
-      <Modal open={open} onClose={handleCloseModal}>
-        <Box
+      {/* Dialog Section */}
+      <Dialog open={open} onClose={handleCloseDialog}>
+        <DialogTitle
           sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 500,
-            bgcolor: "#FAF8F1",
-            borderRadius: "10px",
-            boxShadow: 24,
-            p: 3,
+            textAlign: "center",
+            backgroundColor: "#E6D189",
+            fontWeight: "bold",
+            color: "#000",
           }}
         >
-          {/* Title */}
-          <h2
-            style={{
-              margin: 0,
-              backgroundColor: "#D3B023",
-              textAlign: "center",
-              borderRadius: "10px 10px 0 0",
-              padding: "10px 0",
-            }}
-          >
-            TÊN VẬT DỤNG
-          </h2>
-
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: 2,
-            }}
-          >
+          {selectedItem?.name || "Dịch vụ A"}
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ marginTop: 2 }}>
             <TextField
               variant="outlined"
               placeholder="Tìm kiếm đơn"
@@ -319,7 +285,6 @@ const StaffTable = () => {
                 "& .MuiOutlinedInput-root": {
                   borderRadius: "20px",
                   borderColor: "#E0E0E0",
-                  paddingRight: "10px",
                 },
               }}
               InputProps={{
@@ -331,49 +296,98 @@ const StaffTable = () => {
                   </InputAdornment>
                 ),
               }}
+              value={searchModal}
+              onChange={(e) => setSearchModal(e.target.value)}
             />
           </Box>
-
-          <TableContainer
-            sx={{
-              marginTop: 2,
-              border: "1px solid #E0E0E0",
-              borderRadius: "10px",
-              boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.2)",
-              backgroundColor: "#fff",
-            }}
+          <Table
+            sx={{ marginTop: 2, borderCollapse: "collapse", width: "100%" }}
           >
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    STT
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    Mã đơn
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    Số lượng
-                  </TableCell>
-                  <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                    Ngày
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {hardcodedItemDetails.map((detail, index) => (
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  STT
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  Mã đơn
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  Số lượng
+                </TableCell>
+                <TableCell
+                  sx={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  Ngày
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {hardcodedItemDetails
+                .filter((detail) => detail.orderCode.includes(searchModal))
+                .map((detail, index) => (
                   <TableRow key={detail.id}>
-                    <TableCell align="center">{index + 1}</TableCell>
-                    <TableCell align="center">{detail.orderCode}</TableCell>
-                    <TableCell align="center">{detail.quantity}</TableCell>
-                    <TableCell align="center">{detail.date}</TableCell>
+                    <TableCell
+                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                    >
+                      {index + 1}
+                    </TableCell>
+                    <TableCell
+                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                    >
+                      {detail.orderCode}
+                    </TableCell>
+                    <TableCell
+                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                    >
+                      {detail.quantity}
+                    </TableCell>
+                    <TableCell
+                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                    >
+                      {detail.date}
+                    </TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      </Modal>
+            </TableBody>
+          </Table>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleCloseDialog}
+            sx={{
+              backgroundColor: "#E6D189",
+              color: "#000",
+              "&:hover": {
+                backgroundColor: "#D5C17B",
+              },
+            }}
+          >
+            Đóng
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

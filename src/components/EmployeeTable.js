@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Typography,
@@ -28,19 +28,19 @@ function createData(stt, tennhanvien) {
 }
 
 const rows = [
-  createData(1, 'EMPLOYEE01'),
-  createData(2, 'EMPLOYEE02'),
-  createData(3, 'EMPLOYEE03'),
-  createData(4, 'EMPLOYEE04'),
-  createData(5, 'EMPLOYEE05'),
-  createData(6, 'EMPLOYEE05'),
-  createData(7, 'EMPLOYEE05'),
+  createData(1, "EMPLOYEE01"),
+  createData(2, "EMPLOYEE02"),
+  createData(3, "EMPLOYEE03"),
+  createData(4, "EMPLOYEE04"),
+  createData(5, "EMPLOYEE05"),
+  createData(6, "EMPLOYEE05"),
+  createData(7, "EMPLOYEE05"),
 ];
 
 const orderRows = [
-  { stt: 1, maDon: 'ORDER001', trangThai: 'Đang xử lý' },
-  { stt: 2, maDon: 'ORDER002', trangThai: 'Hoàn thành' },
-  { stt: 3, maDon: 'ORDER003', trangThai: 'Đã hủy' },
+  { stt: 1, maDon: "ORDER001", trangThai: "Đang xử lý" },
+  { stt: 2, maDon: "ORDER002", trangThai: "Hoàn thành" },
+  { stt: 3, maDon: "ORDER003", trangThai: "Đã hủy" },
 ];
 
 // Shared table cell style
@@ -51,10 +51,10 @@ const tableCellStyle = {
 // Hover effect for customer name
 const employeeNameStyle = {
   textDecoration: "underline",
-  '&:hover': {
-    color: 'blue',
-    cursor: 'pointer',
-    textDecoration: 'underline',
+  "&:hover": {
+    color: "blue",
+    cursor: "pointer",
+    textDecoration: "underline",
   },
 };
 
@@ -109,23 +109,38 @@ export default function BasicTable() {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ width: '1080px' }}>
+    <TableContainer component={Paper} sx={{ width: "1080px" }}>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}>
+            <TableCell
+              align="left"
+              sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}
+            >
               STT
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
+            <TableCell
+              align="left"
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+            >
               Tên nhân viên
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
+            <TableCell
+              align="left"
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+            >
               Số điện thoại
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
+            <TableCell
+              align="left"
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+            >
               Email
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
+            <TableCell
+              align="left"
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+            >
               Tổng số đơn
             </TableCell>
           </TableRow>
@@ -136,7 +151,11 @@ export default function BasicTable() {
               <TableCell align="left" scope="row" sx={tableCellStyle}>
                 {row.stt}
               </TableCell>
-              <TableCell align="left" sx={{ ...tableCellStyle, ...employeeNameStyle }} onClick={handleClickOpen}>
+              <TableCell
+                align="left"
+                sx={{ ...tableCellStyle, ...employeeNameStyle }}
+                onClick={handleClickOpen}
+              >
                 {row.tennhanvien}
               </TableCell>
               <TableCell align="left" sx={tableCellStyle}>
@@ -145,7 +164,11 @@ export default function BasicTable() {
               <TableCell align="left" sx={tableCellStyle}>
                 mail
               </TableCell>
-              <TableCell align="left" sx={{ ...tableCellStyle, ...employeeNameStyle }} onClick={handleClickOpenOrders}>
+              <TableCell
+                align="left"
+                sx={{ ...tableCellStyle, ...employeeNameStyle }}
+                onClick={handleClickOpenOrders}
+              >
                 số
               </TableCell>
             </TableRow>
@@ -169,23 +192,26 @@ export default function BasicTable() {
         >
           Sửa thông tin nhân viên
         </DialogTitle>
-        <DialogContent sx={{ width: "400px", marginTop: '20px' }}>
+        <DialogContent sx={{ width: "400px", marginTop: "20px" }}>
           <TextField
             margin="dense"
             label="Tên tài khoản"
-            fullWidth sx={textFieldStyle}
+            fullWidth
+            sx={textFieldStyle}
             defaultValue="CUSTOMER01"
           />
           <TextField
             margin="dense"
             label="Số điện thoại"
-            fullWidth sx={textFieldStyle}
+            fullWidth
+            sx={textFieldStyle}
             defaultValue="số"
           />
           <TextField
             margin="dense"
             label="Email"
-            fullWidth sx={textFieldStyle}
+            fullWidth
+            sx={textFieldStyle}
             defaultValue="mail"
           />
 
@@ -209,7 +235,9 @@ export default function BasicTable() {
           />
 
           {/* Mật khẩu mới */}
-          <Typography sx={{ padding: "10px 10px 0 0" }}>Mật khẩu mới</Typography>
+          <Typography sx={{ padding: "10px 10px 0 0" }}>
+            Mật khẩu mới
+          </Typography>
           <TextField
             variant="outlined"
             size="small"
@@ -228,7 +256,9 @@ export default function BasicTable() {
           />
 
           {/* Xác nhận mật khẩu mới */}
-          <Typography sx={{ padding: "10px 10px 0 0" }}>Xác nhận mật khẩu mới</Typography>
+          <Typography sx={{ padding: "10px 10px 0 0" }}>
+            Xác nhận mật khẩu mới
+          </Typography>
           <TextField
             variant="outlined"
             size="small"
@@ -248,12 +278,8 @@ export default function BasicTable() {
         </DialogContent>
 
         <DialogActions>
-          <Button sx={dialogButtonStyle}>
-            Cập nhập
-          </Button>
-          <Button sx={dialogButtonStyle}>
-            Đặt lại
-          </Button>
+          <Button sx={dialogButtonStyle}>Cập nhập</Button>
+          <Button sx={dialogButtonStyle}>Đặt lại</Button>
           <Button onClick={handleClose} sx={dialogButtonStyle}>
             Hủy
           </Button>
@@ -301,20 +327,41 @@ export default function BasicTable() {
           />
 
           {/* Order Table */}
-          <Table aria-label="order table" sx={{ marginTop: '20px' }}>
+          <Table aria-label="order table" sx={{ marginTop: "20px" }}>
             <TableHead>
               <TableRow>
-                <TableCell align="left" sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}>STT</TableCell>
-                <TableCell align="left" sx={{ fontWeight: "bold", width: "200px", ...tableCellStyle }}>Mã đơn</TableCell>
-                <TableCell align="left" sx={{ fontWeight: "bold", width: "200px", ...tableCellStyle }}>Trạng thái</TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}
+                >
+                  STT
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ fontWeight: "bold", width: "200px", ...tableCellStyle }}
+                >
+                  Mã đơn
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ fontWeight: "bold", width: "200px", ...tableCellStyle }}
+                >
+                  Trạng thái
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {orderRows.map((order) => (
                 <TableRow key={order.maDon}>
-                  <TableCell align="left" sx={tableCellStyle}>{order.stt}</TableCell>
-                  <TableCell align="left" sx={tableCellStyle}>{order.maDon}</TableCell>
-                  <TableCell align="left" sx={tableCellStyle}>{order.trangThai}</TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {order.stt}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {order.maDon}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {order.trangThai}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
