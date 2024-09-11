@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import {
+  Typography,
   Box,
   IconButton,
   Button,
@@ -11,13 +12,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import CustomerTable from "../../../components/CustomerTable";
 
 function CustomerManagement() {
-
   return (
     <>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
-      >
         <Box
           sx={{
             display: "flex",
@@ -71,7 +67,7 @@ function CustomerManagement() {
           >
             Thêm điều kiện lọc
           </Button>
-
+          
         </Box>
         <Box
           sx={{
@@ -82,7 +78,6 @@ function CustomerManagement() {
         >
           <CustomerTable />
         </Box>
-      </Box>
     </>
   );
 }
