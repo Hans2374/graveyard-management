@@ -31,7 +31,7 @@ const Footer = () => {
   );
 
   return (
-    <Box sx={{ bgcolor: "#E6D189", p: 4, mt: "auto" }}>
+    <Box sx={{ bgcolor: "var(--primary-color)", p: 4, mt: "auto" }}>
       <Container maxWidth="lg">
         {isMobile ? (
           <Stack direction="column" spacing={2} alignItems="center">
