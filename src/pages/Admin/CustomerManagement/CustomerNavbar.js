@@ -23,27 +23,27 @@ function CustomerNavbar() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#customers" className={styles.a} onClick={() => setNavdata("CustomerManagement")}>
+            <a className={styles.a} onClick={() => setNavdata("CustomerManagement")}>
               Tất cả khách hàng
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#many-order" className={styles.a} onClick={() => setNavdata("CustomerManyOrder")}>
+            <a className={styles.a} onClick={() => setNavdata("CustomerManyOrder")}>
               Nhiều đơn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#few-order" className={styles.a} onClick={() => setNavdata("CustomerFewOrder")}>
+            <a className={styles.a} onClick={() => setNavdata("CustomerFewOrder")}>
               Ít đơn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#none-order" className={styles.a} onClick={() => setNavdata("CustomerNoneOrder")}>
+            <a className={styles.a} onClick={() => setNavdata("CustomerNoneOrder")}>
               Chưa có đơn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a} onClick={() => setNavdata("BlockedCustomer")}>
+            <a className={styles.a} onClick={() => setNavdata("BlockedCustomer")}>
               Bị chặn
             </a>
           </li>

@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import EmployeeTable from "../../../components/EmployeeTable";
+import EmployeeTable from "../../../components/TableData/EmployeeTable";
 import AddIcon from "@mui/icons-material/Add";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
