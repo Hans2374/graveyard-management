@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Homepage } from "./pages/Customer/Homepage";
-import { Servicepage } from "./pages/Servicepage";
+import { Servicepage } from "./pages/Customer/Servicepage";
 import { CustomerServicesPage } from "./pages/Customer/CustomerServicesPage";
-import FuneralServicePage from "./pages/FuneralServicePage";
-import PeriodicOfferingPage from "./pages/PeriodicOfferingPage";
+import FuneralServicePage from "./pages/Customer/FuneralServicePage";
+import PeriodicOfferingPage from "./pages/Customer/PeriodicOfferingPage";
 import "./App.css";
 import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar";

@@ -6,6 +6,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { routes } from "../routes";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -119,7 +120,7 @@ const StickyNavbar = () => {
 
   const navItems = [
     { label: "Trang Chủ", path: "/" },
-    { label: "Dịch Vụ", path: "/service" },
+    { label: "Dịch Vụ", path: routes.name },
     { label: "Tin tức", path: "/news" },
     { label: "Khách hàng", path: "/" },
     { label: "Liên Hệ", path: "/" },
