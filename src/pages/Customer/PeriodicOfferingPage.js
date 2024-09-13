@@ -1,8 +1,8 @@
 import React from "react";
-import { Header } from "../components/Header";
-import Footer from "../components/Footer";
-import StickyNavbar from "../components/StickyNavbar";
-import PeriodicOffering from "../components/PeriodicOffering";
+import { Header } from "../../components/Header";
+import Footer from "../../components/Footer";
+import StickyNavbar from "../../components/StickyNavbar";
+import PeriodicOffering from "../../components/PeriodicOffering";
 
 const PeriodicOfferingPage = () => {
   return (

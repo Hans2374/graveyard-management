@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Homepage } from "./pages/Customer/Homepage";
-import { Servicepage } from "./pages/Servicepage";
+import { Servicepage } from "./pages/Customer/Servicepage";
 import { CustomerServicesPage } from "./pages/Customer/CustomerServicesPage";
-import FuneralServicePage from "./pages/FuneralServicePage";
-import PeriodicOfferingPage from "./pages/PeriodicOfferingPage";
+import FuneralServicePage from "./pages/Customer/FuneralServicePage";
+import PeriodicOfferingPage from "./pages/Customer/PeriodicOfferingPage";
 import "./App.css";
 import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar";
 import { NotificationPage } from "./pages/Customer/NotificationPage";
 import { News } from "./pages/Customer/News";
-import {NewsDetail} from "./pages/Customer/NewsDetail";
+import { NewsDetail } from "./pages/Customer/NewsDetail";
 import StaffSidebar from "./components/StaffSidebar";
 import { CustomerProfile } from "./pages/Customer/CustomerProfile";
 
