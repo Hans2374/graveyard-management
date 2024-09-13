@@ -697,10 +697,12 @@ export default function ServiceListTable() {
             <Button
               onClick={handleCloseDialog}
               sx={{
-                p: "5px 100px",
-                border: "none",
-                bgcolor: "var(--primary-color)",
+                backgroundColor: "var(--primary-color)",
                 color: "black",
+                borderRadius: "10px",
+                padding: "5px 100px 5px 100px",
+                textTransform: "none",
+                margin:"0 15px",
               }}
             >
               Close
@@ -708,10 +710,12 @@ export default function ServiceListTable() {
             <Button
               onClick={handleCloseDialog}
               sx={{
-                p: "5px 100px",
-                border: "none",
-                bgcolor: "var(--primary-color)",
+                backgroundColor: "var(--primary-color)",
                 color: "black",
+                borderRadius: "10px",
+                padding: "5px 100px 5px 100px",
+                margin:"0 15px",
+                textTransform: "none",
               }}
             >
               Lưu

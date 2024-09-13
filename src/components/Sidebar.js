@@ -16,7 +16,7 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
-import AdminContent from "../pages/Admin/AdminContent";
+import AdminContent from "../pages/Admin/NewsManagement/AdminNews";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
@@ -25,6 +25,8 @@ import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import EmployeeNavbar from "../pages/Admin/EmployeeManagement/EmployeeNavbar";
 import CustomerNavbar from "../pages/Admin/CustomerManagement/CustomerNavbar";
 import { useState } from "react";
+import AdminNews from "../pages/Admin/NewsManagement/AdminNews";
+import NewsNavbar from "../pages/Admin/NewsManagement/NewsNavbar";
 
 const drawerWidth = 240;
 
@@ -93,7 +95,7 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => handleTabClick("AdminContent")} 
+              <ListItemButton onClick={() => handleTabClick("NewsNavbar")} 
               selected={activeItem === "AdminContent"}>
                 <ListItemIcon>
                   <ArticleOutlinedIcon />
@@ -141,7 +143,7 @@ export default function Sidebar() {
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
         {menudata === "AdminDiscount" && <AdminDiscount />}
-        {menudata === "AdminContent" && <AdminContent />}
+        {menudata === "NewsNavbar" && <NewsNavbar />}
         {menudata === "EmployeeNavbar" && <EmployeeNavbar />}
         {menudata === "CustomerNavbar" && <CustomerNavbar />}
         {menudata === "Dashboard" && <Dashboard />}

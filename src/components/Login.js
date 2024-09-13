@@ -105,6 +105,7 @@ export const Login = () => {
         // Logic for registration
         setIsLoggedIn(true);
         handleCloseDialog();
+        
         // Reset form
         setSignupValues({ email: '', username: '', password: '', confirmPassword: '' });
         setSignupErrors({});
