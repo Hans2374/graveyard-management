@@ -133,8 +133,8 @@ export const Login = () => {
 
         // Giả sử đăng ký thành công
         setIsLoggedIn(true);
-        handleCloseDialog();
         localStorage.setItem('isLoggedIn', 'true');
+        handleCloseDialog();
         setSignupValues({ email: '', username: '', password: '', confirmPassword: '' });
         setSignupErrors({});
 

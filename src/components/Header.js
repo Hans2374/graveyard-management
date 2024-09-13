@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     AppBar, Toolbar, Button, Box, MenuItem, Select, 
@@ -38,6 +38,12 @@ export const Header = () => {
     const isMd = useMediaQuery(theme.breakpoints.only('md'));
     const isLg = useMediaQuery(theme.breakpoints.only('lg'));
     const isXl = useMediaQuery(theme.breakpoints.only('xl'));
+
+    useEffect(() => {
+        // Check local storage to see if the user is logged in
+        const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        setIsLoggedIn(loggedIn);
+      }, []);
 
     const toLoginPage = () => {
         navigate('/login');
