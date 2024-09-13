@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -21,6 +22,8 @@ export const Login = () => {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [open, setOpen] = useState(false);
+
+    const navigate = useNavigate(); // Initialize navigate
 
     const handleTabChange = (event, newValue) => setActiveTab(newValue);
     const handleShowPasswordToggle = () => setShowPassword(!showPassword);
@@ -55,6 +58,9 @@ export const Login = () => {
         handleCloseDialog();
         setLoginValues({ username: '', password: '' });
         setLoginErrors({});
+
+        // Navigate to the path after successful login
+        navigate('/'); 
     };
 
     const handleSendVerificationCode = () => {
@@ -125,13 +131,15 @@ export const Login = () => {
             return;
         }
 
-        // Ở đây bạn sẽ thêm logic đăng ký với server
         // Giả sử đăng ký thành công
         setIsLoggedIn(true);
         handleCloseDialog();
-        // Reset form
+        localStorage.setItem('isLoggedIn', 'true');
         setSignupValues({ email: '', username: '', password: '', confirmPassword: '' });
         setSignupErrors({});
+
+        // Navigate to the path after successful signup
+        navigate('/'); 
     };
 
     const resetForgotPasswordForm = () => {
