@@ -1,8 +1,14 @@
 export const routes = {
-  //tên tự đặt, chữ cái đầu ko viết hoa (tránh trùng tên với file js )
-  customerProfile: "/profile",
+  homePage: "/",
+  admin: "/admin",
+  staff: "/staff",
+  notificationPage: "/notification",
+  news: "/news",
+  newsDetail: "/news-detail", 
   service: "/service",
   funeralService: "/services/funeral",
   periodicOffering: "/services/periodic-offering",
-  loginPage: "/login"
+  customerServicesPage: "/services/detail",
+  customerProfile: "/profile",
+  loginPage: "/login",
 };
