@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Typography, Dialog, DialogTitle, DialogContent, FormControlLabel, Checkbox } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { routes } from "../routes";  // Thêm đường dẫn đúng của routes file
@@ -23,6 +23,8 @@ export const Login = () => {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [open, setOpen] = useState(false);
+    const [countdown, setCountdown] = useState(0);
+    const [rememberMe, setRememberMe] = useState(false); // State for "Remember me?"
 
     const navigate = useNavigate(); // Initialize navigate
 
@@ -37,6 +39,16 @@ export const Login = () => {
         setLoginErrors({});
         setSignupErrors({});
     };
+
+    useEffect(() => {
+        let timer;
+        if (countdown > 0) {
+            timer = setInterval(() => {
+                setCountdown(prevCountdown => prevCountdown - 1);
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [countdown]);
 
     // Giả lập đăng nhập thành công
     const handleSuccessfulLogin = () => {
@@ -61,7 +73,7 @@ export const Login = () => {
         setLoginErrors({});
 
         // Navigate to the path after successful login
-        navigate(routes.homePage); 
+        navigate(routes.homePage);
     };
 
     const handleSendVerificationCode = () => {
@@ -71,6 +83,7 @@ export const Login = () => {
             console.log("Verification code sent to:", email);
             setCodeSent(true);
             setHelpText('Mã xác minh đã được gửi đến email của bạn.');
+            setCountdown(60); // Set countdown for 1 minute
         }
     };
 
@@ -140,7 +153,7 @@ export const Login = () => {
         setSignupErrors({});
 
         // Navigate to the path after successful signup
-        navigate(routes.homePage); 
+        navigate(routes.homePage);
     };
 
     const resetForgotPasswordForm = () => {
@@ -218,13 +231,24 @@ export const Login = () => {
                                 }}
                                 sx={{ mb: 2 }}
                             />
-                            <Link
-                                variant="body2"
-                                onClick={handleForgotPasswordDialogOpen}
-                                sx={{ cursor: 'pointer', marginLeft: '14px' }}
-                            >
-                                Quên mật khẩu?
-                            </Link>
+                            <Box display="flex" justifyContent="space-between" alignItems="center">
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={rememberMe}
+                                            onChange={(e) => setRememberMe(e.target.checked)}
+                                        />
+                                    }
+                                    label="Nhớ mật khẩu?"
+                                />
+                                <Link
+                                    variant="body2"
+                                    onClick={handleForgotPasswordDialogOpen}
+                                    sx={{ cursor: 'pointer', marginLeft: '14px' }}
+                                >
+                                    Quên mật khẩu?
+                                </Link>
+                            </Box>
                         </Box>
                     )}
 
@@ -348,7 +372,9 @@ export const Login = () => {
                                                     sx={{ color: 'var(--secondary-color)' }}
                                                     disabled={codeSent}
                                                 >
-                                                    Gửi mã
+                                                    {codeSent
+                                                        ? `Gửi mã (${Math.floor(countdown / 60)}:${countdown % 60 < 10 ? '0' : ''}${countdown % 60})`
+                                                        : 'Gửi mã'}
                                                 </Button>
                                             </InputAdornment>
                                         ),
