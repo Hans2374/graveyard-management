@@ -356,7 +356,8 @@ export const Header = () => {
                             }}
                         >
                             <Box sx={{
-                                maxWidth: 350,
+                                width: '360px',
+                                maxHeight: '750px',
                                 display: 'flex',
                                 flexDirection: 'column'
                             }}>
@@ -383,17 +384,16 @@ export const Header = () => {
                                         sx={{
                                             minWidth: 'auto',
                                             p: 0,
-                                            pt: '2px',
+                                            pt: '5px',
                                         }}
                                     >
                                         Xem tất cả
                                     </Button>
                                 </Box>
                                 <List sx={{
-                                    maxHeight: 100,
-                                    maxWidth: 310,
+                                    maxHeight: '750px',
+                                    width: '360px',
                                     pt: 0,
-                                    pb: 0,
                                     overflowY: 'scroll',
                                     scrollbarWidth: 'none',
                                     msOverflowStyle: 'none',
@@ -404,7 +404,7 @@ export const Header = () => {
                                     {notifications.map((notification, index) => (
                                         <ListItem key={index} sx={{ pb: 0, pt: 0 }}>
                                             <ListItemText
-                                                primary={notification.length > 20 ? `${notification.substring(0, 20)}...` : notification}
+                                                primary={notification.length > 42 ? `${notification.substring(0, 42)}...` : notification}
                                             />
                                         </ListItem>
                                     ))}
