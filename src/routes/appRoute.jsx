@@ -10,6 +10,7 @@ import { Servicepage } from "./pages/Customer/Servicepage";
 import FuneralServicePage from "./pages/Customer/FuneralServicePage";
 import PeriodicOfferingPage from "./pages/Customer/PeriodicOfferingPage";
 import StaffSidebar from "./components/StaffSidebar";
+import { LoginPage } from "./pages/LoginPage"
 export default function AppRoute() {
   return (
     <Box
