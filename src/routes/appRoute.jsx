@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { routes } from ".";
 import { ToastContainer } from "react-toastify";
+import { Box } from "@mui/material";
 
 //import file js (element), cẩn thận nhầm viết hoa với ko viết hoa nha ; )
 import { CustomerProfile } from "./pages/Customer/CustomerProfile";

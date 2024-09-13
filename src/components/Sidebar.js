@@ -24,11 +24,20 @@ import ServiceList from "../pages/Admin/ServiceList";
 import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import EmployeeNavbar from "../pages/Admin/EmployeeManagement/EmployeeNavbar";
 import CustomerNavbar from "../pages/Admin/CustomerManagement/CustomerNavbar";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
 export default function Sidebar() {
   const [menudata, setMenudata] = React.useState("ServicesNavbar");
+
+  const [activeItem, setActiveItem] = useState(null); 
+  const drawerWidth = 240;
+
+  const handleTabClick = (menudata) => {
+    setActiveItem(menudata);
+    setMenudata(menudata);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -53,8 +62,9 @@ export default function Sidebar() {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            <ListItem>
-              <ListItemButton onClick={() => setMenudata("ServicesNavbar")}>
+            <ListItem >
+              <ListItemButton onClick={() => handleTabClick("ServicesNavbar")} 
+              selected={activeItem === "ServicesNavbar"}>
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
@@ -63,7 +73,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ServiceList")}>
+              <ListItemButton onClick={() => handleTabClick("ServiceList")} 
+              selected={activeItem === "ServiceList"}>
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
@@ -72,7 +83,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminDiscount")}>
+              <ListItemButton onClick={() => handleTabClick("AdminDiscount")} 
+              selected={activeItem === "AdminDiscount"}>
                 <ListItemIcon>
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
@@ -81,7 +93,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("AdminContent")}>
+              <ListItemButton onClick={() => handleTabClick("AdminContent")} 
+              selected={activeItem === "AdminContent"}>
                 <ListItemIcon>
                   <ArticleOutlinedIcon />
                 </ListItemIcon>
@@ -90,7 +103,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("EmployeeNavbar")}>
+              <ListItemButton onClick={() => handleTabClick("EmployeeNavbar")} 
+              selected={activeItem === "EmployeeNavbar"}>
                 <ListItemIcon>
                   <AssignmentIndOutlinedIcon />
                 </ListItemIcon>
@@ -99,7 +113,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("CustomerNavbar")}>
+              <ListItemButton onClick={() => handleTabClick("CustomerNavbar")} 
+              selected={activeItem === "CustomerNavbar"}>
                 <ListItemIcon>
                   <ManageAccountsOutlinedIcon />
                 </ListItemIcon>
@@ -108,7 +123,8 @@ export default function Sidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("Dashboard")}>
+              <ListItemButton onClick={() => handleTabClick("Dashboard")} 
+              selected={activeItem === "Dashboard"}>
                 <ListItemIcon>
                   <ShowChartOutlinedIcon />
                 </ListItemIcon>

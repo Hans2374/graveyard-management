@@ -17,7 +17,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
-import ServiceTable from "../../../components/ServiceTable";
+import ServiceTable from "../../../components/TableData/ServiceTable";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function AllServiceTab() {

@@ -18,7 +18,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from "./Service.module.css";
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from "react";
-import DiscountListTable from "../../components/DiscountListTable";
+import DiscountListTable from "../../components/TableData/DiscountListTable";
 
 function AdminDiscount() {
 
@@ -44,22 +44,22 @@ function AdminDiscount() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#home" className={styles.a}>
+            <a className={styles.a}>
               Tất cả mã khuyến mãi
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#news" className={styles.a}>
+            <a className={styles.a}>
               Còn hạn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
+            <a className={styles.a}>
               Gần hết hạn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Hết hạn
             </a>
           </li>

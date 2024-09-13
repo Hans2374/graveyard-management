@@ -26,22 +26,22 @@ function EmployeeNavbar() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#employees" className={styles.a} onClick={() => setNavdata("EmployeeManagement")}>
+            <a className={styles.a} onClick={() => setNavdata("EmployeeManagement")}>
               Tất cả nhân viên
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#many-orders" className={styles.a} onClick={() => setNavdata("ManyOrderTabs")}>
+            <a className={styles.a} onClick={() => setNavdata("ManyOrderTabs")}>
               Nhiều đơn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#few-orders" className={styles.a} onClick={() => setNavdata("FewOrdersTab")}>
+            <a className={styles.a} onClick={() => setNavdata("FewOrdersTab")}>
               Ít đơn
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#none-order" className={styles.a} onClick={() => setNavdata("NoneOrderTab")}>
+            <a className={styles.a} onClick={() => setNavdata("NoneOrderTab")}>
               Chưa có đơn
             </a>
           </li>

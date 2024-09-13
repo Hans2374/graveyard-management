@@ -116,7 +116,7 @@ const dialogButtonStyle = {
 };
 
 // Table component
-export default function BasicTable() {
+export default function CustomerTable() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

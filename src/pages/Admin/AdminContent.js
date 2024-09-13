@@ -31,27 +31,27 @@ function AdminContent() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#home" className={styles.a}>
+            <a className={styles.a}>
               Giới thiệu
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#news" className={styles.a}>
+            <a className={styles.a}>
               Hình ảnh
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
+            <a className={styles.a}>
               Tin tức
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Đánh giá
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Liên hệ
             </a>
           </li>

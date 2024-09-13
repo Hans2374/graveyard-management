@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import styles from "../Service.module.css";
 import AllServiceTab from "./AllServiceTab";
 import AddServiceTab from "./AddServiceTab";
+import ServiceOrderDetail from "./ServiceOrderDetail";
 
 function ServicesNavbar() {
   const [navdata, setNavdata] = React.useState("AllServiceTab");
@@ -18,22 +19,22 @@ function ServicesNavbar() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#allservice" className={styles.a} onClick={() => setNavdata("AllServiceTab")}>
+            <a className={styles.a} onClick={() => setNavdata("AllServiceTab")}>
               Tất cả gói dịch vụ
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#service-1" className={styles.a} onClick={() => setNavdata("AddService")}>
+            <a className={styles.a} onClick={() => setNavdata("AddService")}>
               Mai táng
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#service-2" className={styles.a}>
+            <a className={styles.a} onClick={() => setNavdata("ServiceOrderDetail")}>
               Cúng định kỳ
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#addservice" className={styles.a} onClick={() => setNavdata("AddServiceTab")}>
+            <a className={styles.a} onClick={() => setNavdata("AddServiceTab")}>
               Thêm dịch vụ
             </a>
           </li>
@@ -45,7 +46,7 @@ function ServicesNavbar() {
       >
         {navdata === "AllServiceTab" && <AllServiceTab />}
         {navdata === "AddServiceTab" && <AddServiceTab />}
-
+        {navdata === "ServiceOrderDetail" && <ServiceOrderDetail />}
       </Box>
     </>
   );
