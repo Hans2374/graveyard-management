@@ -4,6 +4,8 @@ import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Ty
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { routes } from "../routes";  // Thêm đường dẫn đúng của routes file
+import MailOutline from '@mui/icons-material/MailOutline';
+import FacebookIcon from '@mui/icons-material/Facebook';
 
 export const Login = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -181,7 +183,7 @@ export const Login = () => {
             <Box
                 sx={{
                     width: '400px',
-                    height: '570px', // Cố định chiều cao của Box ngoài
+                    height: '600px', // Cố định chiều cao của Box ngoài
                     backgroundColor: 'white',
                     padding: 4,
                     borderRadius: 2,
@@ -189,7 +191,7 @@ export const Login = () => {
                     position: 'relative', // Đặt position relative để các thành phần con có thể sử dụng absolute
                 }}
             >
-                <Typography align="center" padding={2} pb={4} fontWeight="bold" fontSize={20}>
+                <Typography align="center" padding={0} pb={2} fontWeight="bold" fontSize={20}>
                     {activeTab === 0 ? 'Đăng nhập tài khoản' : 'Tạo tài khoản mới'}
                 </Typography>
                 <Tabs value={activeTab} onChange={handleTabChange} centered>
@@ -442,6 +444,15 @@ export const Login = () => {
                         )}
                     </DialogContent>
                 </Dialog>
+                {/* Social Media Icons */}
+                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                    <IconButton color="primary" sx={{ marginRight: 1 }}>
+                        <MailOutline />
+                    </IconButton>
+                    <IconButton color="primary">
+                        <FacebookIcon />
+                    </IconButton>
+                </Box>
             </Box>
         </Box>
     );
