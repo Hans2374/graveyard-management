@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { routes } from "../routes";  // Thêm đường dẫn đúng của routes file
 
 export const Login = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -60,7 +61,7 @@ export const Login = () => {
         setLoginErrors({});
 
         // Navigate to the path after successful login
-        navigate('/'); 
+        navigate(routes.homePage); 
     };
 
     const handleSendVerificationCode = () => {
@@ -139,7 +140,7 @@ export const Login = () => {
         setSignupErrors({});
 
         // Navigate to the path after successful signup
-        navigate('/'); 
+        navigate(routes.homePage); 
     };
 
     const resetForgotPasswordForm = () => {

@@ -12,7 +12,6 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
-import AdminDiscount from "../pages/Admin/AdminDiscount";
 import { Header } from "./Header";
 import ScheduleList from "../pages/Staff/ScheduleList";
 import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
