@@ -9,9 +9,10 @@ import { Box } from "@mui/material";
 import Sidebar from "./components/Sidebar";
 import { NotificationPage } from "./pages/Customer/NotificationPage";
 import { News } from "./pages/Customer/News";
-import {NewsDetail} from "./pages/Customer/NewsDetail";
+import { NewsDetail } from "./pages/Customer/NewsDetail";
 import StaffSidebar from "./components/StaffSidebar";
 import { CustomerProfile } from "./pages/Customer/CustomerProfile";
+import { LoginPage } from "./pages/LoginPage"
 
 function App() {
   return (
@@ -32,11 +33,9 @@ function App() {
         <Route path="/service" element={<Servicepage />} />
         <Route path="/services/funeral" element={<FuneralServicePage />} />
         <Route path="/services/detail" element={<CustomerServicesPage />} />
-        <Route
-          path="/services/periodic-offering"
-          element={<PeriodicOfferingPage />}
-        />
+        <Route path="/services/periodic-offering" element={<PeriodicOfferingPage />} />
         <Route path="/profile" element={<CustomerProfile />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Box>
   );
