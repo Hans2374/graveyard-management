@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import styles from "../Service.module.css";
 import AllServiceTab from "./AllServiceTab";
 import AddServiceTab from "./AddServiceTab";
+import ServiceOrderDetail from "./ServiceOrderDetail";
 
 function ServicesNavbar() {
   const [navdata, setNavdata] = React.useState("AllServiceTab");
@@ -28,7 +29,7 @@ function ServicesNavbar() {
             </a>
           </li>
           <li className={styles.li}>
-            <a className={styles.a}>
+            <a className={styles.a} onClick={() => setNavdata("ServiceOrderDetail")}>
               Cúng định kỳ
             </a>
           </li>
@@ -45,7 +46,7 @@ function ServicesNavbar() {
       >
         {navdata === "AllServiceTab" && <AllServiceTab />}
         {navdata === "AddServiceTab" && <AddServiceTab />}
-
+        {navdata === "ServiceOrderDetail" && <ServiceOrderDetail />}
       </Box>
     </>
   );

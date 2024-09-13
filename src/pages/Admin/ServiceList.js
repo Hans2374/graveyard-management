@@ -12,8 +12,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from "./Service.module.css";
-import AddIcon from '@mui/icons-material/Add';
-import ServiceTable from "../../components/TableData/ServiceTable";
+import ServiceListTable from "../../components/TableData/ServiceListTable";
 
 function ServiceList() {
   return (
@@ -147,7 +146,7 @@ function ServiceList() {
             marginTop: "50px",
           }}
         >
-          <ServiceTable/>
+          <ServiceListTable/>
         </Box>
       </Box>
     </>
