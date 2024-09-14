@@ -10,6 +10,7 @@ import { Servicepage } from "./pages/Customer/Servicepage";
 import FuneralServicePage from "./pages/Customer/FuneralServicePage";
 import PeriodicOfferingPage from "./pages/Customer/PeriodicOfferingPage";
 import StaffSidebar from "./components/StaffSidebar";
+import Sidebar from "../components/Sidebar";
 export default function AppRoute() {
   return (
     <Box
@@ -30,6 +31,7 @@ export default function AppRoute() {
           element={<PeriodicOfferingPage />}
         />
       </Routes>
+      <Route path={routes.admin} element={<Sidebar />} />
       <Route path={routes.staff} element={<StaffSidebar />} />
     </Box>
   );
