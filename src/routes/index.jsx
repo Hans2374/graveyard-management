@@ -6,6 +6,7 @@ export const routes = {
   news: "/news",
   newsDetail: "/news-detail", 
   service: "/service",
+  serviceDetail:"/service/detail",
   funeralService: "/services/funeral",
   periodicOffering: "/services/periodic-offering",
   customerServicesPage: "/services/detail",

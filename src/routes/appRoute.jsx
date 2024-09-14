@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 
 import { Homepage } from "../pages/Customer/Homepage";
 import { Servicepage } from "../pages/Customer/Servicepage";
+import { ServiceDetailPage } from "../pages/Customer/ServiceDetailPage";
 import { CustomerServicesPage } from "../pages/Customer/CustomerServicesPage";
 import FuneralServicePage from "../pages/Customer/FuneralServicePage";
 import PeriodicOfferingPage from "../pages/Customer/PeriodicOfferingPage";
@@ -33,6 +34,7 @@ export default function AppRoute() {
         <Route path={routes.news} element={<News />} />
         <Route path={routes.newsDetail} element={<NewsDetail />} />
         <Route path={routes.service} element={<Servicepage />} />
+        <Route path={routes.serviceDetail} element={<ServiceDetailPage />} />
         <Route path={routes.funeralService} element={<FuneralServicePage />} />
         <Route path={routes.periodicOffering} element={<CustomerServicesPage />} />
         <Route path={routes.customerServicesPage} element={<PeriodicOfferingPage />} />
