@@ -5,27 +5,44 @@ import RoomIcon from "@mui/icons-material/Room";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import logo from "../assets/logo.png";
-import image from "../assets/image.png";
 
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const logoStyles = {
+    width: { sm: 300, md: 350, lg: 400 },
+    height: 'auto',
+    maxWidth: '100%',
+    padding: 1,
+    margin: '0 auto',  // Căn giữa logo
+  };
+
+  const contactInfoStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    marginLeft: '10px', // Thêm marginLeft cho contact info
+  };
+
+  const iconStyles = {
+    marginRight: '15px', // Thêm khoảng cách giữa icon và chữ
+  };
+
   const ContactInfo = () => (
-    <Stack spacing={1} alignItems={isMobile ? "center" : "flex-start"}>
-      <Box display="flex" alignItems="center">
-        <RoomIcon sx={{ mr: 1 }} />
-        <Typography variant="body1" textAlign={isMobile ? "center" : "left"}>
-          22 D. Hoàng Diệu 2, P. Linh Trung, Thủ Đức, Hồ Chí Minh
-        </Typography>
-      </Box>
-      <Box display="flex" alignItems="center">
-        <PhoneIcon sx={{ mr: 1 }} />
+    <Stack spacing={1} alignItems="flex-start"> {/* Căn lề trái cho contact info */}
+      <Box sx={contactInfoStyles}>
+        <PhoneIcon sx={iconStyles} />
         <Typography variant="body1">06857495673 - 0584756649</Typography>
       </Box>
-      <Box display="flex" alignItems="center">
-        <EmailIcon sx={{ mr: 1 }} />
+      <Box sx={contactInfoStyles}>
+        <EmailIcon sx={iconStyles} />
         <Typography variant="body1">amazingtech@gmail.com</Typography>
+      </Box>
+      <Box sx={contactInfoStyles}>
+        <RoomIcon sx={iconStyles} />
+        <Typography variant="body1" textAlign="left">
+          22 D. Hoàng Diệu 2, P. Linh Trung, Thủ Đức, Hồ Chí Minh
+        </Typography>
       </Box>
     </Stack>
   );
@@ -34,76 +51,45 @@ const Footer = () => {
     <Box sx={{ bgcolor: "var(--primary-color)", p: 4, mt: "auto" }}>
       <Container maxWidth="lg">
         {isMobile ? (
-          <Stack direction="column" spacing={2} alignItems="center">
-            <Box
-              component="img"
-              src={logo}
-              alt="logo"
-              sx={{
-                width: '100%',
-                maxWidth: 300,
-                height: 'auto',
-                padding: 1,
-              }}
-            />
+          <Stack direction="column" spacing={2} alignItems="center"> {/* Căn giữa logo cho mobile */}
+            <Box component="img" src={logo} alt="logo" sx={{ width: '100%', maxWidth: 300, height: 'auto', padding: 1, margin: '0 auto' }} />
             <ContactInfo />
-            <Box
-              component="img"
-              src={image}
-              alt="image"
-              sx={{
-                width: '100%',
-                height: 'auto',
-                maxWidth: 502,
-                padding: 1,
-              }}
-            />
+            <Box sx={{ width: '100%', height: '100%', padding: 1 }}>
+                <iframe
+                  title="Google Map"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5628050519643!2d106.7698912759312!3d10.850873289296602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752743bdf5a07b%3A0x42a0364c47a52796!2zMjIgRC4gSMOgbmcgRGl14buBdSAyLCBQLiBMaW5oIFRydW5nLCBUaOG7pyDEkOG7qWMgVGjhuqFjIFRow6BuaCwgSOG7kyBDaMOtIE5naGhp!5e0!3m2!1sen!2s!4v1694593284505!5m2!1sen!2s"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </Box>
           </Stack>
         ) : (
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <Box
-                component="img"
-                src={logo}
-                alt="logo"
-                sx={{
-                  width: {
-                    sm: 300,
-                    md: 350,
-                    lg: 400
-                  },
-                  height: 'auto',
-                  maxWidth: '100%',
-                  padding: 1,
-                  marginLeft: -4
-                }}
-              />
+              <Box component="img" src={logo} alt="logo" sx={logoStyles} /> {/* Căn giữa logo */}
               <ContactInfo />
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box
-                component="img"
-                src={image}
-                alt="image"
-                sx={{
-                  width: '100%',
-                  height: 'auto',
-                  maxWidth: 502,
-                  padding: 1,
-                  marginLeft: 'auto',
-                  marginRight: 'auto',
-                  display: 'block'
-                }}
-              />
+              <Box sx={{ width: '100%', height: '100%', padding: 1 }}>
+                <iframe
+                  title="Google Map"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.5628050519643!2d106.7698912759312!3d10.850873289296602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752743bdf5a07b%3A0x42a0364c47a52796!2zMjIgRC4gSMOgbmcgRGl14buBdSAyLCBQLiBMaW5oIFRydW5nLCBUaOG7pyDEkOG7qWMgVGjhuqFjIFRow6BuaCwgSOG7kyBDaMOtIE5naGhp!5e0!3m2!1sen!2s!4v1694593284505!5m2!1sen!2s"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </Box>
             </Grid>
           </Grid>
         )}
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          align="center"
-          sx={{ mt: 2 }}
-        >
+        <Typography variant="body2" color="textSecondary" align="center" sx={{ mt: 2 }}>
           © 2023 Amazing Tech. All Rights Reserved.
         </Typography>
       </Container>
