@@ -61,14 +61,7 @@ export const Service = () => {
             justifyContent: "center",
           }}
         >
-          <Typography
-            variant="h4"
-            align="center"
-            gutterBottom
-            style={{ color: "#333", fontWeight: "bold" }}
-          >
-            DỊCH VỤ
-          </Typography>
+         
         </Box>
 
         <Grid container spacing={4} justifyContent="center">
@@ -154,3 +147,5 @@ export const Service = () => {
     </Box>
   );
 };
+
+export default Service;
