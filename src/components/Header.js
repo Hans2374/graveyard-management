@@ -315,7 +315,7 @@ export const Header = () => {
                                     <ListItem sx={{ p: '0px 16px' }}>
                                         <ListItemText primary="Đóng góp ý kiến" />
                                     </ListItem>
-                                    <RouterLink to={routes.customerProfile} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <RouterLink to={routes.homePage} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <ListItem button onClick={handleListItemClick}
                                             sx={{
                                                 cursor: 'pointer',
