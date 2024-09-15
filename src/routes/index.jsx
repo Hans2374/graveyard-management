@@ -12,4 +12,6 @@ export const routes = {
   customerServicesPage: "/services/detail",
   customerProfile: "/profile",
   loginPage: "/login",
+  myService: "/myservice",
+  myServiceDetail: "/myservicedetail",
 };
