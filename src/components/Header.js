@@ -309,9 +309,18 @@ export const Header = () => {
                                             <ListItemText primary="Tên Người Dùng" />
                                         </ListItem>
                                     </RouterLink>
-                                    <ListItem sx={{ p: '0px 16px' }}>
-                                        <ListItemText primary="Dịch vụ của tôi" />
-                                    </ListItem>
+                                    <RouterLink to={routes.myService} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <ListItem
+                                            sx={{
+                                                cursor: 'pointer',
+                                                p: '0px 16px',
+                                                ':hover': {
+                                                    backgroundColor: '#EEEEEE',
+                                                },
+                                            }}>
+                                            <ListItemText primary="Dịch vụ của tôi" />
+                                        </ListItem>
+                                    </RouterLink>
                                     <ListItem sx={{ p: '0px 16px' }}>
                                         <ListItemText primary="Đóng góp ý kiến" />
                                     </ListItem>

@@ -297,7 +297,7 @@ const ServiceDetail = () => {
               SelectProps={{ native: true }}
               sx={{ mb: 2 }}
             >
-              <option value="">Chọn phương thức thanh toán</option>
+              <option value=""></option>
               <option value="tien-mat">Tiền mặt</option>
               <option value="chuyen-khoan">Chuyển khoản</option>
               {/* Thêm các phương thức thanh toán khác */}
@@ -314,7 +314,7 @@ const ServiceDetail = () => {
               SelectProps={{ native: true }}
               sx={{ mb: 2 }}
             >
-              <option value="">Chọn khuyến mãi</option>
+              <option value=""></option>
               <option value="khuyen-mai-1">Khuyến mãi 1</option>
               <option value="khuyen-mai-2">Khuyến mãi 2</option>
               {/* Thêm các khuyến mãi khác */}

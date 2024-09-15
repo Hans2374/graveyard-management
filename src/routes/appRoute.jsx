@@ -9,6 +9,8 @@ import { ServiceDetailPage } from "../pages/Customer/ServiceDetailPage";
 import { CustomerServicesPage } from "../pages/Customer/CustomerServicesPage";
 import FuneralServicePage from "../pages/Customer/FuneralServicePage";
 import PeriodicOfferingPage from "../pages/Customer/PeriodicOfferingPage";
+import MyServicePage from "../pages/Customer/MyServicePage";
+import MyServiceDetailPage from "../pages/Customer/MyServiceDetailPage";
 import Sidebar from "../components/Sidebar";
 import { NotificationPage } from "../pages/Customer/NotificationPage";
 import { News } from "../pages/Customer/News";
@@ -36,7 +38,9 @@ export default function AppRoute() {
         <Route path={routes.service} element={<Servicepage />} />
         <Route path={routes.serviceDetail} element={<ServiceDetailPage />} />
         <Route path={routes.funeralService} element={<FuneralServicePage />} />
-        <Route path={routes.periodicOffering} element={<CustomerServicesPage />} />
+        <Route path={routes.myService} element={<MyServicePage />} />
+        <Route path={routes.myServiceDetail} element={<MyServiceDetailPage />} />
+        <Route path={routes.periodicOffering} element={<PeriodicOfferingPage />} />
         <Route path={routes.customerServicesPage} element={<PeriodicOfferingPage />} />
         <Route path={routes.customerProfile} element={<CustomerProfile />} />
         <Route path={routes.loginPage} element={<LoginPage />} />
