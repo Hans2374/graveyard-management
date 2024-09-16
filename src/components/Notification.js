@@ -24,7 +24,7 @@ const Notification = ({ notifications = [] }) => {
     const notificationsToDisplay = notifications.length > 0 ? notifications : defaultNotifications;
 
     return (
-        <Box align='center' >
+        <Box align='center' sx={{ overflow: 'hidden' }}>
             <Box sx={{ backgroundColor: 'white', padding: 2, marginTop: '65px', maxWidth: '1000px' }}>
                 <Typography
                     align="center"

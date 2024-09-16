@@ -57,6 +57,7 @@ const MyService = () => {
         backgroundColor: "#f0f0f0",
         padding: 0,
         margin: 0,
+        overflow: 'hidden'
       }}
     >
       <Box
@@ -70,7 +71,7 @@ const MyService = () => {
         }}
       >
         <Typography
-          variant="h4"
+          variant="h5"
           textAlign="center"
           fontWeight="bold"
           mb={4}
@@ -91,7 +92,21 @@ const MyService = () => {
             <TextField
               placeholder="Tìm kiếm dịch vụ"
               variant="outlined"
-              sx={{ marginRight: "10px", width: "300px" }}
+              sx={{
+                marginRight: "10px",
+                width: {
+                  xs: "200px", // Extra small devices (phones)
+                  sm: "250px", // Small devices (tablets)
+                  md: "280px", // Medium devices (desktops)
+                  lg: "320px", // Large devices (larger desktops)
+                },
+                height: {
+                  xs: 'auto',  // Height for extra small devices
+                  sm: 'auto',  // Height for small devices
+                  md: 'auto',  // Height for medium devices
+                  lg: 'auto',  // Height for large devices
+                },
+              }}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -103,11 +118,27 @@ const MyService = () => {
             <Button
               variant="contained"
               startIcon={<FilterListIcon />}
-              sx={{ backgroundColor: "#f5e1a4", color: "#333" }}
+              sx={{
+                backgroundColor: "#f5e1a4",
+                color: "#333",
+                padding: {
+                  xs: "5px 10px",  // Padding for extra small devices
+                  sm: "6px 12px",  // Padding for small devices
+                  md: "8px 15px",  // Padding for medium devices
+                  lg: "10px 18px", // Padding for large devices
+                },
+                fontSize: {
+                  xs: "12px",  // Font size for extra small devices
+                  sm: "14px",  // Font size for small devices
+                  md: "16px",  // Font size for medium devices
+                  lg: "18px",  // Font size for large devices
+                },
+              }}
             >
               Thêm điều kiện lọc
             </Button>
           </Box>
+
         </Box>
 
         <Grid container spacing={4}>
