@@ -6,6 +6,8 @@ import styles from "../Service.module.css"
 import AdminNews from "./AdminNews";
 import Picture from "./Picture";
 import News from "./News";
+import AdminContact from "./AdminContact";
+import AdminRate from "./AdminRate";
 
 function NewsNavbar() {
   const [navdata, setNavdata] = React.useState("AdminNews");
@@ -36,12 +38,12 @@ function NewsNavbar() {
             </a>
           </li>
           <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("EmployeeManagement")}>
+            <a className={styles.a} onClick={() => setNavdata("AdminRate")}>
               Đánh giá
             </a>
           </li>
           <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("EmployeeManagement")}>
+            <a className={styles.a} onClick={() => setNavdata("AdminContact")}>
               Liên hệ
             </a>
           </li>
@@ -55,6 +57,8 @@ function NewsNavbar() {
         {navdata === "AdminNews" && <AdminNews />}
         {navdata === "Picture" && <Picture />}
         {navdata === "News" && <News />}
+        {navdata === "AdminRate" && <AdminRate />}
+        {navdata === "AdminContact" && <AdminContact />}
       </Box>
     </>
   );
