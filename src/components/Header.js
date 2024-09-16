@@ -125,7 +125,10 @@ export const Header = () => {
     return (
         <StyledAppBar position='sticky'>
             <Toolbar>
-                <Link to="/">
+                <Link
+                    component={RouterLink}
+                    to={routes.homePage}
+                >
                     <img
                         src={getLogo()}
                         alt="logo"
@@ -233,6 +236,7 @@ export const Header = () => {
                                                 minWidth: 'auto',
                                                 p: 0,
                                                 pt: '5px',
+                                                mr: 2,
                                             }}
                                         >
                                             Xem tất cả
@@ -309,13 +313,22 @@ export const Header = () => {
                                             <ListItemText primary="Tên Người Dùng" />
                                         </ListItem>
                                     </RouterLink>
-                                    <ListItem sx={{ p: '0px 16px' }}>
-                                        <ListItemText primary="Dịch vụ của tôi" />
-                                    </ListItem>
+                                    <RouterLink to={routes.myService} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <ListItem
+                                            sx={{
+                                                cursor: 'pointer',
+                                                p: '0px 16px',
+                                                ':hover': {
+                                                    backgroundColor: '#EEEEEE',
+                                                },
+                                            }}>
+                                            <ListItemText primary="Dịch vụ của tôi" />
+                                        </ListItem>
+                                    </RouterLink>
                                     <ListItem sx={{ p: '0px 16px' }}>
                                         <ListItemText primary="Đóng góp ý kiến" />
                                     </ListItem>
-                                    <RouterLink to={routes.customerProfile} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                    <RouterLink to={routes.homePage} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <ListItem button onClick={handleListItemClick}
                                             sx={{
                                                 cursor: 'pointer',

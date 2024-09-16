@@ -284,7 +284,7 @@ const FuneralServicePage = () => {
                     <Button
                       variant="text"
                       sx={{ marginTop: "10px", color: "#f0c431" }}
-                      href={`/chi-tiet-dich-vu/${service.id}`}
+                      href={"/service/detail"}
                     >
                       Chi tiết →
                     </Button>
