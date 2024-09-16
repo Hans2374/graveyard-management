@@ -121,8 +121,8 @@ function News() {
           >
             Thông tin chi tiết
           </DialogTitle>
-          <DialogContent sx={{ width: "600px"}}>
-            <Typography sx={{ padding: "10px 10px 0 0", marginTop:"20px" }}>
+          <DialogContent sx={{ width: "600px" }}>
+            <Typography sx={{ padding: "10px 10px 0 0", marginTop: "20px" }}>
               Tiêu đề bài viết
             </Typography>
             <TextField
@@ -142,7 +142,14 @@ function News() {
                 ),
               }}
             />
-            <Box sx={{ bgcolor: "#f5f5f5", p: 2, borderRadius: 2, marginTop:"30px"}}>
+            <Box
+              sx={{
+                bgcolor: "#f5f5f5",
+                p: 2,
+                borderRadius: 2,
+                marginTop: "30px",
+              }}
+            >
               {/* Icons for formatting */}
               <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                 <IconButton aria-label="bold">
@@ -165,12 +172,12 @@ function News() {
                 value={reportText}
                 onChange={handleTextChange}
                 multiline
-                rows={10} // Adjust this value based on how large you want the text area
+                rows={10}
                 placeholder="Nhập báo cáo công việc..."
                 fullWidth
                 variant="outlined"
                 inputProps={{
-                  maxLength: 1000, // Limit the input to 1000 characters
+                  maxLength: 1000,
                 }}
                 helperText={`${reportText.length}/1000 ký tự`}
               />
@@ -185,8 +192,7 @@ function News() {
                 borderRadius: "10px",
                 padding: "5px 20px 5px 20px",
                 textTransform: "none",
-                margin:"0 290px 0 0"
-                
+                margin: "0 290px 0 0",
               }}
             >
               Cập nhật
@@ -213,7 +219,7 @@ function News() {
                 borderRadius: "10px",
                 padding: "5px 20px 5px 20px",
                 textTransform: "none",
-                margin:"0px 15px"
+                margin: "0px 15px",
               }}
             >
               Hủy

@@ -38,10 +38,8 @@ export default function AppRoute() {
         <Route path={routes.customerServicesPage} element={<PeriodicOfferingPage />} />
         <Route path={routes.customerProfile} element={<CustomerProfile />} />
         <Route path={routes.loginPage} element={<LoginPage />} />
-
       </Routes>
-      <Route path={routes.admin} element={<Sidebar />} />
-      <Route path={routes.staff} element={<StaffSidebar />} />
+      
     </Box>
   );
 }

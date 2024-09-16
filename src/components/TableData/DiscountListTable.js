@@ -88,16 +88,16 @@ export default function DiscountListTable() {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px"}}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", border: "1px solid #ccc"}}>
               STT
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "600px" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "600px", border: "1px solid #ccc" }}>
               Tên Gói
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold",  border: "1px solid #ccc" }}>
               Khả Dụng
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold",  border: "1px solid #ccc" }}>
               Chỉnh Sửa
             </TableCell>
           </TableRow>
@@ -106,18 +106,17 @@ export default function DiscountListTable() {
           {rows.map((row) => (
             <TableRow
               key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="left" scope="row">
+              <TableCell align="left" scope="row" sx={{ border: "1px solid #ccc" }}>
                 {row.stt}
               </TableCell>
-              <TableCell align="left">{row.tengoi}</TableCell>
-              <TableCell align="left">
+              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>{row.tengoi}</TableCell>
+              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                 />
               </TableCell>
-              <TableCell align="left">{row.chinhsua}</TableCell>
+              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>{row.chinhsua}</TableCell>
             </TableRow>
           ))}
         </TableBody>
