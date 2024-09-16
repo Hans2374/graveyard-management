@@ -240,7 +240,7 @@ export default function ServiceListTable() {
     <Box sx={{ position: "relative", width: "1080px" }}>
       <TableContainer
         component={Paper}
-        sx={{ width: "1100px", height: "420px" }}
+        sx={{ width: "1100px", height: "360px" }}
       >
         <Table aria-label="simple table">
           <TableHead>
@@ -250,7 +250,6 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "10px",
-                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -261,7 +260,6 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "50px",
-                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -272,7 +270,6 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "100px",
-                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -283,7 +280,6 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "100px",
-                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -294,7 +290,7 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "100px",
-                  p: 1,
+
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -305,7 +301,7 @@ export default function ServiceListTable() {
                 sx={{
                   fontWeight: "bold",
                   width: "100px",
-                  p: 1,
+
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -357,7 +353,7 @@ export default function ServiceListTable() {
                       p: 0,
                       cursor: "pointer",
                     }}
-                    onClick={() => handleOpenDialog(row)} // Open dialog on click
+                    onClick={() => handleOpenDialog(row)}
                   >
                     {row.madon}
                   </TableCell>

@@ -27,27 +27,27 @@ function ServiceList() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#home" className={styles.a}>
+            <a className={styles.a}>
               Tất cả đơn hàng
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#news" className={styles.a}>
+            <a className={styles.a}>
               Chưa phân công
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
+            <a className={styles.a}>
               Đã phân công
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Đang thực hiện
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Hoàn thành
             </a>
           </li>
@@ -64,22 +64,22 @@ function ServiceList() {
       >
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <a href="#home" className={styles.a}>
+            <a className={styles.a}>
               Chưa thanh toán
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#news" className={styles.a}>
+            <a className={styles.a}>
               Đã thanh toán
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#contact" className={styles.a}>
+            <a className={styles.a}>
               Yêu cầu hủy
             </a>
           </li>
           <li className={styles.li}>
-            <a href="#about" className={styles.a}>
+            <a className={styles.a}>
               Đã hủy
             </a>
           </li>

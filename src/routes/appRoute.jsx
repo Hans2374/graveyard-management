@@ -44,8 +44,8 @@ export default function AppRoute() {
         <Route path={routes.customerServicesPage} element={<PeriodicOfferingPage />} />
         <Route path={routes.customerProfile} element={<CustomerProfile />} />
         <Route path={routes.loginPage} element={<LoginPage />} />
-
       </Routes>
+      
     </Box>
   );
 }
