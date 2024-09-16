@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
-import { 
-  Box, 
-  Typography, 
-  Container, 
-  Button, 
-  styled, 
-  Grid, 
-  Card, 
-  CardContent, 
+import {
+  Box,
+  Typography,
+  Container,
+  Button,
+  styled,
+  Grid,
+  Card,
+  CardContent,
   CardActions,
   IconButton,
   Avatar,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
 } from '@mui/material';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos'; 
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Service from "../components/Service";
@@ -53,17 +48,8 @@ const Dot = styled('span')({
   margin: '0 5px',
 });
 
-const ActiveDot = styled(Dot)({
-  backgroundColor: 'var(--secondary-color)',
-});
-
 const NewsCard = styled(Card)(({ theme }) => ({
   width: 'calc(33.33% - 20px)',
-  margin: '0 10px',
-}));
-
-const ServiceCard = styled(Card)(({ theme }) => ({
-  width: 'calc(50% - 20px)',
   margin: '0 10px',
 }));
 
@@ -85,7 +71,7 @@ const HomePage = () => {
   };
 
   return (
-    <Box align='center' >
+    <Box align='center' sx={{ overflow: 'hidden' }}>
       <Box sx={{ backgroundColor: 'white', padding: 2, marginTop: '65px', maxWidth: '1000px' }}>
 
         {/* VỀ CHÚNG TÔI */}
@@ -111,21 +97,21 @@ const HomePage = () => {
                 <ArrowBackIos />
               </IconButton>
               <ImageItem sx={{ flex: 1, ml: 1 }} onClick={() => handleImageClick(0)}>
-                  {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </ImageItem>
+                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </ImageItem>
             </Grid>
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <ImageItem sx={{ flex: 1 }} onClick={() => handleImageClick(1)}>
-                  {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </ImageItem>
+                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </ImageItem>
             </Grid>
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <ImageItem sx={{ flex: 1, mr: 1 }} onClick={() => handleImageClick(2)}>
-                  {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </ImageItem>
+                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </ImageItem>
               <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
                 <ArrowForwardIos />
               </IconButton>
@@ -153,33 +139,33 @@ const HomePage = () => {
                 <ArrowBackIos />
               </IconButton>
               <NewsCard sx={{ flex: 1, ml: 1 }} onClick={() => handleNewsClick(0)}>
-                  <CardContent>
-                    <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                  </CardActions>
-                </NewsCard>
+                <CardContent>
+                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
+                </CardContent>
+                <CardActions>
+                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+                </CardActions>
+              </NewsCard>
             </Grid>
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <NewsCard sx={{ flex: 1 }} onClick={() => handleNewsClick(1)}>
-                  <CardContent>
-                    <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                  </CardActions>
-                </NewsCard>
+                <CardContent>
+                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
+                </CardContent>
+                <CardActions>
+                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+                </CardActions>
+              </NewsCard>
             </Grid>
             <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
               <NewsCard sx={{ flex: 1, mr: 1 }} onClick={() => handleNewsClick(2)}>
-                  <CardContent>
-                    <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                  </CardActions>
-                </NewsCard>
+                <CardContent>
+                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
+                </CardContent>
+                <CardActions>
+                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+                </CardActions>
+              </NewsCard>
               <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
                 <ArrowForwardIos />
               </IconButton>
@@ -199,8 +185,8 @@ const HomePage = () => {
           <Typography align="center" gutterBottom sx={{ color: '#FFFFFF', mb: 2, fontSize: '1.5rem' }}>
             DỊCH VỤ
           </Typography>
-          
-          <Service/>
+
+          <Service />
 
           {/* Phần dot indicator */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>

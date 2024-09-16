@@ -125,7 +125,10 @@ export const Header = () => {
     return (
         <StyledAppBar position='sticky'>
             <Toolbar>
-                <Link to="/">
+                <Link
+                    component={RouterLink}
+                    to={routes.homePage}
+                >
                     <img
                         src={getLogo()}
                         alt="logo"
@@ -233,6 +236,7 @@ export const Header = () => {
                                                 minWidth: 'auto',
                                                 p: 0,
                                                 pt: '5px',
+                                                mr: 2,
                                             }}
                                         >
                                             Xem tất cả
