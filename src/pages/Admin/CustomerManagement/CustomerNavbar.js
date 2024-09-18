@@ -15,7 +15,7 @@ function CustomerNavbar() {
     <>
       <Box
         sx={{
-          marginTop: "65px",
+          marginTop: "54px",
           backgroundColor: "white",
           maxWidth: "100%",
           display: "flex",

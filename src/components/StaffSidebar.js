@@ -1,28 +1,68 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import {
+  createTheme,
+  Box,
+  Drawer,
+  AppBar,
+  CssBaseline,
+  Toolbar,
+  List,
+  ListItemText,
+  ListItem,
+  ThemeProvider,ListItemIcon, ListItemButton
+} from "@mui/material";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
-import ListItemText from "@mui/material/ListItemText";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
 import { Header } from "./Header";
 import ScheduleList from "../pages/Staff/ScheduleList";
 import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import StaffTable from "../components/StaffTable";
+import { useState } from "react";
 
 const drawerWidth = 240;
 
 export default function StaffSidebar() {
   const [menudata, setMenudata] = React.useState("ServicesNavbar");
 
+  const [activeItem, setActiveItem] = useState("ServicesNavbar");
+  const drawerWidth = 240;
+
+  const handleTabClick = (menudata) => {
+    setActiveItem(menudata);
+    setMenudata(menudata);
+  };
+
+  const theme = createTheme({
+    components: {
+      MuiListItemButton: {
+        defaultProps: {
+          disableRipple: true,
+        },
+        styleOverrides: {
+          root: {
+            transition: "transform 0.2s",
+            "&:hover": {
+              transform: "scale(1.1)",
+              backgroundColor: "var(--primary-color)",
+              color: "white",
+            },
+            backgroundColor: activeItem === menudata ? "white" : "red",
+            color: activeItem === menudata ? "black" : "black",
+            '&.Mui-selected': {
+            backgroundColor: 'var(--primary-color) !important',
+            color: 'white',
+          },
+          },
+        },
+      },
+      
+    },
+  });
+
   return (
+    <ThemeProvider theme = {theme}>
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
@@ -46,7 +86,8 @@ export default function StaffSidebar() {
         <Box sx={{ overflow: "auto" }}>
           <List>
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ServicesNavbar")}>
+              <ListItemButton onClick={() => handleTabClick("ServicesNavbar")}
+                  selected={activeItem === "ServicesNavbar"}>
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
@@ -55,7 +96,8 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("ScheduleList")}>
+              <ListItemButton onClick={() => handleTabClick("ScheduleList")}
+                selected={activeItem === "ScheduleList"}>
                 <ListItemIcon>
                   <HistoryOutlinedIcon />
                 </ListItemIcon>
@@ -64,7 +106,8 @@ export default function StaffSidebar() {
             </ListItem>
 
             <ListItem>
-              <ListItemButton onClick={() => setMenudata("StaffTable")}>
+              <ListItemButton onClick={() => handleTabClick("StaffTable")}
+                selected={activeItem === "StaffTable"}>
                 <ListItemIcon>
                   <DiscountOutlinedIcon />
                 </ListItemIcon>
@@ -83,5 +126,6 @@ export default function StaffSidebar() {
         {menudata === "StaffTable" && <StaffTable />}
       </Box>
     </Box>
+    </ThemeProvider>
   );
 }

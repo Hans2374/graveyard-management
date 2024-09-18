@@ -33,172 +33,186 @@ function AddServiceTab() {
 
   return (
     <>
-        <Box
+      <Box
+        sx={{
+          display: "flex",
+          maxWidth: "100%",
+          marginLeft: "50px",
+        }}
+      >
+        <TextField
+          variant="outlined"
+          placeholder="Tìm kiếm gói dịch vụ"
+          size="small"
           sx={{
-            display: "flex",
-            maxWidth: "100%",
-            marginLeft: "50px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+              width: "500px",
+              margin: "0 20px 0 -0",
+            },
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        <TextField
+          variant="outlined"
+          placeholder="Thêm điều kiện lọc"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "20px",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <IconButton>
+                  <FilterListIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        <IconButton
+          sx={{
+            backgroundColor: "var(--primary-color)",
+            position: "absolute",
+            marginLeft: "1040px",
+          }}
+          onClick={handleClickOpen}
+        >
+          <AddIcon />
+        </IconButton>
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          sx={{
+            backgroundColor: "var(--primary-color)",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(5px)",
           }}
         >
-          <TextField
-            variant="outlined"
-            placeholder="Tìm kiếm gói dịch vụ"
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "20px",
-                width: "500px",
-                margin: "0 20px 0 -0",
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <TextField
-            variant="outlined"
-            placeholder="Thêm điều kiện lọc"
-            size="small"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "20px",
-              },
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <FilterListIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <IconButton
+          <DialogTitle
             sx={{
               backgroundColor: "var(--primary-color)",
-              position: "absolute",
-              marginLeft: "1040px",
+              fontWeight: "bold",
+              textAlign: "center",
             }}
-            onClick={handleClickOpen}
           >
-            <AddIcon />
-          </IconButton>
-
-          <Dialog open={open} onClose={handleClose} sx={{
-                backgroundColor: "var(--primary-color)",
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(5px)',
-              }}>
-            <DialogTitle
+            Thông tin chi tiết
+          </DialogTitle>
+          <DialogContent sx={{ width: "400px" }}>
+            <Typography sx={{ padding: "10px 10px 0 0" }}>
+              Tên dịch vụ
+            </Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              fullWidth
               sx={{
-                backgroundColor: "var(--primary-color)",
-                fontWeight: "bold",
-                textAlign: "center",
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "10px",
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton>
+                      <ArrowDropDownIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <Typography sx={{ padding: "10px 10px 0 0" }}>Mô tả</Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "10px",
+                  height: "200px",
+                },
+              }}
+            />
+            <Typography sx={{ padding: "10px 10px 0 0" }}>Hình ảnh</Typography>
+            <Box
+              sx={{
+                maxWidth: "100%",
+                marginLeft: "40px",
+                marginRight: "40px",
+                marginTop: "50px",
               }}
             >
-              Thông tin chi tiết
-            </DialogTitle>
-            <DialogContent sx={{width:"400px"}}>
-              <Typography sx={{ padding: "10px 10px 0 0" }}>
-                Loại dịch vụ
-              </Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "10px",
-                  },
-                }}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <ArrowDropDownIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Typography sx={{ padding: "10px 10px 0 0" }}>
-                Tên gói dịch vụ
-              </Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "10px",
-                  },
-                }}
-              />
-            </DialogContent>
-            <DialogActions>
+            </Box>
+          </DialogContent>
+          <DialogActions>
             <Button
-                onClick={handleClose}
-                sx={{
-                  backgroundColor: "var(--primary-color)",
-                  color: "black",
-                  borderRadius: "10px",
-                  padding: "5px 20px 5px 20px",
-                  textTransform: "none",
-                  left:"0px",
-                  display:"flex",
-                  justifyContent:"flex-start"
-                }}
-              >
-                Cập nhật
-              </Button>
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "var(--primary-color)",
+                color: "black",
+                borderRadius: "10px",
+                padding: "5px 20px 5px 20px",
+                textTransform: "none",
+                left: "0px",
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
+            >
+              Thêm
+            </Button>
 
-              <Button
-                onClick={handleClose}
-                sx={{
-                  backgroundColor: "var(--primary-color)",
-                  color: "black",
-                  borderRadius: "10px",
-                  padding: "5px 20px 5px 20px",
-                  textTransform: "none",
-                }}
-              >
-                Đặt lại
-              </Button>
+            <Button
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "var(--primary-color)",
+                color: "black",
+                borderRadius: "10px",
+                padding: "5px 20px 5px 20px",
+                textTransform: "none",
+              }}
+            >
+              Đặt lại
+            </Button>
 
-              <Button
-                onClick={handleClose}
-                sx={{
-                  backgroundColor: "var(--primary-color)",
-                  color: "black",
-                  borderRadius: "10px",
-                  padding: "5px 20px 5px 20px",
-                  textTransform: "none",
-                }}
-              >
-                Hủy
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </Box>
-        <Box
-          sx={{
-            maxWidth: "100%",
-            marginLeft: "50px",
-            marginTop: "50px",
-          }}
-        >
-          <ServiceTable />
-        </Box>
-        </>
+            <Button
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "var(--primary-color)",
+                color: "black",
+                borderRadius: "10px",
+                padding: "5px 20px 5px 20px",
+                textTransform: "none",
+              }}
+            >
+              Hủy
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
+      <Box
+        sx={{
+          maxWidth: "100%",
+          marginLeft: "50px",
+          marginTop: "50px",
+          height: "430px",
+        }}
+      >
+        <ServiceTable />
+      </Box>
+    </>
   );
 }
 
