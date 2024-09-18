@@ -76,10 +76,7 @@ function createData(stt, tengoi, khadung, chinhsua) {
 
 const rows = [
   createData(1, "Mai táng"),
-  createData(2, "Mai táng"),
-  createData(3, "Cúng định kỳ"),
-  createData(4, "Mai táng"),
-  createData(5, "Cúng định kỳ"),
+  createData(2, "Cúng định kỳ"),
 ];
 
 export default function ServiceTable() {
@@ -94,6 +91,7 @@ export default function ServiceTable() {
                 fontWeight: "bold",
                 width: "100px",
                 border: "1px solid #ccc",
+                p:"1"
               }}
             >
               STT

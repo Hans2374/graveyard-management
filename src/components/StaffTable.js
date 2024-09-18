@@ -18,6 +18,8 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  ThemeProvider, 
+  createTheme
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -101,8 +103,8 @@ const StaffTable = () => {
   };
 
   return (
+    
     <Box sx={{ padding: 2, marginTop: 6 }}>
-      {/* Tabs Section */}
       <Box
         sx={{ marginBottom: "3px", backgroundColor: "#fff", padding: "10px" }}
       >

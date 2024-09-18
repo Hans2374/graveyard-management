@@ -9,7 +9,9 @@ import {
   List,
   ListItemText,
   ListItem,
+  ListItemIcon,
   ThemeProvider,
+  ListItemButton
 } from "@mui/material";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -18,7 +20,6 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import { ListItemButton, ListItemIcon } from "@mui/material";
 import "./Sidebar.module.css";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import Dashboard from "../pages/Admin/Dashboard";

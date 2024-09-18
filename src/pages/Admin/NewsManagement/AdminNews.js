@@ -24,7 +24,13 @@ function AdminNews() {
   return (
     <>
       <Box
-        sx={{ bgcolor: "#f5f5f5", p: 2, borderRadius: 2, margin: "30px 0 0 50px" }}
+        sx={{
+          bgcolor: "#f5f5f5",
+          p: 2,
+          borderRadius: 2,
+          margin: "30px 0 0 50px",
+          height: "430px",
+        }}
       >
         {/* Icons for formatting */}
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
