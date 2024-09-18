@@ -7,6 +7,19 @@ import ServiceOrderDetail from "./ServiceOrderDetail";
 
 function ServicesNavbar() {
   const [navdata, setNavdata] = React.useState("AllServiceTab");
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => setNavdata(tabKey)}
+        style={{
+          color: navdata === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
   return (
     <>
       <Box
@@ -18,26 +31,10 @@ function ServicesNavbar() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("AllServiceTab")}>
-              Tất cả gói dịch vụ
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("AddService")}>
-              Mai táng
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("ServiceOrderDetail")}>
-              Cúng định kỳ
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("AddServiceTab")}>
-              Thêm dịch vụ
-            </a>
-          </li>
+          {renderTab("Tất cả gói dịch vụ", "AllServiceTab")}
+          {renderTab("Mai táng", "AddService")}
+          {renderTab("Cúng định kỳ", "ServiceOrderDetail")}
+          {renderTab("Thêm dịch vụ", "AddServiceTab")}
         </ul>
       </Box>
       <Box

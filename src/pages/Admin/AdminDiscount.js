@@ -11,19 +11,18 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "./Service.module.css";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import DiscountListTable from "../../components/TableData/DiscountListTable";
 
 function AdminDiscount() {
-
   const [open, setOpen] = useState(false);
-
+  const [selectedTab, setSelectedTab] = useState(null);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,6 +30,24 @@ function AdminDiscount() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => handleTabClick(tabKey)}
+        style={{
+          color: selectedTab === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
 
   return (
     <>
@@ -43,26 +60,10 @@ function AdminDiscount() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Tất cả mã khuyến mãi
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Còn hạn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Gần hết hạn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Hết hạn
-            </a>
-          </li>
+          {renderTab("Tất cả mã khuyến mãi", "allDiscounts")}
+          {renderTab("Còn hạn", "valid")}
+          {renderTab("Gần hết hạn", "expiringSoon")}
+          {renderTab("Hết hạn", "expired")}
         </ul>
       </Box>
 
@@ -130,11 +131,15 @@ function AdminDiscount() {
             <AddIcon />
           </IconButton>
 
-          <Dialog open={open} onClose={handleClose} sx={{
-                backgroundColor: "var(--primary-color)",
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                backdropFilter: 'blur(5px)',
-              }}>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            sx={{
+              backgroundColor: "var(--primary-color)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(5px)",
+            }}
+          >
             <DialogTitle
               sx={{
                 backgroundColor: "var(--primary-color)",
@@ -144,9 +149,9 @@ function AdminDiscount() {
             >
               Thông tin chi tiết
             </DialogTitle>
-            <DialogContent sx={{width:"400px"}}>
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold'}}>
-              Tên mã khuyến mãi:
+            <DialogContent sx={{ width: "400px" }}>
+              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: "bold" }}>
+                Tên mã khuyến mãi:
               </Typography>
               <TextField
                 variant="outlined"
@@ -158,7 +163,7 @@ function AdminDiscount() {
                   },
                 }}
               />
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold' }}>
+              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: "bold" }}>
                 Mô tả:
               </Typography>
               <TextField
@@ -168,11 +173,11 @@ function AdminDiscount() {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     borderRadius: "10px",
-                    height:"200px"
+                    height: "200px",
                   },
                 }}
               />
-              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: 'bold' }}>
+              <Typography sx={{ padding: "10px 10px 0 0", fontWeight: "bold" }}>
                 Đơn tối thiểu:
               </Typography>
               <TextField
@@ -187,7 +192,7 @@ function AdminDiscount() {
               />
             </DialogContent>
             <DialogActions>
-            <Button
+              <Button
                 onClick={handleClose}
                 sx={{
                   backgroundColor: "var(--primary-color)",
@@ -195,9 +200,9 @@ function AdminDiscount() {
                   borderRadius: "10px",
                   padding: "5px 20px 5px 20px",
                   textTransform: "none",
-                  left:"0px",
-                  display:"flex",
-                  justifyContent:"flex-start"
+                  left: "0px",
+                  display: "flex",
+                  justifyContent: "flex-start",
                 }}
               >
                 Cập nhật
