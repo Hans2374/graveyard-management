@@ -1,0 +1,131 @@
+import React, { useState } from "react";
+import { Box, TextField, IconButton, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import styles from "./Service.module.css";
+import ServiceListTable from "../../components/TableData/ServiceListTable";
+
+function ServiceList() {
+  const [selectedTab, setSelectedTab] = useState(null);
+
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => handleTabClick(tabKey)}
+        style={{
+          color: selectedTab === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
+
+  return (
+    <>
+      <Box
+        sx={{
+          marginTop: "65px",
+          backgroundColor: "white",
+          maxWidth: "100%",
+          display: "flex",
+        }}
+      >
+        <ul className={styles.ul}>
+          {renderTab("Tất cả đơn hàng", "allOrders")}
+          {renderTab("Chưa phân công", "unassigned")}
+          {renderTab("Đã phân công", "assigned")}
+          {renderTab("Đang thực hiện", "inProgress")}
+          {renderTab("Hoàn thành", "completed")}
+        </ul>
+      </Box>
+
+      <Box
+        sx={{
+          marginTop: "3px",
+          backgroundColor: "white",
+          maxWidth: "100%",
+          display: "flex",
+        }}
+      >
+        <ul className={styles.ul}>
+          {renderTab("Chưa thanh toán", "unpaid")}
+          {renderTab("Đã thanh toán", "paid")}
+          {renderTab("Yêu cầu hủy", "cancelRequest")}
+          {renderTab("Đã hủy", "canceled")}
+        </ul>
+      </Box>
+
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            maxWidth: "100%",
+            marginLeft: "50px",
+          }}
+        >
+          <TextField
+            variant="outlined"
+            placeholder="Tìm kiếm gói dịch vụ"
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
+                width: "500px",
+                margin: "0 20px 0 -0",
+              },
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <TextField
+            variant="outlined"
+            placeholder="Thêm điều kiện lọc"
+            size="small"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "20px",
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton>
+                    <FilterListIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+        <Box
+          sx={{
+            maxWidth: "100%",
+            marginLeft: "50px",
+            marginTop: "50px",
+          }}
+        >
+          <ServiceListTable />
+        </Box>
+      </Box>
+    </>
+  );
+}
+
+export default ServiceList;
