@@ -27,6 +27,7 @@ export const Login = () => {
     const [open, setOpen] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [rememberMe, setRememberMe] = useState(false); // State for "Remember me?"
+    const [loginErrorMessage, setLoginErrorMessage] = useState(''); // State to hold error message
 
     const navigate = useNavigate(); // Initialize navigate
 
@@ -52,7 +53,13 @@ export const Login = () => {
         return () => clearInterval(timer);
     }, [countdown]);
 
-    // Giả lập đăng nhập thành công
+    // Giả lập hai tài khoản: 1 customer và 1 staff
+    const accounts = {
+        customer: { username: 'customerUser', password: 'customerPass', role: 'customer' },
+        staff: { username: 'staffUser', password: 'staffPass', role: 'staff' },
+    };
+
+    // Hàm kiểm tra thông tin đăng nhập và xác định vai trò
     const handleSuccessfulLogin = () => {
         const errors = {};
         if (!loginValues.username.trim()) {
@@ -67,12 +74,33 @@ export const Login = () => {
             return;
         }
 
-        // Giả lập đăng nhập thành công
+        // Giả lập quá trình kiểm tra tài khoản
+        let role = '';
+        if (
+            loginValues.username === accounts.customer.username &&
+            loginValues.password === accounts.customer.password
+        ) {
+            role = accounts.customer.role; // Đặt vai trò là customer
+        } else if (
+            loginValues.username === accounts.staff.username &&
+            loginValues.password === accounts.staff.password
+        ) {
+            role = accounts.staff.role; // Đặt vai trò là staff
+        } else {
+            // Nếu tài khoản hoặc mật khẩu không đúng
+            setLoginErrorMessage('Tên đăng nhập hoặc mật khẩu không đúng');
+            return;
+        }
+
+        // Đăng nhập thành công, lưu vai trò vào localStorage
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('role', role); // Lưu vai trò vào localStorage
+
         handleCloseDialog();
         setLoginValues({ username: '', password: '' });
         setLoginErrors({});
+        setLoginErrorMessage(''); // Clear error message on successful login
 
         // Navigate to the path after successful login
         navigate(routes.homePage);
@@ -251,6 +279,12 @@ export const Login = () => {
                                     Quên mật khẩu?
                                 </Link>
                             </Box>
+                            {/* Hiển thị thông báo lỗi đăng nhập */}
+                            {loginErrorMessage && (
+                                <Typography color="error">
+                                    {loginErrorMessage}
+                                </Typography>
+                            )}
                         </Box>
                     )}
 
