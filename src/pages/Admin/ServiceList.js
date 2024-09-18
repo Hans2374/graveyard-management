@@ -1,20 +1,31 @@
-import React from "react";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Box, TextField, IconButton, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "./Service.module.css";
 import ServiceListTable from "../../components/TableData/ServiceListTable";
 
 function ServiceList() {
+  const [selectedTab, setSelectedTab] = useState(null);
+
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+  };
+
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => handleTabClick(tabKey)}
+        style={{
+          color: selectedTab === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
+
   return (
     <>
       <Box
@@ -26,31 +37,11 @@ function ServiceList() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Tất cả đơn hàng
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Chưa phân công
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Đã phân công
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Đang thực hiện
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Hoàn thành
-            </a>
-          </li>
+          {renderTab("Tất cả đơn hàng", "allOrders")}
+          {renderTab("Chưa phân công", "unassigned")}
+          {renderTab("Đã phân công", "assigned")}
+          {renderTab("Đang thực hiện", "inProgress")}
+          {renderTab("Hoàn thành", "completed")}
         </ul>
       </Box>
 
@@ -63,26 +54,10 @@ function ServiceList() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Chưa thanh toán
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Đã thanh toán
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Yêu cầu hủy
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a}>
-              Đã hủy
-            </a>
-          </li>
+          {renderTab("Chưa thanh toán", "unpaid")}
+          {renderTab("Đã thanh toán", "paid")}
+          {renderTab("Yêu cầu hủy", "cancelRequest")}
+          {renderTab("Đã hủy", "canceled")}
         </ul>
       </Box>
 
@@ -146,11 +121,11 @@ function ServiceList() {
             marginTop: "50px",
           }}
         >
-          <ServiceListTable/>
+          <ServiceListTable />
         </Box>
       </Box>
     </>
   );
 }
 
-export default ServiceList
+export default ServiceList;

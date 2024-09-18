@@ -1,8 +1,6 @@
 import React from "react";
-import {
-  Box,
-} from "@mui/material";
-import styles from "../Service.module.css"
+import { Box } from "@mui/material";
+import styles from "../Service.module.css";
 import CustomerManagement from "./CustomerManagement";
 import BlockedCustomer from "./BlockedCustomer";
 import CustomerNoneOrder from "./CustomerNoneOrder";
@@ -11,6 +9,19 @@ import CustomerManyOrder from "./CustomerManyOrder";
 
 function CustomerNavbar() {
   const [navdata, setNavdata] = React.useState("CustomerManagement");
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => setNavdata(tabKey)}
+        style={{
+          color: navdata === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
   return (
     <>
       <Box
@@ -22,31 +33,11 @@ function CustomerNavbar() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("CustomerManagement")}>
-              Tất cả khách hàng
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("CustomerManyOrder")}>
-              Nhiều đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("CustomerFewOrder")}>
-              Ít đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("CustomerNoneOrder")}>
-              Chưa có đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("BlockedCustomer")}>
-              Bị chặn
-            </a>
-          </li>
+          {renderTab("Tất cả khách hàng", "CustomerManagement")}
+          {renderTab("Nhiều đơn", "CustomerManyOrder")}
+          {renderTab("Ít đơn", "CustomerFewOrder")}
+          {renderTab("Chưa có đơn", "CustomerNoneOrder")}
+          {renderTab("Bị chặn", "BlockedCustomer")}
         </ul>
       </Box>
 
