@@ -6,7 +6,7 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import styles from "../Service.module.css"
+import styles from "../Service.module.css";
 import EmployeeManagement from "./EmployeeManagement";
 import ManyOrderTabs from "./ManyOrdersTab";
 import FewOrdersTab from "./FewOrdersTab";
@@ -14,6 +14,19 @@ import NoneOrderTab from "./NoneOrderTab";
 
 function EmployeeNavbar() {
   const [navdata, setNavdata] = React.useState("EmployeeManagement");
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => setNavdata(tabKey)}
+        style={{
+          color: navdata === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
   return (
     <>
       <Box
@@ -25,26 +38,10 @@ function EmployeeNavbar() {
         }}
       >
         <ul className={styles.ul}>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("EmployeeManagement")}>
-              Tất cả nhân viên
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("ManyOrderTabs")}>
-              Nhiều đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("FewOrdersTab")}>
-              Ít đơn
-            </a>
-          </li>
-          <li className={styles.li}>
-            <a className={styles.a} onClick={() => setNavdata("NoneOrderTab")}>
-              Chưa có đơn
-            </a>
-          </li>
+          {renderTab("Tất cả nhân viên", "EmployeeManagement")}
+          {renderTab("Nhiều đơn", "ManyOrderTabs")}
+          {renderTab("Ít đơn", "FewOrdersTab")}
+          {renderTab("Chưa có đơn", "NoneOrderTab")}
         </ul>
       </Box>
 
