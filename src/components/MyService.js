@@ -181,7 +181,7 @@ const MyService = () => {
                     <Button
                       variant="text"
                       sx={{ marginTop: "10px", color: "#f0c431" }}
-                      href={"/service/detail"}
+                      href={"/myservicedetail"}
                     >
                       Chi tiết →
                     </Button>
