@@ -18,7 +18,9 @@ import { NewsDetail } from "../pages/Customer/NewsDetail";
 import StaffSidebar from "../components/StaffSidebar";
 import { CustomerProfile } from "../pages/Customer/CustomerProfile";
 import { LoginPage } from "../pages/LoginPage"
-
+import { Rtt } from "@mui/icons-material";
+import ServiceOrderDetails from "../components/ServiceOrderDetails";
+import ServiceOrderList from "../components/ServiceOrderList";
 export default function AppRoute() {
   return (
     <Box
@@ -44,8 +46,10 @@ export default function AppRoute() {
         <Route path={routes.customerServicesPage} element={<PeriodicOfferingPage />} />
         <Route path={routes.customerProfile} element={<CustomerProfile />} />
         <Route path={routes.loginPage} element={<LoginPage />} />
+        <Route path={routes.serviceOrderDetailForm} element={<ServiceOrderDetails />} />
+        <Route path={routes.serviceOrderList} element={<ServiceOrderList />} />
       </Routes>
-      
+
     </Box>
   );
 }
