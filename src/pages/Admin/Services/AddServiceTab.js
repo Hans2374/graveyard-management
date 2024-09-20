@@ -98,7 +98,6 @@ function AddServiceTab() {
           onClose={handleClose}
           sx={{
             backgroundColor: "var(--primary-color)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
             backdropFilter: "blur(5px)",
           }}
         >
