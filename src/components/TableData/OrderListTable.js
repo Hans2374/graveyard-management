@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button
 } from '@mui/material';
 import dayjs from 'dayjs';
 import ServiceOrderDetails from '../ServiceOrderDetails'; // Import the ServiceOrderDetails component
@@ -58,11 +58,12 @@ export default function OrderListTable({ filter }) {
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Thanh Toán</TableCell>
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "200px" }}>Khách Hàng</TableCell>
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Tổng Tiền</TableCell>
+                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Chi Tiết</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {filteredRows.map((row) => (
-                            <TableRow key={row.madon} onClick={() => handleRowClick(row)} sx={{ "&:last-child td, &:last-child th": { border: 0 }, cursor: 'pointer' }}>
+                            <TableRow key={row.madon} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                                 <TableCell align="left">{row.stt}</TableCell>
                                 <TableCell align="left">{row.madon}</TableCell>
                                 <TableCell align="left">{row.trangthai}</TableCell>
@@ -70,6 +71,14 @@ export default function OrderListTable({ filter }) {
                                 <TableCell align="left">{row.thanhtoan}</TableCell>
                                 <TableCell align="left">{row.khachhang}</TableCell>
                                 <TableCell align="left">{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
+                                <TableCell align="left">
+                                    <Button
+                                        variant="outlined"
+                                        onClick={() => handleRowClick(row)}
+                                    >
+                                        Xem chi tiết
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
