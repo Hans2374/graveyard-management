@@ -16,8 +16,9 @@ const rows = [
 ];
 
 export default function OrderListTable({ filter }) {
-    const [selectedOrder, setSelectedOrder] = useState(null); // State for selected order
-    const [dialogOpen, setDialogOpen] = useState(false); // State to control dialog visibility
+    // State to control dialog open/close and store selected order
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     const filteredRows = rows.filter((row) => {
         if (filter === "All") return true;
@@ -36,13 +37,16 @@ export default function OrderListTable({ filter }) {
         }
     });
 
-    const handleRowClick = (row) => {
-        setSelectedOrder(row); // Set the selected order
-        setDialogOpen(true); // Open the dialog
+    // Function to handle clicking on Mã Đơn
+    const handleRowClick = (order) => {
+        setSelectedOrder(order); // Set the clicked order as selected
+        setDialogOpen(true);     // Open the dialog
     };
 
+    // Function to close the dialog
     const handleCloseDialog = () => {
-        setDialogOpen(false); // Close the dialog
+        setDialogOpen(false);    // Close the dialog
+        setSelectedOrder(null);  // Clear selected order
     };
 
     return (
@@ -58,36 +62,39 @@ export default function OrderListTable({ filter }) {
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Thanh Toán</TableCell>
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "200px" }}>Khách Hàng</TableCell>
                             <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Tổng Tiền</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Chi Tiết</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {filteredRows.map((row) => (
-                            <TableRow key={row.madon} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                                <TableCell align="left">{row.stt}</TableCell>
-                                <TableCell align="left">{row.madon}</TableCell>
-                                <TableCell align="left">{row.trangthai}</TableCell>
-                                <TableCell align="left">{dayjs(row.ngaytao).format('DD/MM/YYYY HH:mm')}</TableCell>
-                                <TableCell align="left">{row.thanhtoan}</TableCell>
-                                <TableCell align="left">{row.khachhang}</TableCell>
-                                <TableCell align="left">{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
-                                <TableCell align="left">
-                                    <Button
-                                        variant="outlined"
-                                        onClick={() => handleRowClick(row)}
-                                    >
-                                        Xem chi tiết
-                                    </Button>
+                        {rows.map((row) => (
+                            <TableRow key={row.madon}>
+                                <TableCell>{row.stt}</TableCell>
+
+                                {/* Apply onClick only to the TableCell with row.madon */}
+                                <TableCell
+                                    sx={{ cursor: 'pointer' }}
+                                    onClick={() => handleRowClick(row)}
+                                >
+                                    {row.madon}
                                 </TableCell>
+
+                                <TableCell>{row.trangthai}</TableCell>
+                                <TableCell>{dayjs(row.ngaytao).format('DD/MM/YYYY HH:mm')}</TableCell>
+                                <TableCell>{row.thanhtoan}</TableCell>
+                                <TableCell>{row.khachhang}</TableCell>
+                                <TableCell>{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
 
-            {/* Render ServiceOrderDetails Dialog */}
+            {/* Pass props to ServiceOrderDetails for controlling the dialog */}
             {selectedOrder && (
-                <ServiceOrderDetails open={dialogOpen} onClose={handleCloseDialog} orderData={selectedOrder} />
+                <ServiceOrderDetails
+                    open={dialogOpen}
+                    onClose={handleCloseDialog}
+                    orderData={selectedOrder}
+                />
             )}
         </>
     );
