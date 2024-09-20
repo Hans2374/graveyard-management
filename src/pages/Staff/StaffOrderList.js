@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Box,
-  AppBar,
-  Toolbar,
   IconButton,
   Typography,
   Button,
@@ -16,7 +14,6 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "../Admin/Service.module.css";
-import AddIcon from "@mui/icons-material/Add";
 import OrderListTable from "../../components/TableData/OrderListTable";
 import { useState } from "react";
 
@@ -32,10 +29,6 @@ function StaffOrderList() {
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter); // Cập nhật filter
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true); // Mở hộp thoại
   };
 
   const handleClose = () => {
@@ -126,17 +119,6 @@ function StaffOrderList() {
               ),
             }}
           />
-
-          <IconButton
-            sx={{
-              backgroundColor: "var(--primary-color)",
-              position: "absolute",
-              marginLeft: "1040px",
-            }}
-            onClick={handleClickOpen}
-          >
-            <AddIcon />
-          </IconButton>
 
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle

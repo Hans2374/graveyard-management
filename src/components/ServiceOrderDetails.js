@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import {
-    Grid, Typography, Button, FormControl, IconButton, Box, Dialog, DialogTitle,
-    DialogContent, DialogActions, Avatar, TextField, Snackbar, Alert
+    Grid, Typography, Button, IconButton, Box, Dialog, DialogTitle,
+    DialogContent, DialogActions, Avatar, TextField,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 
-const ServiceOrderDetails = () => {
+function ServiceOrderDetails({ open, onClose }) {
 
     const servicePackages = [
         {
@@ -86,8 +85,6 @@ const ServiceOrderDetails = () => {
     // State for Snackbar
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
-
-    const [open, setOpen] = useState(false);
     const [showAllImages, setShowAllImages] = useState(false);
     const [newItemDialogOpen, setNewItemDialogOpen] = useState(false);
     const [newItem, setNewItem] = useState({ name: "", quantity: 1 });
@@ -95,15 +92,6 @@ const ServiceOrderDetails = () => {
         name: item,
         quantity: 1
     })));
-
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleToggleImages = () => {
         setShowAllImages(!showAllImages);
@@ -159,21 +147,29 @@ const ServiceOrderDetails = () => {
     const displayedImages = mockData.hinhAnh.slice(0, 4); // Show first 4 images by default
     const extraImagesCount = mockData.hinhAnh.length - 4; // Count of images beyond the first 4
 
+    // Custom onClose handler to disable click outside the dialog
+    const handleClose = (event, reason) => {
+        if (reason !== 'backdropClick') {
+            onClose(); // Only close if the reason is not a backdrop click
+        }
+    };
+
 
     return (
         <>
-            {/* Button to trigger the pop-up */}
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open Service Order Form
-            </Button>
-
             {/* Pop-up Dialog */}
-            <Dialog open={open} onClose={handleClose} maxWidth="lg" fullWidth>
-                {/* Dialog Title */}
-                <DialogTitle sx={{ marginBottom: '20px' }}>
-                    Thông Tin Chi Tiết Dịch Vụ
-                </DialogTitle>
-
+            <Dialog
+                open={open}
+                onClose={handleClose}  // Use custom handler to disable backdrop click
+                maxWidth="lg"
+                disableEscapeKeyDown={true} // Optional: Disable closing by Escape key
+                sx={{
+                    '& .MuiDialog-paper': {
+                        height: '100vh', // Set height to 100vh
+                        maxHeight: '100vh', // Ensure no max height restrictions
+                    }
+                }}
+            >
                 {/* Dialog Content (Form with mock data) */}
                 <DialogContent
                     sx={{
@@ -182,6 +178,10 @@ const ServiceOrderDetails = () => {
                         height: '900px'
                     }}
                 >
+                    {/* Dialog Title */}
+                    <DialogTitle align='center' sx={{ marginBottom: '20px' }}>
+                        Thông Tin Chi Tiết Dịch Vụ
+                    </DialogTitle>
                     <Grid container spacing={2}>
                         {/* Row 1: Mã đơn, SDT */}
                         <Grid item xs={6}>
@@ -438,13 +438,12 @@ const ServiceOrderDetails = () => {
                             </Dialog>
                         )}
                     </Grid>
+                    {/* Dialog Actions */}
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+                        <Button onClick={onClose} sx={{ p: '5px 100px', border: 'none', bgcolor: 'lightblue', color: 'black' }}>Hủy</Button>
+                        <Button onClick={onClose} sx={{ p: '5px 100px', border: 'none', bgcolor: 'var(--primary-color)', color: 'black' }}>Lưu</Button>
+                    </Box>
                 </DialogContent>
-
-                {/* Dialog Actions */}
-                <DialogActions>
-                    <Button onClick={handleClose}>Hủy</Button>
-                    <Button onClick={handleClose}>Lưu</Button>
-                </DialogActions>
             </Dialog>
 
             {/* Add Item Dialog */}

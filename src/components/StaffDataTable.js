@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -293,6 +292,7 @@ export default function StaffDataTable() {
                 }}
                 maxWidth="lg" // Optional: Adjust the maximum width
                 fullWidth // Makes the dialog take up full width
+                disableEscapeKeyDown={true} // Optional: Disable closing by Escape key
                 PaperProps={{
                     sx: {
                         height: '100vh', // Full viewport height
@@ -479,7 +479,7 @@ export default function StaffDataTable() {
                         </div>
                     )}
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button onClick={handleCloseDialog} sx={{ p: '5px 100px', border: 'none', bgcolor: 'lightblue', color: 'black' }}>Close</Button>
+                        <Button onClick={handleCloseDialog} sx={{ p: '5px 100px', border: 'none', bgcolor: 'lightblue', color: 'black' }}>Đóng</Button>
                         <Button onClick={handleCloseDialog} sx={{ p: '5px 100px', border: 'none', bgcolor: 'var(--primary-color)', color: 'black' }}>Lưu</Button>
                     </Box>
                 </DialogContent>
