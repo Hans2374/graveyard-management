@@ -15,12 +15,12 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import styles from "../Service.module.css";
+import styles from "../Admin/Service.module.css"
 import AddIcon from '@mui/icons-material/Add';
-import OrderListTable from "../../../components/TableData/OrderListTable";
+import OrderListTable from "../../components/TableData/OrderListTable";
 import { useState } from "react";
 
-function ServiceOrderList() {
+function StaffOrderList() {
 
     const [open, setOpen] = useState(false);
     const [filter, setFilter] = useState("All");
@@ -199,4 +199,4 @@ function ServiceOrderList() {
     );
 }
 
-export default ServiceOrderList;
+export default StaffOrderList;

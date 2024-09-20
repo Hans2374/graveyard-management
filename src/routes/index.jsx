@@ -1,4 +1,3 @@
-import ServiceOrderList from "../components/ServiceOrderList";
 
 export const routes = {
   homePage: "/",
@@ -17,5 +16,4 @@ export const routes = {
   myService: "/myservice",
   myServiceDetail: "/myservicedetail",
   serviceOrderDetailForm: "/orderdetail",
-  serviceOrderList: "/orderlist",
 };

@@ -17,16 +17,16 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import "./Sidebar.module.css";
 import { Header } from "./Header";
 import ScheduleList from "../pages/Staff/ScheduleList";
-import ServicesNavbar from "../pages/Admin/Services/ServicesNavbar";
 import StaffTable from "../components/StaffTable";
-import { useState } from "react";
+import { useState } from "react"
+import StaffOrderList from "../pages/Staff/StaffOrderList";
 
 const drawerWidth = 240;
 
 export default function StaffSidebar() {
-  const [menudata, setMenudata] = React.useState("ServicesNavbar");
+  const [menudata, setMenudata] = React.useState("StaffOrderList");
 
-  const [activeItem, setActiveItem] = useState("ServicesNavbar");
+  const [activeItem, setActiveItem] = useState("StaffOrderList");
   const drawerWidth = 240;
 
   const handleTabClick = (menudata) => {
@@ -86,8 +86,8 @@ export default function StaffSidebar() {
         <Box sx={{ overflow: "auto" }}>
           <List>
             <ListItem>
-              <ListItemButton onClick={() => handleTabClick("ServicesNavbar")}
-                  selected={activeItem === "ServicesNavbar"}>
+              <ListItemButton onClick={() => handleTabClick("StaffOrderList")}
+                  selected={activeItem === "StaffOrderList"}>
                 <ListItemIcon>
                   <Inventory2OutlinedIcon />
                 </ListItemIcon>
@@ -121,7 +121,7 @@ export default function StaffSidebar() {
         component="main"
         sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
       >
-        {menudata === "ServicesNavbar" && <ServicesNavbar />}
+        {menudata === "StaffOrderList" && <StaffOrderList />}
         {menudata === "ScheduleList" && <ScheduleList />}
         {menudata === "StaffTable" && <StaffTable />}
       </Box>
