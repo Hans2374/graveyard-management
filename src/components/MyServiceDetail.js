@@ -217,10 +217,9 @@ const MyServiceDetail = () => {
           transform: 'translate(-50%, -50%)',
           width: 700, 
           bgcolor: '#fff', 
-          border: '2px solid #000',
           boxShadow: 24,
-          p: 4,
           borderRadius: '8px', 
+          overflowY: 'auto', // Cho phép cuộn dọc
         }}>
           {/* Phần header với màu primary */}
           <Box sx={{
@@ -234,7 +233,7 @@ const MyServiceDetail = () => {
           </Box>
 
           {/* Nội dung bên dưới */}
-          <Box sx={{ paddingTop: 2 }}>
+          <Box sx={{ padding: 1 }}> 
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 2 }}>
               <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
                 <TextField label="Ngày bắt đầu" fullWidth />
@@ -255,14 +254,12 @@ const MyServiceDetail = () => {
               <TextField label="Số điện thoại" fullWidth />
             </Box>
 
+            {/* Giới hạn chiều dài của nội dung giới thiệu */}
             <Typography variant="subtitle1" gutterBottom sx={{ mt: 2 }}>
-              Yêu cầu thêm: is simply dummy text of the printing and
               typesetting industry. Lorem Ipsum has been the industry's
               standard dummy text ever since the 1500s, when an unknown
               printer took a galley of type and scrambled it to make a type
-              specimen book. It has survived not only five centuries, but also
-              the leap into electronic typesetting, remaining essentially
-              unchanged.
+              specimen book. 
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
@@ -322,10 +319,10 @@ const MyServiceDetail = () => {
           transform: 'translate(-50%, -50%)',
           width: 400,
           bgcolor: 'background.paper',
-          border: '2px solid #000',
+          border: '0px', // Bỏ border
           boxShadow: 24,
-          p: 4,
           borderRadius: '8px', // Bo góc modal
+          padding: 1, // Thêm padding
         }}>
           {/* Phần header với màu primary */}
           <Box sx={{
@@ -339,7 +336,7 @@ const MyServiceDetail = () => {
           </Box>
 
           {/* Nội dung bên dưới */}
-          <Box sx={{ paddingTop: 2 }}>
+          <Box>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               Hãy cho chúng tôi biết ý kiến của bạn về gói dịch vụ này
             </Typography>
@@ -350,7 +347,7 @@ const MyServiceDetail = () => {
               }, transition: 'all 0.2s ease', }} >
               Thêm hình ảnh
             </Button>
-            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ marginTop: 2, padding: 0 }}> 
               <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
@@ -382,9 +379,10 @@ const MyServiceDetail = () => {
           transform: 'translate(-50%, -50%)',
           width: 400,
           bgcolor: 'background.paper',
-          borderRadius: '8px', 
+          border: '0px', // Bỏ border
           boxShadow: 24,
-          p: 4,
+          borderRadius: '8px', 
+          padding: 1, // Thêm padding
         }}>
           {/* Phần header với màu primary */}
           <Box sx={{
@@ -398,12 +396,12 @@ const MyServiceDetail = () => {
           </Box>
 
           {/* Nội dung bên dưới */}
-          <Box sx={{ paddingTop: 2 }}>
+          <Box>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               Hãy cho chúng tôi biết lý do bạn muốn hủy gói dịch vụ này
             </Typography>
             <TextField label="Lý do hủy" fullWidth multiline rows={4} sx={{ marginTop: 2 }} />
-            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2 }}>
+            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2, padding: 0 }}> 
               <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
@@ -435,10 +433,10 @@ const MyServiceDetail = () => {
           transform: 'translate(-50%, -50%)',
           width: 400,
           bgcolor: '#FFFF', 
-          border: '2px solid #000',
+          border: '0px', // Bỏ border
           boxShadow: 24,
-          p: 4,
           borderRadius: '8px', 
+          padding: 1, // Thêm padding
         }}>
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: 'center', color: '#000', fontWeight: 'bold' }}>
             XÁC NHẬN HỦY GÓI DỊCH VỤ

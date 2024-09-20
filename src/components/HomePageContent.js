@@ -5,7 +5,6 @@ import {
   Container,
   Button,
   styled,
-  Grid,
   Card,
   CardContent,
   CardActions,
@@ -37,6 +36,7 @@ const ImageItem = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  margin: '0 10px', 
 });
 
 const Dot = styled('span')({
@@ -61,6 +61,11 @@ const CustomerCard = styled(Card)(({ theme }) => ({
 const HomePage = () => {
   const [activeImage, setActiveImage] = useState(0);
   const [activeNews, setActiveNews] = useState(0);
+  const [activeCustomer, setActiveCustomer] = useState(0);
+
+  const [currentPageImage, setCurrentPageImage] = useState(0);
+  const [currentPageNews, setCurrentPageNews] = useState(0);
+  const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
 
   const handleImageClick = (index) => {
     setActiveImage(index);
@@ -69,6 +74,103 @@ const HomePage = () => {
   const handleNewsClick = (index) => {
     setActiveNews(index);
   };
+
+  const handleCustomerClick = (index) => {
+    setActiveCustomer(index);
+  };
+
+  const handleImageNext = () => {
+    setCurrentPageImage((currentPageImage + 1) % Math.ceil(imageData.length / 3));
+  };
+
+  const handleImagePrev = () => {
+    setCurrentPageImage((currentPageImage - 1 + Math.ceil(imageData.length / 3)) % Math.ceil(imageData.length / 3));
+  };
+
+  const handleNewsNext = () => {
+    setCurrentPageNews((currentPageNews + 1) % Math.ceil(newsData.length / 3));
+  };
+
+  const handleNewsPrev = () => {
+    setCurrentPageNews((currentPageNews - 1 + Math.ceil(newsData.length / 3)) % Math.ceil(newsData.length / 3));
+  };
+
+  const handleCustomerNext = () => {
+    setCurrentPageCustomer((currentPageCustomer + 1) % Math.ceil(customerData.length / 3));
+  };
+
+  const handleCustomerPrev = () => {
+    setCurrentPageCustomer((currentPageCustomer - 1 + Math.ceil(customerData.length / 3)) % Math.ceil(customerData.length / 3));
+  };
+
+  const imageData = [
+    {
+      // ... thông tin hình ảnh 1
+    },
+    {
+      // ... thông tin hình ảnh 2
+    },
+    {
+      // ... thông tin hình ảnh 3
+    },
+    {
+      // ... thông tin hình ảnh 4
+    },
+    {
+      // ... thông tin hình ảnh 5
+    },
+    {
+      // ... thông tin hình ảnh 6
+    },
+  ];
+
+  const newsData = [
+    {
+      // ... thông tin tin tức 1
+    },
+    {
+      // ... thông tin tin tức 2
+    },
+    {
+      // ... thông tin tin tức 3
+    },
+    {
+      // ... thông tin tin tức 4
+    },
+    {
+      // ... thông tin tin tức 5
+    },
+    {
+      // ... thông tin tin tức 6
+    },
+  ];
+
+  const customerData = [
+    {
+      name: "Tên khách hàng 1",
+      content: "Nội dung về khách hàng 1"
+    },
+    {
+      name: "Tên khách hàng 2",
+      content: "Nội dung về khách hàng 2"
+    },
+    {
+      name: "Tên khách hàng 3",
+      content: "Nội dung về khách hàng 3"
+    },
+    {
+      name: "Tên khách hàng 4",
+      content: "Nội dung về khách hàng 4"
+    },
+    {
+      name: "Tên khách hàng 5",
+      content: "Nội dung về khách hàng 5"
+    },
+    {
+      name: "Tên khách hàng 6",
+      content: "Nội dung về khách hàng 6"
+    },
+  ];
 
   return (
     <Box align='center' sx={{ overflow: 'hidden' }}>
@@ -90,39 +192,27 @@ const HomePage = () => {
             HÌNH ẢNH
           </Typography>
 
-          <Grid container spacing={2} justifyContent="space-between" sx={{ mb: 2, alignItems: 'center' }}>
-            {/* Sử dụng Grid để tạo 3 cột */}
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }}>
-                <ArrowBackIos />
-              </IconButton>
-              <ImageItem sx={{ flex: 1, ml: 1 }} onClick={() => handleImageClick(0)}>
-                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                <CircularProgress size={50} /> {/* Placeholder for image loading */}
-              </ImageItem>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImageItem sx={{ flex: 1 }} onClick={() => handleImageClick(1)}>
-                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                <CircularProgress size={50} /> {/* Placeholder for image loading */}
-              </ImageItem>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <ImageItem sx={{ flex: 1, mr: 1 }} onClick={() => handleImageClick(2)}>
-                {/*  Thay thế phần này bằng hình ảnh thực tế  */}
-                <CircularProgress size={50} /> {/* Placeholder for image loading */}
-              </ImageItem>
-              <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
-                <ArrowForwardIos />
-              </IconButton>
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+            <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }} onClick={handleImagePrev}>
+              <ArrowBackIos />
+            </IconButton>
+            <ImageItem onClick={() => handleImageClick(currentPageImage * 3)}>
+              <CircularProgress size={50} /> {/* Placeholder for image loading */}
+            </ImageItem>
+            <ImageItem onClick={() => handleImageClick((currentPageImage * 3) + 1)}>
+              <CircularProgress size={50} /> {/* Placeholder for image loading */}
+            </ImageItem>
+            <ImageItem onClick={() => handleImageClick((currentPageImage * 3) + 2)}>
+              <CircularProgress size={50} /> {/* Placeholder for image loading */}
+            </ImageItem>
+            <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }} onClick={handleImageNext}>
+              <ArrowForwardIos />
+            </IconButton>
+          </Box>
 
-          {/* Phần dot indicator */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Dot className={activeImage === 0 ? 'active' : ''} onClick={() => handleImageClick(0)} />
-            <Dot className={activeImage === 1 ? 'active' : ''} onClick={() => handleImageClick(1)} />
-            <Dot className={activeImage === 2 ? 'active' : ''} onClick={() => handleImageClick(2)} />
+            <Dot className={currentPageImage === 0 ? 'active' : ''} onClick={() => setCurrentPageImage(0)} />
+            <Dot className={currentPageImage === 1 ? 'active' : ''} onClick={() => setCurrentPageImage(1)} />
           </Box>
         </StyledContainer>
 
@@ -132,51 +222,42 @@ const HomePage = () => {
             TIN TỨC
           </Typography>
 
-          <Grid container spacing={2} justifyContent="space-between" sx={{ mb: 2, alignItems: 'center' }}>
-            {/* Sử dụng Grid để tạo 3 cột */}
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }}>
-                <ArrowBackIos />
-              </IconButton>
-              <NewsCard sx={{ flex: 1, ml: 1 }} onClick={() => handleNewsClick(0)}>
-                <CardContent>
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </CardContent>
-                <CardActions>
-                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                </CardActions>
-              </NewsCard>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <NewsCard sx={{ flex: 1 }} onClick={() => handleNewsClick(1)}>
-                <CardContent>
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </CardContent>
-                <CardActions>
-                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                </CardActions>
-              </NewsCard>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <NewsCard sx={{ flex: 1, mr: 1 }} onClick={() => handleNewsClick(2)}>
-                <CardContent>
-                  <CircularProgress size={50} /> {/* Placeholder for image loading */}
-                </CardContent>
-                <CardActions>
-                  <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
-                </CardActions>
-              </NewsCard>
-              <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
-                <ArrowForwardIos />
-              </IconButton>
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+            <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }} onClick={handleNewsPrev}>
+              <ArrowBackIos />
+            </IconButton>
+            <NewsCard sx={{ flex: 1, ml: 1 }} onClick={() => handleNewsClick(currentPageNews * 3)}>
+              <CardContent>
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </CardContent>
+              <CardActions>
+                <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+              </CardActions>
+            </NewsCard>
+            <NewsCard sx={{ flex: 1 }} onClick={() => handleNewsClick((currentPageNews * 3) + 1)}>
+              <CardContent>
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </CardContent>
+              <CardActions>
+                <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+              </CardActions>
+            </NewsCard>
+            <NewsCard sx={{ flex: 1, mr: 1 }} onClick={() => handleNewsClick((currentPageNews * 3) + 2)}>
+              <CardContent>
+                <CircularProgress size={50} /> {/* Placeholder for image loading */}
+              </CardContent>
+              <CardActions>
+                <Button size="small" sx={{ color: 'var(--secondary-color)' }}>Tiêu đề</Button>
+              </CardActions>
+            </NewsCard>
+            <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }} onClick={handleNewsNext}>
+              <ArrowForwardIos />
+            </IconButton>
+          </Box>
 
-          {/* Phần dot indicator */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Dot className={activeNews === 0 ? 'active' : ''} onClick={() => handleNewsClick(0)} />
-            <Dot className={activeNews === 1 ? 'active' : ''} onClick={() => handleNewsClick(1)} />
-            <Dot className={activeNews === 2 ? 'active' : ''} onClick={() => handleNewsClick(2)} />
+            <Dot className={currentPageNews === 0 ? 'active' : ''} onClick={() => setCurrentPageNews(0)} />
+            <Dot className={currentPageNews === 1 ? 'active' : ''} onClick={() => setCurrentPageNews(1)} />
           </Box>
         </StyledContainer>
 
@@ -202,62 +283,52 @@ const HomePage = () => {
             KHÁCH HÀNG
           </Typography>
 
-          <Grid container spacing={2} justifyContent="space-between" sx={{ mb: 2, alignItems: 'center' }}>
-            {/* Sử dụng Grid để tạo 3 cột */}
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }}>
-                <ArrowBackIos />
-              </IconButton>
-              <CustomerCard sx={{ flex: 1, ml: 1 }}>
-                <CardContent>
-                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
-                    Tên người dùng
-                  </Typography>
-                  <Typography variant="body2" gutterBottom align="center">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when look
-                  </Typography>
-                </CardContent>
-              </CustomerCard>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <CustomerCard sx={{ flex: 1 }}>
-                <CardContent>
-                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
-                    Tên người dùng
-                  </Typography>
-                  <Typography variant="body2" gutterBottom align="center">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when look
-                  </Typography>
-                </CardContent>
-              </CustomerCard>
-            </Grid>
-            <Grid item xs={12} md={4} sx={{ display: 'flex', alignItems: 'center' }}>
-              <CustomerCard sx={{ flex: 1, mr: 1 }}>
-                <CardContent>
-                  <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
-                  <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
-                    Tên người dùng
-                  </Typography>
-                  <Typography variant="body2" gutterBottom align="center">
-                    It is a long established fact that a reader will be distracted by the readable content of a page when look
-                  </Typography>
-                </CardContent>
-              </CustomerCard>
-              <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }}>
-                <ArrowForwardIos />
-              </IconButton>
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+            <IconButton aria-label="previous" sx={{ position: 'relative', top: '-5px', left: '10px' }} onClick={handleCustomerPrev}>
+              <ArrowBackIos />
+            </IconButton>
+            <CustomerCard sx={{ flex: 1, ml: 1 }} onClick={() => handleCustomerClick(currentPageCustomer * 3)}>
+              <CardContent>
+                <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
+                  {customerData[currentPageCustomer * 3].name}
+                </Typography>
+                <Typography variant="body2" gutterBottom align="center">
+                  {customerData[currentPageCustomer * 3].content}
+                </Typography>
+              </CardContent>
+            </CustomerCard>
+            <CustomerCard sx={{ flex: 1 }} onClick={() => handleCustomerClick((currentPageCustomer * 3) + 1)}>
+              <CardContent>
+                <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
+                  {customerData[(currentPageCustomer * 3) + 1].name}
+                </Typography>
+                <Typography variant="body2" gutterBottom align="center">
+                  {customerData[(currentPageCustomer * 3) + 1].content}
+                </Typography>
+              </CardContent>
+            </CustomerCard>
+            <CustomerCard sx={{ flex: 1, mr: 1 }} onClick={() => handleCustomerClick((currentPageCustomer * 3) + 2)}>
+              <CardContent>
+                <Avatar sx={{ bgcolor: 'var(--secondary-color)', margin: 'auto' }} />
+                <Typography variant="subtitle1" gutterBottom align="center" sx={{ color: 'var(--secondary-color)' }}>
+                  {customerData[(currentPageCustomer * 3) + 2].name}
+                </Typography>
+                <Typography variant="body2" gutterBottom align="center">
+                  {customerData[(currentPageCustomer * 3) + 2].content}
+                </Typography>
+              </CardContent>
+            </CustomerCard>
+            <IconButton aria-label="next" sx={{ position: 'relative', top: '-5px', right: '10px' }} onClick={handleCustomerNext}>
+              <ArrowForwardIos />
+            </IconButton>
+          </Box>
 
           {/* Phần dot indicator */}
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <Dot />
-            <Dot />
-            <Dot />
-            <Dot />
-            <Dot />
+            <Dot className={currentPageCustomer === 0 ? 'active' : ''} onClick={() => setCurrentPageCustomer(0)} />
+            <Dot className={currentPageCustomer === 1 ? 'active' : ''} onClick={() => setCurrentPageCustomer(1)} />
           </Box>
         </StyledContainer>
 

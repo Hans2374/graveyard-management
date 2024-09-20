@@ -9,7 +9,7 @@ const services = [
     description: [
       "Cung cấp các dịch vụ liên quan đến việc tổ chức tang lễ, an táng người đã khuất.",
       "Chuẩn bị quan tài, dịch vụ hỏa táng, chôn cất, và các nghi lễ tôn giáo liên quan.",
-      "Giúp gia đình giải quyết các thủ tục pháp lý, lựa chọn địa điểm chôn cất, và tổ chức tang lễ.",
+      "Giúp gia đình giải quyết các thủ tục pháp lý, lựa chọn địa điểm chôn cất.",
     ],
     link: "/services/funeral",
     image:
