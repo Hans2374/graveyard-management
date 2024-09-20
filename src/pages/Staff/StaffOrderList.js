@@ -1,37 +1,18 @@
 import React from "react";
 import {
     Box,
-    AppBar,
-    Toolbar,
     IconButton,
-    Typography,
-    Button,
     TextField,
     InputAdornment,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import styles from "../Admin/Service.module.css"
-import AddIcon from '@mui/icons-material/Add';
 import OrderListTable from "../../components/TableData/OrderListTable";
 import { useState } from "react";
 
 function StaffOrderList() {
-
-    const [open, setOpen] = useState(false);
     const [filter, setFilter] = useState("All");
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const handleFilterChange = (newFilter) => {
         setFilter(newFilter);
@@ -148,42 +129,6 @@ function StaffOrderList() {
                             ),
                         }}
                     />
-
-                    <IconButton
-                        sx={{
-                            backgroundColor: "var(--primary-color)",
-                            position: "absolute",
-                            marginLeft: "1040px",
-                        }}
-                        onClick={handleClickOpen}
-                    >
-                        <AddIcon />
-                    </IconButton>
-
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle
-                            sx={{
-                                backgroundColor: "var(--primary-color)",
-                                fontWeight: "bold",
-                                textAlign: "center",
-                            }}
-                        >
-                            Thông tin chi tiết
-                        </DialogTitle>
-                        <DialogContent>
-                            <Typography>
-                                h1. Heading
-                            </Typography>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose} sx={{ backgroundColor: "var(--primary-color)", color: "black", borderRadius: "20px", padding: "5px 20px 5px 20px" }}>
-                                Đặt lại
-                            </Button>
-                            <Button onClick={handleClose} sx={{ backgroundColor: "var(--primary-color)", color: "black" }}>
-                                Hủy
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
                 </Box>
                 <Box
                     sx={{
