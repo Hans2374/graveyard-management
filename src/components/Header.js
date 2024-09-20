@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { routes } from "../routes";
 import { Link as RouterLink } from 'react-router-dom';
 import {
-    AppBar, Toolbar, Button, Box, MenuItem, Select, IconButton, Link, Typography,
+    AppBar, Toolbar, Button, Box,IconButton, Link, Typography,
     Popover, List, ListItem, ListItemText, Divider, useTheme, useMediaQuery
 } from '@mui/material';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import logo from "../assets/logo.png";
 import logo1 from "../assets/logo1.png";
-import VI from "../assets/vietnam.png";
-import EN from "../assets/united-kingdom.png";
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -36,23 +32,32 @@ const notificationStyles = {
     textOverflow: 'ellipsis'
 };
 
+const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text;
+};
+
 export const Header = () => {
-    const [language, setLanguage] = useState('vi');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [role, setRole] = useState(null);
     const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
     const [accountAnchorEl, setAccountAnchorEl] = useState(null);
-    const navigate = useNavigate();
     const theme = useTheme();
     const isXs = useMediaQuery(theme.breakpoints.only('xs'));
     const isSm = useMediaQuery(theme.breakpoints.only('sm'));
     const isMd = useMediaQuery(theme.breakpoints.only('md'));
     const isLg = useMediaQuery(theme.breakpoints.only('lg'));
-    const isXl = useMediaQuery(theme.breakpoints.only('xl'));
 
     useEffect(() => {
         const loggedInStatus = localStorage.getItem('isLoggedIn');
+        const userRole = localStorage.getItem('role'); // Load role from localStorage
         if (loggedInStatus === 'true') {
             setIsLoggedIn(true);
+        }
+        if (userRole) {
+            setRole(userRole); // Set role if available
         }
     }, []);
 
@@ -120,8 +125,6 @@ export const Header = () => {
         "Thông báo 6",
     ];
 
-    const handleLanguageChange = (event) => setLanguage(event.target.value);
-
     return (
         <StyledAppBar position='sticky'>
             <Toolbar>
@@ -139,52 +142,7 @@ export const Header = () => {
                         }}
                     />
                 </Link>
-                <Box sx={{ flexGrow: 1 }} />
-                <Select
-                    color='inherit'
-                    value={language}
-                    onChange={handleLanguageChange}
-                    displayEmpty
-                    sx={{
-                        width: 100,
-                        borderRadius: 3,
-                        marginRight: 3,
-                        height: 40,
-                        backgroundColor: 'white',
-                        '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
-                        boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.1)',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-                            backgroundColor: '#f5f5f5',
-                        },
-                        fontSize: getFontSize(),
-                    }}
-                    IconComponent={KeyboardArrowDownIcon}
-                    renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <img
-                                src={selected === 'vi' ? VI : EN}
-                                alt={selected === 'vi' ? 'Vietnamese flag' : 'UK flag'}
-                                style={{ width: 24, height: 24, marginRight: 8 }}
-                            />
-                            {selected.toUpperCase()}
-                        </Box>
-                    )}
-                >
-                    <MenuItem value="vi">
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={VI} alt="Vietnamese flag" style={{ width: 24, height: 24, marginRight: 8 }} />
-                            VI
-                        </Box>
-                    </MenuItem>
-                    <MenuItem value="en">
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                            <img src={EN} alt="UK flag" style={{ width: 24, height: 24, marginRight: 8 }} />
-                            EN
-                        </Box>
-                    </MenuItem>
-                </Select>
+                <Box sx={{ flexGrow: 1 }} />               
                 {isLoggedIn ? (
                     <>
                         <IconButton color="inherit" onClick={handleNotificationClick} sx={{ scale: 1.5, marginRight: 2 }} aria-label="notification">
@@ -260,7 +218,10 @@ export const Header = () => {
                                                 },
                                             }}
                                         >
-                                            <ListItemText primary={notification} sx={notificationStyles} />
+                                            <ListItemText
+                                                primary={truncateText(notification, 41)}
+                                                sx={notificationStyles}
+                                            />
                                         </ListItem>
                                     ))}
                                 </List>
@@ -280,8 +241,8 @@ export const Header = () => {
                             }}
                         >
                             <Box sx={{
-                                height: 185,
                                 width: 160,
+                                maxHeight: 200,
                                 display: 'flex',
                                 flexDirection: 'column'
                             }}>
@@ -300,7 +261,7 @@ export const Header = () => {
                                     borderColor: 'var(--secondary-color)',
                                     borderBottomWidth: 5
                                 }} />
-                                <List sx={{ maxHeight: 100, maxWidth: 310, p: 0 }}>
+                                <List sx={{ maxHeight: 190, width: 150, p: 0 }}>
                                     <RouterLink to={routes.customerProfile} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <ListItem
                                             sx={{
@@ -310,24 +271,41 @@ export const Header = () => {
                                                     backgroundColor: '#EEEEEE',
                                                 },
                                             }}>
-                                            <ListItemText primary="Tên Người Dùng" />
+                                            <ListItemText primary="Hồ sơ" />
                                         </ListItem>
                                     </RouterLink>
-                                    <RouterLink to={routes.myService} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                        <ListItem
-                                            sx={{
-                                                cursor: 'pointer',
-                                                p: '0px 16px',
-                                                ':hover': {
-                                                    backgroundColor: '#EEEEEE',
-                                                },
-                                            }}>
-                                            <ListItemText primary="Dịch vụ của tôi" />
-                                        </ListItem>
-                                    </RouterLink>
-                                    <ListItem sx={{ p: '0px 16px' }}>
-                                        <ListItemText primary="Đóng góp ý kiến" />
-                                    </ListItem>
+                                    {role === 'customer' ? (
+                                        <>
+                                            <RouterLink to={routes.myService} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                <ListItem
+                                                    sx={{
+                                                        cursor: 'pointer',
+                                                        p: '0px 16px',
+                                                        ':hover': {
+                                                            backgroundColor: '#EEEEEE',
+                                                        },
+                                                    }}>
+                                                    <ListItemText primary="Dịch vụ của tôi" />
+                                                </ListItem>
+                                            </RouterLink>
+                                            <ListItem sx={{ p: '0px 16px' }}>
+                                                <ListItemText primary="Đóng góp ý kiến" />
+                                            </ListItem>
+                                        </>
+                                    ) : (
+                                        <RouterLink to={routes.staff} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                            <ListItem
+                                                sx={{
+                                                    cursor: 'pointer',
+                                                    p: '0px 16px',
+                                                    ':hover': {
+                                                        backgroundColor: '#EEEEEE',
+                                                    },
+                                                }}>
+                                                <ListItemText primary="Quản lý" />
+                                            </ListItem>
+                                        </RouterLink>
+                                    )}
                                     <RouterLink to={routes.homePage} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         <ListItem button onClick={handleListItemClick}
                                             sx={{
