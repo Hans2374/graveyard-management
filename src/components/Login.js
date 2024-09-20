@@ -249,11 +249,11 @@ export const Login = () => {
                         xl: '580px'   // Fixed height for extra large screens
                     },
                     backgroundColor: {
-                        xs: 'rgba(255, 255, 255, 0.9)', // Same color for all breakpoints
+                        xs: 'rgba(255, 255, 255, 0.9)',
                         sm: 'rgba(255, 255, 255, 0.9)',
                         md: 'rgba(255, 255, 255, 0.9)',
                         lg: 'rgba(255, 255, 255, 0.9)',
-                        xl: 'rgba(255, 255, 255, 0.9)',
+                        xl: 'rgba(255, 255, 255, 0.69)',
                     },
                     padding: { xs: 3, sm: 4, md: 6 },
                     borderRadius: 2,
@@ -441,13 +441,12 @@ export const Login = () => {
                             fullWidth
                             sx={{
                                 py: { xs: 1, sm: 1.5, md: 2 }, // Padding adjusts based on screen size
+                                mb: { md: 3 },
+                                mt: { md: '-20px' },
                                 borderRadius: 3,
                                 bgcolor: 'var(--secondary-color)',
                                 fontSize: { xs: 14, sm: 16, md: 18 },
                                 transition: 'background-color 0.3s',
-                                '&:hover': {
-                                    bgcolor: 'var(--secondary-color-hover)',
-                                },
                             }}
                         >
                             Đăng nhập
@@ -464,11 +463,8 @@ export const Login = () => {
                                 mt: { md: '-20px' },
                                 borderRadius: 3,
                                 bgcolor: 'var(--secondary-color)',
-                                fontSize: { xs: 14, sm: 16, md: 17 },
+                                fontSize: { xs: 14, sm: 16, md: 18 },
                                 transition: 'background-color 0.3s',
-                                '&:hover': {
-                                    bgcolor: 'var(--secondary-color-hover)',
-                                },
                             }}
                         >
                             Đăng ký
