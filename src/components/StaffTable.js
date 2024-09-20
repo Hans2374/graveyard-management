@@ -18,8 +18,11 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  ThemeProvider, 
+  createTheme
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import styles from "../pages/Admin/Service.module.css"
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 // Mock data (dữ liệu cứng)
@@ -62,6 +65,20 @@ const StaffTable = () => {
   const [open, setOpen] = useState(false);
   const [searchModal, setSearchModal] = useState(""); // Tìm kiếm trong dialog
 
+  const [navdata, setNavdata] = React.useState("AdminNews");
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => setNavdata(tabKey)}
+        style={{
+          color: navdata === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
   const handleTabChange = (event, newIndex) => {
     setTabIndex(newIndex);
   };
@@ -101,54 +118,29 @@ const StaffTable = () => {
   };
 
   return (
-    <Box sx={{ padding: 2, marginTop: 6 }}>
-      {/* Tabs Section */}
+    
+    <Box>
       <Box
-        sx={{ marginBottom: "3px", backgroundColor: "#fff", padding: "10px" }}
+        sx={{
+          marginTop: "54px",
+          backgroundColor: "white",
+          maxWidth: "100%",
+          display: "flex",
+        }}
       >
-        <Tabs
-          value={tabIndex}
-          onChange={handleTabChange}
-          textColor="inherit"
-          indicatorColor="primary"
-          sx={{
-            "& .MuiTab-root": {
-              textDecoration: "none",
-            },
-            "& .MuiTab-root.Mui-selected": {
-              fontWeight: "normal",
-              color: "#000",
-            },
-            "& .MuiTab-root::after": {
-              content: '""',
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "0%",
-              height: "2px",
-              backgroundColor: "#D3B023",
-              transition: "width 0.3s ease",
-            },
-            "& .MuiTab-root:hover::after": {
-              width: "100%",
-            },
-            "& .MuiTabs-indicator": {
-              display: "none",
-            },
-          }}
-        >
-          <Tab label="Tất cả vật dụng" />
-          <Tab label="Còn" />
-          <Tab label="Hết" />
-          <Tab label="Sắp hết" />
-          <Tab label="Mai táng" />
-          <Tab label="Cúng định kỳ" />
-        </Tabs>
+        <ul className={styles.ul}>
+          {renderTab("Tất cả vật dụng", "AllTool")}
+          {renderTab("Còn", "Available")}
+          {renderTab("Hết", "UnAvailable")}
+          {renderTab("Sắp hết", "AlmostRanOut")}
+          {renderTab("Mai táng", "Service1")}
+          {renderTab("Cúng định kỳ", "Service2")}
+        </ul>
       </Box>
 
       {/* Search and Filter Section */}
-      <Box sx={{ backgroundColor: "#fff", padding: "20px" }}>
-        <Box sx={{ display: "flex", maxWidth: "100%", marginBottom: 2 }}>
+      <Box sx={{ backgroundColor: "#fff", padding: "20px", margin:"3px 0 0 0 ", height:"568px"}}>
+        <Box sx={{ display: "flex", maxWidth: "100%", margin:"0 0 0 50px" }}>
           <TextField
             variant="outlined"
             placeholder="Tìm kiếm gói dịch vụ"
@@ -193,6 +185,7 @@ const StaffTable = () => {
         </Box>
 
         {/* Table Section */}
+        <Box sx={{margin:"45px 0 0 50px"}}>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
@@ -388,6 +381,7 @@ const StaffTable = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      </Box>
     </Box>
   );
 };

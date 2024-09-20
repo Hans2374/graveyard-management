@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Box,
-  AppBar,
-  Toolbar,
   IconButton,
   Typography,
   Button,
@@ -53,7 +51,7 @@ function AdminDiscount() {
     <>
       <Box
         sx={{
-          marginTop: "65px",
+          marginTop: "54px",
           backgroundColor: "white",
           maxWidth: "100%",
           display: "flex",
@@ -241,6 +239,7 @@ function AdminDiscount() {
             maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "50px",
+            height:"430px"
           }}
         >
           <DiscountListTable />

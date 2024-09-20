@@ -1,12 +1,13 @@
+
 export const routes = {
   homePage: "/",
   admin: "/admin",
   staff: "/staff",
   notificationPage: "/notification",
   news: "/news",
-  newsDetail: "/news-detail", 
+  newsDetail: "/news-detail",
   service: "/service",
-  serviceDetail:"/service/detail",
+  serviceDetail: "/service/detail",
   funeralService: "/services/funeral",
   periodicOffering: "/services/periodic-offering",
   customerServicesPage: "/services/detail",
@@ -14,4 +15,5 @@ export const routes = {
   loginPage: "/login",
   myService: "/myservice",
   myServiceDetail: "/myservicedetail",
+  serviceOrderDetailForm: "/orderdetail",
 };

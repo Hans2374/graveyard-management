@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Box, TextField, Tabs, Tab, Button, InputAdornment, IconButton, Link, Typography, Dialog, DialogTitle, DialogContent, FormControlLabel, Checkbox } from '@mui/material';
+import {
+    Box,
+    TextField,
+    Tabs,
+    Tab,
+    Button,
+    InputAdornment,
+    IconButton,
+    Link,
+    Typography,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    FormControlLabel,
+    Checkbox
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { routes } from "../routes";  // Thêm đường dẫn đúng của routes file
 import MailOutline from '@mui/icons-material/MailOutline';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import backgroundImage from '../assets/login_background.jpg';
 
 export const Login = () => {
     const [activeTab, setActiveTab] = useState(0);
@@ -27,6 +43,7 @@ export const Login = () => {
     const [open, setOpen] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [rememberMe, setRememberMe] = useState(false); // State for "Remember me?"
+    const [loginErrorMessage, setLoginErrorMessage] = useState(''); // State to hold error message
 
     const navigate = useNavigate(); // Initialize navigate
 
@@ -52,7 +69,13 @@ export const Login = () => {
         return () => clearInterval(timer);
     }, [countdown]);
 
-    // Giả lập đăng nhập thành công
+    // Giả lập hai tài khoản: 1 customer và 1 staff
+    const accounts = {
+        customer: { username: 'customerUser', password: 'customerPass', role: 'customer' },
+        staff: { username: 'staffUser', password: 'staffPass', role: 'staff' },
+    };
+
+    // Hàm kiểm tra thông tin đăng nhập và xác định vai trò
     const handleSuccessfulLogin = () => {
         const errors = {};
         if (!loginValues.username.trim()) {
@@ -67,12 +90,33 @@ export const Login = () => {
             return;
         }
 
-        // Giả lập đăng nhập thành công
+        // Giả lập quá trình kiểm tra tài khoản
+        let role = '';
+        if (
+            loginValues.username === accounts.customer.username &&
+            loginValues.password === accounts.customer.password
+        ) {
+            role = accounts.customer.role; // Đặt vai trò là customer
+        } else if (
+            loginValues.username === accounts.staff.username &&
+            loginValues.password === accounts.staff.password
+        ) {
+            role = accounts.staff.role; // Đặt vai trò là staff
+        } else {
+            // Nếu tài khoản hoặc mật khẩu không đúng
+            setLoginErrorMessage('Tên đăng nhập hoặc mật khẩu không đúng');
+            return;
+        }
+
+        // Đăng nhập thành công, lưu vai trò vào localStorage
         setIsLoggedIn(true);
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('role', role); // Lưu vai trò vào localStorage
+
         handleCloseDialog();
         setLoginValues({ username: '', password: '' });
         setLoginErrors({});
+        setLoginErrorMessage(''); // Clear error message on successful login
 
         // Navigate to the path after successful login
         navigate(routes.homePage);
@@ -179,28 +223,68 @@ export const Login = () => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh" sx={{ backgroundColor: '#f5f5f5' }}>
+        <Box
+            display="flex"
+            alignItems="center"
+            justifyContent={{ xs: 'center', md: 'flex-end' }} // Center on smaller screens, align right on larger screens
+            sx={{
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '100vh',
+                width: '100vw',
+                padding: { xs: 2, sm: 4, md: 6 },
+                boxSizing: 'border-box',
+            }}
+        >
             <Box
                 sx={{
-                    width: '400px',
-                    height: '600px', // Cố định chiều cao của Box ngoài
-                    backgroundColor: 'white',
-                    padding: 4,
+                    width: { xs: '100%', sm: '80%', md: '400px' },
+                    maxWidth: '500px',
+                    height: {
+                        xs: '600px',  // Fixed height for extra small screens
+                        sm: '650px',  // Fixed height for small screens
+                        md: '500px',  // Fixed height for medium screens (iPad)
+                        lg: '550px',  // Fixed height for large screens
+                        xl: '580px'   // Fixed height for extra large screens
+                    },
+                    backgroundColor: {
+                        xs: 'rgba(255, 255, 255, 0.9)',
+                        sm: 'rgba(255, 255, 255, 0.9)',
+                        md: 'rgba(255, 255, 255, 0.9)',
+                        lg: 'rgba(255, 255, 255, 0.9)',
+                        xl: 'rgba(255, 255, 255, 0.69)',
+                    },
+                    padding: { xs: 3, sm: 4, md: 6 },
                     borderRadius: 2,
-                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                    position: 'relative', // Đặt position relative để các thành phần con có thể sử dụng absolute
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
                 }}
             >
-                <Typography align="center" padding={0} pb={2} fontWeight="bold" fontSize={20}>
+                <Typography
+                    align="center"
+                    pb={2}
+                    fontWeight="bold"
+                    fontSize={{ xs: 18, sm: 20, md: 22 }}
+                    sx={{ mb: { md: '-20px' }, mt: { md: '20px' } }}
+                >
                     {activeTab === 0 ? 'Đăng nhập tài khoản' : 'Tạo tài khoản mới'}
                 </Typography>
-                <Tabs value={activeTab} onChange={handleTabChange} centered>
-                    <Tab label="Đăng nhập" />
-                    <Tab label="Đăng ký" />
+                <Tabs
+                    value={activeTab}
+                    onChange={handleTabChange}
+                    centered
+                    sx={{
+                        minHeight: { xs: 40, sm: 48 },
+                        '& .MuiTabs-indicator': { height: 3 },
+                    }}
+                >
+                    <Tab label="Đăng nhập" sx={{ textTransform: 'none', fontSize: { xs: 14, sm: 16 } }} />
+                    <Tab label="Đăng ký" sx={{ textTransform: 'none', fontSize: { xs: 14, sm: 16 } }} />
                 </Tabs>
 
                 <Box sx={{ flexGrow: 1, mt: 2 }}>
-                    {/* Form Đăng nhập */}
                     {activeTab === 0 && (
                         <Box>
                             <TextField
@@ -251,10 +335,14 @@ export const Login = () => {
                                     Quên mật khẩu?
                                 </Link>
                             </Box>
+                            {loginErrorMessage && (
+                                <Typography color="error" sx={{ mt: 1 }}>
+                                    {loginErrorMessage}
+                                </Typography>
+                            )}
                         </Box>
                     )}
 
-                    {/* Form Đăng ký */}
                     {activeTab === 1 && (
                         <Box>
                             <TextField
@@ -319,142 +407,190 @@ export const Login = () => {
                             />
                         </Box>
                     )}
-
-                    {/* Nút hành động */}
-                    <Box sx={{ position: 'absolute', bottom: 35, left: 16, right: 16 }}>
-                        {activeTab === 0 ? (
-                            <Button
-                                onClick={handleSuccessfulLogin}
-                                variant="contained"
-                                color="inherit"
-                                fullWidth
-                                sx={{ py: 1.5, borderRadius: 3, bgcolor: 'var(--secondary-color)' }}
-                            >
-                                Đăng nhập
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={handleSignup}
-                                variant="contained"
-                                fullWidth
-                                sx={{ py: 1.5, borderRadius: 3, bgcolor: 'var(--secondary-color)' }}
-                            >
-                                Đăng ký
-                            </Button>
-                        )}
-                    </Box>
                 </Box>
 
-                {/* Forgot Password Dialog */}
-                <Dialog open={forgotPasswordDialogOpen} onClose={handleForgotPasswordDialogClose} maxWidth="xs">
-                    <DialogTitle>Quên mật khẩu</DialogTitle>
-                    <DialogContent sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '250px' }}>
-                        {!verificationForm ? (
-                            <Box sx={{ mt: 2, flexGrow: 1, marginTop: 2 }}>
-                                <TextField
-                                    fullWidth
-                                    variant="outlined"
-                                    label="Nhập email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
-                                />
-                                <TextField
-                                    fullWidth
-                                    variant="outlined"
-                                    label="Nhập mã xác minh"
-                                    value={verificationCode}
-                                    onChange={(e) => setVerificationCode(e.target.value)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <Button
-                                                    onClick={handleSendVerificationCode}
-                                                    variant="text"
-                                                    sx={{ color: 'var(--secondary-color)' }}
-                                                    disabled={codeSent}
-                                                >
-                                                    {codeSent
-                                                        ? `Gửi mã (${Math.floor(countdown / 60)}:${countdown % 60 < 10 ? '0' : ''}${countdown % 60})`
-                                                        : 'Gửi mã'}
-                                                </Button>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
-                                />
-                                {helpText && <Typography color="error">{helpText}</Typography>}
-                                <Button
-                                    onClick={handleVerifyCode}
-                                    variant="contained"
-                                    sx={{ backgroundColor: 'var(--secondary-color)', color: 'black', mt: 2 }}
-                                    fullWidth
-                                >
-                                    Xác minh mã
-                                </Button>
-                            </Box>
-                        ) : (
-                            <Box sx={{ mt: 2, flexGrow: 1, marginTop: 2 }}>
-                                <TextField
-                                    fullWidth
-                                    variant="outlined"
-                                    label="Mật khẩu mới"
-                                    type={showNewPassword ? 'text' : 'password'}
-                                    value={newPassword}
-                                    onChange={(e) => setNewPassword(e.target.value)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton onClick={handleShowNewPasswordToggle} edge="end">
-                                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
-                                />
-                                <TextField
-                                    fullWidth
-                                    variant="outlined"
-                                    label="Xác nhận mật khẩu"
-                                    type={showNewPassword ? 'text' : 'password'}
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton onClick={handleShowNewPasswordToggle} edge="end">
-                                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                    sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
-                                />
-                                <Button
-                                    onClick={handleResetPassword}
-                                    variant="contained"
-                                    sx={{ backgroundColor: 'var(--secondary-color)', color: 'black' }}
-                                    fullWidth
-                                >
-                                    Đặt lại mật khẩu
-                                </Button>
-                                {helpText && <Typography color="error">{helpText}</Typography>}
-                            </Box>
-                        )}
-                    </DialogContent>
-                </Dialog>
                 {/* Social Media Icons */}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-                    <IconButton color="primary" sx={{ marginRight: 1 }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end', // Space between the icons to avoid overlay
+                        mt: 2,
+                    }}
+                >
+                    <IconButton color="primary">
                         <MailOutline />
                     </IconButton>
                     <IconButton color="primary">
                         <FacebookIcon />
                     </IconButton>
                 </Box>
+
+                {/* Action Button */}
+                <Box
+                    sx={{
+                        mt: 3, // Add margin to push the button below the social icons
+                        display: 'flex', // Use flexbox for better positioning
+                        justifyContent: 'center',
+                    }}
+                >
+                    {activeTab === 0 ? (
+                        <Button
+                            onClick={handleSuccessfulLogin}
+                            variant="contained"
+                            color="inherit"
+                            fullWidth
+                            sx={{
+                                py: { xs: 1, sm: 1.5, md: 2 }, // Padding adjusts based on screen size
+                                mb: { md: 3 },
+                                mt: { md: '-20px' },
+                                borderRadius: 3,
+                                bgcolor: 'var(--secondary-color)',
+                                fontSize: { xs: 14, sm: 16, md: 18 },
+                                transition: 'background-color 0.3s',
+                            }}
+                        >
+                            Đăng nhập
+                        </Button>
+                    ) : (
+                        <Button
+                            onClick={handleSignup}
+                            variant="contained"
+                            color="inherit"
+                            fullWidth
+                            sx={{
+                                py: { xs: 1, sm: 1.5, md: 2 },
+                                mb: { md: 3 },
+                                mt: { md: '-20px' },
+                                borderRadius: 3,
+                                bgcolor: 'var(--secondary-color)',
+                                fontSize: { xs: 14, sm: 16, md: 18 },
+                                transition: 'background-color 0.3s',
+                            }}
+                        >
+                            Đăng ký
+                        </Button>
+                    )}
+                </Box>
             </Box>
+
+            {/* Forgot Password Dialog */}
+            <Dialog open={forgotPasswordDialogOpen} onClose={handleForgotPasswordDialogClose} maxWidth="xs" fullWidth>
+                <DialogTitle>Quên mật khẩu</DialogTitle>
+                <DialogContent
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        height: { xs: 'auto', sm: 'auto', md: '250px' },
+                        padding: { xs: 2, sm: 3, md: 4 },
+                    }}
+                >
+                    {!verificationForm ? (
+                        <Box sx={{ mt: 2, flexGrow: 1 }}>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                label="Nhập email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                label="Nhập mã xác minh"
+                                value={verificationCode}
+                                onChange={(e) => setVerificationCode(e.target.value)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <Button
+                                                onClick={() => handleSendVerificationCode()}
+                                                variant="text"
+                                                sx={{ color: 'var(--secondary-color)' }}
+                                                disabled={codeSent}
+                                            >
+                                                {codeSent
+                                                    ? `Gửi mã (${Math.floor(countdown / 60)}:${countdown % 60 < 10 ? '0' : ''}${countdown % 60})`
+                                                    : 'Gửi mã'}
+                                            </Button>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
+                            />
+                            {helpText && <Typography color="error">{helpText}</Typography>}
+                            <Button
+                                onClick={handleVerifyCode}
+                                variant="contained"
+                                sx={{
+                                    backgroundColor: 'var(--secondary-color)',
+                                    color: 'black',
+                                    mt: 2,
+                                    fontSize: { xs: 14, sm: 16, md: 18 },
+                                    py: { xs: 1, sm: 1.5, md: 2 },
+                                }}
+                                fullWidth
+                            >
+                                Xác minh mã
+                            </Button>
+                        </Box>
+                    ) : (
+                        <Box sx={{ mt: 2, flexGrow: 1 }}>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                label="Mật khẩu mới"
+                                type={showNewPassword ? 'text' : 'password'}
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleShowNewPasswordToggle} edge="end">
+                                                {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
+                            />
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                label="Xác nhận mật khẩu"
+                                type={showNewPassword ? 'text' : 'password'}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleShowNewPasswordToggle} edge="end">
+                                                {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                                sx={{ mb: 2, backgroundColor: '#F0F0F0', borderRadius: 2 }}
+                            />
+                            <Button
+                                onClick={handleResetPassword}
+                                variant="contained"
+                                sx={{
+                                    backgroundColor: 'var(--secondary-color)',
+                                    color: 'black',
+                                    fontSize: { xs: 14, sm: 16, md: 18 },
+                                    py: { xs: 1, sm: 1.5, md: 2 },
+                                }}
+                                fullWidth
+                            >
+                                Đặt lại mật khẩu
+                            </Button>
+                            {helpText && <Typography color="error">{helpText}</Typography>}
+                        </Box>
+                    )}
+                </DialogContent>
+            </Dialog>
         </Box>
     );
 };
-

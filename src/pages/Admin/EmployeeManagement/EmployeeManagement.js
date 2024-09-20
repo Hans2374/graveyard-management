@@ -210,6 +210,7 @@ function EmployeeManagement() {
           maxWidth: "100%",
           marginLeft: "50px",
           marginTop: "50px",
+          height:"430px"
         }}
       >
         <EmployeeTable />
