@@ -41,7 +41,7 @@ function StaffOrderList() {
         <>
             <Box
                 sx={{
-                    marginTop: "65px",
+                    marginTop: "54px",
                     backgroundColor: "white",
                     maxWidth: "100%",
                     display: "flex",
@@ -190,6 +190,7 @@ function StaffOrderList() {
                         maxWidth: "100%",
                         marginLeft: "50px",
                         marginTop: "50px",
+                        height:"430px"
                     }}
                 >
                     <OrderListTable filter={filter} />
