@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { routes } from "../routes";
 import { Link as RouterLink } from 'react-router-dom';
 import {
-    AppBar, Toolbar, Button, Box,IconButton, Link, Typography,
+    AppBar, Toolbar, Button, Box, IconButton, Link, Typography, MenuItem, Select, 
     Popover, List, ListItem, ListItemText, Divider, useTheme, useMediaQuery
 } from '@mui/material';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import logo from "../assets/logo.png";
 import logo1 from "../assets/logo1.png";
+import VI from "../assets/vietnam.png";
+import EN from "../assets/united-kingdom.png";
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -40,6 +43,7 @@ const truncateText = (text, maxLength) => {
 };
 
 export const Header = () => {
+    const [language, setLanguage] = useState('vi');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState(null);
     const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
@@ -125,6 +129,8 @@ export const Header = () => {
         "Thông báo 6",
     ];
 
+    const handleLanguageChange = (event) => setLanguage(event.target.value);
+
     return (
         <StyledAppBar position='sticky'>
             <Toolbar>
@@ -142,7 +148,52 @@ export const Header = () => {
                         }}
                     />
                 </Link>
-                <Box sx={{ flexGrow: 1 }} />               
+                <Box sx={{ flexGrow: 1 }} />
+                <Select
+                    color='inherit'
+                    value={language}
+                    onChange={handleLanguageChange}
+                    displayEmpty
+                    sx={{
+                        width: 100,
+                        borderRadius: 3,
+                        marginRight: 3,
+                        height: 40,
+                        backgroundColor: 'white',
+                        '& .MuiOutlinedInput-notchedOutline': { border: 'none' },
+                        boxShadow: '0px 3px 2px rgba(0, 0, 0, 0.1)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+                            backgroundColor: '#f5f5f5',
+                        },
+                        fontSize: getFontSize(),
+                    }}
+                    IconComponent={KeyboardArrowDownIcon}
+                    renderValue={(selected) => (
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img
+                                src={selected === 'vi' ? VI : EN}
+                                alt={selected === 'vi' ? 'Vietnamese flag' : 'UK flag'}
+                                style={{ width: 24, height: 24, marginRight: 8 }}
+                            />
+                            {selected.toUpperCase()}
+                        </Box>
+                    )}
+                >
+                    <MenuItem value="vi">
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={VI} alt="Vietnamese flag" style={{ width: 24, height: 24, marginRight: 8 }} />
+                            VI
+                        </Box>
+                    </MenuItem>
+                    <MenuItem value="en">
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img src={EN} alt="UK flag" style={{ width: 24, height: 24, marginRight: 8 }} />
+                            EN
+                        </Box>
+                    </MenuItem>
+                </Select>
                 {isLoggedIn ? (
                     <>
                         <IconButton color="inherit" onClick={handleNotificationClick} sx={{ scale: 1.5, marginRight: 2 }} aria-label="notification">
