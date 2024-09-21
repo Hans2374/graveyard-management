@@ -6,7 +6,6 @@ import { styled, useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { routes } from "../routes";
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -21,13 +20,13 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
   },
   top: "74px",
   [theme.breakpoints.down("lg")]: {
-    top: "63px",
+    top: "62px",
   },
   [theme.breakpoints.down("md")]: {
-    top: "63px",
+    top: "62px",
   },
   [theme.breakpoints.down("sm")]: {
-    top: "58px",
+    top: "55px",
   },
 }));
 
@@ -131,7 +130,7 @@ const StickyNavbar = () => {
       position="fixed"
       elevation={0}
       className={isSticky ? "sticky" : ""}
-      sx={{ bgcolor: "white", top: "68px", p: 0 }}
+      sx={{ bgcolor: "white", top: "64px", p: 0 }}
     >
       <Toolbar sx={{ p: 0 }}>
         <GridContainer>

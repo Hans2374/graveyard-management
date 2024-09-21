@@ -13,8 +13,9 @@ function ScheduleList() {
           flexGrow: 1,
           p: 3,
           backgroundColor: "white",
-          marginTop: "54px",
+          marginTop: "50px",
           maxWidth: "100%",
+          maxHeight: '605px'
         }}
       >
         <Box

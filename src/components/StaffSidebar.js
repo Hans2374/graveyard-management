@@ -21,8 +21,6 @@ import StaffTable from "../components/StaffTable";
 import { useState } from "react"
 import StaffOrderList from "../pages/Staff/StaffOrderList";
 
-const drawerWidth = 240;
-
 export default function StaffSidebar() {
   const [menudata, setMenudata] = React.useState("StaffOrderList");
 
