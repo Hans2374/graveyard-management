@@ -75,7 +75,7 @@ export const Header = () => {
         if (isSm) return { width: 150, height: 50 };
         if (isMd) return { width: 140, height: 49 };
         if (isLg) return { width: 155, height: 54 };
-        return { width: 170, height: 60 };  // xl size
+        return { width: 170, height: 55 };  // xl size
     };
 
     const getFontSize = () => {
@@ -137,13 +137,13 @@ export const Header = () => {
                 <Link
                     component={RouterLink}
                     to={routes.homePage}
+                    height={0.9}
                 >
                     <img
                         src={getLogo()}
                         alt="logo"
                         style={{
                             ...getLogoSize(),
-                            padding: 5,
                             cursor: 'pointer'
                         }}
                     />
