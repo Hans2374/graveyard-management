@@ -20,7 +20,6 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import "./Sidebar.module.css";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
@@ -59,13 +58,13 @@ export default function Sidebar() {
             backgroundColor: activeItem === menudata ? "white" : "red",
             color: activeItem === menudata ? "black" : "black",
             '&.Mui-selected': {
-            backgroundColor: 'var(--primary-color) !important',
-            color: 'white',
-          },
+              backgroundColor: 'var(--primary-color) !important',
+              color: 'white',
+            },
           },
         },
       },
-      
+
     },
   });
 

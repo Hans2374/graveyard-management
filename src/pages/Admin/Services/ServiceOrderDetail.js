@@ -24,7 +24,7 @@ function ServiceOrderDetail() {
           marginLeft: "50px",
         }}
       >
-        
+
 
       </Box>
     </>

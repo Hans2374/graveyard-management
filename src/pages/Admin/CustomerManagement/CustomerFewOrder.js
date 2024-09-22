@@ -1,9 +1,9 @@
 import React from "react";
 
-function CustomerFewOrder () {
-  return ( 
+function CustomerFewOrder() {
+  return (
     <></>
-   );
+  );
 }
 
 export default CustomerFewOrder;

@@ -94,9 +94,9 @@ const CustomerProfileContent = () => {
                             height: 150,
                             cursor: 'pointer',
                             margin: '0 auto',
-                            transition: '0.3s', 
+                            transition: '0.3s',
                             '&:hover': {
-                                filter: 'brightness(85%)' 
+                                filter: 'brightness(85%)'
                             }
                         }}
                         onClick={handleAvatarClick}

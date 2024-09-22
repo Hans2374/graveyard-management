@@ -83,77 +83,77 @@ const NewsContent = () => {
     };
     return (
         <Box align="center">
-        <Box
-            sx={{
-                backgroundColor: '#FFFFFF',
-                padding: 2,
-                marginTop: '65px',
-                maxWidth: '1000px'
-            }}
-        >
-            <Container maxWidth="md" sx={{ mb: 4 }}>
-                {/* TIN TỨC */}
-                <Typography
-                    align="center"
-                    gutterBottom
-                    sx={{
-                        marginTop: '20px',
-                        color: 'var(--secondary-color)',
-                        fontWeight: 'bold',
-                        mb: 2,
-                        fontSize: {
-                            xs: '18px',
-                            sm: '24px',
-                            md: '28px',
-                            lg: '32px'
-                        }
-                    }}
-                >
-                    TIN TỨC
-                </Typography>
-
-                {newsData.slice(0, visibleCount).map((news, index) => (
-                    <Link to="/news-detail" key={index} style={{ textDecoration: 'none', marginBottom: '40px' }}>
-                        <NewsItemContainer>
-                            <NewsImage src={news.image} alt={news.title} />
-                            <Typography
-                                variant="body2"
-                                sx={{
-                                    color: 'var(--secondary-color)',
-                                    textAlign: 'left',
-                                    fontSize: {
-                                        xs: '12px',
-                                        sm: '16px',
-                                        md: '20px',
-                                        lg: '20px'
-                                    }
-                                }}
-                            >
-                                {news.title}
-                            </Typography>
-                        </NewsItemContainer>
-                    </Link>
-                ))}
-
-                {visibleCount < newsData.length && (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleLoadMore}
+            <Box
+                sx={{
+                    backgroundColor: '#FFFFFF',
+                    padding: 2,
+                    marginTop: '65px',
+                    maxWidth: '1000px'
+                }}
+            >
+                <Container maxWidth="md" sx={{ mb: 4 }}>
+                    {/* TIN TỨC */}
+                    <Typography
+                        align="center"
+                        gutterBottom
                         sx={{
                             marginTop: '20px',
-                            backgroundColor: 'var(--secondary-color)',
-                            textTransform: 'none'
+                            color: 'var(--secondary-color)',
+                            fontWeight: 'bold',
+                            mb: 2,
+                            fontSize: {
+                                xs: '18px',
+                                sm: '24px',
+                                md: '28px',
+                                lg: '32px'
+                            }
                         }}
                     >
-                        Xem thêm
-                    </Button>
-                )}
+                        TIN TỨC
+                    </Typography>
 
-            </Container>
+                    {newsData.slice(0, visibleCount).map((news, index) => (
+                        <Link to="/news-detail" key={index} style={{ textDecoration: 'none', marginBottom: '40px' }}>
+                            <NewsItemContainer>
+                                <NewsImage src={news.image} alt={news.title} />
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        color: 'var(--secondary-color)',
+                                        textAlign: 'left',
+                                        fontSize: {
+                                            xs: '12px',
+                                            sm: '16px',
+                                            md: '20px',
+                                            lg: '20px'
+                                        }
+                                    }}
+                                >
+                                    {news.title}
+                                </Typography>
+                            </NewsItemContainer>
+                        </Link>
+                    ))}
+
+                    {visibleCount < newsData.length && (
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleLoadMore}
+                            sx={{
+                                marginTop: '20px',
+                                backgroundColor: 'var(--secondary-color)',
+                                textTransform: 'none'
+                            }}
+                        >
+                            Xem thêm
+                        </Button>
+                    )}
+
+                </Container>
+            </Box>
         </Box>
-    </Box>
-);
+    );
 };
 
 export default NewsContent;

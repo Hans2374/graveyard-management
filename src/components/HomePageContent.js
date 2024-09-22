@@ -36,7 +36,7 @@ const ImageItem = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  margin: '0 10px', 
+  margin: '0 10px',
 });
 
 const Dot = styled('span')({

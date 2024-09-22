@@ -231,8 +231,8 @@ export default function CustomerTable() {
             fullWidth sx={textFieldStyle}
             defaultValue="mail"
           />
-          </DialogContent>
-          <DialogActions>
+        </DialogContent>
+        <DialogActions>
           <Button sx={dialogButtonStyle}>
             Cập nhập
           </Button>

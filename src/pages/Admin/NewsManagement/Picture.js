@@ -104,8 +104,8 @@ function Picture() {
           ))}
         </Grid>
       </Box>
-      <Box sx={{display:"flex", m:"0px 0 0 50px"}}> 
-      <Button
+      <Box sx={{ display: "flex", m: "0px 0 0 50px" }}>
+        <Button
           sx={{
             backgroundColor: "var(--primary-color)",
             color: "black",
@@ -117,7 +117,7 @@ function Picture() {
         >
           Lưu
         </Button>
-        </Box>
+      </Box>
     </>
   );
 }

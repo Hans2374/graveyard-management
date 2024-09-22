@@ -1,4 +1,4 @@
-import {Header} from "../../components/Header";
+import { Header } from "../../components/Header";
 import StickyNavbar from "../../components/StickyNavbar";
 import NewsContent from "../../components/NewsContent";
 import Footer from "../../components/Footer";
