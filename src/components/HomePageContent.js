@@ -74,7 +74,7 @@ const CustomerCard = styled(Card)(({ theme }) => ({
   margin: "0 10px",
 }));
 
-const HomePage = () => {
+const HomePage = ({ footerRef }) => {
   const [activeImage, setActiveImage] = useState(0);
   const [activeNews, setActiveNews] = useState(0);
   const [activeCustomer, setActiveCustomer] = useState(0);
@@ -84,7 +84,6 @@ const HomePage = () => {
   const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
 
   const [isFooterVisible, setIsFooterVisible] = useState(false);
-  const footerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,7 +102,7 @@ const HomePage = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [footerRef]);
 
   const handleImageClick = (index) => {
     setActiveImage(index);
@@ -246,15 +245,23 @@ const HomePage = () => {
   ];
 
   return (
-
-    <Box align="center" sx={{ overflow: "hidden" }}>
+    <Box sx={{ overflow: "hidden" }}>
       {/* Container cho toàn bộ content chính */}
-      <Container sx={{ position: "relative", maxWidth: "1200px", margin: "0 auto" }}>
+      <Container
+        sx={{
+          position: "relative",  // Make the container relative to anchor the absolute images
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
 
         {/* Hình ảnh bên trái */}
         <LeftImage
           style={{
             position: isFooterVisible ? "absolute" : "fixed",  // Change to absolute when Footer is visible
+            top: isFooterVisible ? "auto" : "",           // Adjust top position
+            left: isFooterVisible ? "-160px" : "",           // Adjust left position
+            bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
           }}
         >
           <img
@@ -269,7 +276,7 @@ const HomePage = () => {
         </LeftImage>
 
         {/* Nội dung chính giữa */}
-        <Box align="center" sx={{ overflow: "hidden" }}>
+        <Box align="center" sx={{ overflow: "hidden", flexGrow: 1 }}>
           <Box
             sx={{
               backgroundColor: "white",
@@ -613,6 +620,9 @@ const HomePage = () => {
         <RightImage
           style={{
             position: isFooterVisible ? "absolute" : "fixed",  // Change to absolute when Footer is visible
+            top: isFooterVisible ? "auto" : "",           // Adjust top position
+            right: isFooterVisible ? "-160px" : "",           // Adjust left position
+            bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
           }}
         >
           <img
