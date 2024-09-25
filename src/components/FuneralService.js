@@ -172,7 +172,11 @@ const FuneralServicePage = () => {
             <Button
               variant="contained"
               startIcon={<FilterListIcon />}
-              sx={{ backgroundColor: "#f5e1a4", color: "#333" }}
+              sx={{
+                backgroundColor: "#f5e1a4",
+                color: "#333",
+                padding: "16px",
+              }}
             >
               Thêm điều kiện lọc
             </Button>
@@ -227,7 +231,7 @@ const FuneralServicePage = () => {
 
         <Grid container spacing={4}>
           {displayedServices.map((service) => (
-            <Grid item xs={12} sm={6} md={6} key={service.id}>
+            <Grid item xs={12} sm={6} md={3} key={service.id}>
               <Card
                 sx={{
                   backgroundColor: "#fff3e0",
@@ -243,7 +247,7 @@ const FuneralServicePage = () => {
                   height="auto"
                   image={service.img}
                   alt={service.title}
-                  sx={{ objectFit: "cover", height: "384px" }}
+                  sx={{ objectFit: "cover", height: "300px" }}
                 />
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" color="#f0c431">
@@ -261,7 +265,13 @@ const FuneralServicePage = () => {
                   >
                     <Button
                       variant="contained"
-                      sx={{ backgroundColor: "#f0c431" }}
+                      sx={{
+                        backgroundColor: "#f0c431",
+                        padding: "4px 8px",
+                        fontSize: "12px",
+                        minWidth: "100px",
+                        borderRadius: "8px",
+                      }}
                       onClick={() => handleAddToCompare(service)}
                       disabled={compareList.some(
                         (item) => item.id === service.id
@@ -269,12 +279,18 @@ const FuneralServicePage = () => {
                     >
                       {compareList.some((item) => item.id === service.id)
                         ? "Đã thêm"
-                        : "Thêm vào so sánh"}
+                        : "So sánh"}
                     </Button>
 
                     <Button
                       variant="text"
-                      sx={{ marginTop: "10px", color: "#f0c431" }}
+                      sx={{
+                        marginTop: "10px",
+                        color: "#f0c431",
+                        fontSize: "12px",
+                        padding: "4px 8px",
+                        borderRadius: "8px",
+                      }}
                       href={"/service/detail"}
                     >
                       Chi tiết →

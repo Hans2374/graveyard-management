@@ -61,6 +61,14 @@ const ResponsiveButton = styled(Button)(({ theme }) => ({
   color: "var(--secondary-color)",
   width: "100%",
   padding: 0,
+  background: "none",
+  boxShadow: "none",
+  borderRadius: "0",
+  transition: "none",
+  "&:hover": {
+    background: "none",
+    boxShadow: "none",
+  },
   [theme.breakpoints.down("md")]: {
     fontSize: "14px",
   },
