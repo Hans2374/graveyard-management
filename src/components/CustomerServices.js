@@ -52,13 +52,13 @@ const CustomerServices = () => {
 
       {/* Phần mô tả dịch vụ */}
       <Grid container spacing={4}>
-        <ServiceDescription 
-          image="https://via.placeholder.com/150" 
-          description="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature." 
+        <ServiceDescription
+          image="https://via.placeholder.com/150"
+          description="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature."
         />
-        <ServiceDescription 
-          image="https://via.placeholder.com/150" 
-          description="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature." 
+        <ServiceDescription
+          image="https://via.placeholder.com/150"
+          description="Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature."
         />
       </Grid>
 
@@ -75,17 +75,17 @@ const CustomerServices = () => {
           ĐÁNH GIÁ CỦA KHÁCH HÀNG
         </Typography>
         <Grid container spacing={4}>
-          <CustomerReview 
+          <CustomerReview
             name="Tên người dùng 1"
-            content="It is a long established fact that a reader will be distracted by the readable content." 
+            content="It is a long established fact that a reader will be distracted by the readable content."
           />
-          <CustomerReview 
+          <CustomerReview
             name="Tên người dùng 2"
-            content="It is a long established fact that a reader will be distracted by the readable content." 
+            content="It is a long established fact that a reader will be distracted by the readable content."
           />
-          <CustomerReview 
+          <CustomerReview
             name="Tên người dùng 3"
-            content="It is a long established fact that a reader will be distracted by the readable content." 
+            content="It is a long established fact that a reader will be distracted by the readable content."
           />
         </Grid>
       </Box>

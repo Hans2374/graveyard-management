@@ -23,7 +23,7 @@ const MyServiceDetail = () => {
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
   const [openCancelModal, setOpenCancelModal] = useState(false);
   const [openConfirmCancelModal, setOpenConfirmCancelModal] = useState(false);
-  const [serviceCancelled, setServiceCancelled] = useState(false); 
+  const [serviceCancelled, setServiceCancelled] = useState(false);
 
   const handleDateChange = (date) => {
     setActiveDate(date);
@@ -60,16 +60,16 @@ const MyServiceDetail = () => {
 
   const handleOpenConfirmCancelModal = () => setOpenConfirmCancelModal(true);
   const handleCloseConfirmCancelModal = () => {
-    setOpenConfirmCancelModal(false); 
-    setOpenCancelModal(false); 
+    setOpenConfirmCancelModal(false);
+    setOpenCancelModal(false);
   };
 
   const handleConfirmCancel = () => {
     // Thực hiện hành động hủy dịch vụ ở đây (ví dụ: gọi API)
     // ...
 
-    setServiceCancelled(true); 
-    handleCloseConfirmCancelModal(); 
+    setServiceCancelled(true);
+    handleCloseConfirmCancelModal();
   };
 
   const dates = [
@@ -171,30 +171,36 @@ const MyServiceDetail = () => {
       >
         <Button
           variant="contained"
-          sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
-            backgroundColor: 'var(--primary-color)',
-            color: '#fff',
-          }, transition: 'all 0.2s ease', }}
+          sx={{
+            backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
+              backgroundColor: 'var(--primary-color)',
+              color: '#fff',
+            }, transition: 'all 0.2s ease',
+          }}
           onClick={handleOpenFeedbackModal}
         >
           Gửi đánh giá
         </Button>
         <Button
           variant="contained"
-          sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
-            backgroundColor: 'var(--primary-color)',
-            color: '#fff',
-          }, transition: 'all 0.2s ease', }}
+          sx={{
+            backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
+              backgroundColor: 'var(--primary-color)',
+              color: '#fff',
+            }, transition: 'all 0.2s ease',
+          }}
           onClick={handleOpenScheduleModal}
         >
           Chi tiết đặt lịch
         </Button>
         <Button
           variant="contained"
-          sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
-            backgroundColor: 'var(--primary-color)',
-            color: '#fff',
-          }, transition: 'all 0.2s ease', }}
+          sx={{
+            backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
+              backgroundColor: 'var(--primary-color)',
+              color: '#fff',
+            }, transition: 'all 0.2s ease',
+          }}
           onClick={handleOpenCancelModal}
         >
           Hủy gói dịch vụ
@@ -215,17 +221,17 @@ const MyServiceDetail = () => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 700, 
-          bgcolor: '#fff', 
+          width: 700,
+          bgcolor: '#fff',
           boxShadow: 24,
-          borderRadius: '8px', 
+          borderRadius: '8px',
           overflowY: 'auto', // Cho phép cuộn dọc
         }}>
           {/* Phần header với màu primary */}
           <Box sx={{
-            bgcolor: 'var(--primary-color)', 
+            bgcolor: 'var(--primary-color)',
             padding: 2,
-            borderRadius: '8px 8px 0 0', 
+            borderRadius: '8px 8px 0 0',
           }}>
             <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: '#fff', textAlign: 'center' }}>
               TÊN GÓI DỊCH VỤ
@@ -233,7 +239,7 @@ const MyServiceDetail = () => {
           </Box>
 
           {/* Nội dung bên dưới */}
-          <Box sx={{ padding: 1 }}> 
+          <Box sx={{ padding: 1 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 2 }}>
               <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
                 <TextField label="Ngày bắt đầu" fullWidth />
@@ -259,7 +265,7 @@ const MyServiceDetail = () => {
               typesetting industry. Lorem Ipsum has been the industry's
               standard dummy text ever since the 1500s, when an unknown
               printer took a galley of type and scrambled it to make a type
-              specimen book. 
+              specimen book.
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 2 }}>
@@ -288,16 +294,20 @@ const MyServiceDetail = () => {
             </Box>
 
             <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2 }}>
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff', width: 100,  '&:hover': {
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', width: 100, '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleCloseScheduleModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleCloseScheduleModal}>
                 Lưu
               </Button>
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff', width: 100,  '&:hover': {
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', width: 100, '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleCloseScheduleModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleCloseScheduleModal}>
                 Quay lại
               </Button>
             </Stack>
@@ -341,23 +351,29 @@ const MyServiceDetail = () => {
               Hãy cho chúng tôi biết ý kiến của bạn về gói dịch vụ này
             </Typography>
             <TextField label="Nội dung đánh giá" fullWidth multiline rows={4} sx={{ marginTop: 2 }} />
-            <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff', marginTop: 2,  '&:hover': {
+            <Button variant="contained" sx={{
+              backgroundColor: 'var(--primary-color)', color: '#fff', marginTop: 2, '&:hover': {
                 backgroundColor: 'var(--primary-color)',
                 color: '#fff',
-              }, transition: 'all 0.2s ease', }} >
+              }, transition: 'all 0.2s ease',
+            }} >
               Thêm hình ảnh
             </Button>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ marginTop: 2, padding: 0 }}> 
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ marginTop: 2, padding: 0 }}>
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleCloseFeedbackModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleCloseFeedbackModal}>
                 Gửi đánh giá
               </Button>
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleCloseFeedbackModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleCloseFeedbackModal}>
                 Hủy
               </Button>
             </Stack>
@@ -381,14 +397,14 @@ const MyServiceDetail = () => {
           bgcolor: 'background.paper',
           border: '0px', // Bỏ border
           boxShadow: 24,
-          borderRadius: '8px', 
+          borderRadius: '8px',
           padding: 1, // Thêm padding
         }}>
           {/* Phần header với màu primary */}
           <Box sx={{
-            bgcolor: 'var(--primary-color)', 
+            bgcolor: 'var(--primary-color)',
             padding: 2,
-            borderRadius: '8px 8px 0 0', 
+            borderRadius: '8px 8px 0 0',
           }}>
             <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: '#fff', textAlign: 'center' }}>
               Hủy gói dịch vụ
@@ -401,17 +417,21 @@ const MyServiceDetail = () => {
               Hãy cho chúng tôi biết lý do bạn muốn hủy gói dịch vụ này
             </Typography>
             <TextField label="Lý do hủy" fullWidth multiline rows={4} sx={{ marginTop: 2 }} />
-            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2, padding: 0 }}> 
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
+            <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2, padding: 0 }}>
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleOpenConfirmCancelModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleOpenConfirmCancelModal}>
                 Xác nhận
               </Button>
-              <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff',  '&:hover': {
+              <Button variant="contained" sx={{
+                backgroundColor: 'var(--primary-color)', color: '#fff', '&:hover': {
                   backgroundColor: 'var(--primary-color)',
                   color: '#fff',
-                }, transition: 'all 0.2s ease', }} onClick={handleCloseCancelModal}>
+                }, transition: 'all 0.2s ease',
+              }} onClick={handleCloseCancelModal}>
                 Quay lại
               </Button>
             </Stack>
@@ -432,10 +452,10 @@ const MyServiceDetail = () => {
           left: '50%',
           transform: 'translate(-50%, -50%)',
           width: 400,
-          bgcolor: '#FFFF', 
+          bgcolor: '#FFFF',
           border: '0px', // Bỏ border
           boxShadow: 24,
-          borderRadius: '8px', 
+          borderRadius: '8px',
           padding: 1, // Thêm padding
         }}>
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: 'center', color: '#000', fontWeight: 'bold' }}>
@@ -449,16 +469,20 @@ const MyServiceDetail = () => {
             Hành động này không thể hoàn tác!
           </Typography>
           <Stack direction="row" justifyContent="space-around" alignItems="center" sx={{ marginTop: 2 }}>
-            <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff', width: 100,  '&:hover': {
+            <Button variant="contained" sx={{
+              backgroundColor: 'var(--primary-color)', color: '#fff', width: 100, '&:hover': {
                 backgroundColor: 'var(--primary-color)',
                 color: '#fff',
-              }, transition: 'all 0.2s ease', }} onClick={handleConfirmCancel}>
+              }, transition: 'all 0.2s ease',
+            }} onClick={handleConfirmCancel}>
               Có
             </Button>
-            <Button variant="contained" sx={{ backgroundColor: 'var(--primary-color)', color: '#fff', width: 100,  '&:hover': {
+            <Button variant="contained" sx={{
+              backgroundColor: 'var(--primary-color)', color: '#fff', width: 100, '&:hover': {
                 backgroundColor: 'var(--primary-color)',
                 color: '#fff',
-              }, transition: 'all 0.2s ease', }} onClick={handleCloseConfirmCancelModal}>
+              }, transition: 'all 0.2s ease',
+            }} onClick={handleCloseConfirmCancelModal}>
               Không
             </Button>
           </Stack>
