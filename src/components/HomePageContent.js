@@ -263,6 +263,10 @@ const HomePage = ({ footerRef }) => {
             left: isFooterVisible ? "-160px" : "",           // Adjust left position
             bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
           }}
+          sx={{
+            // Hide the left image on small screens and below (like <600px)
+            display: { xs: "none", sm: "none", md: "block" }
+          }}
         >
           <img
             src={leftImage}
@@ -623,6 +627,10 @@ const HomePage = ({ footerRef }) => {
             top: isFooterVisible ? "auto" : "",           // Adjust top position
             right: isFooterVisible ? "-160px" : "",           // Adjust left position
             bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
+          }}
+          sx={{
+            // Hide the left image on small screens and below (like <600px)
+            display: { xs: "none", sm: "none", md: "block" }
           }}
         >
           <img
