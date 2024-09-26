@@ -9,6 +9,8 @@ import {
     DialogActions,
     TextField,
     IconButton,
+    Card,
+    CardMedia,
     Button,
     Grid,
     Tooltip,
@@ -22,13 +24,19 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import backgroundImage from '../assets/login_background.jpg';
 
 const CustomerProfileContent = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     // State cho dialogs, avatar, và menu avatar
     const [editDialogOpen, setEditDialogOpen] = useState(false);
     const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
-    const [avatar, setAvatar] = useState("/path-to-default-avatar.jpg");
+    const [avatar, setAvatar] = useState(backgroundImage);
     const [anchorEl, setAnchorEl] = useState(null);
 
     // State cho ẩn hiện password
@@ -72,19 +80,72 @@ const CustomerProfileContent = () => {
     const handleClickShowNewPassword = () => setShowNewPassword(!showNewPassword);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
+    const imageData = [
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/vuon-nhi-thap-tu-hieu.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/GD100-IMG_0787-2020.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/6%20(2).jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/toan%20canh%20cong%20vien%20vinh%20hang%20long%20thanh.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/goc%20canh%20quan%20khu%20gia%20toc%20dep%20tai%20hoa%20vien%20vinh%20hang%20long%20thanh.jpg",
+        },
+        {
+            src: "https://cdnphoto.dantri.com.vn/XXKeoGI5eHY-594kWEorzcnmSFM=/thumb_w/1920/2024/02/21/chua-dai-tue-nghe-annguyen-duy-1-1708478566537.jpg?watermark=true",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/vuon-nhi-thap-tu-hieu.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/GD100-IMG_0787-2020.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/6%20(2).jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/toan%20canh%20cong%20vien%20vinh%20hang%20long%20thanh.jpg",
+        },
+        {
+            src: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/goc%20canh%20quan%20khu%20gia%20toc%20dep%20tai%20hoa%20vien%20vinh%20hang%20long%20thanh.jpg",
+        },
+        {
+            src: "https://cdnphoto.dantri.com.vn/XXKeoGI5eHY-594kWEorzcnmSFM=/thumb_w/1920/2024/02/21/chua-dai-tue-nghe-annguyen-duy-1-1708478566537.jpg?watermark=true",
+        },
+    ];
+
     return (
-        <Box align="center" >
+        <Box align="center" 
+        sx={{ 
+            backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20230902/pngtree-sunrise-above-a-sunrise-in-the-sky-image_13129631.jpg)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+            }}>
             <Box
                 sx={{
                     backgroundColor: '#FFFFFF',
                     padding: 2,
-                    marginTop: '65px',
-                    maxWidth: '1000px',
-                    textAlign: 'center'
+                    marginTop: '55px',
+                    maxWidth: '1000px'
                 }}
             >
-                <Container maxWidth="md" sx={{ mb: 4, marginTop: '40px' }} >
-                    {/* Avatar */}
+                <Container maxWidth="md" sx={{ mb: 4, marginTop: '40px' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'flex-start',
+                    gap: '30px',
+                    flexWrap: 'wrap', // Allow wrapping
+                }}
+            >
+                {/* Avatar */}
+                <Box sx={{ textAlign: 'center', flex: '0 0 auto' }}>
                     <Avatar
                         src={avatar}
                         alt="User Avatar"
@@ -93,22 +154,46 @@ const CustomerProfileContent = () => {
                             width: 150,
                             height: 150,
                             cursor: 'pointer',
-                            margin: '0 auto',
                             transition: '0.3s',
                             '&:hover': {
-                                filter: 'brightness(85%)'
-                            }
+                                filter: 'brightness(85%)',
+                            },
                         }}
                         onClick={handleAvatarClick}
                     />
-
-                    {/* Tên account */}
                     <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
                         Nguyễn Văn A
                     </Typography>
+                </Box>
 
-                    {/* icon button để update infomation, đến trang xem lịch sử đơn hàng và góp ý */}
-                    <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                {/* User information and menu icons */}
+                <Box sx={{ flex: 1, minWidth: '250px' }}> {/* Added minWidth for better responsiveness */}
+                    {/* User info */}
+                    <Box
+                        sx={{
+                            padding: 3,
+                            border: '3px solid #E6D189',
+                            borderRadius: '8px',
+                            textAlign: 'left',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 4.5,
+                            minHeight: '135px',
+                        }}
+                    >
+                        <Typography variant="body2">
+                            <strong>SĐT :</strong> 0123445678
+                        </Typography>
+                        <Typography variant="body2">
+                            <strong>Email :</strong> exemail@gmail.com
+                        </Typography>
+                        <Typography variant="body2">
+                            <strong>Địa chỉ :</strong> Thành phố ABC, Quận XYZ, Đường số 45, nhà số 12/2
+                        </Typography>
+                    </Box>
+
+                    {/* Icon buttons for actions */}
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', flexWrap: 'wrap' }}>
                         <Tooltip title="Sửa thông tin" arrow>
                             <IconButton onClick={handleEditDialogOpen} sx={{ color: '#D3B023' }}>
                                 <Edit />
@@ -130,41 +215,60 @@ const CustomerProfileContent = () => {
                             </IconButton>
                         </Tooltip>
                     </Box>
-
-                </Container>
-
-                {/* Thông tin người dùng */}
+                </Box>
+            </Box>
+        </Container>
                 <Box
                     sx={{
-                        marginTop: '30px',
-                        padding: 3,
-                        border: '3px solid #E6D189',
-                        borderRadius: '8px',
-                        maxWidth: '800px',
-                        textAlign: 'left',
-                        margin: '0 auto',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                        minHeight: '250px',
+                        display: "flex",
+                        maxWidth: "100%",
+                        marginLeft: "50px",
                     }}
                 >
-                    <Box>
-                        <Typography variant="body2">
-                            <strong>SĐT :</strong> 0123445678
-                        </Typography>
-                    </Box>
-                    <Box>
-                        <Typography variant="body2">
-                            <strong>Email :</strong> exampleemail@gmail.com
-                        </Typography>
-                    </Box>
-                    <Box>
-                        <Typography variant="body2">
-                            <strong>Địa chỉ :</strong> Thành phố ABC, Quận XYZ, Đường số 45, nhà số 12/2
-                        </Typography>
-                    </Box>
                 </Box>
+
+                <Box
+                    sx={{
+                        maxWidth: "100%",
+                        marginLeft: "40px",
+                        marginRight: "40px",
+                        marginTop: "50px",
+                    }}
+                >
+                    <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold', color: '#d3b023' }}>
+                        Ảnh Của Tôi
+                    </Typography>
+                    <Grid container spacing={2} sx={{ padding: 2 }}>
+                        {imageData.map((image, index) => (
+                            <Grid item xs={12} sm={6} md={4} key={index}>
+                                <Card
+                                    sx={{
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        transition: 'transform 0.3s',
+                                        '&:hover': {
+                                            transform: 'scale(1.1)', // Enlarge the hovered card
+                                        },
+                                        // Apply a scale effect to the surrounding cards
+                                        '&:not(:hover)': {
+                                            transform: 'scale(0.9)', // Shrink surrounding cards
+                                        },
+                                    }}
+                                >
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={image.src}
+                                        sx={{
+                                            transition: 'transform 0.3s', // Ensure smooth transition for the image
+                                        }}
+                                    />
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+
 
                 {/* Sửa infor dialog */}
                 <Dialog open={editDialogOpen} onClose={handleEditDialogClose}>
