@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, Container, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
+import leftImage from "../assets/pexels-arina-krasnikova-6907774.jpg";
+import rightImage from "../assets/pexels-koolshooters-6495751.jpg";
 
 const NewsItemContainer = styled(Box)({
     display: 'flex',
@@ -12,9 +14,25 @@ const NewsItemContainer = styled(Box)({
     borderRadius: '5px',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-        backgroundColor: '#fff8dc', 
+        backgroundColor: '#fff8dc',
         transform: 'scale(1.02)',
     },
+});
+
+// Tạo container cho ảnh trái và phải
+const ImageContainer = styled("div")({
+    width: "244px",  // Kích thước ảnh
+    height: "700px",
+    top: "128px",  // Điều chỉnh vị trí top cho phù hợp
+    overflow: "hidden",  // Đảm bảo ảnh không vượt quá container
+});
+
+const LeftImage = styled(ImageContainer)({
+    left: '0px'  // Đặt bên trái màn hình
+});
+
+const RightImage = styled(ImageContainer)({
+    right: "0px",  // Đặt bên phải màn hình
 });
 
 const NewsImage = styled('img')({
@@ -78,9 +96,11 @@ const newsData = [
 ];
 
 
-const NewsContent = () => {
+const NewsContent = ({ footerRef }) => {
 
     const [visibleCount, setVisibleCount] = useState(8);
+
+    const [isFooterVisible, setIsFooterVisible] = useState(false);
 
     const handleLoadMore = () => {
         setVisibleCount(prevCount => prevCount + 5);
@@ -90,83 +110,157 @@ const NewsContent = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            if (footerRef.current) {
+                const footerTop = footerRef.current.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                // Check if the Footer is in view
+                if (footerTop <= windowHeight) {
+                    setIsFooterVisible(true);
+                } else {
+                    setIsFooterVisible(false);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [footerRef]);
+
     return (
-        <Box align="center" 
-        sx={{ 
-            backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20230902/pngtree-sunrise-above-a-sunrise-in-the-sky-image_13129631.jpg)', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center' 
-            }}>
-            <Box
+        <Box sx={{ overflow: "hidden" }}>
+            {/* Container cho toàn bộ content chính */}
+            <Container
                 sx={{
-                    backgroundColor: '#FFFFFF',
-                    padding: 2,
-                    marginTop: '55px',
-                    maxWidth: '1000px'
+                    position: "relative",  // Make the container relative to anchor the absolute images
+                    maxWidth: "1200px",
+                    margin: "0 auto",
                 }}
             >
-                <Container maxWidth="md" sx={{ mb: 4 }}>
-                    {/* TIN TỨC */}
-                    <Typography
-                        align="center"
-                        gutterBottom
+
+                {/* Hình ảnh bên trái */}
+                <LeftImage
+                    style={{
+                        position: isFooterVisible ? "absolute" : "fixed",  // Change to absolute when Footer is visible
+                        top: isFooterVisible ? "auto" : "",           // Adjust top position
+                        left: isFooterVisible ? "-160px" : "",           // Adjust left position
+                        bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
+                    }}
+                    sx={{
+                        // Hide the left image on small screens and below (like <600px)
+                        display: { xs: "none", sm: "none", md: "block" }
+                    }}
+                >
+                    <img
+                        src={leftImage}
+                        alt="Left Image"
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover"
+                        }}
+                    />
+                </LeftImage>
+
+                {/* Nội dung chính giữa */}
+                <Box align="center" sx={{ overflow: "hidden", flexGrow: 1 }}>
+                    <Box
                         sx={{
-                            marginTop: '20px',
-                            color: 'var(--secondary-color)',
-                            fontWeight: 'bold',
-                            mb: 2,
-                            fontSize: {
-                                xs: '18px',
-                                sm: '24px',
-                                md: '28px',
-                                lg: '32px'
-                            }
+                            backgroundColor: '#FFFFFF',
+                            padding: 2,
+                            marginTop: '55px',
+                            maxWidth: '1000px'
                         }}
                     >
-                        TIN TỨC
-                    </Typography>
+                        <Container maxWidth="md" sx={{ mb: 4 }}>
+                            {/* TIN TỨC */}
+                            <Typography
+                                align="center"
+                                gutterBottom
+                                sx={{
+                                    marginTop: '20px',
+                                    color: 'var(--secondary-color)',
+                                    fontWeight: 'bold',
+                                    mb: 2,
+                                    fontSize: {
+                                        xs: '18px',
+                                        sm: '24px',
+                                        md: '28px',
+                                        lg: '32px'
+                                    }
+                                }}
+                            >
+                                TIN TỨC
+                            </Typography>
 
-                    {newsData.slice(0, visibleCount).map((news, index) => (
-                        <Link to="/news-detail" key={index} style={{ textDecoration: 'none', marginBottom: '40px' }}>
-                            <NewsItemContainer>
-                                <NewsImage src={news.image} alt={news.title} />
-                                <Typography
-                                    variant="body2"
+                            {newsData.slice(0, visibleCount).map((news, index) => (
+                                <Link to="/news-detail" key={index} style={{ textDecoration: 'none', marginBottom: '40px' }}>
+                                    <NewsItemContainer>
+                                        <NewsImage src={news.image} alt={news.title} />
+                                        <Typography
+                                            variant="body2"
+                                            sx={{
+                                                color: 'var(--secondary-color)',
+                                                marginTop: '10px',
+                                                textAlign: 'left',
+                                                fontSize: {
+                                                    xs: '12px',
+                                                    sm: '16px',
+                                                    md: '20px',
+                                                    lg: '20px'
+                                                }
+                                            }}
+                                        >
+                                            {news.title}
+                                        </Typography>
+                                    </NewsItemContainer>
+                                </Link>
+                            ))}
+
+                            {visibleCount < newsData.length && (
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={handleLoadMore}
                                     sx={{
-                                        color: 'var(--secondary-color)',
-                                        marginTop: '10px',
-                                        textAlign: 'left',
-                                        fontSize: {
-                                            xs: '12px',
-                                            sm: '16px',
-                                            md: '20px',
-                                            lg: '20px'
-                                        }
+                                        marginTop: '20px',
+                                        backgroundColor: 'var(--secondary-color)',
+                                        textTransform: 'none'
                                     }}
                                 >
-                                    {news.title}
-                                </Typography>
-                            </NewsItemContainer>
-                        </Link>
-                    ))}
+                                    Xem thêm
+                                </Button>
+                            )}
 
-                    {visibleCount < newsData.length && (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleLoadMore}
-                            sx={{
-                                marginTop: '20px',
-                                backgroundColor: 'var(--secondary-color)',
-                                textTransform: 'none'
-                            }}
-                        >
-                            Xem thêm
-                        </Button>
-                    )}
-
-                </Container>
-            </Box>
+                        </Container>
+                    </Box>
+                </Box>
+                {/* Hình ảnh bên phải */}
+                <RightImage
+                    style={{
+                        position: isFooterVisible ? "absolute" : "fixed",  // Change to absolute when Footer is visible
+                        top: isFooterVisible ? "auto" : "",           // Adjust top position
+                        right: isFooterVisible ? "-160px" : "",           // Adjust left position
+                        bottom: isFooterVisible ? "0px" : "",        // Ensure it doesn't overlap at the bottom
+                    }}
+                    sx={{
+                        // Hide the left image on small screens and below (like <600px)
+                        display: { xs: "none", sm: "none", md: "block" }
+                    }}
+                >
+                    <img
+                        src={rightImage}
+                        alt="Right Image"
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover"
+                        }}
+                    />
+                </RightImage>
+            </Container>
         </Box>
     );
 };
