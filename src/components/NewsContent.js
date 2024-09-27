@@ -12,7 +12,7 @@ const NewsItemContainer = styled(Box)({
     borderRadius: '5px',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-        backgroundColor: '#fff8dc', 
+        backgroundColor: '#fff8dc',
         transform: 'scale(1.02)',
     },
 });
@@ -91,12 +91,11 @@ const NewsContent = () => {
     }, []);
 
     return (
-        <Box align="center" 
-        sx={{ 
-            backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20230902/pngtree-sunrise-above-a-sunrise-in-the-sky-image_13129631.jpg)', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center' 
-            }}>
+        <Box align="center" sx={{
+            overflow: "hidden", flexGrow: 1, backgroundImage: 'url(https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        }}>
             <Box
                 sx={{
                     backgroundColor: '#FFFFFF',
