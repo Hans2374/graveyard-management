@@ -57,15 +57,18 @@ const MyService = () => {
         backgroundColor: "#f0f0f0",
         padding: 0,
         margin: 0,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        backgroundImage: 'url(https://media.istockphoto.com/id/501057465/vi/anh/d%C3%A3y-n%C3%BAi-himalaya-ph%E1%BB%A7-%C4%91%E1%BA%A7y-s%C6%B0%C6%A1ng-m%C3%B9-v%C3%A0-s%C6%B0%C6%A1ng-m%C3%B9.jpg?s=612x612&w=0&k=20&c=eN_J5-6a4z5g3XOZUanHCmkma-ljDgxG-CFUS5ey8gc=)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <Box
         sx={{
           padding: "40px 20px",
-          maxWidth: "1200px",
+          maxWidth: "990px",
           width: "100%",
-          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          backgroundColor: "rgba(255, 255, 255, 1)",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
           margin: "auto",
         }}
