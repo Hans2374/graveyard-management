@@ -94,7 +94,7 @@ export default function ServiceTable() {
                 fontWeight: "bold",
                 width: "100px",
                 border: "1px solid #ccc",
-                p:"1"
+                p: "1"
               }}
             >
               STT

@@ -1,9 +1,9 @@
 import React from "react";
 
-function FewOrdersTab () {
-  return ( 
+function FewOrdersTab() {
+  return (
     <></>
-   );
+  );
 }
 
 export default FewOrdersTab;

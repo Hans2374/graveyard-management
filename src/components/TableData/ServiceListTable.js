@@ -699,7 +699,7 @@ export default function ServiceListTable() {
                 borderRadius: "10px",
                 padding: "5px 100px 5px 100px",
                 textTransform: "none",
-                margin:"0 15px",
+                margin: "0 15px",
               }}
             >
               Lưu
@@ -711,7 +711,7 @@ export default function ServiceListTable() {
                 color: "black",
                 borderRadius: "10px",
                 padding: "5px 100px 5px 100px",
-                margin:"0 15px",
+                margin: "0 15px",
                 textTransform: "none",
               }}
             >

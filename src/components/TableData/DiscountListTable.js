@@ -88,16 +88,16 @@ export default function DiscountListTable() {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", border: "1px solid #ccc"}}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", border: "1px solid #ccc" }}>
               STT
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold", width: "600px", border: "1px solid #ccc" }}>
               Tên Gói
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold",  border: "1px solid #ccc" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", border: "1px solid #ccc" }}>
               Khả Dụng
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold",  border: "1px solid #ccc" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", border: "1px solid #ccc" }}>
               Chỉnh Sửa
             </TableCell>
           </TableRow>
