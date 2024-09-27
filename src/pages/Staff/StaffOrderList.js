@@ -120,39 +120,6 @@ function StaffOrderList() {
             }}
           />
 
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle
-              sx={{
-                backgroundColor: "var(--primary-color)",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              Thông tin chi tiết
-            </DialogTitle>
-            <DialogContent>
-              <Typography>h1. Heading</Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={handleClose}
-                sx={{
-                  backgroundColor: "var(--primary-color)",
-                  color: "black",
-                  borderRadius: "20px",
-                  padding: "5px 20px 5px 20px",
-                }}
-              >
-                Đặt lại
-              </Button>
-              <Button
-                onClick={handleClose}
-                sx={{ backgroundColor: "var(--primary-color)", color: "black" }}
-              >
-                Hủy
-              </Button>
-            </DialogActions>
-          </Dialog>
         </Box>
         <Box
           sx={{
