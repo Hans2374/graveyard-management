@@ -446,6 +446,7 @@ export default function ServiceListTable() {
             backgroundColor: "var(--primary-color)",
             fontWeight: "bold",
             textAlign: "center",
+            color:"white"
           }}
         >
           Báo Cáo Đơn Hàng
@@ -454,14 +455,14 @@ export default function ServiceListTable() {
           {selectedRow && (
             <div>
               <Box sx={{ width: "100%", p: "0px 24px" }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
                   Nội dung công việc chung của dịch vụ:
                 </Typography>
                 <Typography>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
                   Ghi chú đặc biệt:
                 </Typography>
                 <Typography>
@@ -537,7 +538,7 @@ export default function ServiceListTable() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                      <Typography sx={{ fontWeight: "bold" }}>
                         Vật dụng
                       </Typography>
                       <IconButton
@@ -553,7 +554,7 @@ export default function ServiceListTable() {
                         <FilterListIcon />
                         <Typography sx={{ ml: 1 }}>Lọc vật dụng</Typography>
                       </IconButton>
-                      <Typography variant="h6" sx={{ marginRight: "74px" }}>
+                      <Typography sx={{ marginRight: "74px" }}>
                         Số lượng
                       </Typography>
                     </Box>
@@ -646,7 +647,7 @@ export default function ServiceListTable() {
                 ))}
               </Box>
               <Box sx={{ width: "100%", p: 2 }}>
-                <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
+                <Typography sx={{ mb: 1, fontWeight: "bold" }}>
                   Báo cáo công việc
                 </Typography>
 
@@ -701,7 +702,7 @@ export default function ServiceListTable() {
                 margin:"0 15px",
               }}
             >
-              Close
+              Lưu
             </Button>
             <Button
               onClick={handleCloseDialog}
@@ -714,7 +715,7 @@ export default function ServiceListTable() {
                 textTransform: "none",
               }}
             >
-              Lưu
+              Đóng
             </Button>
           </Box>
         </DialogContent>

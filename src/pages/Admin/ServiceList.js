@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, TextField, IconButton, InputAdornment } from "@mui/material";
+import { Box, TextField, IconButton, InputAdornment, ThemeProvider, createTheme} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "./Service.module.css";
@@ -18,7 +18,7 @@ function ServiceList() {
         className={styles.a}
         onClick={() => handleTabClick(tabKey)}
         style={{
-          color: selectedTab === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+          color: selectedTab === tabKey ? "black" : "grey",
         }}
       >
         {label}
@@ -26,11 +26,29 @@ function ServiceList() {
     </li>
   );
 
+  const theme = createTheme({
+    components: {
+        MuiBox: {
+            styleOverrides: {
+                noScroll: {
+                    overflow: 'hidden',
+                    height: '200px',
+                    width: '300px',
+                    border: '1px solid black',
+                    padding: '16px',
+                    position: 'relative',
+                    backgroundColor: '#f5f5f5',
+                },
+            },
+        },
+    },
+});
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{
-          marginTop: "65px",
+          marginTop: "54px",
           backgroundColor: "white",
           maxWidth: "100%",
           display: "flex",
@@ -42,22 +60,6 @@ function ServiceList() {
           {renderTab("Đã phân công", "assigned")}
           {renderTab("Đang thực hiện", "inProgress")}
           {renderTab("Hoàn thành", "completed")}
-        </ul>
-      </Box>
-
-      <Box
-        sx={{
-          marginTop: "3px",
-          backgroundColor: "white",
-          maxWidth: "100%",
-          display: "flex",
-        }}
-      >
-        <ul className={styles.ul}>
-          {renderTab("Chưa thanh toán", "unpaid")}
-          {renderTab("Đã thanh toán", "paid")}
-          {renderTab("Yêu cầu hủy", "cancelRequest")}
-          {renderTab("Đã hủy", "canceled")}
         </ul>
       </Box>
 
@@ -124,7 +126,7 @@ function ServiceList() {
           <ServiceListTable />
         </Box>
       </Box>
-    </>
+    </ThemeProvider>
   );
 }
 

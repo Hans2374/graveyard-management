@@ -77,6 +77,9 @@ function createData(stt, tengoi, khadung, chinhsua) {
 const rows = [
   createData(1, "Mai táng"),
   createData(2, "Cúng định kỳ"),
+  createData(3, "An táng"),
+  createData(4, "Bảo trì mộ"),
+  createData(5, "Hỗ trợ tâm lý"),
 ];
 
 export default function ServiceTable() {
