@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, createTheme, ThemeProvider } from "@mui/material";
 import styles from "../Service.module.css";
 import AllServiceTab from "./AllServiceTab";
 import AddServiceTab from "./AddServiceTab";
@@ -20,8 +20,27 @@ function ServicesNavbar() {
       </a>
     </li>
   );
+
+  const theme = createTheme({
+    components: {
+      MuiBox: {
+        styleOverrides: {
+          noScroll: {
+            overflow: "hidden",
+            height: "200px",
+            width: "300px",
+            border: "1px solid black",
+            padding: "16px",
+            position: "relative",
+            backgroundColor: "#f5f5f5",
+          },
+        },
+      },
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{
           marginTop: "54px",
@@ -45,7 +64,7 @@ function ServicesNavbar() {
         {navdata === "AddServiceTab" && <AddServiceTab />}
         {navdata === "ServiceOrderDetail" && <ServiceOrderDetail />}
       </Box>
-    </>
+    </ThemeProvider>
   );
 }
 
