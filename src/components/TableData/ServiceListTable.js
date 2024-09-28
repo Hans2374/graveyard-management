@@ -240,8 +240,7 @@ export default function ServiceListTable() {
     <Box sx={{ position: "relative", width: "1080px" }}>
       <TableContainer
         component={Paper}
-        sx={{ width: "1100px", height: "360px" }}
-      >
+        sx={{ width: "1200px", maxWidth: "100%", height: "360px" }}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>

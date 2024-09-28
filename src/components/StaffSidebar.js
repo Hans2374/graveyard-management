@@ -44,14 +44,16 @@ export default function StaffSidebar() {
             transition: "transform 0.2s",
             "&:hover": {
               transform: "scale(1.1)",
-              backgroundColor: "var(--primary-color)",
-              color: "white",
+              border:"2px solid #black",
+              backgroundColor:"none"
             },
             backgroundColor: activeItem === menudata ? "white" : "red",
             color: activeItem === menudata ? "black" : "black",
+            borderRadius:"10px",
             "&.Mui-selected": {
               backgroundColor: "var(--primary-color) !important",
               color: "white",
+              transform: "scale(1.1)",
             },
           },
         },

@@ -25,7 +25,7 @@ const BarChart = () => {
     }));
 
     return (
-        <div style={{ height: '420px', width:"765px"}}>
+        <div style={{ height: '420px', width:"785px"}}>
             <ResponsiveBar
                 data={processedData}
                 keys={['thisYear']}

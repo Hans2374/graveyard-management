@@ -58,7 +58,7 @@ function ServicesNavbar() {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
+        sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white", height:"auto" }}
       >
         {navdata === "AllServiceTab" && <AllServiceTab />}
         {navdata === "AddServiceTab" && <AddServiceTab />}

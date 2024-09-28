@@ -11,6 +11,9 @@ import {
   Icon,
   Divider,
   Stack,
+  MenuItem,
+  Paper,
+  Avatar,
 } from "@mui/material";
 import BarChart from "../../components/BarChart";
 import PieChartComponent from "../../components/PieChart";
@@ -28,6 +31,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PeopleIcon from "@mui/icons-material/People";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import AddIcon from "@mui/icons-material/Add";
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 10,
@@ -55,6 +59,21 @@ const data = [
   { service: "Hỗ trợ tâm lý", sales: 10 },
 ];
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+  maxWidth: 750,
+  ...theme.applyStyles("dark", {
+    backgroundColor: "#1A2027",
+  }),
+}));
+
+const message = `Truncation should be conditionally applicable on this long line of text
+ as this is a much longer line than what the container can support.`;
+
 const totalSales = data.reduce((acc, item) => acc + item.sales, 0);
 
 function Dashboard() {
@@ -81,7 +100,7 @@ function Dashboard() {
             Kể từ tháng trước
           </Typography>
           <Box className={styles.icon_box}>
-          <AttachMoneyIcon className={styles.icon} />
+            <AttachMoneyIcon className={styles.icon} />
           </Box>
         </Box>
 
@@ -98,7 +117,7 @@ function Dashboard() {
             Kể từ tháng trước
           </Typography>
           <Box className={styles.icon_box}>
-          <PeopleIcon className={styles.icon} />
+            <PeopleIcon className={styles.icon} />
           </Box>
         </Box>
         <Box className={styles.box}>
@@ -112,7 +131,7 @@ function Dashboard() {
             sx={{ height: "5px", m: "20px 0 0 0" }}
           />
           <Box className={styles.icon_box}>
-            <FormatListBulletedIcon className={styles.icon}/>
+            <FormatListBulletedIcon className={styles.icon} />
           </Box>
         </Box>
         <Box className={styles.box}>
@@ -121,19 +140,20 @@ function Dashboard() {
             $15B VND
           </Typography>
           <Box className={styles.icon_box}>
-          <LocalAtmIcon className={styles.icon} />
+            <LocalAtmIcon className={styles.icon} />
           </Box>
         </Box>
       </Box>
 
-      <Box sx={{ display: "flex", width: "100%", height: "800px" }}>
+      <Box sx={{ display: "flex", width: "100%" }}>
         <Box
           sx={{
-            m: "10px 10px 0 12px",
+            m: "5px 10px 0 5px",
             backgroundColor: "white",
             border: "2px solid #EEEEEE",
-            borderRadius: "20px",
+            borderRadius: "15px",
             p: "10px",
+            height: "545px",
           }}
         >
           <Box
@@ -191,12 +211,13 @@ function Dashboard() {
 
         <Box
           sx={{
-            m: "10px 0 0 10px",
+            m: "5px 0 0 5px",
             backgroundColor: "white",
             border: "2px solid #EEEEEE",
-            borderRadius: "20px",
+            borderRadius: "15px",
             p: "10px",
             width: "400px",
+            height: "800px",
           }}
         >
           <Typography
@@ -229,6 +250,55 @@ function Dashboard() {
 
           <Box sx={{ m: "50px 0 0 0" }}>
             <PieChartComponent />
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            m: "0px 0px 0 5px",
+            backgroundColor: "white",
+            border: "2px solid #EEEEEE",
+            borderRadius: "15px",
+            height: "244px",
+            width: "810px",
+            position: "absolute",
+            top: "805px",
+          }}
+        >
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              sx={{
+                textAlign: "start",
+                m: "10px 0 0 20px",
+                p: "10px",
+                fontWeight: "bold",
+              }}
+              variant="h6"
+            >
+              Ghi chú
+            </Typography>
+
+            <IconButton sx={{ m: "10px 15px 0 20px", p: "10px" }}>
+              <AddIcon />
+            </IconButton>
+          </Box>
+
+          <Box>
+            <Item sx={{ m: "15px 0 0 30px" }}>
+              <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                <Avatar>W</Avatar>
+                <Typography noWrap>{message}</Typography>
+              </Stack>
+            </Item>
+            <Item sx={{ m: "20px 0 0 30px" }}>
+              <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
+                <Stack>
+                  <Avatar>W</Avatar>
+                </Stack>
+                <Stack sx={{ minWidth: 0 }}>
+                  <Typography noWrap>{message}</Typography>
+                </Stack>
+              </Stack>
+            </Item>
           </Box>
         </Box>
       </Box>

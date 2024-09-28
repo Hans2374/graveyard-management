@@ -10,6 +10,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  createTheme,
+  ThemeProvider
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -29,8 +31,27 @@ function AllServiceTab() {
     setOpen(false);
   };
 
+  const theme = createTheme({
+    components: {
+      MuiBox: {
+        styleOverrides: {
+          noScroll: {
+            overflow: "hidden",
+            height: "200px",
+            width: "300px",
+            border: "1px solid black",
+            padding: "16px",
+            position: "relative",
+            backgroundColor: "#f5f5f5",
+          },
+        },
+      },
+    },
+  });
+
   return (
     <>
+    <ThemeProvider theme={theme}>
       <Box
         sx={{
           display: "flex",
@@ -192,11 +213,11 @@ function AllServiceTab() {
           maxWidth: "100%",
           marginLeft: "50px",
           marginTop: "50px",
-          height: "430px"
         }}
       >
         <ServiceTable />
       </Box>
+      </ThemeProvider>
     </>
   );
 }
