@@ -150,7 +150,6 @@ const FuneralServicePage = () => {
           gutterBottom
           sx={{
             marginTop: '20px',
-            margin: '20px',
             color: 'var(--secondary-color)',
             fontWeight: 'bold',
             mb: 2,
@@ -165,21 +164,30 @@ const FuneralServicePage = () => {
           DỊCH VỤ CÚNG ĐỊNH KỲ
         </Typography>
 
-        {/* Search and Compare Box */}
         <Box
           sx={{
             display: "flex",
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             mb: 4,
-            alignItems: "flex-start",
+            alignItems: { xs: "center", md: "flex-start" },
           }}
         >
-          {/* Search Bar */}
-          <Box display="flex" alignItems="center">
+          {/* Tìm kiếm dịch vụ và Thêm điều kiện lọc */}
+          <Box
+            display="flex"
+            alignItems="center"
+            sx={{
+              flexDirection: { xs: "column", md: "row" },
+              mb: { xs: 2, md: 0 },
+              width: { xs: "100%", md: "auto" },
+              justifyContent: { xs: "center", md: "flex-start" },
+            }}
+          >
             <TextField
               placeholder="Tìm kiếm dịch vụ"
               variant="outlined"
-              sx={{ marginRight: "10px", width: "300px" }}
+              sx={{ marginBottom: { xs: 2, md: 0 }, marginRight: { md: "10px" }, width: { xs: "100%", md: "300px" } }}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -191,22 +199,28 @@ const FuneralServicePage = () => {
             <Button
               variant="contained"
               startIcon={<FilterListIcon />}
-              sx={{ backgroundColor: "#f5e1a4", color: "#333" }}
+              sx={{
+                backgroundColor: "#f5e1a4",
+                color: "#333",
+                padding: "16px",
+                width: { xs: "100%", md: "300px" }, 
+              }}
             >
               Thêm điều kiện lọc
             </Button>
           </Box>
 
-          {/* Sticky Compare Box */}
+          {/* So sánh dịch vụ */}
           <Box
             sx={{
-              position: "sticky",
+              position: { xs: "relative", md: "sticky" },
               top: "10px",
               backgroundColor: "#fff3e0",
               padding: "10px",
               borderRadius: "8px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-              minWidth: "200px",
+              width: { xs: "100%", md: "300px" }, 
+              mt: { xs: 2, md: 0 },
             }}
           >
             <Typography variant="h6" fontWeight="bold" color="#f0c431">
