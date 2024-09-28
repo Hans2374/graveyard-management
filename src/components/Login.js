@@ -69,10 +69,11 @@ export const Login = () => {
         return () => clearInterval(timer);
     }, [countdown]);
 
-    // Giả lập hai tài khoản: 1 customer và 1 staff
+    // Giả lập tài khoản
     const accounts = {
         customer: { username: 'customerUser', password: 'customerPass', role: 'customer' },
         staff: { username: 'staffUser', password: 'staffPass', role: 'staff' },
+        admin: { username: 'adminUser', password: 'adminPass', role: 'admin' },
     };
 
     // Hàm kiểm tra thông tin đăng nhập và xác định vai trò
@@ -102,6 +103,11 @@ export const Login = () => {
             loginValues.password === accounts.staff.password
         ) {
             role = accounts.staff.role; // Đặt vai trò là staff
+        } else if (
+            loginValues.username === accounts.admin.username &&
+            loginValues.password === accounts.admin.password
+        ) {
+            role = accounts.admin.role; // Đặt vai trò là admin
         } else {
             // Nếu tài khoản hoặc mật khẩu không đúng
             setLoginErrorMessage('Tên đăng nhập hoặc mật khẩu không đúng');

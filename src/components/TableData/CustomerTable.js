@@ -93,7 +93,6 @@ const tableCellStyle = {
 
 // Hover effect for customer name
 const customerNameStyle = {
-  textDecoration: "underline",
   '&:hover': {
     color: 'blue',
     cursor: 'pointer',

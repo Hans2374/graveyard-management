@@ -71,7 +71,13 @@ export default function OrderListTable({ filter }) {
 
                                 {/* Apply onClick only to the TableCell with row.madon */}
                                 <TableCell
-                                    sx={{ cursor: 'pointer' }}
+                                    sx={{
+                                        "&:hover": {
+                                            color: "blue",
+                                            cursor: "pointer",
+                                            textDecoration: "underline",
+                                        },
+                                    }}
                                     onClick={() => handleRowClick(row)}
                                 >
                                     {row.madon}

@@ -50,7 +50,6 @@ const tableCellStyle = {
 
 // Hover effect for customer name
 const employeeNameStyle = {
-  textDecoration: "underline",
   "&:hover": {
     color: "blue",
     cursor: "pointer",

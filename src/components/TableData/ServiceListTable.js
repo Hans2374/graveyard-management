@@ -351,7 +351,11 @@ export default function ServiceListTable() {
                     sx={{
                       borderRight: "1px solid #ddd",
                       p: 0,
-                      cursor: "pointer",
+                      "&:hover": {
+                        color: "blue",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      },
                     }}
                     onClick={() => handleOpenDialog(row)}
                   >
@@ -446,7 +450,7 @@ export default function ServiceListTable() {
             backgroundColor: "var(--primary-color)",
             fontWeight: "bold",
             textAlign: "center",
-            color:"white"
+            color: "white"
           }}
         >
           Báo Cáo Đơn Hàng
