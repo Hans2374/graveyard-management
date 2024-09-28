@@ -126,6 +126,9 @@ const FuneralServicePage = () => {
         backgroundColor: "#f0f0f0",
         padding: 0,
         margin: 0,
+        backgroundImage: 'url(https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <Box
@@ -133,7 +136,7 @@ const FuneralServicePage = () => {
           padding: "40px 20px",
           maxWidth: "1200px",
           width: "100%",
-          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
           margin: "auto",
         }}

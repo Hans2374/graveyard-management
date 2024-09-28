@@ -98,7 +98,7 @@ const NewsContent = () => {
         }}>
             <Box
                 sx={{
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
                     padding: 2,
                     marginTop: '55px',
                     maxWidth: '1000px'
@@ -127,7 +127,7 @@ const NewsContent = () => {
 
                     {newsData.slice(0, visibleCount).map((news, index) => (
                         <Link to="/news-detail" key={index} style={{ textDecoration: 'none', marginBottom: '40px' }}>
-                            <NewsItemContainer>
+                            <NewsItemContainer sx={{ backgroundColor: 'white' }}>
                                 <NewsImage src={news.image} alt={news.title} />
                                 <Typography
                                     variant="body2"
