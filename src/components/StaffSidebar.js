@@ -9,7 +9,9 @@ import {
   List,
   ListItemText,
   ListItem,
-  ThemeProvider, ListItemIcon, ListItemButton
+  ThemeProvider,
+  ListItemIcon,
+  ListItemButton,
 } from "@mui/material";
 import DiscountOutlinedIcon from "@mui/icons-material/DiscountOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
@@ -17,7 +19,7 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import { Header } from "./Header";
 import ScheduleList from "../pages/Staff/ScheduleList";
 import StaffTable from "../components/StaffTable";
-import { useState } from "react"
+import { useState } from "react";
 import StaffOrderList from "../pages/Staff/StaffOrderList";
 
 export default function StaffSidebar() {
@@ -47,14 +49,13 @@ export default function StaffSidebar() {
             },
             backgroundColor: activeItem === menudata ? "white" : "red",
             color: activeItem === menudata ? "black" : "black",
-            '&.Mui-selected': {
-              backgroundColor: 'var(--primary-color) !important',
-              color: 'white',
+            "&.Mui-selected": {
+              backgroundColor: "var(--primary-color) !important",
+              color: "white",
             },
           },
         },
       },
-
     },
   });
 
@@ -83,8 +84,10 @@ export default function StaffSidebar() {
           <Box sx={{ overflow: "auto" }}>
             <List>
               <ListItem>
-                <ListItemButton onClick={() => handleTabClick("StaffOrderList")}
-                  selected={activeItem === "StaffOrderList"}>
+                <ListItemButton
+                  onClick={() => handleTabClick("StaffOrderList")}
+                  selected={activeItem === "StaffOrderList"}
+                >
                   <ListItemIcon>
                     <Inventory2OutlinedIcon />
                   </ListItemIcon>
@@ -93,8 +96,10 @@ export default function StaffSidebar() {
               </ListItem>
 
               <ListItem>
-                <ListItemButton onClick={() => handleTabClick("ScheduleList")}
-                  selected={activeItem === "ScheduleList"}>
+                <ListItemButton
+                  onClick={() => handleTabClick("ScheduleList")}
+                  selected={activeItem === "ScheduleList"}
+                >
                   <ListItemIcon>
                     <HistoryOutlinedIcon />
                   </ListItemIcon>
@@ -103,8 +108,10 @@ export default function StaffSidebar() {
               </ListItem>
 
               <ListItem>
-                <ListItemButton onClick={() => handleTabClick("StaffTable")}
-                  selected={activeItem === "StaffTable"}>
+                <ListItemButton
+                  onClick={() => handleTabClick("StaffTable")}
+                  selected={activeItem === "StaffTable"}
+                >
                   <ListItemIcon>
                     <DiscountOutlinedIcon />
                   </ListItemIcon>
@@ -116,7 +123,12 @@ export default function StaffSidebar() {
         </Drawer>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            backgroundColor: "#F2F2F2",
+            overflow: "hidden",
+          }}
         >
           {menudata === "StaffOrderList" && <StaffOrderList />}
           {menudata === "ScheduleList" && <ScheduleList />}

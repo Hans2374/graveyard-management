@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, TextField, IconButton, InputAdornment, ThemeProvider, createTheme} from "@mui/material";
+import {
+  Box,
+  TextField,
+  IconButton,
+  InputAdornment,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import styles from "./Service.module.css";
@@ -28,21 +35,20 @@ function ServiceList() {
 
   const theme = createTheme({
     components: {
-        MuiBox: {
-            styleOverrides: {
-                noScroll: {
-                    overflow: 'hidden',
-                    height: '200px',
-                    width: '300px',
-                    border: '1px solid black',
-                    padding: '16px',
-                    position: 'relative',
-                    backgroundColor: '#f5f5f5',
-                },
-            },
+      MuiBox: {
+        styleOverrides: {
+          noScroll: {
+            overflow: "hidden",
+            width: "300px",
+            border: "1px solid black",
+            padding: "16px",
+            position: "relative",
+            backgroundColor: "#f5f5f5",
+          },
         },
+      },
     },
-});
+  });
 
   return (
     <ThemeProvider theme={theme}>
