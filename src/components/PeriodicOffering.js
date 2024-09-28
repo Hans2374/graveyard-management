@@ -130,24 +130,37 @@ const FuneralServicePage = () => {
         backgroundColor: "#f0f0f0",
         padding: 0,
         margin: 0,
+        backgroundImage: 'url(https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     >
       <Box
         sx={{
-          padding: "40px 20px",
+          padding: { xs: "20px 10px", md: "40px 20px" },
           maxWidth: "1200px",
           width: "100%",
-          backgroundColor: "rgba(255, 255, 255, 0.9)",
+          backgroundColor: "rgba(255, 255, 255, 0.8)",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
           margin: "auto",
         }}
       >
         <Typography
-          variant="h4"
-          textAlign="center"
-          fontWeight="bold"
-          mb={4}
-          style={{ color: "#333" }}
+          align="center"
+          gutterBottom
+          sx={{
+            marginTop: '20px',
+            margin: '20px',
+            color: 'var(--secondary-color)',
+            fontWeight: 'bold',
+            mb: 2,
+            fontSize: {
+              xs: '18px',
+              sm: '24px',
+              md: '28px',
+              lg: '32px'
+            }
+          }}
         >
           DỊCH VỤ CÚNG ĐỊNH KỲ
         </Typography>
