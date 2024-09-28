@@ -13,7 +13,7 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import Service from "../components/Service";
+import Service from "../components/Service"; 
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -35,6 +35,7 @@ const ImageItem = styled("div")({
   justifyContent: "center",
   alignItems: "center",
   margin: "0 10px",
+  transition: "transform 0.3s ease-in-out",
 });
 
 const Dot = styled("span")({
@@ -49,11 +50,35 @@ const Dot = styled("span")({
 const NewsCard = styled(Card)(({ theme }) => ({
   width: "calc(33.33% - 20px)",
   margin: "0 10px",
+  border: "1px solid #ddd",
+  borderRadius: "5px",
+  transform: "scale(1)", 
+  transition: "transform 0.3s ease-in-out",  
+  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
 }));
 
 const CustomerCard = styled(Card)(({ theme }) => ({
   width: "calc(33.33% - 20px)",
   margin: "0 10px",
+  border: "1px solid #ddd",
+  borderRadius: "5px",
+  transform: "scale(1)", 
+  transition: "transform 0.3s ease-in-out", 
+  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
+}));
+
+// Thêm transition cho button ArrowForwardIos
+const NextButton = styled(IconButton)(({ theme }) => ({
+  transition: "transform 0.3s ease-in-out", // Thêm transition cho button
+  '&:hover': {
+    transform: 'scale(1.1)', // Hiệu ứng phóng to khi hover
+  },
 }));
 
 const HomePage = () => {
@@ -116,27 +141,27 @@ const HomePage = () => {
 
   const imageData = [
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/toan%20canh%20cong%20vien%20vinh%20hang%20long%20thanh.jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/toan%20canh%20cong%20vien%20vinh%20hang%20long%20thanh.jpg",
       alt: "Image 1 description",
     },
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/truc-than-dao-223.jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/truc-than-dao-223.jpg",
       alt: "Image 2 description",
     },
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/vuon-nhi-thap-tu-hieu.jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/vuon-nhi-thap-tu-hieu.jpg",
       alt: "Image 3 description",
     },
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/GD100-IMG_0787-2020.jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/GD100-IMG_0787-2020.jpg",
       alt: "Image 4 description",
     },
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/goc%20canh%20quan%20khu%20gia%20toc%20dep%20tai%20hoa%20vien%20vinh%20hang%20long%20thanh.jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/goc%20canh%20quan%20khu%20gia%20toc%20dep%20tai%20hoa%20vien%20vinh%20hang%20long%20thanh.jpg",
       alt: "Image 5 description",
     },
     {
-      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/6%20(2).jpg", // Thay bằng URL thực tế của ảnh
+      url: "https://congvienvinhhanglongthanh.com/public/ckeditor/uploads/6%20(2).jpg",
       alt: "Image 6 description",
     },
   ];
@@ -345,7 +370,7 @@ const HomePage = () => {
                 <Box
                   sx={{
                     width: "100%",
-                    height: 200, // Thiết lập chiều cao cố định cho hình ảnh
+                    height: 200, 
                     overflow: "hidden",
                     display: "flex",
                     justifyContent: "center",
@@ -359,21 +384,21 @@ const HomePage = () => {
                       style={{
                         width: "100%",
                         height: "100%",
-                        objectFit: "cover", // Đảm bảo ảnh vừa khung
+                        objectFit: "cover", 
                       }}
                     />
                   ) : (
-                    <CircularProgress size={50} /> // Placeholder nếu không có ảnh
+                    <CircularProgress size={50} /> 
                   )}
                 </Box>
                 <CardContent
                   sx={{
-                    height: 100, // Thiết lập chiều cao cố định cho phần mô tả
-                    overflow: "hidden", // Để ngăn văn bản quá dài tràn ra ngoài
+                    height: 100, 
+                    overflow: "hidden", 
                     display: "flex",
-                    alignItems: "center", // Căn giữa nội dung theo chiều dọc
+                    alignItems: "center", 
                     justifyContent: "center",
-                    textAlign: "center", // Căn giữa văn bản
+                    textAlign: "center", 
                   }}
                 >
                   <Typography
@@ -381,10 +406,10 @@ const HomePage = () => {
                     sx={{
                       color: "var(--secondary-color)",
                       display: "-webkit-box",
-                      WebkitLineClamp: 3, // Giới hạn 3 dòng
+                      WebkitLineClamp: 3, 
                       WebkitBoxOrient: "vertical",
                       overflow: "hidden",
-                      textOverflow: "ellipsis", // Hiển thị dấu "..."
+                      textOverflow: "ellipsis", 
                     }}
                   >
                     {newsData[currentPageNews * 3 + index]?.description ||
@@ -394,13 +419,14 @@ const HomePage = () => {
               </NewsCard>
             ))}
 
-            <IconButton
+            {/* Sử dụng NextButton thay cho IconButton */}
+            <NextButton
               aria-label="next"
               sx={{ position: "relative", top: "-5px", right: "10px" }}
               onClick={handleNewsNext}
             >
               <ArrowForwardIos />
-            </IconButton>
+            </NextButton>
           </Box>
 
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
@@ -425,7 +451,7 @@ const HomePage = () => {
             DỊCH VỤ
           </Typography>
 
-          <Service />
+          <Service /> 
 
           {/* Phần dot indicator */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
@@ -528,13 +554,14 @@ const HomePage = () => {
                 </Typography>
               </CardContent>
             </CustomerCard>
-            <IconButton
+            {/* Sử dụng NextButton thay cho IconButton */}
+            <NextButton
               aria-label="next"
               sx={{ position: "relative", top: "-5px", right: "10px" }}
               onClick={handleCustomerNext}
             >
               <ArrowForwardIos />
-            </IconButton>
+            </NextButton>
           </Box>
 
           {/* Phần dot indicator */}
