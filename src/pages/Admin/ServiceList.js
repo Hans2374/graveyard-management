@@ -124,7 +124,7 @@ function ServiceList() {
         </Box>
         <Box
           sx={{
-            maxWidth: "100%",
+            width: "100%",
             marginLeft: "50px",
             marginTop: "50px",
           }}
