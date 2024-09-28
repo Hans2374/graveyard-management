@@ -18,7 +18,7 @@ import {
   Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import styles from "../pages/Admin/Service.module.css"
+import styles from "../pages/Admin/Service.module.css";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 // Mock data (dữ liệu cứng)
@@ -114,7 +114,6 @@ const StaffTable = () => {
   };
 
   return (
-
     <Box>
       <Box
         sx={{
@@ -135,7 +134,13 @@ const StaffTable = () => {
       </Box>
 
       {/* Search and Filter Section */}
-      <Box sx={{ backgroundColor: "#fff", padding: "20px", margin: "3px 0 0 0 ", height: "568px" }}>
+      <Box
+        sx={{
+          backgroundColor: "#fff",
+          padding: "20px",
+          margin: "3px 0 0 0 ",
+        }}
+      >
         <Box sx={{ display: "flex", maxWidth: "100%", margin: "0 0 0 50px" }}>
           <TextField
             variant="outlined"

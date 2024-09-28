@@ -15,7 +15,7 @@ function ScheduleList() {
           backgroundColor: "white",
           marginTop: "50px",
           maxWidth: "100%",
-          maxHeight: '605px'
+          maxHeight: "605px",
         }}
       >
         <Box
@@ -72,7 +72,7 @@ function ScheduleList() {
             maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "45px",
-            height: "494px",
+            // overflow: "hidden",
           }}
         >
           <StaffDataTable />

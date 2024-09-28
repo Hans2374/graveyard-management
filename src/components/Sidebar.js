@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemIcon,
   ThemeProvider,
-  ListItemButton
+  ListItemButton,
 } from "@mui/material";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -40,7 +40,6 @@ export default function Sidebar() {
     setActiveItem(menudata);
     setMenudata(menudata);
   };
-  
 
   const theme = createTheme({
     components: {
@@ -58,14 +57,13 @@ export default function Sidebar() {
             },
             backgroundColor: activeItem === menudata ? "white" : "red",
             color: activeItem === menudata ? "black" : "black",
-            '&.Mui-selected': {
-              backgroundColor: 'var(--primary-color) !important',
-              color: 'white',
+            "&.Mui-selected": {
+              backgroundColor: "var(--primary-color) !important",
+              color: "white",
             },
           },
         },
       },
-
     },
   });
 
@@ -182,7 +180,12 @@ export default function Sidebar() {
       </ThemeProvider>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "#F2F2F2",
+          overflow: "hidden",
+        }}
       >
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}
