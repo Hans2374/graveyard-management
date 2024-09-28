@@ -88,7 +88,7 @@ const rows = [
 
 // Shared table cell style
 const tableCellStyle = {
-  border: "1px solid #ccc",
+  border: "1px solid #ccc", p: 1
 };
 
 // Hover effect for customer name
@@ -141,7 +141,7 @@ export default function CustomerTable() {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}>
+            <TableCell align="center" sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}>
               STT
             </TableCell>
             <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
@@ -156,7 +156,7 @@ export default function CustomerTable() {
             <TableCell align="left" sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}>
               Tổng số đơn
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", ...tableCellStyle }}>
+            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", ...tableCellStyle }}>
               Chặn
             </TableCell>
           </TableRow>
@@ -164,7 +164,7 @@ export default function CustomerTable() {
         <TableBody>
           {rows.map((row, index) => (
             <TableRow key={row.tenkhachhang}>
-              <TableCell align="left" scope="row" sx={tableCellStyle}>
+              <TableCell align="center" scope="row" sx={tableCellStyle}>
                 {row.stt}
               </TableCell>
               <TableCell align="left" sx={{ ...tableCellStyle, ...customerNameStyle }} onClick={handleClickOpen}>
@@ -179,7 +179,7 @@ export default function CustomerTable() {
               <TableCell align="left" sx={tableCellStyle}>
                 số
               </TableCell>
-              <TableCell align="left" sx={tableCellStyle}>
+              <TableCell align="center" sx={{...tableCellStyle, pl: '40px'}}>
                 <FormControlLabel
                   control={
                     <IOSSwitch

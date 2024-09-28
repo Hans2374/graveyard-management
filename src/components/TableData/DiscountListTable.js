@@ -88,16 +88,16 @@ export default function DiscountListTable() {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "100px", border: "1px solid #ccc" }}>
+            <TableCell align="center" sx={{ fontWeight: "bold", width: "100px", border: "1px solid #ccc", p: 1 }}>
               STT
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", width: "600px", border: "1px solid #ccc" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", width: "600px", border: "1px solid #ccc", p: 1 }}>
               Tên Gói
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", border: "1px solid #ccc" }}>
+            <TableCell align="center" sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 1 }}>
               Khả Dụng
             </TableCell>
-            <TableCell align="left" sx={{ fontWeight: "bold", border: "1px solid #ccc" }}>
+            <TableCell align="left" sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 1 }}>
               Chỉnh Sửa
             </TableCell>
           </TableRow>
@@ -107,16 +107,16 @@ export default function DiscountListTable() {
             <TableRow
               key={row.name}
             >
-              <TableCell align="left" scope="row" sx={{ border: "1px solid #ccc" }}>
+              <TableCell align="center" scope="row" sx={{ border: "1px solid #ccc", p: 1 }}>
                 {row.stt}
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>{row.tengoi}</TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>
+              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>{row.tengoi}</TableCell>
+              <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0.5, pl: '35px' }}>
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                 />
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>{row.chinhsua}</TableCell>
+              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>{row.chinhsua}</TableCell>
             </TableRow>
           ))}
         </TableBody>

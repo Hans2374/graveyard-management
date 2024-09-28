@@ -213,6 +213,7 @@ function AllServiceTab() {
           maxWidth: "100%",
           marginLeft: "50px",
           marginTop: "50px",
+          height: '404px'
         }}
       >
         <ServiceTable />

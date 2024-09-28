@@ -341,7 +341,7 @@ export default function ServiceListTable() {
                   <TableCell
                     align="center"
                     scope="row"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: 1 }}
                   >
                     {row.stt}
                   </TableCell>
@@ -362,25 +362,25 @@ export default function ServiceListTable() {
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: 1 }}
                   >
                     {row.trangthai}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: 1 }}
                   >
                     {row.phancong}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: 1 }}
                   >
                     {row.ngaytao}
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: 1 }}
                   >
                     {row.thanhtoan}
                   </TableCell>
@@ -388,7 +388,7 @@ export default function ServiceListTable() {
                     align="left"
                     sx={{
                       borderRight: "1px solid #ddd",
-                      p: 0,
+                      p: 1,
                       pl: "5px",
                       whiteSpace: "pre-wrap",
                     }}
@@ -397,7 +397,7 @@ export default function ServiceListTable() {
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
+                    sx={{ p: 1, whiteSpace: "pre-wrap" }}
                   >
                     {row.tongtien}
                   </TableCell>

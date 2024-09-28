@@ -89,12 +89,12 @@ export default function ServiceTable() {
         <TableHead>
           <TableRow>
             <TableCell
-              align="left"
+              align="center"
               sx={{
                 fontWeight: "bold",
                 width: "100px",
                 border: "1px solid #ccc",
-                p: "1"
+                p: 0,
               }}
             >
               STT
@@ -105,19 +105,20 @@ export default function ServiceTable() {
                 fontWeight: "bold",
                 width: "600px",
                 border: "1px solid #ccc",
+                p: 1
               }}
             >
               Tên Gói
             </TableCell>
             <TableCell
-              align="left"
-              sx={{ fontWeight: "bold", border: "1px solid #ccc" }}
+              align="center"
+              sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 0.1 }}
             >
               Khả Dụng
             </TableCell>
             <TableCell
               align="left"
-              sx={{ fontWeight: "bold", border: "1px solid #ccc" }}
+              sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 1 }}
             >
               Chỉnh Sửa
             </TableCell>
@@ -129,21 +130,21 @@ export default function ServiceTable() {
               key={row.id}
             >
               <TableCell
-                align="left"
+                align="center"
                 scope="row"
-                sx={{ border: "1px solid #ccc" }}
+                sx={{ border: "1px solid #ccc", p: 1 }}
               >
                 {row.stt}
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>
+              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>
                 {row.tengoi}
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>
+              <TableCell align="center" sx={{ border: "1px solid #ccc", p: 1, pl: 3, pr: 0 }}>
                 <FormControlLabel
                   control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
                 />
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc" }}>
+              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>
                 {row.chinhsua}
               </TableCell>
             </TableRow>

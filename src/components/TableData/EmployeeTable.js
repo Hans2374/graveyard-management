@@ -45,7 +45,7 @@ const orderRows = [
 
 // Shared table cell style
 const tableCellStyle = {
-  border: "1px solid #ccc",
+  border: "1px solid #ccc", p: 1
 };
 
 // Hover effect for customer name
@@ -113,32 +113,32 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell
-              align="left"
-              sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle }}
+              align="center"
+              sx={{ fontWeight: "bold", width: "50px", ...tableCellStyle, p: 1 }}
             >
               STT
             </TableCell>
             <TableCell
               align="left"
-              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle, p: 1 }}
             >
               Tên nhân viên
             </TableCell>
             <TableCell
               align="left"
-              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle, p: 1 }}
             >
               Số điện thoại
             </TableCell>
             <TableCell
               align="left"
-              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle, p: 1 }}
             >
               Email
             </TableCell>
             <TableCell
               align="left"
-              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle }}
+              sx={{ fontWeight: "bold", width: "500px", ...tableCellStyle, p: 1 }}
             >
               Tổng số đơn
             </TableCell>
@@ -147,7 +147,7 @@ export default function BasicTable() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.tennhanvien}>
-              <TableCell align="left" scope="row" sx={tableCellStyle}>
+              <TableCell align="center" scope="row" sx={tableCellStyle}>
                 {row.stt}
               </TableCell>
               <TableCell
