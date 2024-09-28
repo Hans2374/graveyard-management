@@ -157,11 +157,6 @@ export const Header = () => {
         setAccountAnchorEl(null);
     };
 
-    const handleNotificationItemClick = (notification) => {
-        console.log("Clicked notification:", notification);
-        // Handle notification click logic here
-    };
-
     const handleListItemClick = (event, action) => {
         if (action === 'logout') {
             setIsLoggedIn(false);
@@ -334,16 +329,7 @@ export const Header = () => {
                                         padding: 0,
                                     }}>
                                         {notifications.map((notification, index) => (
-                                            <ListItem
-                                                key={index}
-                                                onClick={() => handleNotificationItemClick(notification)}
-                                                sx={{
-                                                    cursor: 'pointer',
-                                                    ':hover': {
-                                                        backgroundColor: '#EEEEEE',
-                                                    },
-                                                }}
-                                            >
+                                            <ListItem>
                                                 <ListItemText
                                                     primary={truncateText(notification, 41)}
                                                     sx={notificationStyles}
@@ -418,8 +404,21 @@ export const Header = () => {
                                                     <ListItemText primary="Đóng góp ý kiến" />
                                                 </ListItem>
                                             </>
-                                        ) : (
+                                        ) : role === 'staff' ? (
                                             <RouterLink to={routes.staff} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                                <ListItem
+                                                    sx={{
+                                                        cursor: 'pointer',
+                                                        p: '0px 16px',
+                                                        ':hover': {
+                                                            backgroundColor: '#EEEEEE',
+                                                        },
+                                                    }}>
+                                                    <ListItemText primary="Quản lý" />
+                                                </ListItem>
+                                            </RouterLink>
+                                        ) : (
+                                            <RouterLink to={routes.admin} style={{ textDecoration: 'none', color: 'inherit' }}>
                                                 <ListItem
                                                     sx={{
                                                         cursor: 'pointer',

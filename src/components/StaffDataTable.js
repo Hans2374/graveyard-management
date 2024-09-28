@@ -516,7 +516,11 @@ export default function StaffDataTable() {
                     sx={{
                       borderRight: "1px solid #ddd",
                       p: 0,
-                      cursor: "pointer",
+                      "&:hover": {
+                        color: "blue",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      },
                     }}
                     onClick={() => handleOpenDialog(row)} // Open dialog on click
                   >
@@ -611,7 +615,7 @@ export default function StaffDataTable() {
             backgroundColor: "var(--primary-color)",
             fontWeight: "bold",
             textAlign: "center",
-            color:"white"
+            color: "white"
           }}
         >
           Chi tiết mã đơn
@@ -619,7 +623,7 @@ export default function StaffDataTable() {
         <DialogContent>
           {selectedRow && (
             <div>
-              <Box sx={{ width: "100%", p: "0px 24px", m:"30px 0 0 0 " }}>
+              <Box sx={{ width: "100%", p: "0px 24px", m: "30px 0 0 0 " }}>
                 <Typography sx={{ fontWeight: "bold" }}>
                   Nội dung công việc chung của dịch vụ:
                 </Typography>
@@ -863,9 +867,9 @@ export default function StaffDataTable() {
                 border: "none",
                 bgcolor: "lightblue",
                 color: "black",
-                m:"0 20px 0 15px",
-                borderRadius:"10px",
-                textTransform:"capitalize"
+                m: "0 20px 0 15px",
+                borderRadius: "10px",
+                textTransform: "capitalize"
               }}
             >
               Lưu
@@ -877,9 +881,9 @@ export default function StaffDataTable() {
                 border: "none",
                 bgcolor: "var(--primary-color)",
                 color: "black",
-                m:"0 15px 0 15px",
-                borderRadius:"10px",
-                textTransform:"capitalize"
+                m: "0 15px 0 15px",
+                borderRadius: "10px",
+                textTransform: "capitalize"
               }}
             >
               Đóng
