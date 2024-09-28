@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -8,12 +8,13 @@ import {
   CardContent,
   IconButton,
   Avatar,
+  useTheme,
+  useMediaQuery
 } from "@mui/material";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
-
-import Service from "../components/Service"; 
+import Service from "../components/Service";
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -25,7 +26,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   maxWidth: "none",
 }));
 
-const ImageItem = styled("div")({
+const ImageItem = styled("div")(({ theme }) => ({
   width: "calc(33.33% - 10px)",
   height: 150,
   backgroundColor: "var(--primary-color)",
@@ -36,52 +37,75 @@ const ImageItem = styled("div")({
   alignItems: "center",
   margin: "0 10px",
   transition: "transform 0.3s ease-in-out",
-});
+  cursor: "pointer",
+  [theme.breakpoints.down('sm')]: {
+    width: "100%",
+    margin: "10px 0",
+  },
+}));
 
-const Dot = styled("span")({
+const Dot = styled("span")(({ theme }) => ({
   width: 10,
   height: 10,
   borderRadius: "50%",
   backgroundColor: "#ddd",
   cursor: "pointer",
   margin: "0 5px",
-});
+  "&.active": {
+    backgroundColor: "#555",
+  },
+}));
 
 const NewsCard = styled(Card)(({ theme }) => ({
   width: "calc(33.33% - 20px)",
   margin: "0 10px",
   border: "1px solid #ddd",
   borderRadius: "5px",
-  transform: "scale(1)", 
-  transition: "transform 0.3s ease-in-out",  
+  transform: "scale(1)",
+  transition: "transform 0.3s ease-in-out",
   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  cursor: "pointer",
   '&:hover': {
     transform: 'scale(1.05)',
   },
+  [theme.breakpoints.down('sm')]: {
+    width: "100%",
+    margin: "10px 0",
+  },
 }));
+
 
 const CustomerCard = styled(Card)(({ theme }) => ({
   width: "calc(33.33% - 20px)",
   margin: "0 10px",
   border: "1px solid #ddd",
   borderRadius: "5px",
-  transform: "scale(1)", 
-  transition: "transform 0.3s ease-in-out", 
+  transform: "scale(1)",
+  transition: "transform 0.3s ease-in-out",
   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  cursor: "pointer",
   '&:hover': {
     transform: 'scale(1.05)',
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: "100%",
+    margin: "10px 0",
   },
 }));
 
 // Thêm transition cho button ArrowForwardIos
 const NextButton = styled(IconButton)(({ theme }) => ({
-  transition: "transform 0.3s ease-in-out", // Thêm transition cho button
+  transition: "transform 0.3s ease-in-out",
   '&:hover': {
-    transform: 'scale(1.1)', // Hiệu ứng phóng to khi hover
+    transform: 'scale(1.1)',
   },
 }));
 
 const HomePage = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const itemsPerPage = isSmallScreen ? 1 : 3;
+
   const [activeImage, setActiveImage] = useState(0);
   const [activeNews, setActiveNews] = useState(0);
   const [activeCustomer, setActiveCustomer] = useState(0);
@@ -89,55 +113,6 @@ const HomePage = () => {
   const [currentPageImage, setCurrentPageImage] = useState(0);
   const [currentPageNews, setCurrentPageNews] = useState(0);
   const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
-
-  const handleImageClick = (index) => {
-    setActiveImage(index);
-  };
-
-  const handleNewsClick = (index) => {
-    setActiveNews(index);
-  };
-
-  const handleCustomerClick = (index) => {
-    setActiveCustomer(index);
-  };
-
-  const handleImageNext = () => {
-    setCurrentPageImage(
-      (currentPageImage + 1) % Math.ceil(imageData.length / 3)
-    );
-  };
-
-  const handleImagePrev = () => {
-    setCurrentPageImage(
-      (currentPageImage - 1 + Math.ceil(imageData.length / 3)) %
-      Math.ceil(imageData.length / 3)
-    );
-  };
-
-  const handleNewsNext = () => {
-    setCurrentPageNews((currentPageNews + 1) % Math.ceil(newsData.length / 3));
-  };
-
-  const handleNewsPrev = () => {
-    setCurrentPageNews(
-      (currentPageNews - 1 + Math.ceil(newsData.length / 3)) %
-      Math.ceil(newsData.length / 3)
-    );
-  };
-
-  const handleCustomerNext = () => {
-    setCurrentPageCustomer(
-      (currentPageCustomer + 1) % Math.ceil(customerData.length / 3)
-    );
-  };
-
-  const handleCustomerPrev = () => {
-    setCurrentPageCustomer(
-      (currentPageCustomer - 1 + Math.ceil(customerData.length / 3)) %
-      Math.ceil(customerData.length / 3)
-    );
-  };
 
   const imageData = [
     {
@@ -230,6 +205,66 @@ const HomePage = () => {
     },
   ];
 
+  // Calculate Total Pages
+  const totalPagesImage = Math.ceil(imageData.length / itemsPerPage);
+  const totalPagesNews = Math.ceil(newsData.length / itemsPerPage);
+  const totalPagesCustomer = Math.ceil(customerData.length / itemsPerPage);
+
+  const handleImageClick = (index) => {
+    setActiveImage(index);
+  };
+
+  const handleNewsClick = (index) => {
+    setActiveNews(index);
+  };
+
+  const handleCustomerClick = (index) => {
+    setActiveCustomer(index);
+  };
+
+  // Handlers for Images
+  const handleImageNext = () => {
+    setCurrentPageImage((prev) => (prev + 1) % totalPagesImage);
+  };
+
+  const handleImagePrev = () => {
+    setCurrentPageImage((prev) => (prev - 1 + totalPagesImage) % totalPagesImage);
+  };
+
+  // Handlers for News
+  const handleNewsNext = () => {
+    setCurrentPageNews((prev) => (prev + 1) % totalPagesNews);
+  };
+
+  const handleNewsPrev = () => {
+    setCurrentPageNews((prev) => (prev - 1 + totalPagesNews) % totalPagesNews);
+  };
+
+  // Handlers for Customers
+  const handleCustomerNext = () => {
+    setCurrentPageCustomer((prev) => (prev + 1) % totalPagesCustomer);
+  };
+
+  const handleCustomerPrev = () => {
+    setCurrentPageCustomer((prev) => (prev - 1 + totalPagesCustomer) % totalPagesCustomer);
+  };
+
+  // Slice Data Based on Current Page and Items Per Page
+  const currentImages = imageData.slice(
+    currentPageImage * itemsPerPage,
+    currentPageImage * itemsPerPage + itemsPerPage
+  );
+
+  const currentNews = newsData.slice(
+    currentPageNews * itemsPerPage,
+    currentPageNews * itemsPerPage + itemsPerPage
+  );
+
+  const currentCustomers = customerData.slice(
+    currentPageCustomer * itemsPerPage,
+    currentPageCustomer * itemsPerPage + itemsPerPage
+  );
+
   return (
     <Box align="center" sx={{
       overflow: "hidden", flexGrow: 1,
@@ -280,61 +315,65 @@ const HomePage = () => {
               justifyContent: "space-between",
               alignItems: "center",
               mb: 2,
+              flexDirection: isSmallScreen ? 'column' : 'row',
             }}
           >
+            {/* Previous Button */}
             <IconButton
               aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
               onClick={handleImagePrev}
+              sx={{ mb: isSmallScreen ? 2 : 0 }}
             >
               <ArrowBackIos />
             </IconButton>
-            <ImageItem onClick={() => handleImageClick(currentPageImage * 3)}>
-              <img
-                src={imageData[currentPageImage * 3].url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
-            <ImageItem
-              onClick={() => handleImageClick(currentPageImage * 3 + 1)}
+
+            {/* Image Items */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isSmallScreen ? 'column' : 'row',
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <img
-                src={imageData[currentPageImage * 3 + 1]?.url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
-            <ImageItem
-              onClick={() => handleImageClick(currentPageImage * 3 + 2)}
-            >
-              <img
-                src={imageData[currentPageImage * 3 + 2]?.url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
+              {currentImages.map((image, index) => (
+                <ImageItem
+                  key={index}
+                  onClick={() => handleImageClick(currentPageImage * itemsPerPage + index)}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                </ImageItem>
+              ))}
+            </Box>
+
+            {/* Next Button */}
             <IconButton
               aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
               onClick={handleImageNext}
+              sx={{ mt: isSmallScreen ? 2 : 0 }}
             >
               <ArrowForwardIos />
             </IconButton>
           </Box>
 
+          {/* Dot Indicators */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageImage === 0 ? "active" : ""}
-              onClick={() => setCurrentPageImage(0)}
-            />
-            <Dot
-              className={currentPageImage === 1 ? "active" : ""}
-              onClick={() => setCurrentPageImage(1)}
-            />
+            {Array.from({ length: totalPagesImage }).map((_, index) => (
+              <Dot
+                key={index}
+                className={currentPageImage === index ? "active" : ""}
+                onClick={() => setCurrentPageImage(index)}
+              />
+            ))}
           </Box>
         </StyledContainer>
 
+        {/* TIN TỨC */}
         <StyledContainer>
           <Typography
             align="center"
@@ -350,94 +389,104 @@ const HomePage = () => {
               justifyContent: "space-between",
               alignItems: "center",
               mb: 2,
+              flexDirection: isSmallScreen ? 'column' : 'row',
             }}
           >
+            {/* Previous Button */}
             <IconButton
               aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
               onClick={handleNewsPrev}
+              sx={{ mb: isSmallScreen ? 2 : 0 }}
             >
               <ArrowBackIos />
             </IconButton>
 
             {/* News Cards */}
-            {[0, 1, 2].map((index) => (
-              <NewsCard
-                key={index}
-                sx={{ flex: 1, ml: index !== 0 ? 1 : 0 }}
-                onClick={() => handleNewsClick(currentPageNews * 3 + index)}
-              >
-                <Box
-                  sx={{
-                    width: "100%",
-                    height: 200, 
-                    overflow: "hidden",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isSmallScreen ? 'column' : 'row',
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {currentNews.map((news, index) => (
+                <NewsCard
+                  key={index}
+                  onClick={() => handleNewsClick(currentPageNews * itemsPerPage + index)}
                 >
-                  {newsData[currentPageNews * 3 + index]?.url ? (
-                    <img
-                      src={newsData[currentPageNews * 3 + index]?.url}
-                      alt="News"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover", 
-                      }}
-                    />
-                  ) : (
-                    <CircularProgress size={50} /> 
-                  )}
-                </Box>
-                <CardContent
-                  sx={{
-                    height: 100, 
-                    overflow: "hidden", 
-                    display: "flex",
-                    alignItems: "center", 
-                    justifyContent: "center",
-                    textAlign: "center", 
-                  }}
-                >
-                  <Typography
-                    variant="body2"
+                  <Box
                     sx={{
-                      color: "var(--secondary-color)",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3, 
-                      WebkitBoxOrient: "vertical",
+                      width: "100%",
+                      height: 200,
                       overflow: "hidden",
-                      textOverflow: "ellipsis", 
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    {newsData[currentPageNews * 3 + index]?.description ||
-                      "Mô tả không có sẵn"}
-                  </Typography>
-                </CardContent>
-              </NewsCard>
-            ))}
+                    {news.url ? (
+                      <img
+                        src={news.url}
+                        alt={news.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <CircularProgress size={50} />
+                    )}
+                  </Box>
+                  <CardContent
+                    sx={{
+                      height: 100,
+                      overflow: "hidden",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "var(--secondary-color)",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {news.description || "Mô tả không có sẵn"}
+                    </Typography>
+                  </CardContent>
+                </NewsCard>
+              ))}
+            </Box>
 
-            {/* Sử dụng NextButton thay cho IconButton */}
+            {/* Next Button */}
             <NextButton
               aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
               onClick={handleNewsNext}
+              sx={{ mt: isSmallScreen ? 2 : 0 }}
             >
               <ArrowForwardIos />
             </NextButton>
           </Box>
 
+          {/* Dot Indicators */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageNews === 0 ? "active" : ""}
-              onClick={() => setCurrentPageNews(0)}
-            />
-            <Dot
-              className={currentPageNews === 1 ? "active" : ""}
-              onClick={() => setCurrentPageNews(1)}
-            />
+            {Array.from({ length: totalPagesNews }).map((_, index) => (
+              <Dot
+                key={index}
+                className={currentPageNews === index ? "active" : ""}
+                onClick={() => setCurrentPageNews(index)}
+              />
+            ))}
           </Box>
         </StyledContainer>
 
@@ -451,7 +500,7 @@ const HomePage = () => {
             DỊCH VỤ
           </Typography>
 
-          <Service /> 
+          <Service />
 
           {/* Phần dot indicator */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
@@ -482,98 +531,72 @@ const HomePage = () => {
               justifyContent: "space-between",
               alignItems: "center",
               mb: 2,
+              flexDirection: isSmallScreen ? 'column' : 'row',
             }}
           >
+            {/* Previous Button */}
             <IconButton
               aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
               onClick={handleCustomerPrev}
+              sx={{ mb: isSmallScreen ? 2 : 0 }}
             >
               <ArrowBackIos />
             </IconButton>
-            <CustomerCard
-              sx={{ flex: 1, ml: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3)}
+
+            {/* Customer Cards */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: isSmallScreen ? 'column' : 'row',
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
+              {currentCustomers.map((customer, index) => (
+                <CustomerCard
+                  key={index}
+                  onClick={() => handleCustomerClick(currentPageCustomer * itemsPerPage + index)}
                 >
-                  {customerData[currentPageCustomer * 3].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            <CustomerCard
-              sx={{ flex: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3 + 1)}
-            >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
-                >
-                  {customerData[currentPageCustomer * 3 + 1].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3 + 1].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            <CustomerCard
-              sx={{ flex: 1, mr: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3 + 2)}
-            >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
-                >
-                  {customerData[currentPageCustomer * 3 + 2].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3 + 2].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            {/* Sử dụng NextButton thay cho IconButton */}
+                  <CardContent>
+                    <Avatar
+                      sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
+                    />
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      align="center"
+                      sx={{ color: "var(--secondary-color)" }}
+                    >
+                      {customer.name}
+                    </Typography>
+                    <Typography variant="body2" gutterBottom align="center">
+                      {customer.content}
+                    </Typography>
+                  </CardContent>
+                </CustomerCard>
+              ))}
+            </Box>
+
+            {/* Next Button */}
             <NextButton
               aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
               onClick={handleCustomerNext}
+              sx={{ mt: isSmallScreen ? 2 : 0 }}
             >
               <ArrowForwardIos />
             </NextButton>
           </Box>
 
-          {/* Phần dot indicator */}
+          {/* Dot Indicators */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageCustomer === 0 ? "active" : ""}
-              onClick={() => setCurrentPageCustomer(0)}
-            />
-            <Dot
-              className={currentPageCustomer === 1 ? "active" : ""}
-              onClick={() => setCurrentPageCustomer(1)}
-            />
+            {Array.from({ length: totalPagesCustomer }).map((_, index) => (
+              <Dot
+                key={index}
+                className={currentPageCustomer === index ? "active" : ""}
+                onClick={() => setCurrentPageCustomer(index)}
+              />
+            ))}
           </Box>
         </StyledContainer>
       </Box>
