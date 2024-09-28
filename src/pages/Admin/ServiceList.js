@@ -127,6 +127,7 @@ function ServiceList() {
             width: "100%",
             marginLeft: "50px",
             marginTop: "50px",
+            height: '404px'
           }}
         >
           <ServiceListTable />

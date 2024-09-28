@@ -23,6 +23,7 @@ function AdminNews() {
           p: 2,
           borderRadius: 2,
           margin: "30px 0 0 50px",
+          height: '410px'
         }}
       >
         {/* Icons for formatting */}
