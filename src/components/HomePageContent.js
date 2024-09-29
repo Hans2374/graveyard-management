@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -6,14 +6,18 @@ import {
   styled,
   Card,
   CardContent,
-  IconButton,
   Avatar,
+  useTheme,
+  useMediaQuery
 } from "@mui/material";
-import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
-
-import Service from "../components/Service"; 
+import Service from "../components/Service";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -25,8 +29,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   maxWidth: "none",
 }));
 
-const ImageItem = styled("div")({
-  width: "calc(33.33% - 10px)",
+const ImageItem = styled("div")(({ theme }) => ({
+  width: "100%",
   height: 150,
   backgroundColor: "var(--primary-color)",
   border: "1px solid #ddd",
@@ -34,109 +38,90 @@ const ImageItem = styled("div")({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  margin: "0 10px",
   transition: "transform 0.3s ease-in-out",
-});
+  cursor: "pointer",
+}));
 
-const Dot = styled("span")({
+const Dot = styled("span")(({ theme }) => ({
   width: 10,
   height: 10,
   borderRadius: "50%",
   backgroundColor: "#ddd",
   cursor: "pointer",
   margin: "0 5px",
-});
+  "&.active": {
+    backgroundColor: "#555",
+  },
+}));
+
+const StyledSwiper = styled(Swiper)(({ theme }) => ({
+  '& .swiper-pagination-bullets': {
+    bottom: '-3px !important',
+  },
+  '& .swiper-pagination-bullet': {
+    backgroundColor: 'black',
+  },
+  '& .swiper-button-next, & .swiper-button-prev': {
+    color: 'black',
+    // Thay đổi vị trí của nút điều hướng
+    top: '55%', // Chỉnh vị trí theo chiều dọc (50% là giữa)
+    transform: 'translateY(-50%)', // Căn giữa nút điều hướng
+    // Thay đổi khoảng cách từ cạnh Swiper
+    right: '3px', // Đối với nút "next"
+  },
+  paddingBottom: '30px',
+  paddingLeft: '40px',
+  paddingRight: '35px',
+}));
 
 const NewsCard = styled(Card)(({ theme }) => ({
-  width: "calc(33.33% - 20px)",
-  margin: "0 10px",
+  width: "100%",
   border: "1px solid #ddd",
   borderRadius: "5px",
-  transform: "scale(1)", 
-  transition: "transform 0.3s ease-in-out",  
+  transform: "scale(1)",
+  transition: "transform 0.3s ease-in-out",
   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  cursor: "pointer",
   '&:hover': {
     transform: 'scale(1.05)',
   },
 }));
 
 const CustomerCard = styled(Card)(({ theme }) => ({
-  width: "calc(33.33% - 20px)",
-  margin: "0 10px",
+  width: "100%",
   border: "1px solid #ddd",
   borderRadius: "5px",
-  transform: "scale(1)", 
-  transition: "transform 0.3s ease-in-out", 
+  transform: "scale(1)",
+  transition: "transform 0.3s ease-in-out",
   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+  cursor: "pointer",
   '&:hover': {
     transform: 'scale(1.05)',
   },
 }));
 
-// Thêm transition cho button ArrowForwardIos
-const NextButton = styled(IconButton)(({ theme }) => ({
-  transition: "transform 0.3s ease-in-out", // Thêm transition cho button
-  '&:hover': {
-    transform: 'scale(1.1)', // Hiệu ứng phóng to khi hover
-  },
-}));
-
 const HomePage = () => {
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [activeImage, setActiveImage] = useState(0);
   const [activeNews, setActiveNews] = useState(0);
   const [activeCustomer, setActiveCustomer] = useState(0);
 
-  const [currentPageImage, setCurrentPageImage] = useState(0);
-  const [currentPageNews, setCurrentPageNews] = useState(0);
-  const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
-
-  const handleImageClick = (index) => {
-    setActiveImage(index);
-  };
-
-  const handleNewsClick = (index) => {
-    setActiveNews(index);
-  };
-
-  const handleCustomerClick = (index) => {
-    setActiveCustomer(index);
-  };
-
-  const handleImageNext = () => {
-    setCurrentPageImage(
-      (currentPageImage + 1) % Math.ceil(imageData.length / 3)
-    );
-  };
-
-  const handleImagePrev = () => {
-    setCurrentPageImage(
-      (currentPageImage - 1 + Math.ceil(imageData.length / 3)) %
-      Math.ceil(imageData.length / 3)
-    );
-  };
-
-  const handleNewsNext = () => {
-    setCurrentPageNews((currentPageNews + 1) % Math.ceil(newsData.length / 3));
-  };
-
-  const handleNewsPrev = () => {
-    setCurrentPageNews(
-      (currentPageNews - 1 + Math.ceil(newsData.length / 3)) %
-      Math.ceil(newsData.length / 3)
-    );
-  };
-
-  const handleCustomerNext = () => {
-    setCurrentPageCustomer(
-      (currentPageCustomer + 1) % Math.ceil(customerData.length / 3)
-    );
-  };
-
-  const handleCustomerPrev = () => {
-    setCurrentPageCustomer(
-      (currentPageCustomer - 1 + Math.ceil(customerData.length / 3)) %
-      Math.ceil(customerData.length / 3)
-    );
+  const swiperProps = {
+    modules: [Pagination, Autoplay, ...(isSmallScreen ? [] : [Navigation])],
+    pagination: {
+      clickable: true,
+      type: 'bullets',
+    },
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    navigation: !isSmallScreen,
+    spaceBetween: 42,
+    slidesPerView: isSmallScreen ? 1 : 3,
+    loop: true,
   };
 
   const imageData = [
@@ -230,6 +215,35 @@ const HomePage = () => {
     },
   ];
 
+  const handleImageClick = (index) => {
+    setActiveImage(index);
+  };
+
+  const handleNewsClick = (index) => {
+    setActiveNews(index);
+  };
+
+  const handleCustomerClick = (index) => {
+    setActiveCustomer(index);
+  };
+
+
+  const handleSlideClick = (type, index) => {
+    switch (type) {
+      case 'image':
+        handleImageClick(index);
+        break;
+      case 'news':
+        handleNewsClick(index);
+        break;
+      case 'customer':
+        handleCustomerClick(index);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <Box align="center" sx={{
       overflow: "hidden", flexGrow: 1,
@@ -269,176 +283,96 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             HÌNH ẢNH
           </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <IconButton
-              aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
-              onClick={handleImagePrev}
-            >
-              <ArrowBackIos />
-            </IconButton>
-            <ImageItem onClick={() => handleImageClick(currentPageImage * 3)}>
-              <img
-                src={imageData[currentPageImage * 3].url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
-            <ImageItem
-              onClick={() => handleImageClick(currentPageImage * 3 + 1)}
-            >
-              <img
-                src={imageData[currentPageImage * 3 + 1]?.url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
-            <ImageItem
-              onClick={() => handleImageClick(currentPageImage * 3 + 2)}
-            >
-              <img
-                src={imageData[currentPageImage * 3 + 2]?.url}
-                alt={imageData[currentPageImage * 3].alt}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            </ImageItem>
-            <IconButton
-              aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
-              onClick={handleImageNext}
-            >
-              <ArrowForwardIos />
-            </IconButton>
-          </Box>
-
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageImage === 0 ? "active" : ""}
-              onClick={() => setCurrentPageImage(0)}
-            />
-            <Dot
-              className={currentPageImage === 1 ? "active" : ""}
-              onClick={() => setCurrentPageImage(1)}
-            />
-          </Box>
+          <StyledSwiper {...swiperProps}>
+            {imageData.map((image, index) => (
+              <SwiperSlide key={index}>
+                <ImageItem onClick={() => handleSlideClick('image', index)}>
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    loading="lazy"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </ImageItem>
+              </SwiperSlide>
+            ))}
+          </StyledSwiper>
         </StyledContainer>
 
+        {/* TIN TỨC */}
         <StyledContainer>
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             TIN TỨC
           </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <IconButton
-              aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
-              onClick={handleNewsPrev}
-            >
-              <ArrowBackIos />
-            </IconButton>
-
-            {/* News Cards */}
-            {[0, 1, 2].map((index) => (
-              <NewsCard
-                key={index}
-                sx={{ flex: 1, ml: index !== 0 ? 1 : 0 }}
-                onClick={() => handleNewsClick(currentPageNews * 3 + index)}
-              >
-                <Box
-                  sx={{
-                    width: "100%",
-                    height: 200, 
-                    overflow: "hidden",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {newsData[currentPageNews * 3 + index]?.url ? (
-                    <img
-                      src={newsData[currentPageNews * 3 + index]?.url}
-                      alt="News"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover", 
-                      }}
-                    />
-                  ) : (
-                    <CircularProgress size={50} /> 
-                  )}
-                </Box>
-                <CardContent
-                  sx={{
-                    height: 100, 
-                    overflow: "hidden", 
-                    display: "flex",
-                    alignItems: "center", 
-                    justifyContent: "center",
-                    textAlign: "center", 
-                  }}
-                >
-                  <Typography
-                    variant="body2"
+          <StyledSwiper {...swiperProps}>
+            {newsData.map((news, index) => (
+              <SwiperSlide key={index}>
+                <NewsCard onClick={() => handleSlideClick('news', index)}>
+                  <Box
                     sx={{
-                      color: "var(--secondary-color)",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3, 
-                      WebkitBoxOrient: "vertical",
+                      width: "100%",
+                      height: 200,
                       overflow: "hidden",
-                      textOverflow: "ellipsis", 
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
                   >
-                    {newsData[currentPageNews * 3 + index]?.description ||
-                      "Mô tả không có sẵn"}
-                  </Typography>
-                </CardContent>
-              </NewsCard>
+                    {news.url ? (
+                      <img
+                        src={news.url}
+                        alt={news.title}
+                        loading="lazy"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <CircularProgress size={50} />
+                    )}
+                  </Box>
+                  <CardContent
+                    sx={{
+                      height: 100,
+                      overflow: "hidden",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "var(--secondary-color)",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {news.description || "Mô tả không có sẵn"}
+                    </Typography>
+                  </CardContent>
+                </NewsCard>
+              </SwiperSlide>
             ))}
-
-            {/* Sử dụng NextButton thay cho IconButton */}
-            <NextButton
-              aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
-              onClick={handleNewsNext}
-            >
-              <ArrowForwardIos />
-            </NextButton>
-          </Box>
-
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageNews === 0 ? "active" : ""}
-              onClick={() => setCurrentPageNews(0)}
-            />
-            <Dot
-              className={currentPageNews === 1 ? "active" : ""}
-              onClick={() => setCurrentPageNews(1)}
-            />
-          </Box>
+          </StyledSwiper>
         </StyledContainer>
 
         {/* DỊCH VỤ */}
@@ -446,12 +380,12 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             DỊCH VỤ
           </Typography>
 
-          <Service /> 
+          <Service />
 
           {/* Phần dot indicator */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
@@ -471,110 +405,34 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             KHÁCH HÀNG
           </Typography>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <IconButton
-              aria-label="previous"
-              sx={{ position: "relative", top: "-5px", left: "10px" }}
-              onClick={handleCustomerPrev}
-            >
-              <ArrowBackIos />
-            </IconButton>
-            <CustomerCard
-              sx={{ flex: 1, ml: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3)}
-            >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
-                >
-                  {customerData[currentPageCustomer * 3].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            <CustomerCard
-              sx={{ flex: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3 + 1)}
-            >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
-                >
-                  {customerData[currentPageCustomer * 3 + 1].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3 + 1].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            <CustomerCard
-              sx={{ flex: 1, mr: 1 }}
-              onClick={() => handleCustomerClick(currentPageCustomer * 3 + 2)}
-            >
-              <CardContent>
-                <Avatar
-                  sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                />
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  align="center"
-                  sx={{ color: "var(--secondary-color)" }}
-                >
-                  {customerData[currentPageCustomer * 3 + 2].name}
-                </Typography>
-                <Typography variant="body2" gutterBottom align="center">
-                  {customerData[currentPageCustomer * 3 + 2].content}
-                </Typography>
-              </CardContent>
-            </CustomerCard>
-            {/* Sử dụng NextButton thay cho IconButton */}
-            <NextButton
-              aria-label="next"
-              sx={{ position: "relative", top: "-5px", right: "10px" }}
-              onClick={handleCustomerNext}
-            >
-              <ArrowForwardIos />
-            </NextButton>
-          </Box>
-
-          {/* Phần dot indicator */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Dot
-              className={currentPageCustomer === 0 ? "active" : ""}
-              onClick={() => setCurrentPageCustomer(0)}
-            />
-            <Dot
-              className={currentPageCustomer === 1 ? "active" : ""}
-              onClick={() => setCurrentPageCustomer(1)}
-            />
-          </Box>
+          <StyledSwiper {...swiperProps}>
+            {customerData.map((customer, index) => (
+              <SwiperSlide key={index}>
+                <CustomerCard onClick={() => handleSlideClick('customer', index)}>
+                  <CardContent>
+                    <Avatar
+                      sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
+                    />
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      align="center"
+                      sx={{ color: "var(--secondary-color)" }}
+                    >
+                      {customer.name}
+                    </Typography>
+                    <Typography variant="body2" gutterBottom align="center">
+                      {customer.content}
+                    </Typography>
+                  </CardContent>
+                </CustomerCard>
+              </SwiperSlide>
+            ))}
+          </StyledSwiper>
         </StyledContainer>
       </Box>
     </Box>
