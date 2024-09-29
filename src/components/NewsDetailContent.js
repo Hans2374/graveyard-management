@@ -125,7 +125,7 @@ const NewsDetail = () => {
             }}>
             <Box
                 sx={{
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
                     padding: 2,
                     marginTop: '55px',
                     maxWidth: '1000px'
