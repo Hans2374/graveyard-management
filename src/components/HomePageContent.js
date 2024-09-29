@@ -96,14 +96,6 @@ const CustomerCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-// Thêm transition cho button ArrowForwardIos
-const NextButton = styled(IconButton)(({ theme }) => ({
-  transition: "transform 0.3s ease-in-out",
-  '&:hover': {
-    transform: 'scale(1.1)',
-  },
-}));
-
 const HomePage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -128,7 +120,7 @@ const HomePage = () => {
       disableOnInteraction: false,
     },
     navigation: true,
-    spaceBetween: 20,
+    spaceBetween: 33,
     slidesPerView: isSmallScreen ? 1 : 3,
     loop: true,
   };
