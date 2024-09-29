@@ -16,9 +16,8 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
 import Service from "../components/Service";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
@@ -59,6 +58,16 @@ const Dot = styled("span")(({ theme }) => ({
   "&.active": {
     backgroundColor: "#555",
   },
+}));
+
+const StyledSwiper = styled(Swiper)(({ theme }) => ({
+  '& .swiper-pagination-bullets': {
+    bottom: '-3px !important', // Adjust this value to move pagination lower
+  },
+  '& .swiper-pagination-bullet': {
+    backgroundColor: theme.palette.primary.main, // Optional: customize bullet color
+  },
+  paddingBottom: '30px', // Add padding to make room for pagination
 }));
 
 const NewsCard = styled(Card)(({ theme }) => ({
@@ -315,10 +324,12 @@ const HomePage = () => {
           </Typography>
 
           {isSmallScreen ? (
-            <Swiper
-              modules={[Navigation, Pagination]}
-              navigation
-              pagination={{ clickable: true }}
+            <StyledSwiper
+              modules={[Pagination]}
+              pagination={{
+                clickable: true,
+                bulletClass: 'swiper-pagination-bullet',
+              }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
             >
@@ -338,7 +349,7 @@ const HomePage = () => {
                   </ImageItem>
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </StyledSwiper>
           ) : (
             <Box
               sx={{
@@ -417,10 +428,12 @@ const HomePage = () => {
           </Typography>
 
           {isSmallScreen ? (
-            <Swiper
-              modules={[Navigation, Pagination]}
-              navigation
-              pagination={{ clickable: true }}
+            <StyledSwiper
+              modules={[Pagination]}
+              pagination={{
+                clickable: true,
+                bulletClass: 'swiper-pagination-bullet',
+              }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
             >
@@ -479,7 +492,7 @@ const HomePage = () => {
                   </NewsCard>
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </StyledSwiper>
           ) : (
             <Box
               sx={{
@@ -622,10 +635,12 @@ const HomePage = () => {
           </Typography>
 
           {isSmallScreen ? (
-            <Swiper
-              modules={[Navigation, Pagination]}
-              navigation
-              pagination={{ clickable: true }}
+            <StyledSwiper
+              modules={[Pagination]}
+              pagination={{
+                clickable: true,
+                bulletClass: 'swiper-pagination-bullet',
+              }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
             >
@@ -651,7 +666,7 @@ const HomePage = () => {
                   </CustomerCard>
                 </SwiperSlide>
               ))}
-            </Swiper>
+            </StyledSwiper>
           ) : (
             <Box
               sx={{
