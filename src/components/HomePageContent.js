@@ -6,7 +6,6 @@ import {
   styled,
   Card,
   CardContent,
-  IconButton,
   Avatar,
   useTheme,
   useMediaQuery
@@ -63,11 +62,16 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
   },
   '& .swiper-button-next, & .swiper-button-prev': {
-    color: theme.palette.primary.main,
+    color: 'black',
+    // Thay đổi vị trí của nút điều hướng
+    top: '55%', // Chỉnh vị trí theo chiều dọc (50% là giữa)
+    transform: 'translateY(-50%)', // Căn giữa nút điều hướng
+    // Thay đổi khoảng cách từ cạnh Swiper
+    right: '3px', // Đối với nút "next"
   },
   paddingBottom: '30px',
-  paddingLeft: '30px',
-  paddingRight: '30px',
+  paddingLeft: '40px',
+  paddingRight: '35px',
 }));
 
 const NewsCard = styled(Card)(({ theme }) => ({
@@ -115,7 +119,7 @@ const HomePage = () => {
       disableOnInteraction: false,
     },
     navigation: !isSmallScreen,
-    spaceBetween: 33,
+    spaceBetween: 42,
     slidesPerView: isSmallScreen ? 1 : 3,
     loop: true,
   };
