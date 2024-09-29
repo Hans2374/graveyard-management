@@ -99,18 +99,13 @@ const CustomerCard = styled(Card)(({ theme }) => ({
 const HomePage = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const itemsPerPage = isSmallScreen ? 1 : 3;
 
   const [activeImage, setActiveImage] = useState(0);
   const [activeNews, setActiveNews] = useState(0);
   const [activeCustomer, setActiveCustomer] = useState(0);
 
-  const [currentPageImage, setCurrentPageImage] = useState(0);
-  const [currentPageNews, setCurrentPageNews] = useState(0);
-  const [currentPageCustomer, setCurrentPageCustomer] = useState(0);
-
   const swiperProps = {
-    modules: [Pagination, Autoplay, Navigation],
+    modules: [Pagination, Autoplay, ...(isSmallScreen ? [] : [Navigation])],
     pagination: {
       clickable: true,
       type: 'bullets',
@@ -119,7 +114,7 @@ const HomePage = () => {
       delay: 5000,
       disableOnInteraction: false,
     },
-    navigation: true,
+    navigation: !isSmallScreen,
     spaceBetween: 33,
     slidesPerView: isSmallScreen ? 1 : 3,
     loop: true,
@@ -216,11 +211,6 @@ const HomePage = () => {
     },
   ];
 
-  // Calculate Total Pages
-  const totalPagesImage = Math.ceil(imageData.length / itemsPerPage);
-  const totalPagesNews = Math.ceil(newsData.length / itemsPerPage);
-  const totalPagesCustomer = Math.ceil(customerData.length / itemsPerPage);
-
   const handleImageClick = (index) => {
     setActiveImage(index);
   };
@@ -233,48 +223,22 @@ const HomePage = () => {
     setActiveCustomer(index);
   };
 
-  // Handlers for Images
-  const handleImageNext = () => {
-    setCurrentPageImage((prev) => (prev + 1) % totalPagesImage);
+
+  const handleSlideClick = (type, index) => {
+    switch (type) {
+      case 'image':
+        handleImageClick(index);
+        break;
+      case 'news':
+        handleNewsClick(index);
+        break;
+      case 'customer':
+        handleCustomerClick(index);
+        break;
+      default:
+        break;
+    }
   };
-
-  const handleImagePrev = () => {
-    setCurrentPageImage((prev) => (prev - 1 + totalPagesImage) % totalPagesImage);
-  };
-
-  // Handlers for News
-  const handleNewsNext = () => {
-    setCurrentPageNews((prev) => (prev + 1) % totalPagesNews);
-  };
-
-  const handleNewsPrev = () => {
-    setCurrentPageNews((prev) => (prev - 1 + totalPagesNews) % totalPagesNews);
-  };
-
-  // Handlers for Customers
-  const handleCustomerNext = () => {
-    setCurrentPageCustomer((prev) => (prev + 1) % totalPagesCustomer);
-  };
-
-  const handleCustomerPrev = () => {
-    setCurrentPageCustomer((prev) => (prev - 1 + totalPagesCustomer) % totalPagesCustomer);
-  };
-
-  // Slice Data Based on Current Page and Items Per Page
-  const currentImages = imageData.slice(
-    currentPageImage * itemsPerPage,
-    currentPageImage * itemsPerPage + itemsPerPage
-  );
-
-  const currentNews = newsData.slice(
-    currentPageNews * itemsPerPage,
-    currentPageNews * itemsPerPage + itemsPerPage
-  );
-
-  const currentCustomers = customerData.slice(
-    currentPageCustomer * itemsPerPage,
-    currentPageCustomer * itemsPerPage + itemsPerPage
-  );
 
   return (
     <Box align="center" sx={{
@@ -322,7 +286,7 @@ const HomePage = () => {
           <StyledSwiper {...swiperProps}>
             {imageData.map((image, index) => (
               <SwiperSlide key={index}>
-                <ImageItem>
+                <ImageItem onClick={() => handleSlideClick('image', index)}>
                   <img
                     src={image.url}
                     alt={image.alt}
@@ -351,7 +315,7 @@ const HomePage = () => {
           <StyledSwiper {...swiperProps}>
             {newsData.map((news, index) => (
               <SwiperSlide key={index}>
-                <NewsCard>
+                <NewsCard onClick={() => handleSlideClick('news', index)}>
                   <Box
                     sx={{
                       width: "100%",
@@ -444,7 +408,7 @@ const HomePage = () => {
           <StyledSwiper {...swiperProps}>
             {customerData.map((customer, index) => (
               <SwiperSlide key={index}>
-                <CustomerCard>
+                <CustomerCard onClick={() => handleSlideClick('customer', index)}>
                   <CardContent>
                     <Avatar
                       sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
