@@ -16,9 +16,10 @@ import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
 import Service from "../components/Service";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -325,10 +326,14 @@ const HomePage = () => {
 
           {isSmallScreen ? (
             <StyledSwiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
               pagination={{
                 clickable: true,
                 bulletClass: 'swiper-pagination-bullet',
+              }}
+              autoplay={{
+                delay: 5000,  // Delay between transitions (in ms)
+                disableOnInteraction: false,  // Continue autoplay after user interaction
               }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
@@ -429,10 +434,14 @@ const HomePage = () => {
 
           {isSmallScreen ? (
             <StyledSwiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
               pagination={{
                 clickable: true,
                 bulletClass: 'swiper-pagination-bullet',
+              }}
+              autoplay={{
+                delay: 5000,  // Delay between transitions (in ms)
+                disableOnInteraction: false,  // Continue autoplay after user interaction
               }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
@@ -636,10 +645,14 @@ const HomePage = () => {
 
           {isSmallScreen ? (
             <StyledSwiper
-              modules={[Pagination]}
+              modules={[Pagination, Autoplay]}
               pagination={{
                 clickable: true,
                 bulletClass: 'swiper-pagination-bullet',
+              }}
+              autoplay={{
+                delay: 5000,  // Delay between transitions (in ms)
+                disableOnInteraction: false,  // Continue autoplay after user interaction
               }}
               spaceBetween={20}
               slidesPerView={isSmallScreen ? 1 : 3}
