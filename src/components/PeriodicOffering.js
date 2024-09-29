@@ -130,9 +130,10 @@ const FuneralServicePage = () => {
         backgroundColor: "#f0f0f0",
         padding: 0,
         margin: 0,
-        backgroundImage: 'url(https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundImage:
+          "url(https://cdn.vjshop.vn/tin-tuc/cach-chup-anh-phong-canh/cach-chup-anh-phong-canh-dep-15.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Box
@@ -149,16 +150,16 @@ const FuneralServicePage = () => {
           align="center"
           gutterBottom
           sx={{
-            marginTop: '20px',
-            color: 'var(--secondary-color)',
-            fontWeight: 'bold',
+            marginTop: "20px",
+            color: "var(--secondary-color)",
+            fontWeight: "bold",
             mb: 2,
             fontSize: {
-              xs: '18px',
-              sm: '24px',
-              md: '28px',
-              lg: '32px'
-            }
+              xs: "18px",
+              sm: "24px",
+              md: "28px",
+              lg: "32px",
+            },
           }}
         >
           DỊCH VỤ CÚNG ĐỊNH KỲ
@@ -187,7 +188,11 @@ const FuneralServicePage = () => {
             <TextField
               placeholder="Tìm kiếm dịch vụ"
               variant="outlined"
-              sx={{ marginBottom: { xs: 2, md: 0 }, marginRight: { md: "10px" }, width: { xs: "100%", md: "300px" } }}
+              sx={{
+                marginBottom: { xs: 2, md: 0 },
+                marginRight: { md: "10px" },
+                width: { xs: "100%", md: "300px" },
+              }}
               InputProps={{
                 endAdornment: (
                   <IconButton>
@@ -203,7 +208,7 @@ const FuneralServicePage = () => {
                 backgroundColor: "#f5e1a4",
                 color: "#333",
                 padding: "16px",
-                width: { xs: "100%", md: "300px" }, 
+                width: { xs: "100%", md: "300px" },
               }}
             >
               Thêm điều kiện lọc
@@ -219,7 +224,7 @@ const FuneralServicePage = () => {
               padding: "10px",
               borderRadius: "8px",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-              width: { xs: "100%", md: "300px" }, 
+              width: { xs: "100%", md: "300px" },
               mt: { xs: 2, md: 0 },
             }}
           >
@@ -261,7 +266,7 @@ const FuneralServicePage = () => {
 
         <Grid container spacing={4}>
           {displayedServices.map((service) => (
-            <Grid item xs={12} sm={6} md={6} key={service.id}>
+            <Grid item xs={12} sm={6} md={3} key={service.id}>
               <Card
                 sx={{
                   backgroundColor: "#fff3e0",
@@ -277,7 +282,7 @@ const FuneralServicePage = () => {
                   height="auto"
                   image={service.img}
                   alt={service.title}
-                  sx={{ objectFit: "cover", height: "384px" }}
+                  sx={{ objectFit: "cover", height: "300px" }}
                 />
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" color="#f0c431">
@@ -296,7 +301,13 @@ const FuneralServicePage = () => {
                     {/* Button Thêm vào so sánh */}
                     <Button
                       variant="contained"
-                      sx={{ backgroundColor: "#f0c431" }}
+                      sx={{
+                        backgroundColor: "#f0c431",
+                        padding: "4px 8px",
+                        fontSize: "12px",
+                        minWidth: "100px",
+                        borderRadius: "8px",
+                      }}
                       onClick={() => handleAddToCompare(service)}
                       disabled={compareList.some(
                         (item) => item.id === service.id
@@ -304,13 +315,19 @@ const FuneralServicePage = () => {
                     >
                       {compareList.some((item) => item.id === service.id)
                         ? "Đã thêm"
-                        : "Thêm vào so sánh"}
+                        : "So sánh"}
                     </Button>
 
                     {/* Nút Chi tiết */}
                     <Button
                       variant="text"
-                      sx={{ marginTop: "10px", color: "#f0c431" }}
+                      sx={{
+                        marginTop: "10px",
+                        color: "#f0c431",
+                        fontSize: "12px",
+                        padding: "4px 8px",
+                        borderRadius: "8px",
+                      }}
                       href={"/service/detail"}
                     >
                       Chi tiết →
