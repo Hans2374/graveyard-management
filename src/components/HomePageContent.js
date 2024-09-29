@@ -15,6 +15,9 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
 import Service from "../components/Service";
+// Dynamic import for Swiper
+const { Swiper, SwiperSlide } = await import('swiper/react');
+const { Navigation, Pagination } = await import('swiper/modules');
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -103,7 +106,7 @@ const NextButton = styled(IconButton)(({ theme }) => ({
 
 const HomePage = () => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const itemsPerPage = isSmallScreen ? 1 : 3;
 
   const [activeImage, setActiveImage] = useState(0);
@@ -265,6 +268,19 @@ const HomePage = () => {
     currentPageCustomer * itemsPerPage + itemsPerPage
   );
 
+  // Swipe Handlers
+  const handleSwipeImage = (index) => {
+    setCurrentPageImage(index);
+  };
+
+  const handleSwipeNews = (index) => {
+    setCurrentPageNews(index);
+  };
+
+  const handleSwipeCustomer = (index) => {
+    setCurrentPageCustomer(index);
+  };
+
   return (
     <Box align="center" sx={{
       overflow: "hidden", flexGrow: 1,
@@ -309,68 +325,96 @@ const HomePage = () => {
             HÌNH ẢNH
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-              flexDirection: isSmallScreen ? 'column' : 'row',
-            }}
-          >
-            {/* Previous Button */}
-            <IconButton
-              aria-label="previous"
-              onClick={handleImagePrev}
-              sx={{ mb: isSmallScreen ? 2 : 0 }}
+          {isSmallScreen ? (
+            <Swiper
+              modules={[Navigation, Pagination]}
+              navigation
+              pagination={{ clickable: true }}
+              spaceBetween={20}
+              slidesPerView={1}
             >
-              <ArrowBackIos />
-            </IconButton>
-
-            {/* Image Items */}
+              {imageData.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <ImageItem onClick={() => handleImageClick(index)}>
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </ImageItem>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
             <Box
               sx={{
                 display: "flex",
-                flexDirection: isSmallScreen ? 'column' : 'row',
-                width: "100%",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
+                mb: 2,
+                flexDirection: "row",
               }}
             >
-              {currentImages.map((image, index) => (
-                <ImageItem
-                  key={index}
-                  onClick={() => handleImageClick(currentPageImage * itemsPerPage + index)}
-                >
-                  <img
-                    src={image.url}
-                    alt={image.alt}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                </ImageItem>
-              ))}
-            </Box>
+              {/* Previous Button */}
+              <IconButton aria-label="previous" onClick={handleImagePrev}>
+                <ArrowBackIos />
+              </IconButton>
 
-            {/* Next Button */}
-            <IconButton
-              aria-label="next"
-              onClick={handleImageNext}
-              sx={{ mt: isSmallScreen ? 2 : 0 }}
-            >
-              <ArrowForwardIos />
-            </IconButton>
-          </Box>
+              {/* Image Items */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {currentImages.map((image, index) => (
+                  <ImageItem
+                    key={index}
+                    onClick={() =>
+                      handleImageClick(currentPageImage * itemsPerPage + index)
+                    }
+                  >
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      loading="lazy"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </ImageItem>
+                ))}
+              </Box>
+
+              {/* Next Button */}
+              <IconButton aria-label="next" onClick={handleImageNext}>
+                <ArrowForwardIos />
+              </IconButton>
+            </Box>
+          )}
 
           {/* Dot Indicators */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            {Array.from({ length: totalPagesImage }).map((_, index) => (
-              <Dot
-                key={index}
-                className={currentPageImage === index ? "active" : ""}
-                onClick={() => setCurrentPageImage(index)}
-              />
-            ))}
-          </Box>
+          {!isSmallScreen && (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+              {Array.from({ length: totalPagesImage }).map((_, index) => (
+                <Dot
+                  key={index}
+                  className={currentPageImage === index ? "active" : ""}
+                  onClick={() => setCurrentPageImage(index)}
+                />
+              ))}
+            </Box>
+          )}
         </StyledContainer>
 
         {/* TIN TỨC */}
@@ -383,111 +427,174 @@ const HomePage = () => {
             TIN TỨC
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-              flexDirection: isSmallScreen ? 'column' : 'row',
-            }}
-          >
-            {/* Previous Button */}
-            <IconButton
-              aria-label="previous"
-              onClick={handleNewsPrev}
-              sx={{ mb: isSmallScreen ? 2 : 0 }}
+          {isSmallScreen ? (
+            <Swiper
+              modules={[Navigation, Pagination]} // Correctly reference the modules
+              navigation
+              pagination={{ clickable: true }}
+              spaceBetween={20}
+              slidesPerView={1}
             >
-              <ArrowBackIos />
-            </IconButton>
-
-            {/* News Cards */}
+              {newsData.map((news, index) => (
+                <SwiperSlide key={index}>
+                  <NewsCard onClick={() => handleNewsClick(index)}>
+                    <Box
+                      sx={{
+                        width: "100%",
+                        height: 200,
+                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {news.url ? (
+                        <img
+                          src={news.url}
+                          alt={news.title}
+                          loading="lazy"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        <CircularProgress size={50} />
+                      )}
+                    </Box>
+                    <CardContent
+                      sx={{
+                        height: 100,
+                        overflow: "hidden",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "var(--secondary-color)",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {news.description || "Mô tả không có sẵn"}
+                      </Typography>
+                    </CardContent>
+                  </NewsCard>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
             <Box
               sx={{
                 display: "flex",
-                flexDirection: isSmallScreen ? 'column' : 'row',
-                width: "100%",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
+                mb: 2,
+                flexDirection: "row",
               }}
             >
-              {currentNews.map((news, index) => (
-                <NewsCard
-                  key={index}
-                  onClick={() => handleNewsClick(currentPageNews * itemsPerPage + index)}
-                >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: 200,
-                      overflow: "hidden",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
+              {/* Previous Button */}
+              <IconButton aria-label="previous" onClick={handleNewsPrev}>
+                <ArrowBackIos />
+              </IconButton>
+
+              {/* News Cards */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {currentNews.map((news, index) => (
+                  <NewsCard
+                    key={index}
+                    onClick={() =>
+                      handleNewsClick(currentPageNews * itemsPerPage + index)
+                    }
                   >
-                    {news.url ? (
-                      <img
-                        src={news.url}
-                        alt={news.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    ) : (
-                      <CircularProgress size={50} />
-                    )}
-                  </Box>
-                  <CardContent
-                    sx={{
-                      height: 100,
-                      overflow: "hidden",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
+                    <Box
                       sx={{
-                        color: "var(--secondary-color)",
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical",
+                        width: "100%",
+                        height: 200,
                         overflow: "hidden",
-                        textOverflow: "ellipsis",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
                     >
-                      {news.description || "Mô tả không có sẵn"}
-                    </Typography>
-                  </CardContent>
-                </NewsCard>
-              ))}
-            </Box>
+                      {news.url ? (
+                        <img
+                          src={news.url}
+                          alt={news.title}
+                          loading="lazy"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        <CircularProgress size={50} />
+                      )}
+                    </Box>
+                    <CardContent
+                      sx={{
+                        height: 100,
+                        overflow: "hidden",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "var(--secondary-color)",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 3,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {news.description || "Mô tả không có sẵn"}
+                      </Typography>
+                    </CardContent>
+                  </NewsCard>
+                ))}
+              </Box>
 
-            {/* Next Button */}
-            <NextButton
-              aria-label="next"
-              onClick={handleNewsNext}
-              sx={{ mt: isSmallScreen ? 2 : 0 }}
-            >
-              <ArrowForwardIos />
-            </NextButton>
-          </Box>
+              {/* Next Button */}
+              <NextButton aria-label="next" onClick={handleNewsNext}>
+                <ArrowForwardIos />
+              </NextButton>
+            </Box>
+          )}
 
           {/* Dot Indicators */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            {Array.from({ length: totalPagesNews }).map((_, index) => (
-              <Dot
-                key={index}
-                className={currentPageNews === index ? "active" : ""}
-                onClick={() => setCurrentPageNews(index)}
-              />
-            ))}
-          </Box>
+          {!isSmallScreen && (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+              {Array.from({ length: totalPagesNews }).map((_, index) => (
+                <Dot
+                  key={index}
+                  className={currentPageNews === index ? "active" : ""}
+                  onClick={() => setCurrentPageNews(index)}
+                />
+              ))}
+            </Box>
+          )}
         </StyledContainer>
 
         {/* DỊCH VỤ */}
@@ -525,79 +632,108 @@ const HomePage = () => {
             KHÁCH HÀNG
           </Typography>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-              flexDirection: isSmallScreen ? 'column' : 'row',
-            }}
-          >
-            {/* Previous Button */}
-            <IconButton
-              aria-label="previous"
-              onClick={handleCustomerPrev}
-              sx={{ mb: isSmallScreen ? 2 : 0 }}
+          {isSmallScreen ? (
+            <Swiper
+              modules={[Navigation, Pagination]} // Correctly reference the modules
+              navigation
+              pagination={{ clickable: true }}
+              spaceBetween={20}
+              slidesPerView={1}
             >
-              <ArrowBackIos />
-            </IconButton>
-
-            {/* Customer Cards */}
+              {customerData.map((customer, index) => (
+                <SwiperSlide key={index}>
+                  <CustomerCard onClick={() => handleCustomerClick(index)}>
+                    <CardContent>
+                      <Avatar
+                        sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
+                      />
+                      <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        align="center"
+                        sx={{ color: "var(--secondary-color)" }}
+                      >
+                        {customer.name}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom align="center">
+                        {customer.content}
+                      </Typography>
+                    </CardContent>
+                  </CustomerCard>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
             <Box
               sx={{
                 display: "flex",
-                flexDirection: isSmallScreen ? 'column' : 'row',
-                width: "100%",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 alignItems: "center",
+                mb: 2,
+                flexDirection: "row",
               }}
             >
-              {currentCustomers.map((customer, index) => (
-                <CustomerCard
-                  key={index}
-                  onClick={() => handleCustomerClick(currentPageCustomer * itemsPerPage + index)}
-                >
-                  <CardContent>
-                    <Avatar
-                      sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
-                    />
-                    <Typography
-                      variant="subtitle1"
-                      gutterBottom
-                      align="center"
-                      sx={{ color: "var(--secondary-color)" }}
-                    >
-                      {customer.name}
-                    </Typography>
-                    <Typography variant="body2" gutterBottom align="center">
-                      {customer.content}
-                    </Typography>
-                  </CardContent>
-                </CustomerCard>
-              ))}
-            </Box>
+              {/* Previous Button */}
+              <IconButton aria-label="previous" onClick={handleCustomerPrev}>
+                <ArrowBackIos />
+              </IconButton>
 
-            {/* Next Button */}
-            <NextButton
-              aria-label="next"
-              onClick={handleCustomerNext}
-              sx={{ mt: isSmallScreen ? 2 : 0 }}
-            >
-              <ArrowForwardIos />
-            </NextButton>
-          </Box>
+              {/* Customer Cards */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {currentCustomers.map((customer, index) => (
+                  <CustomerCard
+                    key={index}
+                    onClick={() =>
+                      handleCustomerClick(currentPageCustomer * itemsPerPage + index)
+                    }
+                  >
+                    <CardContent>
+                      <Avatar
+                        sx={{ bgcolor: "var(--secondary-color)", margin: "auto" }}
+                      />
+                      <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        align="center"
+                        sx={{ color: "var(--secondary-color)" }}
+                      >
+                        {customer.name}
+                      </Typography>
+                      <Typography variant="body2" gutterBottom align="center">
+                        {customer.content}
+                      </Typography>
+                    </CardContent>
+                  </CustomerCard>
+                ))}
+              </Box>
+
+              {/* Next Button */}
+              <NextButton aria-label="next" onClick={handleCustomerNext}>
+                <ArrowForwardIos />
+              </NextButton>
+            </Box>
+          )}
 
           {/* Dot Indicators */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            {Array.from({ length: totalPagesCustomer }).map((_, index) => (
-              <Dot
-                key={index}
-                className={currentPageCustomer === index ? "active" : ""}
-                onClick={() => setCurrentPageCustomer(index)}
-              />
-            ))}
-          </Box>
+          {!isSmallScreen && (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+              {Array.from({ length: totalPagesCustomer }).map((_, index) => (
+                <Dot
+                  key={index}
+                  className={currentPageCustomer === index ? "active" : ""}
+                  onClick={() => setCurrentPageCustomer(index)}
+                />
+              ))}
+            </Box>
+          )}
         </StyledContainer>
       </Box>
     </Box>
