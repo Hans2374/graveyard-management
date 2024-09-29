@@ -59,7 +59,7 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
     bottom: '-3px !important',
   },
   '& .swiper-pagination-bullet': {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: 'black',
   },
   '& .swiper-button-next, & .swiper-button-prev': {
     color: 'black',
@@ -283,7 +283,7 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             HÌNH ẢNH
           </Typography>
@@ -312,7 +312,7 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             TIN TỨC
           </Typography>
@@ -380,7 +380,7 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             DỊCH VỤ
           </Typography>
@@ -405,7 +405,7 @@ const HomePage = () => {
           <Typography
             align="center"
             gutterBottom
-            sx={{ color: "#FFFFFF", mb: 2, fontSize: "1.5rem" }}
+            sx={{ color: "black", mb: 2, fontSize: "1.5rem" }}
           >
             KHÁCH HÀNG
           </Typography>
