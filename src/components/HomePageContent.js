@@ -15,9 +15,11 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIos from "@mui/icons-material/ArrowForwardIos";
 import CircularProgress from "@mui/material/CircularProgress";
 import Service from "../components/Service";
-// Dynamic import for Swiper
-const { Swiper, SwiperSlide } = await import('swiper/react');
-const { Navigation, Pagination } = await import('swiper/modules');
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "var(--primary-color)",
@@ -268,19 +270,6 @@ const HomePage = () => {
     currentPageCustomer * itemsPerPage + itemsPerPage
   );
 
-  // Swipe Handlers
-  const handleSwipeImage = (index) => {
-    setCurrentPageImage(index);
-  };
-
-  const handleSwipeNews = (index) => {
-    setCurrentPageNews(index);
-  };
-
-  const handleSwipeCustomer = (index) => {
-    setCurrentPageCustomer(index);
-  };
-
   return (
     <Box align="center" sx={{
       overflow: "hidden", flexGrow: 1,
@@ -331,7 +320,7 @@ const HomePage = () => {
               navigation
               pagination={{ clickable: true }}
               spaceBetween={20}
-              slidesPerView={1}
+              slidesPerView={isSmallScreen ? 1 : 3}
             >
               {imageData.map((image, index) => (
                 <SwiperSlide key={index}>
@@ -429,11 +418,11 @@ const HomePage = () => {
 
           {isSmallScreen ? (
             <Swiper
-              modules={[Navigation, Pagination]} // Correctly reference the modules
+              modules={[Navigation, Pagination]}
               navigation
               pagination={{ clickable: true }}
               spaceBetween={20}
-              slidesPerView={1}
+              slidesPerView={isSmallScreen ? 1 : 3}
             >
               {newsData.map((news, index) => (
                 <SwiperSlide key={index}>
@@ -634,11 +623,11 @@ const HomePage = () => {
 
           {isSmallScreen ? (
             <Swiper
-              modules={[Navigation, Pagination]} // Correctly reference the modules
+              modules={[Navigation, Pagination]}
               navigation
               pagination={{ clickable: true }}
               spaceBetween={20}
-              slidesPerView={1}
+              slidesPerView={isSmallScreen ? 1 : 3}
             >
               {customerData.map((customer, index) => (
                 <SwiperSlide key={index}>
