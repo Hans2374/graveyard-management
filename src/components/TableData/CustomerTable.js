@@ -70,16 +70,21 @@ const IOSSwitch = styled((props) => (
 
 
 // Create sample data
-function createData(stt, tenkhachhang, chan) {
-  return { stt, tenkhachhang, chan };
+function createData(stt, tenkhachhang, sdt, email, sodon, chan) {
+  return { stt, tenkhachhang, sdt, email, sodon, chan };
 }
 
 const rows = [
-  createData(1, 'CUSTOMER01', false),
-  createData(2, 'CUSTOMER05', false),
-  createData(3, 'CUSTOMER06', false),
-  createData(4, 'CUSTOMER07', false),
-  createData(5, 'CUSTOMER08', false),
+  createData(1, "Alice Johnson", "+1-555-595-4173", "user101@example.com", 15, false),
+  createData(2, "Bob Smith", "+1-555-431-3405", "user852@example.com", 13, false),
+  createData(3, "Charlie Brown", "+1-555-497-2707", "user520@example.com", 19, false),
+  createData(4, "David Wilson", "+1-555-702-1112", "user26@example.com", 6, false),
+  createData(5, "Eva Green", "+1-555-180-2246", "user980@example.com", 12, false),
+  createData(6, "Frank White", "+1-555-631-6587", "user881@example.com", 1, false),
+  createData(7, "Grace Miller", "+1-555-481-2755", "user799@example.com", 18, false),
+  createData(8, "Hank Davis", "+1-555-513-1038", "user641@example.com", 7, false),
+  createData(9, "Ivy Thompson", "+1-555-435-5590", "user20@example.com", 10, false),
+  createData(10, "John Clark", "+1-555-338-6563", "user183@example.com", 1, false),
 ];
 
 // Shared table cell style
@@ -175,36 +180,38 @@ export default function CustomerTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={row.tenkhachhang}>
-                <TableCell align="center" scope="row" sx={tableCellStyle}>
-                  {row.stt}
-                </TableCell>
-                <TableCell align="left" sx={{ ...tableCellStyle, ...customerNameStyle }} onClick={handleClickOpen}>
-                  {row.tenkhachhang}
-                </TableCell>
-                <TableCell align="left" sx={tableCellStyle}>
-                  Sdt
-                </TableCell>
-                <TableCell align="left" sx={tableCellStyle}>
-                  mail
-                </TableCell>
-                <TableCell align="left" sx={tableCellStyle}>
-                  số
-                </TableCell>
-                <TableCell align="center" sx={{ ...tableCellStyle, pl: '40px' }}>
-                  <FormControlLabel
-                    control={
-                      <IOSSwitch
-                        checked={blockStatus[index]}
-                        onChange={() => handleSwitchChange(index)}
-                        sx={{ m: 1 }}
-                      />
-                    }
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => (
+                <TableRow key={row.tenkhachhang}>
+                  <TableCell align="center" scope="row" sx={tableCellStyle}>
+                    {row.stt}
+                  </TableCell>
+                  <TableCell align="left" sx={{ ...tableCellStyle, ...customerNameStyle }} onClick={handleClickOpen}>
+                    {row.tenkhachhang}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {row.sdt}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {row.email}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {row.sodon}
+                  </TableCell>
+                  <TableCell align="center" sx={{ ...tableCellStyle, pl: '40px' }}>
+                    <FormControlLabel
+                      control={
+                        <IOSSwitch
+                          checked={blockStatus[index]}
+                          onChange={() => handleSwitchChange(index)}
+                          sx={{ m: 1 }}
+                        />
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
         <Dialog

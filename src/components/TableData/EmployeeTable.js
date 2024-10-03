@@ -24,18 +24,21 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 // Create sample data
-function createData(stt, tennhanvien) {
-  return { stt, tennhanvien };
+function createData(stt, tennhanvien, sdt, email, sodon) {
+  return { stt, tennhanvien, sdt, email, sodon };
 }
 
 const rows = [
-  createData(1, "EMPLOYEE01"),
-  createData(2, "EMPLOYEE02"),
-  createData(3, "EMPLOYEE03"),
-  createData(4, "EMPLOYEE04"),
-  createData(5, "EMPLOYEE05"),
-  createData(6, "EMPLOYEE05"),
-  createData(7, "EMPLOYEE05"),
+  createData(1, "Alice Johnson", "+1-555-595-4173", "user101@example.com", 15),
+  createData(2, "Bob Smith", "+1-555-431-3405", "user852@example.com", 13),
+  createData(3, "Charlie Brown", "+1-555-497-2707", "user520@example.com", 19),
+  createData(4, "David Wilson", "+1-555-702-1112", "user26@example.com", 6),
+  createData(5, "Eva Green", "+1-555-180-2246", "user980@example.com", 12),
+  createData(6, "Frank White", "+1-555-631-6587", "user881@example.com", 1),
+  createData(7, "Grace Miller", "+1-555-481-2755", "user799@example.com", 18),
+  createData(8, "Hank Davis", "+1-555-513-1038", "user641@example.com", 7),
+  createData(9, "Ivy Thompson", "+1-555-435-5590", "user20@example.com", 10),
+  createData(10, "John Clark", "+1-555-338-6563", "user183@example.com", 1),
 ];
 
 const orderRows = [
@@ -163,33 +166,35 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.tennhanvien}>
-                <TableCell align="center" scope="row" sx={tableCellStyle}>
-                  {row.stt}
-                </TableCell>
-                <TableCell
-                  align="left"
-                  sx={{ ...tableCellStyle, ...employeeNameStyle }}
-                  onClick={handleClickOpen}
-                >
-                  {row.tennhanvien}
-                </TableCell>
-                <TableCell align="left" sx={tableCellStyle}>
-                  Sdt
-                </TableCell>
-                <TableCell align="left" sx={tableCellStyle}>
-                  mail
-                </TableCell>
-                <TableCell
-                  align="left"
-                  sx={{ ...tableCellStyle, ...employeeNameStyle }}
-                  onClick={handleClickOpenOrders}
-                >
-                  số
-                </TableCell>
-              </TableRow>
-            ))}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow key={row.tennhanvien}>
+                  <TableCell align="center" scope="row" sx={tableCellStyle}>
+                    {row.stt}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ ...tableCellStyle, ...employeeNameStyle }}
+                    onClick={handleClickOpen}
+                  >
+                    {row.tennhanvien}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {row.sdt}
+                  </TableCell>
+                  <TableCell align="left" sx={tableCellStyle}>
+                    {row.email}
+                  </TableCell>
+                  <TableCell
+                    align="left"
+                    sx={{ ...tableCellStyle, ...employeeNameStyle }}
+                    onClick={handleClickOpenOrders}
+                  >
+                    {row.sodon}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
         <Dialog
