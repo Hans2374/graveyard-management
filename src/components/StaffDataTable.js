@@ -410,7 +410,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "10px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -421,7 +420,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "50px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -432,7 +430,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -443,7 +440,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -454,7 +450,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -465,7 +460,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -476,7 +470,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -487,7 +480,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "150px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -507,7 +499,7 @@ export default function StaffDataTable() {
                   <TableCell
                     align="center"
                     scope="row"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.stt}
                   </TableCell>
@@ -515,7 +507,7 @@ export default function StaffDataTable() {
                     align="center"
                     sx={{
                       borderRight: "1px solid #ddd",
-                      p: 0,
+                      p: "5px",
                       "&:hover": {
                         color: "blue",
                         cursor: "pointer",
@@ -528,25 +520,25 @@ export default function StaffDataTable() {
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.tendichvu}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.goidichvu}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.khachhang}
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.sdt}
                   </TableCell>
@@ -554,8 +546,7 @@ export default function StaffDataTable() {
                     align="left"
                     sx={{
                       borderRight: "1px solid #ddd",
-                      p: 0,
-                      pl: "5px",
+                      p: "5px",
                       whiteSpace: "pre-wrap",
                     }}
                   >
@@ -563,7 +554,7 @@ export default function StaffDataTable() {
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
+                    sx={{ p: "5px", whiteSpace: "pre-wrap" }}
                   >
                     {row.ghichu}
                   </TableCell>

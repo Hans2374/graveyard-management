@@ -255,7 +255,7 @@ const HomePage = () => {
         sx={{
           backgroundColor: "white",
           padding: 2,
-          marginTop: "65px",
+          marginTop: "55px",
           maxWidth: "1000px",
         }}
       >
