@@ -110,54 +110,56 @@ export default function OrderListTable({ filter }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.madon} sx={{ borderBottom: "1px solid #ddd" }}>
-                                <TableCell
-                                    align="center"
-                                    scope="row"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
-                                >{row.stt}
-                                </TableCell>
+                        {rows
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row) => (
+                                <TableRow key={row.madon} sx={{ borderBottom: "1px solid #ddd" }}>
+                                    <TableCell
+                                        align="center"
+                                        scope="row"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                                    >{row.stt}
+                                    </TableCell>
 
-                                {/* Apply onClick only to the TableCell with row.madon */}
-                                <TableCell
-                                    align="center"
-                                    sx={{
-                                        borderRight: "1px solid #ddd",
-                                        p: 0,
-                                        "&:hover": {
-                                            color: "blue",
-                                            cursor: "pointer",
-                                            textDecoration: "underline",
-                                        },
-                                    }}
-                                    onClick={() => handleRowClick(row)}
-                                >
-                                    {row.madon}
-                                </TableCell>
+                                    {/* Apply onClick only to the TableCell with row.madon */}
+                                    <TableCell
+                                        align="center"
+                                        sx={{
+                                            borderRight: "1px solid #ddd",
+                                            p: 0,
+                                            "&:hover": {
+                                                color: "blue",
+                                                cursor: "pointer",
+                                                textDecoration: "underline",
+                                            },
+                                        }}
+                                        onClick={() => handleRowClick(row)}
+                                    >
+                                        {row.madon}
+                                    </TableCell>
 
-                                <TableCell
-                                    align="left"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
-                                >{row.trangthai}</TableCell>
-                                <TableCell
-                                    align="left"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
-                                >{dayjs(row.ngaytao).format('DD/MM/YYYY\nHH:mm')}</TableCell>
-                                <TableCell
-                                    align="left"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
-                                >{row.thanhtoan}</TableCell>
-                                <TableCell
-                                    align="left"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
-                                >{row.khachhang}</TableCell>
-                                <TableCell
-                                    align="center"
-                                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
-                                >{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
-                            </TableRow>
-                        ))}
+                                    <TableCell
+                                        align="left"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                    >{row.trangthai}</TableCell>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
+                                    >{dayjs(row.ngaytao).format('DD/MM/YYYY\nHH:mm')}</TableCell>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                    >{row.thanhtoan}</TableCell>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                    >{row.khachhang}</TableCell>
+                                    <TableCell
+                                        align="center"
+                                        sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                                    >{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
+                                </TableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>

@@ -141,30 +141,32 @@ export default function ServiceTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.id}
-              >
-                <TableCell
-                  align="center"
-                  scope="row"
-                  sx={{ border: "1px solid #ccc", p: 0 }}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow
+                  key={row.id}
                 >
-                  {row.stt}
-                </TableCell>
-                <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0, pl: 1 }}>
-                  {row.tengoi}
-                </TableCell>
-                <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0, pl: 3 }}>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  />
-                </TableCell>
-                <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0 }}>
-                  {row.chinhsua}
-                </TableCell>
-              </TableRow>
-            ))}
+                  <TableCell
+                    align="center"
+                    scope="row"
+                    sx={{ border: "1px solid #ccc", p: 0 }}
+                  >
+                    {row.stt}
+                  </TableCell>
+                  <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0, pl: 1 }}>
+                    {row.tengoi}
+                  </TableCell>
+                  <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0, pl: 3 }}>
+                    <FormControlLabel
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                    />
+                  </TableCell>
+                  <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0 }}>
+                    {row.chinhsua}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

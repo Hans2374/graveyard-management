@@ -120,22 +120,24 @@ export default function DiscountListTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-              >
-                <TableCell align="center" scope="row" sx={{ border: "1px solid #ccc", p: '5px' }}>
-                  {row.stt}
-                </TableCell>
-                <TableCell align="left" sx={{ border: "1px solid #ccc", p: '5px' }}>{row.tengoi}</TableCell>
-                <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0.5, pl: '35px' }}>
-                  <FormControlLabel
-                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  />
-                </TableCell>
-                <TableCell align="left" sx={{ border: "1px solid #ccc", p: '5px' }}>{row.chinhsua}</TableCell>
-              </TableRow>
-            ))}
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableRow
+                  key={row.name}
+                >
+                  <TableCell align="center" scope="row" sx={{ border: "1px solid #ccc", p: '5px' }}>
+                    {row.stt}
+                  </TableCell>
+                  <TableCell align="left" sx={{ border: "1px solid #ccc", p: '5px' }}>{row.tengoi}</TableCell>
+                  <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0.5, pl: '35px' }}>
+                    <FormControlLabel
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                    />
+                  </TableCell>
+                  <TableCell align="left" sx={{ border: "1px solid #ccc", p: '5px' }}>{row.chinhsua}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
