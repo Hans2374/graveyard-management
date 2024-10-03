@@ -16,6 +16,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  TablePagination
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import styles from "../pages/Admin/Service.module.css";
@@ -55,6 +56,8 @@ const hardcodedItemDetails = [
 ];
 
 const StaffTable = () => {
+  const [page, setPage] = React.useState(0); // Current page
+  const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page
   const [tabIndex, setTabIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
@@ -75,6 +78,18 @@ const StaffTable = () => {
       </a>
     </li>
   );
+
+  // Handle page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when rows per page changes
+  };
+
   const handleTabChange = (event, newIndex) => {
     setTabIndex(newIndex);
   };
@@ -96,9 +111,7 @@ const StaffTable = () => {
       if (tabIndex === 3) return item.status === "Sắp hết";
       return true;
     })
-    .filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -138,7 +151,7 @@ const StaffTable = () => {
         sx={{
           backgroundColor: "#fff",
           padding: "20px",
-          margin: "3px 0 0 0 ",
+          margin: "3px 0 0 0 "
         }}
       >
         <Box sx={{ display: "flex", maxWidth: "100%", margin: "0 0 0 50px" }}>
@@ -186,46 +199,107 @@ const StaffTable = () => {
         </Box>
 
         {/* Table Section */}
-        <Box sx={{ margin: "45px 0 0 50px" }}>
-          <TableContainer component={Paper}>
-            <Table>
+        <Box sx={{ position: "relative", width: "1080px", pt: 2, height: '460px' }}>
+          <TableContainer
+            component={Paper}
+            sx={{ width: "1100px", height: "445px" }}
+          >
+            <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     STT
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     Tên vật dụng
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     Tổng số lượng
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     Đang sử dụng
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     Còn lại
                   </TableCell>
-                  <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
                     Trạng thái
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredData.map((item, index) => (
-                  <TableRow key={item.id}>
-                    <TableCell sx={{ textAlign: "center" }}>
+                {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) => (
+                  <TableRow
+                    key={item.id}
+                    sx={{ borderBottom: "1px solid #ddd" }}
+                  >
+                    <TableCell
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
+                    >
                       {index + 1}
                     </TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>
+                    <TableCell
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
+                    >
                       {item.name}
                     </TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>
+                    <TableCell
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
+                    >
                       {item.totalQuantity}
                     </TableCell>
                     <TableCell
+                      align="center"
                       sx={{
-                        textAlign: "center",
+                        borderRight: "1px solid #ddd", p: 1,
                         cursor: "pointer",
                         "&:hover": {
                           color: "#D3B023",
@@ -236,16 +310,20 @@ const StaffTable = () => {
                     >
                       {item.inUse}
                     </TableCell>
-                    <TableCell sx={{ textAlign: "center" }}>
+                    <TableCell
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
+                    >
                       {item.available}
                     </TableCell>
                     <TableCell
+                      align="center"
                       sx={{
                         backgroundColor: getStatusColor(item.status),
                         color: "#000",
-                        borderRadius: "5px",
                         padding: "8px",
-                        textAlign: "center",
+                        borderRight: "1px solid #ddd", p: 1
                       }}
                     >
                       {item.status}
@@ -255,6 +333,18 @@ const StaffTable = () => {
               </TableBody>
             </Table>
           </TableContainer>
+
+          {/* Table Pagination */}
+          <TablePagination
+            component="div"
+            count={filteredData.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            rowsPerPageOptions={[8]}
+            sx={{ position: "absolute", bottom: 0, right: 0, paddingRight: "16px" }}
+          />
         </Box>
 
         {/* Dialog Section */}

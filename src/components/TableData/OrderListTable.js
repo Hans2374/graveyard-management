@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box
 } from '@mui/material';
 import dayjs from 'dayjs';
 import ServiceOrderDetails from '../ServiceOrderDetails'; // Import the ServiceOrderDetails component
+import TablePagination from "@mui/material/TablePagination";
 
 function createData(stt, madon, trangthai, ngaytao, thanhtoan, khachhang, tongtien) {
     return { stt, madon, trangthai, ngaytao, thanhtoan, khachhang, tongtien };
@@ -16,6 +17,8 @@ const rows = [
 ];
 
 export default function OrderListTable({ filter }) {
+    const [page, setPage] = React.useState(0); // Current page
+    const [rowsPerPage, setRowsPerPage] = React.useState(6); // Items per page
     // State to control dialog open/close and store selected order
     const [dialogOpen, setDialogOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
@@ -49,29 +52,79 @@ export default function OrderListTable({ filter }) {
         setSelectedOrder(null);  // Clear selected order
     };
 
+    // Handle page change
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    // Handle rows per page change
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0); // Reset to first page when rows per page changes
+    };
+
     return (
-        <>
-            <TableContainer component={Paper} sx={{ width: "1080px" }}>
+        <Box sx={{ position: "relative", width: "1080px" }}>
+            <TableContainer
+                component={Paper}
+                sx={{ width: "1100px", height: "370px" }}
+            >
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "50px" }}>STT</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Mã Đơn</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Trạng Thái</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "200px" }}>Ngày Tạo</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Thanh Toán</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "200px" }}>Khách Hàng</TableCell>
-                            <TableCell align="left" sx={{ fontWeight: "bold", width: "150px" }}>Tổng Tiền</TableCell>
+                            <TableCell align="center" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>STT</TableCell>
+                            <TableCell align="center" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Mã Đơn</TableCell>
+                            <TableCell align="left" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Trạng Thái</TableCell>
+                            <TableCell align="left" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Ngày Tạo</TableCell>
+                            <TableCell align="left" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Thanh Toán</TableCell>
+                            <TableCell align="left" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Khách Hàng</TableCell>
+                            <TableCell align="center" sx={{
+                                fontWeight: "bold",
+                                p: 1,
+                                borderRight: "1px solid #ddd",
+                            }}>Tổng Tiền</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map((row) => (
-                            <TableRow key={row.madon}>
-                                <TableCell>{row.stt}</TableCell>
+                            <TableRow key={row.madon} sx={{ borderBottom: "1px solid #ddd" }}>
+                                <TableCell
+                                    align="center"
+                                    scope="row"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                                >{row.stt}
+                                </TableCell>
 
                                 {/* Apply onClick only to the TableCell with row.madon */}
                                 <TableCell
+                                    align="center"
                                     sx={{
+                                        borderRight: "1px solid #ddd",
+                                        p: 0,
                                         "&:hover": {
                                             color: "blue",
                                             cursor: "pointer",
@@ -83,16 +136,48 @@ export default function OrderListTable({ filter }) {
                                     {row.madon}
                                 </TableCell>
 
-                                <TableCell>{row.trangthai}</TableCell>
-                                <TableCell>{dayjs(row.ngaytao).format('DD/MM/YYYY HH:mm')}</TableCell>
-                                <TableCell>{row.thanhtoan}</TableCell>
-                                <TableCell>{row.khachhang}</TableCell>
-                                <TableCell>{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                >{row.trangthai}</TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
+                                >{dayjs(row.ngaytao).format('DD/MM/YYYY\nHH:mm')}</TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                >{row.thanhtoan}</TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                                >{row.khachhang}</TableCell>
+                                <TableCell
+                                    align="center"
+                                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                                >{row.tongtien.toLocaleString('vi-VN')} đ</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            {/* Table Pagination */}
+            <TablePagination
+                component="div"
+                count={rows.length}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                rowsPerPageOptions={[6]}
+                sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    paddingRight: "16px",
+                }}
+            />
 
             {/* Pass props to ServiceOrderDetails for controlling the dialog */}
             {selectedOrder && (
@@ -102,6 +187,6 @@ export default function OrderListTable({ filter }) {
                     orderData={selectedOrder}
                 />
             )}
-        </>
+        </Box>
     );
 }

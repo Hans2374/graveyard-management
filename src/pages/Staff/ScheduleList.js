@@ -72,7 +72,7 @@ function ScheduleList() {
             maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "45px",
-            // overflow: "hidden",
+            height: '475px'
           }}
         >
           <StaffDataTable />

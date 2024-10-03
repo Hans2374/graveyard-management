@@ -125,7 +125,7 @@ function StaffOrderList() {
             maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "50px",
-            // height: "430px",
+            height: "393px",
           }}
         >
           <OrderListTable filter={filter} />

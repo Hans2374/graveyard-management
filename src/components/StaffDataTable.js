@@ -410,7 +410,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "10px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -421,7 +420,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "50px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -432,7 +430,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -443,7 +440,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -454,7 +450,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -465,7 +460,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -476,7 +470,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -487,7 +480,6 @@ export default function StaffDataTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "150px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
