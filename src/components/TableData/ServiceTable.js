@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Switch } from "@mui/material";
+import { Box, Switch, TablePagination } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
@@ -83,74 +83,108 @@ const rows = [
 ];
 
 export default function ServiceTable() {
+  const [page, setPage] = React.useState(0); // Current page
+  const [rowsPerPage, setRowsPerPage] = React.useState(6); // Items per page
+
+  // Handle page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when rows per page changes
+  };
+
   return (
-    <TableContainer component={Paper} sx={{ width: "1080px" }}>
-      <Table aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell
-              align="center"
-              sx={{
-                fontWeight: "bold",
-                width: "100px",
-                border: "1px solid #ccc",
-                p: 0,
-              }}
-            >
-              STT
-            </TableCell>
-            <TableCell
-              align="left"
-              sx={{
-                fontWeight: "bold",
-                width: "600px",
-                border: "1px solid #ccc",
-                p: 1
-              }}
-            >
-              Tên Gói
-            </TableCell>
-            <TableCell
-              align="center"
-              sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 0.1 }}
-            >
-              Khả Dụng
-            </TableCell>
-            <TableCell
-              align="left"
-              sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 1 }}
-            >
-              Chỉnh Sửa
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.id}
-            >
+    <Box sx={{ position: "relative", width: "1080px" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ width: "1100px", height: "380px" }}
+      >
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
               <TableCell
                 align="center"
-                scope="row"
-                sx={{ border: "1px solid #ccc", p: 1 }}
+                sx={{
+                  fontWeight: "bold",
+                  border: "1px solid #ccc",
+                  p: 0,
+                }}
               >
-                {row.stt}
+                STT
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>
-                {row.tengoi}
+              <TableCell
+                align="left"
+                sx={{
+                  fontWeight: "bold",
+                  border: "1px solid #ccc",
+                  p: 1
+                }}
+              >
+                Tên Gói
               </TableCell>
-              <TableCell align="center" sx={{ border: "1px solid #ccc", p: 1, pl: 3, pr: 0 }}>
-                <FormControlLabel
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                />
+              <TableCell
+                align="center"
+                sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 0.1 }}
+              >
+                Khả Dụng
               </TableCell>
-              <TableCell align="left" sx={{ border: "1px solid #ccc", p: 1 }}>
-                {row.chinhsua}
+              <TableCell
+                align="left"
+                sx={{ fontWeight: "bold", border: "1px solid #ccc", p: 1 }}
+              >
+                Chỉnh Sửa
               </TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow
+                key={row.id}
+              >
+                <TableCell
+                  align="center"
+                  scope="row"
+                  sx={{ border: "1px solid #ccc", p: 0 }}
+                >
+                  {row.stt}
+                </TableCell>
+                <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0, pl: 1 }}>
+                  {row.tengoi}
+                </TableCell>
+                <TableCell align="center" sx={{ border: "1px solid #ccc", p: 0, pl: 3 }}>
+                  <FormControlLabel
+                    control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                  />
+                </TableCell>
+                <TableCell align="left" sx={{ border: "1px solid #ccc", p: 0 }}>
+                  {row.chinhsua}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      {/* Table Pagination */}
+      <TablePagination
+        component="div"
+        count={rows.length}
+        page={page}
+        onPageChange={handleChangePage}
+        rowsPerPage={rowsPerPage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        rowsPerPageOptions={[6]}
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          paddingRight: "16px",
+        }}
+      />
+    </Box>
   );
 }
