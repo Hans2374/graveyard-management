@@ -61,13 +61,19 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
   '& .swiper-pagination-bullet': {
     backgroundColor: 'black',
   },
-  '& .swiper-button-next, & .swiper-button-prev': {
-    color: 'black',
-    // Thay đổi vị trí của nút điều hướng
-    top: '55%', // Chỉnh vị trí theo chiều dọc (50% là giữa)
-    transform: 'translateY(-50%)', // Căn giữa nút điều hướng
-    // Thay đổi khoảng cách từ cạnh Swiper
-    right: '3px', // Đối với nút "next"
+  "& .swiper-button-next": {
+    color: "black",
+    top: "55%",
+    transform: "translateY(-50%)",
+    right: "3px", // Thêm khoảng cách lớn hơn
+    marginRight: "-4px", // Tạo thêm khoảng cách từ cạnh phải của thẻ
+  },
+  "& .swiper-button-prev": {
+    color: "black",
+    top: "55%",
+    transform: "translateY(-50%)",
+    left: "3px", // Thêm khoảng cách lớn hơn
+    marginLeft: "-4px", // Tạo thêm khoảng cách từ cạnh trái của thẻ
   },
   paddingBottom: '30px',
   paddingLeft: '40px',
