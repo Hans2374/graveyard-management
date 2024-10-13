@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo, useCallback } from "react";
 import {
   Box,
   Typography,
@@ -61,19 +61,11 @@ const StyledSwiper = styled(Swiper)(({ theme }) => ({
   '& .swiper-pagination-bullet': {
     backgroundColor: 'black',
   },
-  "& .swiper-button-next": {
+  "& .swiper-button-next, & .swiper-button-prev": {
     color: "black",
     top: "55%",
     transform: "translateY(-50%)",
-    right: "3px", // Thêm khoảng cách lớn hơn
-    marginRight: "-4px", // Tạo thêm khoảng cách từ cạnh phải của thẻ
-  },
-  "& .swiper-button-prev": {
-    color: "black",
-    top: "55%",
-    transform: "translateY(-50%)",
-    left: "3px", // Thêm khoảng cách lớn hơn
-    marginLeft: "-4px", // Tạo thêm khoảng cách từ cạnh trái của thẻ
+    margin: "0 -4px",
   },
   paddingBottom: '30px',
   paddingLeft: '40px',
@@ -106,7 +98,7 @@ const CustomerCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const HomePage = () => {
+const HomePageContent = ({ footerRef }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -221,34 +213,21 @@ const HomePage = () => {
     },
   ];
 
-  const handleImageClick = (index) => {
-    setActiveImage(index);
-  };
-
-  const handleNewsClick = (index) => {
-    setActiveNews(index);
-  };
-
-  const handleCustomerClick = (index) => {
-    setActiveCustomer(index);
-  };
-
-
-  const handleSlideClick = (type, index) => {
+  const handleSlideClick = useCallback((type, index) => {
     switch (type) {
       case 'image':
-        handleImageClick(index);
+        setActiveImage(index);
         break;
       case 'news':
-        handleNewsClick(index);
+        setActiveNews(index);
         break;
       case 'customer':
-        handleCustomerClick(index);
+        setActiveCustomer(index);
         break;
       default:
         break;
     }
-  };
+  }, []);
 
   return (
     <Box align="center" sx={{
@@ -397,11 +376,11 @@ const HomePage = () => {
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
             <Dot
               className={activeImage === 0 ? "active" : ""}
-              onClick={() => handleImageClick(0)}
+              onClick={() => setActiveImage(0)}
             />
             <Dot
               className={activeImage === 1 ? "active" : ""}
-              onClick={() => handleImageClick(1)}
+              onClick={() => setActiveImage(1)}
             />
           </Box>
         </StyledContainer>
@@ -445,4 +424,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default memo(HomePageContent);
