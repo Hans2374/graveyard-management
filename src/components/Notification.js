@@ -24,7 +24,12 @@ const Notification = ({ notifications = [] }) => {
     const notificationsToDisplay = notifications.length > 0 ? notifications : defaultNotifications;
 
     return (
-        <Box align='center' sx={{ overflow: 'hidden' }}>
+        <Box align='center' sx={{
+            overflow: "hidden", flexGrow: 1,
+            backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20230616/pngtree-3d-mountain-landscape-with-a-serene-lake-background-image_3626132.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+        }}>
             <Box sx={{ backgroundColor: 'white', padding: 2, marginTop: '65px', maxWidth: '1000px' }}>
                 <Typography
                     align="center"

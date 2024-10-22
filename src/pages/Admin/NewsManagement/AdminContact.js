@@ -165,35 +165,37 @@ function AdminContact() {
           size="small"
         />
       </Box>
-      <Box sx={{display: "flex",
-          maxWidth: "100%",
-          margin: "20px 50px 0 50px",
-          justifyContent: "space-between"}}>
-      <Button
-        sx={{
-          backgroundColor: "var(--primary-color)",
-          color: "black",
-          borderRadius: "10px",
-          padding: "5px 100px 5px 100px",
-          textTransform: "none",
-          marginTop: "20px",
-        }}
-      >
-        Lưu
-      </Button>
+      <Box sx={{
+        display: "flex",
+        maxWidth: "100%",
+        margin: "20px 50px 0 50px",
+        justifyContent: "space-between"
+      }}>
+        <Button
+          sx={{
+            backgroundColor: "var(--primary-color)",
+            color: "black",
+            borderRadius: "10px",
+            padding: "5px 100px 5px 100px",
+            textTransform: "none",
+            marginTop: "20px",
+          }}
+        >
+          Lưu
+        </Button>
 
-      <Button
-        sx={{
-          backgroundColor: "var(--primary-color)",
-          color: "black",
-          borderRadius: "10px",
-          padding: "5px 100px 5px 100px",
-          textTransform: "none",
-          marginTop: "20px",
-        }}
-      >
-        Đặt lại
-      </Button>
+        <Button
+          sx={{
+            backgroundColor: "var(--primary-color)",
+            color: "black",
+            borderRadius: "10px",
+            padding: "5px 100px 5px 100px",
+            textTransform: "none",
+            marginTop: "20px",
+          }}
+        >
+          Đặt lại
+        </Button>
       </Box>
     </ThemeProvider>
   );

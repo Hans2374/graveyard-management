@@ -1,8 +1,6 @@
 import React from "react";
 import {
   Box,
-  AppBar,
-  Toolbar,
   IconButton,
   Typography,
   Button,
@@ -98,7 +96,6 @@ function AddServiceTab() {
           onClose={handleClose}
           sx={{
             backgroundColor: "var(--primary-color)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
             backdropFilter: "blur(5px)",
           }}
         >
@@ -207,7 +204,7 @@ function AddServiceTab() {
           maxWidth: "100%",
           marginLeft: "50px",
           marginTop: "50px",
-          height: "430px",
+          height: "404px",
         }}
       >
         <ServiceTable />

@@ -13,7 +13,11 @@ code {
 }
 
 :root {
-  --primary-color: #e6d189; /* Màu chính */
-  --secondary-color: #d3b023; /* Màu phụ */
-  --error-color: #e74c3c; /* Màu lỗi */
+  --primary-color: #e6d189;
+  /* Màu chính */
+  --secondary-color: #d3b023;
+  /* Màu phụ */
+  --error-color: #e74c3c;
+  /* Màu lỗi */
+  /* overflow: hidden; */
 }

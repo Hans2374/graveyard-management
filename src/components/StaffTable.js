@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Tabs,
-  Tab,
   Box,
   Table,
   TableBody,
@@ -18,10 +16,10 @@ import {
   DialogContent,
   DialogActions,
   Button,
-  ThemeProvider, 
-  createTheme
+  TablePagination
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import styles from "../pages/Admin/Service.module.css";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 // Mock data (dữ liệu cứng)
@@ -58,11 +56,39 @@ const hardcodedItemDetails = [
 ];
 
 const StaffTable = () => {
+  const [page, setPage] = React.useState(0); // Current page
+  const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page
   const [tabIndex, setTabIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const [open, setOpen] = useState(false);
   const [searchModal, setSearchModal] = useState(""); // Tìm kiếm trong dialog
+
+  const [navdata, setNavdata] = React.useState("AdminNews");
+  const renderTab = (label, tabKey) => (
+    <li className={styles.li}>
+      <a
+        className={styles.a}
+        onClick={() => setNavdata(tabKey)}
+        style={{
+          color: navdata === tabKey ? "black" : "grey", // Đổi màu khi được chọn
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
+
+  // Handle page change
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  // Handle rows per page change
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0); // Reset to first page when rows per page changes
+  };
 
   const handleTabChange = (event, newIndex) => {
     setTabIndex(newIndex);
@@ -85,9 +111,7 @@ const StaffTable = () => {
       if (tabIndex === 3) return item.status === "Sắp hết";
       return true;
     })
-    .filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    .filter((item) => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -103,54 +127,34 @@ const StaffTable = () => {
   };
 
   return (
-    
-    <Box sx={{ padding: 2, marginTop: 6 }}>
+    <Box>
       <Box
-        sx={{ marginBottom: "3px", backgroundColor: "#fff", padding: "10px" }}
+        sx={{
+          marginTop: "54px",
+          backgroundColor: "white",
+          maxWidth: "100%",
+          display: "flex",
+        }}
       >
-        <Tabs
-          value={tabIndex}
-          onChange={handleTabChange}
-          textColor="inherit"
-          indicatorColor="primary"
-          sx={{
-            "& .MuiTab-root": {
-              textDecoration: "none",
-            },
-            "& .MuiTab-root.Mui-selected": {
-              fontWeight: "normal",
-              color: "#000",
-            },
-            "& .MuiTab-root::after": {
-              content: '""',
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "0%",
-              height: "2px",
-              backgroundColor: "#D3B023",
-              transition: "width 0.3s ease",
-            },
-            "& .MuiTab-root:hover::after": {
-              width: "100%",
-            },
-            "& .MuiTabs-indicator": {
-              display: "none",
-            },
-          }}
-        >
-          <Tab label="Tất cả vật dụng" />
-          <Tab label="Còn" />
-          <Tab label="Hết" />
-          <Tab label="Sắp hết" />
-          <Tab label="Mai táng" />
-          <Tab label="Cúng định kỳ" />
-        </Tabs>
+        <ul className={styles.ul}>
+          {renderTab("Tất cả vật dụng", "AllTool")}
+          {renderTab("Còn", "Available")}
+          {renderTab("Hết", "UnAvailable")}
+          {renderTab("Sắp hết", "AlmostRanOut")}
+          {renderTab("Mai táng", "Service1")}
+          {renderTab("Cúng định kỳ", "Service2")}
+        </ul>
       </Box>
 
       {/* Search and Filter Section */}
-      <Box sx={{ backgroundColor: "#fff", padding: "20px" }}>
-        <Box sx={{ display: "flex", maxWidth: "100%", marginBottom: 2 }}>
+      <Box
+        sx={{
+          backgroundColor: "#fff",
+          padding: "20px",
+          margin: "3px 0 0 0 "
+        }}
+      >
+        <Box sx={{ display: "flex", maxWidth: "100%", margin: "0 0 0 50px" }}>
           <TextField
             variant="outlined"
             placeholder="Tìm kiếm gói dịch vụ"
@@ -195,201 +199,280 @@ const StaffTable = () => {
         </Box>
 
         {/* Table Section */}
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  STT
-                </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  Tên vật dụng
-                </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  Tổng số lượng
-                </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  Đang sử dụng
-                </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  Còn lại
-                </TableCell>
-                <TableCell sx={{ textAlign: "center", fontWeight: "bold" }}>
-                  Trạng thái
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredData.map((item, index) => (
-                <TableRow key={item.id}>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {index + 1}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {item.name}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {item.totalQuantity}
-                  </TableCell>
+        <Box sx={{ position: "relative", width: "1080px", pt: 2, height: '460px' }}>
+          <TableContainer
+            component={Paper}
+            sx={{ width: "1100px", height: "445px" }}
+          >
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
                   <TableCell
+                    align="center"
                     sx={{
-                      textAlign: "center",
-                      cursor: "pointer",
-                      "&:hover": {
-                        color: "#D3B023",
-                        transition: "0.3s ease",
-                      },
-                    }}
-                    onClick={() => handleOpenDialog(item)}
-                  >
-                    {item.inUse}
-                  </TableCell>
-                  <TableCell sx={{ textAlign: "center" }}>
-                    {item.available}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      backgroundColor: getStatusColor(item.status),
-                      color: "#000",
-                      borderRadius: "5px",
-                      padding: "8px",
-                      textAlign: "center",
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
                     }}
                   >
-                    {item.status}
+                    STT
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
+                    Tên vật dụng
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
+                    Tổng số lượng
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
+                    Đang sử dụng
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
+                    Còn lại
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontWeight: "bold",
+                      p: 1,
+                      borderRight: "1px solid #ddd",
+                    }}
+                  >
+                    Trạng thái
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-
-      {/* Dialog Section */}
-      <Dialog open={open} onClose={handleCloseDialog}>
-        <DialogTitle
-          sx={{
-            textAlign: "center",
-            backgroundColor: "#E6D189",
-            fontWeight: "bold",
-            color: "#000",
-          }}
-        >
-          {selectedItem?.name || "Dịch vụ A"}
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ marginTop: 2 }}>
-            <TextField
-              variant="outlined"
-              placeholder="Tìm kiếm đơn"
-              size="small"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "20px",
-                  borderColor: "#E0E0E0",
-                },
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton>
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              value={searchModal}
-              onChange={(e) => setSearchModal(e.target.value)}
-            />
-          </Box>
-          <Table
-            sx={{ marginTop: 2, borderCollapse: "collapse", width: "100%" }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "1px solid #ccc",
-                  }}
-                >
-                  STT
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "1px solid #ccc",
-                  }}
-                >
-                  Mã đơn
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "1px solid #ccc",
-                  }}
-                >
-                  Số lượng
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    border: "1px solid #ccc",
-                  }}
-                >
-                  Ngày
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {hardcodedItemDetails
-                .filter((detail) => detail.orderCode.includes(searchModal))
-                .map((detail, index) => (
-                  <TableRow key={detail.id}>
+              </TableHead>
+              <TableBody>
+                {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item, index) => (
+                  <TableRow
+                    key={item.id}
+                    sx={{ borderBottom: "1px solid #ddd" }}
+                  >
                     <TableCell
-                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
                     >
                       {index + 1}
                     </TableCell>
                     <TableCell
-                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
                     >
-                      {detail.orderCode}
+                      {item.name}
                     </TableCell>
                     <TableCell
-                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
                     >
-                      {detail.quantity}
+                      {item.totalQuantity}
                     </TableCell>
                     <TableCell
-                      sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      align="center"
+                      sx={{
+                        borderRight: "1px solid #ddd", p: 1,
+                        cursor: "pointer",
+                        "&:hover": {
+                          color: "#D3B023",
+                          transition: "0.3s ease",
+                        },
+                      }}
+                      onClick={() => handleOpenDialog(item)}
                     >
-                      {detail.date}
+                      {item.inUse}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      scope="row"
+                      sx={{ borderRight: "1px solid #ddd", p: 1 }}
+                    >
+                      {item.available}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      sx={{
+                        backgroundColor: getStatusColor(item.status),
+                        color: "#000",
+                        padding: "8px",
+                        borderRight: "1px solid #ddd", p: 1
+                      }}
+                    >
+                      {item.status}
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
-          </Table>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseDialog}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          {/* Table Pagination */}
+          <TablePagination
+            component="div"
+            count={filteredData.length}
+            page={page}
+            onPageChange={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            rowsPerPageOptions={[8]}
+            sx={{ position: "absolute", bottom: 0, right: 0, paddingRight: "16px" }}
+          />
+        </Box>
+
+        {/* Dialog Section */}
+        <Dialog open={open} onClose={handleCloseDialog}>
+          <DialogTitle
             sx={{
+              textAlign: "center",
               backgroundColor: "#E6D189",
+              fontWeight: "bold",
               color: "#000",
-              "&:hover": {
-                backgroundColor: "#D5C17B",
-              },
             }}
           >
-            Đóng
-          </Button>
-        </DialogActions>
-      </Dialog>
+            {selectedItem?.name || "Dịch vụ A"}
+          </DialogTitle>
+          <DialogContent>
+            <Box sx={{ marginTop: 2 }}>
+              <TextField
+                variant="outlined"
+                placeholder="Tìm kiếm đơn"
+                size="small"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    borderRadius: "20px",
+                    borderColor: "#E0E0E0",
+                  },
+                }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton>
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                value={searchModal}
+                onChange={(e) => setSearchModal(e.target.value)}
+              />
+            </Box>
+            <Table
+              sx={{ marginTop: 2, borderCollapse: "collapse", width: "100%" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    STT
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    Mã đơn
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    Số lượng
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      border: "1px solid #ccc",
+                    }}
+                  >
+                    Ngày
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {hardcodedItemDetails
+                  .filter((detail) => detail.orderCode.includes(searchModal))
+                  .map((detail, index) => (
+                    <TableRow key={detail.id}>
+                      <TableCell
+                        sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      >
+                        {index + 1}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      >
+                        {detail.orderCode}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      >
+                        {detail.quantity}
+                      </TableCell>
+                      <TableCell
+                        sx={{ textAlign: "center", border: "1px solid #ccc" }}
+                      >
+                        {detail.date}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleCloseDialog}
+              sx={{
+                backgroundColor: "#E6D189",
+                color: "#000",
+                "&:hover": {
+                  backgroundColor: "#D5C17B",
+                },
+              }}
+            >
+              Đóng
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
     </Box>
   );
 };

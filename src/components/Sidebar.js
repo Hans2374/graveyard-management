@@ -11,7 +11,7 @@ import {
   ListItem,
   ListItemIcon,
   ThemeProvider,
-  ListItemButton
+  ListItemButton,
 } from "@mui/material";
 import AssignmentIndOutlinedIcon from "@mui/icons-material/AssignmentIndOutlined";
 import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
@@ -20,7 +20,6 @@ import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
-import "./Sidebar.module.css";
 import AdminDiscount from "../pages/Admin/AdminDiscount";
 import Dashboard from "../pages/Admin/Dashboard";
 import { Header } from "./Header";
@@ -53,19 +52,20 @@ export default function Sidebar() {
             transition: "transform 0.2s",
             "&:hover": {
               transform: "scale(1.1)",
-              backgroundColor: "var(--primary-color)",
-              color: "white",
+              border:"2px solid #black",
+              backgroundColor:"none"
             },
             backgroundColor: activeItem === menudata ? "white" : "red",
             color: activeItem === menudata ? "black" : "black",
-            '&.Mui-selected': {
-            backgroundColor: 'var(--primary-color) !important',
-            color: 'white',
-          },
+            borderRadius:"10px",
+            "&.Mui-selected": {
+              backgroundColor: "var(--primary-color) !important",
+              color: "white",
+              transform: "scale(1.1)",
+            },
           },
         },
       },
-      
     },
   });
 
@@ -182,7 +182,12 @@ export default function Sidebar() {
       </ThemeProvider>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "#F2F2F2" }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "#F2F2F2",
+          overflow: "hidden",
+        }}
       >
         {menudata === "ServicesNavbar" && <ServicesNavbar />}
         {menudata === "ServiceList" && <ServiceList />}

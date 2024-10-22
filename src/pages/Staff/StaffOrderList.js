@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
-  TextField,
   IconButton,
+  Typography,
+  Button,
+  TextField,
   InputAdornment,
-  ThemeProvider,
-  createTheme,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import styles from "./Service.module.css";
-import ServiceListTable from "../../components/TableData/ServiceListTable";
+import styles from "../Admin/Service.module.css";
+import OrderListTable from "../../components/TableData/OrderListTable";
+import { useState } from "react";
 
-function ServiceList() {
-  const [selectedTab, setSelectedTab] = useState(null);
+function StaffOrderList() {
+  const [selectedTab, setSelectedTab] = useState("Tất cả");
+  const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState("All");
 
-  const handleTabClick = (tab) => {
-    setSelectedTab(tab);
+  const handleTabClick = (tabKey) => {
+    setSelectedTab(tabKey); // Cập nhật tab được chọn
+    handleFilterChange(tabKey); // Gọi hàm xử lý filter tương ứng
+  };
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter); // Cập nhật filter
+  };
+
+  const handleClose = () => {
+    setOpen(false); // Đóng hộp thoại
   };
 
   const renderTab = (label, tabKey) => (
@@ -25,7 +41,7 @@ function ServiceList() {
         className={styles.a}
         onClick={() => handleTabClick(tabKey)}
         style={{
-          color: selectedTab === tabKey ? "black" : "grey",
+          color: selectedTab === tabKey ? "black" : "grey", // Đổi màu khi được chọn
         }}
       >
         {label}
@@ -33,42 +49,24 @@ function ServiceList() {
     </li>
   );
 
-  const theme = createTheme({
-    components: {
-      MuiBox: {
-        styleOverrides: {
-          noScroll: {
-            overflow: "hidden",
-            width: "300px",
-            border: "1px solid black",
-            padding: "16px",
-            position: "relative",
-            backgroundColor: "#f5f5f5",
-          },
-        },
-      },
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Box
         sx={{
-          marginTop: "54px",
+          marginTop: "65px",
           backgroundColor: "white",
           maxWidth: "100%",
           display: "flex",
         }}
       >
         <ul className={styles.ul}>
-          {renderTab("Tất cả đơn hàng", "allOrders")}
-          {renderTab("Chưa phân công", "unassigned")}
-          {renderTab("Đã phân công", "assigned")}
-          {renderTab("Đang thực hiện", "inProgress")}
-          {renderTab("Hoàn thành", "completed")}
+          {renderTab("Tất cả đơn hàng", "Tất cả")}
+          {renderTab("Đang thực hiện", "Chờ xử lý")}
+          {renderTab("Hoàn thành", "Đã xử lý")}
+          {renderTab("Chưa thanh toán", "Chưa thanh toán")}
+          {renderTab("Đã thanh toán", "Đã thanh toán")}
         </ul>
       </Box>
-
       <Box
         component="main"
         sx={{ flexGrow: 1, p: 3, marginTop: "3px", backgroundColor: "white" }}
@@ -124,17 +122,17 @@ function ServiceList() {
         </Box>
         <Box
           sx={{
-            width: "100%",
+            maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "50px",
-            height: '404px'
+            height: "393px",
           }}
         >
-          <ServiceListTable />
+          <OrderListTable filter={filter} />
         </Box>
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
 
-export default ServiceList;
+export default StaffOrderList;

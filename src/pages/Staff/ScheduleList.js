@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  Box,
-  IconButton,
-  TextField,
-  InputAdornment,
-} from "@mui/material";
+import { Box, IconButton, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 import StaffDataTable from "../../components/StaffDataTable";
 
 function ScheduleList() {
@@ -14,7 +9,14 @@ function ScheduleList() {
     <>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, marginTop: "70px", backgroundColor: "white" }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "white",
+          marginTop: "50px",
+          maxWidth: "100%",
+          maxHeight: "605px",
+        }}
       >
         <Box
           sx={{
@@ -70,6 +72,7 @@ function ScheduleList() {
             maxWidth: "100%",
             marginLeft: "50px",
             marginTop: "45px",
+            height: '475px'
           }}
         >
           <StaffDataTable />

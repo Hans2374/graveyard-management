@@ -119,90 +119,90 @@ function EmployeeManagement() {
         </IconButton>
 
         <Dialog
-        open={open}
-        onClose={handleClose}
-        sx={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          backdropFilter: "blur(5px)",
-        }}
-      >
-        <DialogTitle
+          open={open}
+          onClose={handleClose}
           sx={{
-            backgroundColor: "var(--primary-color)",
-            fontWeight: "bold",
-            textAlign: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(5px)",
           }}
         >
-          Thêm Nhân Viên
-        </DialogTitle>
-        <DialogContent sx={{ width: "400px", marginTop: '20px' }}>
-          <TextField
-            margin="dense"
-            label="Tên tài khoản"
-            fullWidth sx={textFieldStyle}
-          />
-          <TextField
-            margin="dense"
-            label="Số điện thoại"
-            fullWidth sx={textFieldStyle}
-          />
-          <TextField
-            margin="dense"
-            label="Email"
-            fullWidth sx={textFieldStyle}
-          />
-
-          {/* Mật khẩu */}
-          <Typography sx={{ padding: "10px 10px 0 0" }}>Mật khẩu</Typography>
-          <TextField
-            variant="outlined"
-            size="small"
-            fullWidth
-            type={showPassword ? "text" : "password"}
-            sx={textFieldStyle}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleTogglePasswordVisibility}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
+          <DialogTitle
+            sx={{
+              backgroundColor: "var(--primary-color)",
+              fontWeight: "bold",
+              textAlign: "center",
             }}
-          />
+          >
+            Thêm Nhân Viên
+          </DialogTitle>
+          <DialogContent sx={{ width: "400px", marginTop: '20px' }}>
+            <TextField
+              margin="dense"
+              label="Tên tài khoản"
+              fullWidth sx={textFieldStyle}
+            />
+            <TextField
+              margin="dense"
+              label="Số điện thoại"
+              fullWidth sx={textFieldStyle}
+            />
+            <TextField
+              margin="dense"
+              label="Email"
+              fullWidth sx={textFieldStyle}
+            />
 
-          {/* Xác nhận mật khẩu */}
-          <Typography sx={{ padding: "10px 10px 0 0" }}>Xác nhận mật khẩu</Typography>
-          <TextField
-            variant="outlined"
-            size="small"
-            fullWidth
-            type={showConfirmPassword ? "text" : "password"}
-            sx={textFieldStyle}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleToggleConfirmPasswordVisibility}>
-                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </DialogContent>
+            {/* Mật khẩu */}
+            <Typography sx={{ padding: "10px 10px 0 0" }}>Mật khẩu</Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              fullWidth
+              type={showPassword ? "text" : "password"}
+              sx={textFieldStyle}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleTogglePasswordVisibility}>
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
 
-        <DialogActions>
-          <Button sx={dialogButtonStyle}>
-            Thêm
-          </Button>
-          <Button sx={dialogButtonStyle}>
-            Đặt lại
-          </Button>
-          <Button onClick={handleClose} sx={dialogButtonStyle}>
-            Hủy
-          </Button>
-        </DialogActions>
-      </Dialog>
+            {/* Xác nhận mật khẩu */}
+            <Typography sx={{ padding: "10px 10px 0 0" }}>Xác nhận mật khẩu</Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              fullWidth
+              type={showConfirmPassword ? "text" : "password"}
+              sx={textFieldStyle}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleToggleConfirmPasswordVisibility}>
+                      {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </DialogContent>
+
+          <DialogActions>
+            <Button sx={dialogButtonStyle}>
+              Thêm
+            </Button>
+            <Button sx={dialogButtonStyle}>
+              Đặt lại
+            </Button>
+            <Button onClick={handleClose} sx={dialogButtonStyle}>
+              Hủy
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
 
       <Box
@@ -210,7 +210,7 @@ function EmployeeManagement() {
           maxWidth: "100%",
           marginLeft: "50px",
           marginTop: "50px",
-          height:"430px"
+          height: "404px"
         }}
       >
         <EmployeeTable />

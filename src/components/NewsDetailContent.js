@@ -3,6 +3,7 @@ import { Box, Typography, Container, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 
+
 const ContentContainer = styled('div')({
     textAlign: 'left',
     fontSize: '16px',
@@ -15,16 +16,20 @@ const ContentContainer = styled('div')({
 const NewsItemContainer = styled(Box)({
     display: 'flex',
     alignItems: 'flex-start',
+    marginTop: '10px',
     marginBottom: '30px',
-    borderBottom: '1px solid #88888888',
+    border: '1px solid var(--secondary-color)',
+    borderRadius: '5px',
     transition: 'background-color 0.3s, transform 0.3s',
     '&:hover': {
-        backgroundColor: '#f5f6fa',
+        backgroundColor: '#fff8dc', 
         transform: 'scale(1.02)',
-    }
+    },
 });
 
 const NewsImage = styled('img')({
+    borderTopLeftRadius: '5px',
+    borderbottomLeftRadius: '5px',
     width: '150px',
     height: 'auto',
     marginRight: '15px',
@@ -34,63 +39,72 @@ const NewsImage = styled('img')({
 const newsData = [
     {
         title: 'Khám phá nét đẹp văn hóa và tâm linh trong mùa Vu Lan báo hiếu',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
     {
         title: 'Đọc kinh Vu Lan tại nhà: Hướng dẫn 5 bước đọc kinh Vu Lan đơn giản',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699320953-211-CVVHLT.jpg',
     },
     {
         title: 'Ý nghĩa sâu sắc của việc ăn chay mùa Vu Lan. Tại sao nên ăn chay vào tháng Vu Lan?',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
     {
         title: 'Ý nghĩa bông hồng cài áo mùa Vu Lan: Tình yêu và hiếu thảo',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699320953-211-CVVHLT.jpg',
     },
     {
         title: 'Công viên nghĩa trang Sài Gòn Thiên Phúc kỷ niệm 77 năm ngày Thương binh liệt sĩ Việt Nam (27/7/1947-27/7/2024)',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
     {
         title: '6',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
     {
         title: '7',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699320953-211-CVVHLT.jpg',
     },
     {
         title: '8',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
     {
         title: '9',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699320953-211-CVVHLT.jpg',
     },
     {
         title: '10',
-        image: 'https://via.placeholder.com/150',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
+    },
+    {
+        title: '11',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699320953-211-CVVHLT.jpg',
+    },
+    {
+        title: '12',
+        image: 'https://congvienvinhhanglongthanh.com/public/uploads/1699323667-511-lt.jpg',
     },
 ];
 
 //Content của bài viết 
 const NewsDetail = () => {
     const articleContent = `
-        <p>Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bảnNội dung văn bản Nội dung văn bản Nội dung văn bảnNội dung văn bản Nội dung văn bản</p>
-        <img src='https://via.placeholder.com/150' alt="Sample Image" />
-        <p>Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
-        Nội dung văn bảnNội dung văn bản Nội dung văn bản Nội dung văn bảnNội dung văn bản Nội dung văn bản.</p>
-    `;
+    <p>Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bảnNội dung văn bản Nội dung văn bản Nội dung văn bảnNội dung văn bản Nội dung văn bản</p>
+    <img src='https://cdnphoto.dantri.com.vn/XXKeoGI5eHY-594kWEorzcnmSFM=/thumb_w/1920/2024/02/21/chua-dai-tue-nghe-annguyen-duy-1-1708478566537.jpg?watermark=true' alt="Sample Image" class="custom-img" />
+    <p>Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản Nội dung văn bản 
+    Nội dung văn bảnNội dung văn bản Nội dung văn bản Nội dung văn bảnNội dung văn bản Nội dung văn bản.</p>
+`;
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -103,12 +117,17 @@ const NewsDetail = () => {
     };
 
     return (
-        <Box align="center">
+        <Box align="center" 
+        sx={{ 
+            backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20230902/pngtree-sunrise-above-a-sunrise-in-the-sky-image_13129631.jpg)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+            }}>
             <Box
                 sx={{
-                    backgroundColor: '#FFFFFF',
+                    backgroundColor: "rgba(255, 255, 255, 0.8)",
                     padding: 2,
-                    marginTop: '65px',
+                    marginTop: '55px',
                     maxWidth: '1000px'
                 }}
             >
@@ -172,6 +191,7 @@ const NewsDetail = () => {
                                     variant="body2"
                                     sx={{
                                         color: 'var(--secondary-color)',
+                                        marginTop: '10px',
                                         textAlign: 'left',
                                         fontSize: {
                                             xs: '12px',

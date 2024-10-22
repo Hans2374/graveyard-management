@@ -115,7 +115,7 @@ const rows = [
 
 export default function ServiceListTable() {
   const [page, setPage] = React.useState(0); // Current page
-  const [rowsPerPage, setRowsPerPage] = React.useState(8); // Items per page
+  const [rowsPerPage, setRowsPerPage] = React.useState(5); // Items per page
   const [open, setOpen] = React.useState(false); // Dialog open state
   const [selectedRow, setSelectedRow] = React.useState(null); // Selected order details
   const [selectedYear, setSelectedYear] = React.useState("2024"); // Default selected year
@@ -240,8 +240,7 @@ export default function ServiceListTable() {
     <Box sx={{ position: "relative", width: "1080px" }}>
       <TableContainer
         component={Paper}
-        sx={{ width: "1100px", height: "360px" }}
-      >
+        sx={{ width: "1200px", maxWidth: "100%", height: "360px" }}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -249,7 +248,7 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "10px",
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -259,17 +258,17 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "50px",
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
                 Mã đơn
               </TableCell>
               <TableCell
-                align="center"
+                align="left"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -279,7 +278,7 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -289,8 +288,7 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
-
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
@@ -300,18 +298,16 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
-
+                  p: 1,
                   borderRight: "1px solid #ddd",
                 }}
               >
                 Thanh toán
               </TableCell>
               <TableCell
-                align="center"
+                align="left"
                 sx={{
                   fontWeight: "bold",
-                  width: "100px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -322,7 +318,6 @@ export default function ServiceListTable() {
                 align="center"
                 sx={{
                   fontWeight: "bold",
-                  width: "150px",
                   p: 1,
                   borderRight: "1px solid #ddd",
                 }}
@@ -342,7 +337,7 @@ export default function ServiceListTable() {
                   <TableCell
                     align="center"
                     scope="row"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.stt}
                   </TableCell>
@@ -350,8 +345,12 @@ export default function ServiceListTable() {
                     align="center"
                     sx={{
                       borderRight: "1px solid #ddd",
-                      p: 0,
-                      cursor: "pointer",
+                      p: "5px",
+                      "&:hover": {
+                        color: "blue",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      },
                     }}
                     onClick={() => handleOpenDialog(row)}
                   >
@@ -359,25 +358,25 @@ export default function ServiceListTable() {
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.trangthai}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.phancong}
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ borderRight: "1px solid #ddd", p: 0, pl: "5px" }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px", whiteSpace: "pre-wrap" }}
                   >
                     {row.ngaytao}
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ borderRight: "1px solid #ddd", p: 0 }}
+                    sx={{ borderRight: "1px solid #ddd", p: "5px" }}
                   >
                     {row.thanhtoan}
                   </TableCell>
@@ -385,16 +384,16 @@ export default function ServiceListTable() {
                     align="left"
                     sx={{
                       borderRight: "1px solid #ddd",
-                      p: 0,
-                      pl: "5px",
-                      whiteSpace: "pre-wrap",
+                      p: "5px",
                     }}
                   >
                     {row.khachhang}
                   </TableCell>
                   <TableCell
-                    align="left"
-                    sx={{ p: 0, pl: "5px", whiteSpace: "pre-wrap" }}
+                    align="center"
+                    sx={{
+                      borderRight: "1px solid #ddd", p: "5px"
+                    }}
                   >
                     {row.tongtien}
                   </TableCell>
@@ -412,7 +411,7 @@ export default function ServiceListTable() {
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        rowsPerPageOptions={[8]}
+        rowsPerPageOptions={[5]}
         sx={{
           position: "absolute",
           bottom: 0,
@@ -446,6 +445,7 @@ export default function ServiceListTable() {
             backgroundColor: "var(--primary-color)",
             fontWeight: "bold",
             textAlign: "center",
+            color: "white"
           }}
         >
           Báo Cáo Đơn Hàng
@@ -454,14 +454,14 @@ export default function ServiceListTable() {
           {selectedRow && (
             <div>
               <Box sx={{ width: "100%", p: "0px 24px" }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
                   Nội dung công việc chung của dịch vụ:
                 </Typography>
                 <Typography>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                <Typography sx={{ fontWeight: "bold" }}>
                   Ghi chú đặc biệt:
                 </Typography>
                 <Typography>
@@ -537,7 +537,7 @@ export default function ServiceListTable() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                      <Typography sx={{ fontWeight: "bold" }}>
                         Vật dụng
                       </Typography>
                       <IconButton
@@ -553,7 +553,7 @@ export default function ServiceListTable() {
                         <FilterListIcon />
                         <Typography sx={{ ml: 1 }}>Lọc vật dụng</Typography>
                       </IconButton>
-                      <Typography variant="h6" sx={{ marginRight: "74px" }}>
+                      <Typography sx={{ marginRight: "74px" }}>
                         Số lượng
                       </Typography>
                     </Box>
@@ -646,7 +646,7 @@ export default function ServiceListTable() {
                 ))}
               </Box>
               <Box sx={{ width: "100%", p: 2 }}>
-                <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
+                <Typography sx={{ mb: 1, fontWeight: "bold" }}>
                   Báo cáo công việc
                 </Typography>
 
@@ -698,10 +698,10 @@ export default function ServiceListTable() {
                 borderRadius: "10px",
                 padding: "5px 100px 5px 100px",
                 textTransform: "none",
-                margin:"0 15px",
+                margin: "0 15px",
               }}
             >
-              Close
+              Lưu
             </Button>
             <Button
               onClick={handleCloseDialog}
@@ -710,11 +710,11 @@ export default function ServiceListTable() {
                 color: "black",
                 borderRadius: "10px",
                 padding: "5px 100px 5px 100px",
-                margin:"0 15px",
+                margin: "0 15px",
                 textTransform: "none",
               }}
             >
-              Lưu
+              Đóng
             </Button>
           </Box>
         </DialogContent>
